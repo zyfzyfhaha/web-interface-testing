@@ -1,0 +1,565 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cgw360.cls.dao.loan.LoanApplyMapper">
+    <resultMap id="BaseResultMap" type="com.cgw360.cls.model.loan.LoanApply">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="relative_apply_id" property="relativeApplyId" jdbcType="BIGINT"/>
+        <result column="flow_type" property="flowType" jdbcType="VARCHAR"/>
+        <result column="node_key" property="nodeKey" jdbcType="VARCHAR"/>
+        <result column="project_id" property="projectId" jdbcType="BIGINT"/>
+        <result column="project_no" property="projectNo" jdbcType="VARCHAR"/>
+        <result column="customer_id" property="customerId" jdbcType="BIGINT"/>
+        <result column="customer_no" property="customerNo" jdbcType="VARCHAR"/>
+        <result column="credit_id" property="creditId" jdbcType="BIGINT"/>
+        <result column="business_type_id" property="businessTypeId" jdbcType="INTEGER"/>
+        <result column="business_type_name" property="businessTypeName" jdbcType="VARCHAR"/>
+        <result column="product_id" property="productId" jdbcType="INTEGER"/>
+        <result column="product_name" property="productName" jdbcType="VARCHAR"/>
+        <result column="status" property="status" jdbcType="INTEGER"/>
+        <result column="data_source" property="dataSource" jdbcType="INTEGER"/>
+        <result column="is_inuse" property="isInuse" jdbcType="INTEGER"/>
+        <result column="user_id" property="userId" jdbcType="BIGINT"/>
+        <result column="user_name" property="userName" jdbcType="VARCHAR"/>
+        <result column="user_group_id" property="userGroupId" jdbcType="BIGINT"/>
+        <result column="user_group_name" property="userGroupName" jdbcType="VARCHAR"/>
+        <result column="manager_id" property="managerId" jdbcType="BIGINT"/>
+        <result column="manager_name" property="managerName" jdbcType="VARCHAR"/>
+        <result column="org_id" property="orgId" jdbcType="BIGINT"/>
+        <result column="org_name" property="orgName" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+    id, relative_apply_id, flow_type, node_key, project_id, project_no, customer_id, 
+    customer_no, credit_id, business_type_id, business_type_name, product_id, product_name, 
+    status, data_source, is_inuse, user_id, user_name, user_group_id, user_group_name, 
+    manager_id, manager_name, org_id, org_name, create_time, modify_time
+  </sql>
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.cgw360.cls.model.loan.LoanApplyExample">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from loan_apply
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from loan_apply
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from loan_apply
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+    <delete id="deleteByExample" parameterType="com.cgw360.cls.model.loan.LoanApplyExample">
+        delete from loan_apply
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.cgw360.cls.model.loan.LoanApply">
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into loan_apply (relative_apply_id, flow_type, node_key,
+        project_id, project_no, customer_id,
+        customer_no, credit_id, business_type_id,
+        business_type_name, product_id, product_name,
+        status, data_source, is_inuse,
+        user_id, user_name, user_group_id,
+        user_group_name, manager_id, manager_name,
+        org_id, org_name, create_time,
+        modify_time)
+        values (#{relativeApplyId,jdbcType=BIGINT}, #{flowType,jdbcType=VARCHAR}, #{nodeKey,jdbcType=VARCHAR},
+        #{projectId,jdbcType=BIGINT}, #{projectNo,jdbcType=VARCHAR}, #{customerId,jdbcType=BIGINT},
+        #{customerNo,jdbcType=VARCHAR}, #{creditId,jdbcType=BIGINT}, #{businessTypeId,jdbcType=INTEGER},
+        #{businessTypeName,jdbcType=VARCHAR}, #{productId,jdbcType=INTEGER}, #{productName,jdbcType=VARCHAR},
+        #{status,jdbcType=INTEGER}, #{dataSource,jdbcType=INTEGER}, #{isInuse,jdbcType=INTEGER},
+        #{userId,jdbcType=BIGINT}, #{userName,jdbcType=VARCHAR}, #{userGroupId,jdbcType=BIGINT},
+        #{userGroupName,jdbcType=VARCHAR}, #{managerId,jdbcType=BIGINT}, #{managerName,jdbcType=VARCHAR},
+        #{orgId,jdbcType=BIGINT}, #{orgName,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP},
+        #{modifyTime,jdbcType=TIMESTAMP})
+    </insert>
+    <insert id="insertSelective" parameterType="com.cgw360.cls.model.loan.LoanApply">
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into loan_apply
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="relativeApplyId != null">
+                relative_apply_id,
+            </if>
+            <if test="flowType != null">
+                flow_type,
+            </if>
+            <if test="nodeKey != null">
+                node_key,
+            </if>
+            <if test="projectId != null">
+                project_id,
+            </if>
+            <if test="projectNo != null">
+                project_no,
+            </if>
+            <if test="customerId != null">
+                customer_id,
+            </if>
+            <if test="customerNo != null">
+                customer_no,
+            </if>
+            <if test="creditId != null">
+                credit_id,
+            </if>
+            <if test="businessTypeId != null">
+                business_type_id,
+            </if>
+            <if test="businessTypeName != null">
+                business_type_name,
+            </if>
+            <if test="productId != null">
+                product_id,
+            </if>
+            <if test="productName != null">
+                product_name,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="dataSource != null">
+                data_source,
+            </if>
+            <if test="isInuse != null">
+                is_inuse,
+            </if>
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="userName != null">
+                user_name,
+            </if>
+            <if test="userGroupId != null">
+                user_group_id,
+            </if>
+            <if test="userGroupName != null">
+                user_group_name,
+            </if>
+            <if test="managerId != null">
+                manager_id,
+            </if>
+            <if test="managerName != null">
+                manager_name,
+            </if>
+            <if test="orgId != null">
+                org_id,
+            </if>
+            <if test="orgName != null">
+                org_name,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="modifyTime != null">
+                modify_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="relativeApplyId != null">
+                #{relativeApplyId,jdbcType=BIGINT},
+            </if>
+            <if test="flowType != null">
+                #{flowType,jdbcType=VARCHAR},
+            </if>
+            <if test="nodeKey != null">
+                #{nodeKey,jdbcType=VARCHAR},
+            </if>
+            <if test="projectId != null">
+                #{projectId,jdbcType=BIGINT},
+            </if>
+            <if test="projectNo != null">
+                #{projectNo,jdbcType=VARCHAR},
+            </if>
+            <if test="customerId != null">
+                #{customerId,jdbcType=BIGINT},
+            </if>
+            <if test="customerNo != null">
+                #{customerNo,jdbcType=VARCHAR},
+            </if>
+            <if test="creditId != null">
+                #{creditId,jdbcType=BIGINT},
+            </if>
+            <if test="businessTypeId != null">
+                #{businessTypeId,jdbcType=INTEGER},
+            </if>
+            <if test="businessTypeName != null">
+                #{businessTypeName,jdbcType=VARCHAR},
+            </if>
+            <if test="productId != null">
+                #{productId,jdbcType=INTEGER},
+            </if>
+            <if test="productName != null">
+                #{productName,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=INTEGER},
+            </if>
+            <if test="dataSource != null">
+                #{dataSource,jdbcType=INTEGER},
+            </if>
+            <if test="isInuse != null">
+                #{isInuse,jdbcType=INTEGER},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=BIGINT},
+            </if>
+            <if test="userName != null">
+                #{userName,jdbcType=VARCHAR},
+            </if>
+            <if test="userGroupId != null">
+                #{userGroupId,jdbcType=BIGINT},
+            </if>
+            <if test="userGroupName != null">
+                #{userGroupName,jdbcType=VARCHAR},
+            </if>
+            <if test="managerId != null">
+                #{managerId,jdbcType=BIGINT},
+            </if>
+            <if test="managerName != null">
+                #{managerName,jdbcType=VARCHAR},
+            </if>
+            <if test="orgId != null">
+                #{orgId,jdbcType=BIGINT},
+            </if>
+            <if test="orgName != null">
+                #{orgName,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="modifyTime != null">
+                #{modifyTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.cgw360.cls.model.loan.LoanApplyExample"
+            resultType="java.lang.Integer">
+        select count(*) from loan_apply
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update loan_apply
+        <set>
+            <if test="record.id != null">
+                id = #{record.id,jdbcType=BIGINT},
+            </if>
+            <if test="record.relativeApplyId != null">
+                relative_apply_id = #{record.relativeApplyId,jdbcType=BIGINT},
+            </if>
+            <if test="record.flowType != null">
+                flow_type = #{record.flowType,jdbcType=VARCHAR},
+            </if>
+            <if test="record.nodeKey != null">
+                node_key = #{record.nodeKey,jdbcType=VARCHAR},
+            </if>
+            <if test="record.projectId != null">
+                project_id = #{record.projectId,jdbcType=BIGINT},
+            </if>
+            <if test="record.projectNo != null">
+                project_no = #{record.projectNo,jdbcType=VARCHAR},
+            </if>
+            <if test="record.customerId != null">
+                customer_id = #{record.customerId,jdbcType=BIGINT},
+            </if>
+            <if test="record.customerNo != null">
+                customer_no = #{record.customerNo,jdbcType=VARCHAR},
+            </if>
+            <if test="record.creditId != null">
+                credit_id = #{record.creditId,jdbcType=BIGINT},
+            </if>
+            <if test="record.businessTypeId != null">
+                business_type_id = #{record.businessTypeId,jdbcType=INTEGER},
+            </if>
+            <if test="record.businessTypeName != null">
+                business_type_name = #{record.businessTypeName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.productId != null">
+                product_id = #{record.productId,jdbcType=INTEGER},
+            </if>
+            <if test="record.productName != null">
+                product_name = #{record.productName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.status != null">
+                status = #{record.status,jdbcType=INTEGER},
+            </if>
+            <if test="record.dataSource != null">
+                data_source = #{record.dataSource,jdbcType=INTEGER},
+            </if>
+            <if test="record.isInuse != null">
+                is_inuse = #{record.isInuse,jdbcType=INTEGER},
+            </if>
+            <if test="record.userId != null">
+                user_id = #{record.userId,jdbcType=BIGINT},
+            </if>
+            <if test="record.userName != null">
+                user_name = #{record.userName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.userGroupId != null">
+                user_group_id = #{record.userGroupId,jdbcType=BIGINT},
+            </if>
+            <if test="record.userGroupName != null">
+                user_group_name = #{record.userGroupName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.managerId != null">
+                manager_id = #{record.managerId,jdbcType=BIGINT},
+            </if>
+            <if test="record.managerName != null">
+                manager_name = #{record.managerName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.orgId != null">
+                org_id = #{record.orgId,jdbcType=BIGINT},
+            </if>
+            <if test="record.orgName != null">
+                org_name = #{record.orgName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.createTime != null">
+                create_time = #{record.createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.modifyTime != null">
+                modify_time = #{record.modifyTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update loan_apply
+        set id = #{record.id,jdbcType=BIGINT},
+        relative_apply_id = #{record.relativeApplyId,jdbcType=BIGINT},
+        flow_type = #{record.flowType,jdbcType=VARCHAR},
+        node_key = #{record.nodeKey,jdbcType=VARCHAR},
+        project_id = #{record.projectId,jdbcType=BIGINT},
+        project_no = #{record.projectNo,jdbcType=VARCHAR},
+        customer_id = #{record.customerId,jdbcType=BIGINT},
+        customer_no = #{record.customerNo,jdbcType=VARCHAR},
+        credit_id = #{record.creditId,jdbcType=BIGINT},
+        business_type_id = #{record.businessTypeId,jdbcType=INTEGER},
+        business_type_name = #{record.businessTypeName,jdbcType=VARCHAR},
+        product_id = #{record.productId,jdbcType=INTEGER},
+        product_name = #{record.productName,jdbcType=VARCHAR},
+        status = #{record.status,jdbcType=INTEGER},
+        data_source = #{record.dataSource,jdbcType=INTEGER},
+        is_inuse = #{record.isInuse,jdbcType=INTEGER},
+        user_id = #{record.userId,jdbcType=BIGINT},
+        user_name = #{record.userName,jdbcType=VARCHAR},
+        user_group_id = #{record.userGroupId,jdbcType=BIGINT},
+        user_group_name = #{record.userGroupName,jdbcType=VARCHAR},
+        manager_id = #{record.managerId,jdbcType=BIGINT},
+        manager_name = #{record.managerName,jdbcType=VARCHAR},
+        org_id = #{record.orgId,jdbcType=BIGINT},
+        org_name = #{record.orgName,jdbcType=VARCHAR},
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+        modify_time = #{record.modifyTime,jdbcType=TIMESTAMP}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.cgw360.cls.model.loan.LoanApply">
+        update loan_apply
+        <set>
+            <if test="relativeApplyId != null">
+                relative_apply_id = #{relativeApplyId,jdbcType=BIGINT},
+            </if>
+            <if test="flowType != null">
+                flow_type = #{flowType,jdbcType=VARCHAR},
+            </if>
+            <if test="nodeKey != null">
+                node_key = #{nodeKey,jdbcType=VARCHAR},
+            </if>
+            <if test="projectId != null">
+                project_id = #{projectId,jdbcType=BIGINT},
+            </if>
+            <if test="projectNo != null">
+                project_no = #{projectNo,jdbcType=VARCHAR},
+            </if>
+            <if test="customerId != null">
+                customer_id = #{customerId,jdbcType=BIGINT},
+            </if>
+            <if test="customerNo != null">
+                customer_no = #{customerNo,jdbcType=VARCHAR},
+            </if>
+            <if test="creditId != null">
+                credit_id = #{creditId,jdbcType=BIGINT},
+            </if>
+            <if test="businessTypeId != null">
+                business_type_id = #{businessTypeId,jdbcType=INTEGER},
+            </if>
+            <if test="businessTypeName != null">
+                business_type_name = #{businessTypeName,jdbcType=VARCHAR},
+            </if>
+            <if test="productId != null">
+                product_id = #{productId,jdbcType=INTEGER},
+            </if>
+            <if test="productName != null">
+                product_name = #{productName,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=INTEGER},
+            </if>
+            <if test="dataSource != null">
+                data_source = #{dataSource,jdbcType=INTEGER},
+            </if>
+            <if test="isInuse != null">
+                is_inuse = #{isInuse,jdbcType=INTEGER},
+            </if>
+            <if test="userId != null">
+                user_id = #{userId,jdbcType=BIGINT},
+            </if>
+            <if test="userName != null">
+                user_name = #{userName,jdbcType=VARCHAR},
+            </if>
+            <if test="userGroupId != null">
+                user_group_id = #{userGroupId,jdbcType=BIGINT},
+            </if>
+            <if test="userGroupName != null">
+                user_group_name = #{userGroupName,jdbcType=VARCHAR},
+            </if>
+            <if test="managerId != null">
+                manager_id = #{managerId,jdbcType=BIGINT},
+            </if>
+            <if test="managerName != null">
+                manager_name = #{managerName,jdbcType=VARCHAR},
+            </if>
+            <if test="orgId != null">
+                org_id = #{orgId,jdbcType=BIGINT},
+            </if>
+            <if test="orgName != null">
+                org_name = #{orgName,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="modifyTime != null">
+                modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.cgw360.cls.model.loan.LoanApply">
+    update loan_apply
+    set relative_apply_id = #{relativeApplyId,jdbcType=BIGINT},
+      flow_type = #{flowType,jdbcType=VARCHAR},
+      node_key = #{nodeKey,jdbcType=VARCHAR},
+      project_id = #{projectId,jdbcType=BIGINT},
+      project_no = #{projectNo,jdbcType=VARCHAR},
+      customer_id = #{customerId,jdbcType=BIGINT},
+      customer_no = #{customerNo,jdbcType=VARCHAR},
+      credit_id = #{creditId,jdbcType=BIGINT},
+      business_type_id = #{businessTypeId,jdbcType=INTEGER},
+      business_type_name = #{businessTypeName,jdbcType=VARCHAR},
+      product_id = #{productId,jdbcType=INTEGER},
+      product_name = #{productName,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      data_source = #{dataSource,jdbcType=INTEGER},
+      is_inuse = #{isInuse,jdbcType=INTEGER},
+      user_id = #{userId,jdbcType=BIGINT},
+      user_name = #{userName,jdbcType=VARCHAR},
+      user_group_id = #{userGroupId,jdbcType=BIGINT},
+      user_group_name = #{userGroupName,jdbcType=VARCHAR},
+      manager_id = #{managerId,jdbcType=BIGINT},
+      manager_name = #{managerName,jdbcType=VARCHAR},
+      org_id = #{orgId,jdbcType=BIGINT},
+      org_name = #{orgName,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      modify_time = #{modifyTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+    <!--查询未打款总额-->
+    <select id="getUnpaymentAmountOfAllLoan" resultType="java.math.BigDecimal" parameterType="java.util.List">
+        SELECT
+        sum(IFNULL(LP1.loan_amount, 0)) as sumAmount
+        FROM
+        loan_project_info LP1
+        INNER JOIN loan_apply LA ON LP1.apply_id = LA.id
+        WHERE LP1.is_inuse = 1
+        <if test="loanApplyIdList != null">
+            and LP1.apply_id in
+            <foreach collection="loanApplyIdList" item="loanApplyId" open="(" close=")" separator=",">
+                #{loanApplyId,jdbcType=BIGINT}
+            </foreach>
+            and LA.business_type_id = 1
+        </if>
+    </select>
+
+</mapper>

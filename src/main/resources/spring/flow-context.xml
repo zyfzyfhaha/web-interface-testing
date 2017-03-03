@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop" xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+    <context:property-placeholder location="classpath*:/cls.conf" ignore-unresolvable="true"/>
+
+    <context:component-scan base-package="com.cgw360" annotation-config="true"/>
+    <aop:aspectj-autoproxy proxy-target-class="true"/>
+
+    <!--=================================================二手车评估流程节点映射关系=================================================-->
+    <util:map id="secondHandCarEstimateNodeActionMap" key-type="java.lang.String"
+              value-type="com.cgw360.cls.bss.flow.spi.IBaseProcessAction">
+        <entry key="SECOND_HAND_CAR_ESTIMATE_FLOW#ESTIMATE_LAUNCH" value-ref="P1SecondHandCarLaunchEstimate"/>
+        <entry key="SECOND_HAND_CAR_ESTIMATE_FLOW#FIRST_ESTIMATE" value-ref="P2SecondHandCarFirstEstimate"/>
+        <entry key="SECOND_HAND_CAR_ESTIMATE_FLOW#SECOND_ESTIMATE" value-ref="P3SecondHandCarSecondEstimate"/>
+    </util:map>
+
+    <bean id="secondHandCarEstimateNodeActionMapper" class="com.cgw360.cls.bss.flow.ProcessNodeActionMapper">
+        <property name="nodeActionMapper" ref="secondHandCarEstimateNodeActionMap"/>
+    </bean>
+
+    <!--=================================================二手车过户流程节点映射关系=================================================-->
+    <util:map id="secondHandCarTransferNodeActionMap" key-type="java.lang.String"
+              value-type="com.cgw360.cls.bss.flow.spi.IBaseProcessAction">
+        <entry key="SECOND_HAND_CAR_TRANSFER_FLOW#TRANSFER_LAUNCH" value-ref="P1SecondHandCarLaunchTransfer"/>
+        <entry key="SECOND_HAND_CAR_TRANSFER_FLOW#TRANSFER_APPROVAL" value-ref="P2SecondHandCarFirstTransfer"/>
+        <entry key="SECOND_HAND_CAR_TRANSFER_FLOW#TRANSFER_ESTIMATE_REPORT" value-ref="P3SecondHandCarSecondTransfer"/>
+    </util:map>
+
+    <bean id="secondHandCarTransferNodeActionMapper" class="com.cgw360.cls.bss.flow.ProcessNodeActionMapper">
+        <property name="nodeActionMapper" ref="secondHandCarTransferNodeActionMap"/>
+    </bean>
+
+    <!--=================================================车果客户分配流程节点映射关系=================================================-->
+    <util:map id="CGCustomerNodeActionMap" key-type="java.lang.String"
+              value-type="com.cgw360.cls.bss.flow.spi.IBaseProcessAction">
+        <entry key="CHEGUO_CUSTOMER_ASSIGN_FLOW#CHEGUO_CUSTOMER_ASSIGN" value-ref="P1CustomerAssignActionImpl"/>
+        <entry key="CHEGUO_CUSTOMER_ASSIGN_FLOW#CHEGUO_CUSTOMER_IMPORT" value-ref="P2CustomerImportActionImpl"/>
+    </util:map>
+
+    <bean id="CGCustomerNodeActionMapper" class="com.cgw360.cls.bss.flow.ProcessNodeActionMapper">
+        <property name="nodeActionMapper" ref="CGCustomerNodeActionMap"/>
+    </bean>
+
+    <!--=================================================文档传递流程节点映射关系=================================================-->
+    <util:map id="documentTransmitNodeActionMap" key-type="java.lang.String"
+              value-type="com.cgw360.cls.bss.flow.spi.IBaseProcessAction">
+        <entry key="DOCUMENT_TRANSMIT_FLOW#TRANSMIT_LAUNCH" value-ref="P1DocumentTransmitLaunchActionImpl"/>
+        <entry key="DOCUMENT_TRANSMIT_FLOW#DOCUMENT_VERIFY" value-ref="P2DocumentTransmitVerifyActionImpl"/>
+        <entry key="DOCUMENT_TRANSMIT_FLOW#COPY_CONTRACT" value-ref="P3DocumentTransmitCopyActionImpl"/>
+        <entry key="DOCUMENT_TRANSMIT_FLOW#DOCUMENT_REVIEW" value-ref="P4DocumentTransmitReviewActionImpl"/>
+        <entry key="DOCUMENT_TRANSMIT_FLOW#DOCUMENT_CLASSIFY" value-ref="P5DocumentTransmitClassifyActionImpl"/>
+    </util:map>
+
+    <bean id="documentTransmitNodeActionMapper" class="com.cgw360.cls.bss.flow.ProcessNodeActionMapper">
+        <property name="nodeActionMapper" ref="documentTransmitNodeActionMap"/>
+    </bean>
+
+    <!--=================================================新增车商流程节点映射关系=================================================-->
+    <util:map id="carDealerAddNodeActionMap" key-type="java.lang.String"
+              value-type="com.cgw360.cls.bss.flow.spi.IBaseProcessAction">
+        <entry key="CAR_DEALER_ADD_FLOW#CAR_DEALER_LAUNCH" value-ref="P1CarDealerAddLaunchActionImpl"/>
+        <entry key="CAR_DEALER_ADD_FLOW#CAR_DEALER_REGIONAL_MANAGER" value-ref="P2CarDealerAddRegionalManagerActionImpl"/>
+        <entry key="CAR_DEALER_ADD_FLOW#CAR_DEALER_GENERAL_MANAGER" value-ref="P3CarDealerAddGeneralManagerActionImpl"/>
+        <entry key="CAR_DEALER_ADD_FLOW#CAR_DEALER_ACCOUNTING_ASSISTANT" value-ref="P4CarDealerAddAccountingAssistantActionImpl"/>
+        <entry key="CAR_DEALER_ADD_FLOW#CAR_DEALER_CAR_FINANCE" value-ref="P5CarDealerAddCarFinanceActionImpl"/>
+        <entry key="CAR_DEALER_ADD_FLOW#CAR_DEALER_BRANCH_CASHIER" value-ref="P6CarDealerAddBranchCashierActionImpl"/>
+    </util:map>
+
+    <bean id="carDealerAddNodeActionMapper" class="com.cgw360.cls.bss.flow.ProcessNodeActionMapper">
+        <property name="nodeActionMapper" ref="carDealerAddNodeActionMap"/>
+    </bean>
+
+</beans>

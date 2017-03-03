@@ -1,0 +1,1912 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cgw360.cls.dao.approve.LoanApproveProjectMapper">
+    <resultMap id="BaseResultMap" type="com.cgw360.cls.model.approve.LoanApproveProject">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="project_id" property="projectId" jdbcType="BIGINT"/>
+        <result column="relative_apply_id1" property="relativeApplyId1" jdbcType="BIGINT"/>
+        <result column="relative_apply_id2" property="relativeApplyId2" jdbcType="BIGINT"/>
+        <result column="flow_type" property="flowType" jdbcType="VARCHAR"/>
+        <result column="node_key" property="nodeKey" jdbcType="VARCHAR"/>
+        <result column="credit_id" property="creditId" jdbcType="BIGINT"/>
+        <result column="project_no" property="projectNo" jdbcType="VARCHAR"/>
+        <result column="business_type_id" property="businessTypeId" jdbcType="INTEGER"/>
+        <result column="business_type_name" property="businessTypeName" jdbcType="VARCHAR"/>
+        <result column="product_id" property="productId" jdbcType="INTEGER"/>
+        <result column="product_name" property="productName" jdbcType="VARCHAR"/>
+        <result column="status" property="status" jdbcType="INTEGER"/>
+        <result column="data_source" property="dataSource" jdbcType="INTEGER"/>
+        <result column="car_type" property="carType" jdbcType="VARCHAR"/>
+        <result column="car_id" property="carId" jdbcType="BIGINT"/>
+        <result column="car_serialno" property="carSerialno" jdbcType="VARCHAR"/>
+        <result column="car_brand" property="carBrand" jdbcType="VARCHAR"/>
+        <result column="car_brand_name" property="carBrandName" jdbcType="VARCHAR"/>
+        <result column="car_make" property="carMake" jdbcType="VARCHAR"/>
+        <result column="car_make_name" property="carMakeName" jdbcType="VARCHAR"/>
+        <result column="car_model" property="carModel" jdbcType="VARCHAR"/>
+        <result column="car_model_name" property="carModelName" jdbcType="VARCHAR"/>
+        <result column="is_imported" property="isImported" jdbcType="INTEGER"/>
+        <result column="is_advance" property="isAdvance" jdbcType="INTEGER"/>
+        <result column="online_price" property="onlinePrice" jdbcType="DECIMAL"/>
+        <result column="billing_price" property="billingPrice" jdbcType="DECIMAL"/>
+        <result column="evaluation_price" property="evaluationPrice" jdbcType="DECIMAL"/>
+        <result column="sell_price" property="sellPrice" jdbcType="DECIMAL"/>
+        <result column="second_hand_car_price" property="secondHandCarPrice" jdbcType="DECIMAL"/>
+        <result column="loan_amount" property="loanAmount" jdbcType="DECIMAL"/>
+        <result column="required_amount" property="requiredAmount" jdbcType="DECIMAL"/>
+        <result column="loan_term" property="loanTerm" jdbcType="INTEGER"/>
+        <result column="loan_ratio" property="loanRatio" jdbcType="DECIMAL"/>
+        <result column="handing_fee" property="handingFee" jdbcType="DECIMAL"/>
+        <result column="repayment_amount" property="repaymentAmount" jdbcType="DECIMAL"/>
+        <result column="down_payment_amount" property="downPaymentAmount" jdbcType="DECIMAL"/>
+        <result column="payment_method" property="paymentMethod" jdbcType="INTEGER"/>
+        <result column="delivery_method" property="deliveryMethod" jdbcType="INTEGER"/>
+        <result column="payment_level" property="paymentLevel" jdbcType="INTEGER"/>
+        <result column="settle_method" property="settleMethod" jdbcType="INTEGER"/>
+        <result column="tested_repayment_amount" property="testedRepaymentAmount" jdbcType="DECIMAL"/>
+        <result column="guarantee_corporation_id" property="guaranteeCorporationId" jdbcType="BIGINT"/>
+        <result column="guarantee_corporation_name" property="guaranteeCorporationName" jdbcType="VARCHAR"/>
+        <result column="receivable_amount" property="receivableAmount" jdbcType="DECIMAL"/>
+        <result column="collected_amount" property="collectedAmount" jdbcType="DECIMAL"/>
+        <result column="collected_date" property="collectedDate" jdbcType="DATE"/>
+        <result column="pre_collected_amount" property="preCollectedAmount" jdbcType="DECIMAL"/>
+        <result column="payable_amount" property="payableAmount" jdbcType="DECIMAL"/>
+        <result column="main_signer_id" property="mainSignerId" jdbcType="BIGINT"/>
+        <result column="main_signer_name" property="mainSignerName" jdbcType="VARCHAR"/>
+        <result column="main_signer_weight" property="mainSignerWeight" jdbcType="DECIMAL"/>
+        <result column="vice_signer_id" property="viceSignerId" jdbcType="BIGINT"/>
+        <result column="vice_signer_name" property="viceSignerName" jdbcType="VARCHAR"/>
+        <result column="vice_signer_weight" property="viceSignerWeight" jdbcType="DECIMAL"/>
+        <result column="sign_date" property="signDate" jdbcType="TIMESTAMP"/>
+        <result column="launch_date" property="launchDate" jdbcType="DATE"/>
+        <result column="launch_user_id" property="launchUserId" jdbcType="BIGINT"/>
+        <result column="launch_user_name" property="launchUserName" jdbcType="VARCHAR"/>
+        <result column="review_date" property="reviewDate" jdbcType="DATE"/>
+        <result column="review_user_id" property="reviewUserId" jdbcType="BIGINT"/>
+        <result column="review_user_name" property="reviewUserName" jdbcType="VARCHAR"/>
+        <result column="approve_date" property="approveDate" jdbcType="DATE"/>
+        <result column="approve_user_id" property="approveUserId" jdbcType="BIGINT"/>
+        <result column="approve_user_name" property="approveUserName" jdbcType="VARCHAR"/>
+        <result column="dealer_id" property="dealerId" jdbcType="BIGINT"/>
+        <result column="dealer_name" property="dealerName" jdbcType="VARCHAR"/>
+        <result column="dealer_fee_id" property="dealerFeeId" jdbcType="BIGINT"/>
+        <result column="dealer_fee_name" property="dealerFeeName" jdbcType="VARCHAR"/>
+        <result column="co_bank_id" property="coBankId" jdbcType="BIGINT"/>
+        <result column="co_bank_name" property="coBankName" jdbcType="VARCHAR"/>
+        <result column="is_public_license" property="isPublicLicense" jdbcType="INTEGER"/>
+        <result column="license_company" property="licenseCompany" jdbcType="VARCHAR"/>
+        <result column="is_concerned_customer" property="isConcernedCustomer" jdbcType="INTEGER"/>
+        <result column="is_agency" property="isAgency" jdbcType="INTEGER"/>
+        <result column="is_gps_installed1" property="isGpsInstalled1" jdbcType="INTEGER"/>
+        <result column="is_gps_installed2" property="isGpsInstalled2" jdbcType="INTEGER"/>
+        <result column="policy_finish_flag" property="policyFinishFlag" jdbcType="INTEGER"/>
+        <result column="visit_address_pid" property="visitAddressPid" jdbcType="VARCHAR"/>
+        <result column="visit_address_pname" property="visitAddressPname" jdbcType="VARCHAR"/>
+        <result column="visit_address_cid" property="visitAddressCid" jdbcType="VARCHAR"/>
+        <result column="visit_address_cname" property="visitAddressCname" jdbcType="VARCHAR"/>
+        <result column="visit_address_rid" property="visitAddressRid" jdbcType="VARCHAR"/>
+        <result column="visit_address_rname" property="visitAddressRname" jdbcType="VARCHAR"/>
+        <result column="visit_address_detail" property="visitAddressDetail" jdbcType="VARCHAR"/>
+        <result column="visit_address_longitude" property="visitAddressLongitude" jdbcType="DECIMAL"/>
+        <result column="visit_address_latitude" property="visitAddressLatitude" jdbcType="DECIMAL"/>
+        <result column="visit_address_gps_detail" property="visitAddressGpsDetail" jdbcType="VARCHAR"/>
+        <result column="visit_address_gps_name" property="visitAddressGpsName" jdbcType="VARCHAR"/>
+        <result column="real_address_pid" property="realAddressPid" jdbcType="VARCHAR"/>
+        <result column="real_address_pname" property="realAddressPname" jdbcType="VARCHAR"/>
+        <result column="real_address_cid" property="realAddressCid" jdbcType="VARCHAR"/>
+        <result column="real_address_cname" property="realAddressCname" jdbcType="VARCHAR"/>
+        <result column="real_address_rid" property="realAddressRid" jdbcType="VARCHAR"/>
+        <result column="real_address_rname" property="realAddressRname" jdbcType="VARCHAR"/>
+        <result column="real_address_detail" property="realAddressDetail" jdbcType="VARCHAR"/>
+        <result column="real_address_longitude" property="realAddressLongitude" jdbcType="DECIMAL"/>
+        <result column="real_address_latitude" property="realAddressLatitude" jdbcType="DECIMAL"/>
+        <result column="gps_no" property="gpsNo" jdbcType="VARCHAR"/>
+        <result column="gps_use_date" property="gpsUseDate" jdbcType="DATE"/>
+        <result column="is_inuse" property="isInuse" jdbcType="INTEGER"/>
+        <result column="user_id" property="userId" jdbcType="BIGINT"/>
+        <result column="user_name" property="userName" jdbcType="VARCHAR"/>
+        <result column="user_group_id" property="userGroupId" jdbcType="BIGINT"/>
+        <result column="user_group_name" property="userGroupName" jdbcType="VARCHAR"/>
+        <result column="manager_id" property="managerId" jdbcType="BIGINT"/>
+        <result column="manager_name" property="managerName" jdbcType="VARCHAR"/>
+        <result column="org_id" property="orgId" jdbcType="BIGINT"/>
+        <result column="org_name" property="orgName" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+    id, project_id, relative_apply_id1, relative_apply_id2, flow_type, node_key, credit_id, 
+    project_no, business_type_id, business_type_name, product_id, product_name, status, 
+    data_source, car_type, car_id, car_serialno, car_brand, car_brand_name, car_make, 
+    car_make_name, car_model, car_model_name, is_imported, is_advance, online_price, 
+    billing_price, evaluation_price, sell_price, second_hand_car_price, loan_amount, 
+    required_amount, loan_term, loan_ratio, handing_fee, repayment_amount, down_payment_amount, 
+    payment_method, delivery_method, payment_level, settle_method, tested_repayment_amount, 
+    guarantee_corporation_id, guarantee_corporation_name, receivable_amount, collected_amount, 
+    collected_date, pre_collected_amount, payable_amount, main_signer_id, main_signer_name, 
+    main_signer_weight, vice_signer_id, vice_signer_name, vice_signer_weight, sign_date, 
+    launch_date, launch_user_id, launch_user_name, review_date, review_user_id, review_user_name, 
+    approve_date, approve_user_id, approve_user_name, dealer_id, dealer_name, dealer_fee_id, 
+    dealer_fee_name, co_bank_id, co_bank_name, is_public_license, license_company, is_concerned_customer, 
+    is_agency, is_gps_installed1, is_gps_installed2, policy_finish_flag, visit_address_pid, 
+    visit_address_pname, visit_address_cid, visit_address_cname, visit_address_rid, visit_address_rname, 
+    visit_address_detail, visit_address_longitude, visit_address_latitude, visit_address_gps_detail, 
+    visit_address_gps_name, real_address_pid, real_address_pname, real_address_cid, real_address_cname, 
+    real_address_rid, real_address_rname, real_address_detail, real_address_longitude, 
+    real_address_latitude, gps_no, gps_use_date, is_inuse, user_id, user_name, user_group_id, 
+    user_group_name, manager_id, manager_name, org_id, org_name, create_time, modify_time
+    </sql>
+    <select id="selectByExample" resultMap="BaseResultMap"
+            parameterType="com.cgw360.cls.model.approve.LoanApproveProjectExample">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from loan_approve_project
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from loan_approve_project
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from loan_approve_project
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+    <delete id="deleteByExample" parameterType="com.cgw360.cls.model.approve.LoanApproveProjectExample">
+        delete from loan_approve_project
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.cgw360.cls.model.approve.LoanApproveProject">
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into loan_approve_project (project_id, relative_apply_id1, relative_apply_id2,
+        flow_type, node_key, credit_id,
+        project_no, business_type_id, business_type_name,
+        product_id, product_name, status,
+        data_source, car_type, car_id,
+        car_serialno, car_brand, car_brand_name,
+        car_make, car_make_name, car_model,
+        car_model_name, is_imported, is_advance,
+        online_price, billing_price, evaluation_price,
+        sell_price, second_hand_car_price, loan_amount,
+        required_amount, loan_term, loan_ratio,
+        handing_fee, repayment_amount, down_payment_amount,
+        payment_method, delivery_method, payment_level,
+        settle_method, tested_repayment_amount, guarantee_corporation_id,
+        guarantee_corporation_name, receivable_amount,
+        collected_amount, collected_date, pre_collected_amount,
+        payable_amount, main_signer_id, main_signer_name,
+        main_signer_weight, vice_signer_id, vice_signer_name,
+        vice_signer_weight, sign_date, launch_date,
+        launch_user_id, launch_user_name, review_date,
+        review_user_id, review_user_name, approve_date,
+        approve_user_id, approve_user_name, dealer_id,
+        dealer_name, dealer_fee_id, dealer_fee_name,
+        co_bank_id, co_bank_name, is_public_license,
+        license_company, is_concerned_customer, is_agency,
+        is_gps_installed1, is_gps_installed2, policy_finish_flag,
+        visit_address_pid, visit_address_pname, visit_address_cid,
+        visit_address_cname, visit_address_rid, visit_address_rname,
+        visit_address_detail, visit_address_longitude,
+        visit_address_latitude, visit_address_gps_detail,
+        visit_address_gps_name, real_address_pid, real_address_pname,
+        real_address_cid, real_address_cname, real_address_rid,
+        real_address_rname, real_address_detail, real_address_longitude,
+        real_address_latitude, gps_no, gps_use_date,
+        is_inuse, user_id, user_name,
+        user_group_id, user_group_name, manager_id,
+        manager_name, org_id, org_name,
+        create_time, modify_time)
+        values (#{projectId,jdbcType=BIGINT}, #{relativeApplyId1,jdbcType=BIGINT}, #{relativeApplyId2,jdbcType=BIGINT},
+        #{flowType,jdbcType=VARCHAR}, #{nodeKey,jdbcType=VARCHAR}, #{creditId,jdbcType=BIGINT},
+        #{projectNo,jdbcType=VARCHAR}, #{businessTypeId,jdbcType=INTEGER}, #{businessTypeName,jdbcType=VARCHAR},
+        #{productId,jdbcType=INTEGER}, #{productName,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER},
+        #{dataSource,jdbcType=INTEGER}, #{carType,jdbcType=VARCHAR}, #{carId,jdbcType=BIGINT},
+        #{carSerialno,jdbcType=VARCHAR}, #{carBrand,jdbcType=VARCHAR}, #{carBrandName,jdbcType=VARCHAR},
+        #{carMake,jdbcType=VARCHAR}, #{carMakeName,jdbcType=VARCHAR}, #{carModel,jdbcType=VARCHAR},
+        #{carModelName,jdbcType=VARCHAR}, #{isImported,jdbcType=INTEGER}, #{isAdvance,jdbcType=INTEGER},
+        #{onlinePrice,jdbcType=DECIMAL}, #{billingPrice,jdbcType=DECIMAL}, #{evaluationPrice,jdbcType=DECIMAL},
+        #{sellPrice,jdbcType=DECIMAL}, #{secondHandCarPrice,jdbcType=DECIMAL}, #{loanAmount,jdbcType=DECIMAL},
+        #{requiredAmount,jdbcType=DECIMAL}, #{loanTerm,jdbcType=INTEGER}, #{loanRatio,jdbcType=DECIMAL},
+        #{handingFee,jdbcType=DECIMAL}, #{repaymentAmount,jdbcType=DECIMAL}, #{downPaymentAmount,jdbcType=DECIMAL},
+        #{paymentMethod,jdbcType=INTEGER}, #{deliveryMethod,jdbcType=INTEGER}, #{paymentLevel,jdbcType=INTEGER},
+        #{settleMethod,jdbcType=INTEGER}, #{testedRepaymentAmount,jdbcType=DECIMAL},
+        #{guaranteeCorporationId,jdbcType=BIGINT},
+        #{guaranteeCorporationName,jdbcType=VARCHAR}, #{receivableAmount,jdbcType=DECIMAL},
+        #{collectedAmount,jdbcType=DECIMAL}, #{collectedDate,jdbcType=DATE}, #{preCollectedAmount,jdbcType=DECIMAL},
+        #{payableAmount,jdbcType=DECIMAL}, #{mainSignerId,jdbcType=BIGINT}, #{mainSignerName,jdbcType=VARCHAR},
+        #{mainSignerWeight,jdbcType=DECIMAL}, #{viceSignerId,jdbcType=BIGINT}, #{viceSignerName,jdbcType=VARCHAR},
+        #{viceSignerWeight,jdbcType=DECIMAL}, #{signDate,jdbcType=TIMESTAMP}, #{launchDate,jdbcType=DATE},
+        #{launchUserId,jdbcType=BIGINT}, #{launchUserName,jdbcType=VARCHAR}, #{reviewDate,jdbcType=DATE},
+        #{reviewUserId,jdbcType=BIGINT}, #{reviewUserName,jdbcType=VARCHAR}, #{approveDate,jdbcType=DATE},
+        #{approveUserId,jdbcType=BIGINT}, #{approveUserName,jdbcType=VARCHAR}, #{dealerId,jdbcType=BIGINT},
+        #{dealerName,jdbcType=VARCHAR}, #{dealerFeeId,jdbcType=BIGINT}, #{dealerFeeName,jdbcType=VARCHAR},
+        #{coBankId,jdbcType=BIGINT}, #{coBankName,jdbcType=VARCHAR}, #{isPublicLicense,jdbcType=INTEGER},
+        #{licenseCompany,jdbcType=VARCHAR}, #{isConcernedCustomer,jdbcType=INTEGER}, #{isAgency,jdbcType=INTEGER},
+        #{isGpsInstalled1,jdbcType=INTEGER}, #{isGpsInstalled2,jdbcType=INTEGER}, #{policyFinishFlag,jdbcType=INTEGER},
+        #{visitAddressPid,jdbcType=VARCHAR}, #{visitAddressPname,jdbcType=VARCHAR}, #{visitAddressCid,jdbcType=VARCHAR},
+        #{visitAddressCname,jdbcType=VARCHAR}, #{visitAddressRid,jdbcType=VARCHAR},
+        #{visitAddressRname,jdbcType=VARCHAR},
+        #{visitAddressDetail,jdbcType=VARCHAR}, #{visitAddressLongitude,jdbcType=DECIMAL},
+        #{visitAddressLatitude,jdbcType=DECIMAL}, #{visitAddressGpsDetail,jdbcType=VARCHAR},
+        #{visitAddressGpsName,jdbcType=VARCHAR}, #{realAddressPid,jdbcType=VARCHAR},
+        #{realAddressPname,jdbcType=VARCHAR},
+        #{realAddressCid,jdbcType=VARCHAR}, #{realAddressCname,jdbcType=VARCHAR}, #{realAddressRid,jdbcType=VARCHAR},
+        #{realAddressRname,jdbcType=VARCHAR}, #{realAddressDetail,jdbcType=VARCHAR},
+        #{realAddressLongitude,jdbcType=DECIMAL},
+        #{realAddressLatitude,jdbcType=DECIMAL}, #{gpsNo,jdbcType=VARCHAR}, #{gpsUseDate,jdbcType=DATE},
+        #{isInuse,jdbcType=INTEGER}, #{userId,jdbcType=BIGINT}, #{userName,jdbcType=VARCHAR},
+        #{userGroupId,jdbcType=BIGINT}, #{userGroupName,jdbcType=VARCHAR}, #{managerId,jdbcType=BIGINT},
+        #{managerName,jdbcType=VARCHAR}, #{orgId,jdbcType=BIGINT}, #{orgName,jdbcType=VARCHAR},
+        #{createTime,jdbcType=TIMESTAMP}, #{modifyTime,jdbcType=TIMESTAMP})
+    </insert>
+    <insert id="insertSelective" parameterType="com.cgw360.cls.model.approve.LoanApproveProject">
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into loan_approve_project
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="projectId != null">
+                project_id,
+            </if>
+            <if test="relativeApplyId1 != null">
+                relative_apply_id1,
+            </if>
+            <if test="relativeApplyId2 != null">
+                relative_apply_id2,
+            </if>
+            <if test="flowType != null">
+                flow_type,
+            </if>
+            <if test="nodeKey != null">
+                node_key,
+            </if>
+            <if test="creditId != null">
+                credit_id,
+            </if>
+            <if test="projectNo != null">
+                project_no,
+            </if>
+            <if test="businessTypeId != null">
+                business_type_id,
+            </if>
+            <if test="businessTypeName != null">
+                business_type_name,
+            </if>
+            <if test="productId != null">
+                product_id,
+            </if>
+            <if test="productName != null">
+                product_name,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="dataSource != null">
+                data_source,
+            </if>
+            <if test="carType != null">
+                car_type,
+            </if>
+            <if test="carId != null">
+                car_id,
+            </if>
+            <if test="carSerialno != null">
+                car_serialno,
+            </if>
+            <if test="carBrand != null">
+                car_brand,
+            </if>
+            <if test="carBrandName != null">
+                car_brand_name,
+            </if>
+            <if test="carMake != null">
+                car_make,
+            </if>
+            <if test="carMakeName != null">
+                car_make_name,
+            </if>
+            <if test="carModel != null">
+                car_model,
+            </if>
+            <if test="carModelName != null">
+                car_model_name,
+            </if>
+            <if test="isImported != null">
+                is_imported,
+            </if>
+            <if test="isAdvance != null">
+                is_advance,
+            </if>
+            <if test="onlinePrice != null">
+                online_price,
+            </if>
+            <if test="billingPrice != null">
+                billing_price,
+            </if>
+            <if test="evaluationPrice != null">
+                evaluation_price,
+            </if>
+            <if test="sellPrice != null">
+                sell_price,
+            </if>
+            <if test="secondHandCarPrice != null">
+                second_hand_car_price,
+            </if>
+            <if test="loanAmount != null">
+                loan_amount,
+            </if>
+            <if test="requiredAmount != null">
+                required_amount,
+            </if>
+            <if test="loanTerm != null">
+                loan_term,
+            </if>
+            <if test="loanRatio != null">
+                loan_ratio,
+            </if>
+            <if test="handingFee != null">
+                handing_fee,
+            </if>
+            <if test="repaymentAmount != null">
+                repayment_amount,
+            </if>
+            <if test="downPaymentAmount != null">
+                down_payment_amount,
+            </if>
+            <if test="paymentMethod != null">
+                payment_method,
+            </if>
+            <if test="deliveryMethod != null">
+                delivery_method,
+            </if>
+            <if test="paymentLevel != null">
+                payment_level,
+            </if>
+            <if test="settleMethod != null">
+                settle_method,
+            </if>
+            <if test="testedRepaymentAmount != null">
+                tested_repayment_amount,
+            </if>
+            <if test="guaranteeCorporationId != null">
+                guarantee_corporation_id,
+            </if>
+            <if test="guaranteeCorporationName != null">
+                guarantee_corporation_name,
+            </if>
+            <if test="receivableAmount != null">
+                receivable_amount,
+            </if>
+            <if test="collectedAmount != null">
+                collected_amount,
+            </if>
+            <if test="collectedDate != null">
+                collected_date,
+            </if>
+            <if test="preCollectedAmount != null">
+                pre_collected_amount,
+            </if>
+            <if test="payableAmount != null">
+                payable_amount,
+            </if>
+            <if test="mainSignerId != null">
+                main_signer_id,
+            </if>
+            <if test="mainSignerName != null">
+                main_signer_name,
+            </if>
+            <if test="mainSignerWeight != null">
+                main_signer_weight,
+            </if>
+            <if test="viceSignerId != null">
+                vice_signer_id,
+            </if>
+            <if test="viceSignerName != null">
+                vice_signer_name,
+            </if>
+            <if test="viceSignerWeight != null">
+                vice_signer_weight,
+            </if>
+            <if test="signDate != null">
+                sign_date,
+            </if>
+            <if test="launchDate != null">
+                launch_date,
+            </if>
+            <if test="launchUserId != null">
+                launch_user_id,
+            </if>
+            <if test="launchUserName != null">
+                launch_user_name,
+            </if>
+            <if test="reviewDate != null">
+                review_date,
+            </if>
+            <if test="reviewUserId != null">
+                review_user_id,
+            </if>
+            <if test="reviewUserName != null">
+                review_user_name,
+            </if>
+            <if test="approveDate != null">
+                approve_date,
+            </if>
+            <if test="approveUserId != null">
+                approve_user_id,
+            </if>
+            <if test="approveUserName != null">
+                approve_user_name,
+            </if>
+            <if test="dealerId != null">
+                dealer_id,
+            </if>
+            <if test="dealerName != null">
+                dealer_name,
+            </if>
+            <if test="dealerFeeId != null">
+                dealer_fee_id,
+            </if>
+            <if test="dealerFeeName != null">
+                dealer_fee_name,
+            </if>
+            <if test="coBankId != null">
+                co_bank_id,
+            </if>
+            <if test="coBankName != null">
+                co_bank_name,
+            </if>
+            <if test="isPublicLicense != null">
+                is_public_license,
+            </if>
+            <if test="licenseCompany != null">
+                license_company,
+            </if>
+            <if test="isConcernedCustomer != null">
+                is_concerned_customer,
+            </if>
+            <if test="isAgency != null">
+                is_agency,
+            </if>
+            <if test="isGpsInstalled1 != null">
+                is_gps_installed1,
+            </if>
+            <if test="isGpsInstalled2 != null">
+                is_gps_installed2,
+            </if>
+            <if test="policyFinishFlag != null">
+                policy_finish_flag,
+            </if>
+            <if test="visitAddressPid != null">
+                visit_address_pid,
+            </if>
+            <if test="visitAddressPname != null">
+                visit_address_pname,
+            </if>
+            <if test="visitAddressCid != null">
+                visit_address_cid,
+            </if>
+            <if test="visitAddressCname != null">
+                visit_address_cname,
+            </if>
+            <if test="visitAddressRid != null">
+                visit_address_rid,
+            </if>
+            <if test="visitAddressRname != null">
+                visit_address_rname,
+            </if>
+            <if test="visitAddressDetail != null">
+                visit_address_detail,
+            </if>
+            <if test="visitAddressLongitude != null">
+                visit_address_longitude,
+            </if>
+            <if test="visitAddressLatitude != null">
+                visit_address_latitude,
+            </if>
+            <if test="visitAddressGpsDetail != null">
+                visit_address_gps_detail,
+            </if>
+            <if test="visitAddressGpsName != null">
+                visit_address_gps_name,
+            </if>
+            <if test="realAddressPid != null">
+                real_address_pid,
+            </if>
+            <if test="realAddressPname != null">
+                real_address_pname,
+            </if>
+            <if test="realAddressCid != null">
+                real_address_cid,
+            </if>
+            <if test="realAddressCname != null">
+                real_address_cname,
+            </if>
+            <if test="realAddressRid != null">
+                real_address_rid,
+            </if>
+            <if test="realAddressRname != null">
+                real_address_rname,
+            </if>
+            <if test="realAddressDetail != null">
+                real_address_detail,
+            </if>
+            <if test="realAddressLongitude != null">
+                real_address_longitude,
+            </if>
+            <if test="realAddressLatitude != null">
+                real_address_latitude,
+            </if>
+            <if test="gpsNo != null">
+                gps_no,
+            </if>
+            <if test="gpsUseDate != null">
+                gps_use_date,
+            </if>
+            <if test="isInuse != null">
+                is_inuse,
+            </if>
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="userName != null">
+                user_name,
+            </if>
+            <if test="userGroupId != null">
+                user_group_id,
+            </if>
+            <if test="userGroupName != null">
+                user_group_name,
+            </if>
+            <if test="managerId != null">
+                manager_id,
+            </if>
+            <if test="managerName != null">
+                manager_name,
+            </if>
+            <if test="orgId != null">
+                org_id,
+            </if>
+            <if test="orgName != null">
+                org_name,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="modifyTime != null">
+                modify_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="projectId != null">
+                #{projectId,jdbcType=BIGINT},
+            </if>
+            <if test="relativeApplyId1 != null">
+                #{relativeApplyId1,jdbcType=BIGINT},
+            </if>
+            <if test="relativeApplyId2 != null">
+                #{relativeApplyId2,jdbcType=BIGINT},
+            </if>
+            <if test="flowType != null">
+                #{flowType,jdbcType=VARCHAR},
+            </if>
+            <if test="nodeKey != null">
+                #{nodeKey,jdbcType=VARCHAR},
+            </if>
+            <if test="creditId != null">
+                #{creditId,jdbcType=BIGINT},
+            </if>
+            <if test="projectNo != null">
+                #{projectNo,jdbcType=VARCHAR},
+            </if>
+            <if test="businessTypeId != null">
+                #{businessTypeId,jdbcType=INTEGER},
+            </if>
+            <if test="businessTypeName != null">
+                #{businessTypeName,jdbcType=VARCHAR},
+            </if>
+            <if test="productId != null">
+                #{productId,jdbcType=INTEGER},
+            </if>
+            <if test="productName != null">
+                #{productName,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=INTEGER},
+            </if>
+            <if test="dataSource != null">
+                #{dataSource,jdbcType=INTEGER},
+            </if>
+            <if test="carType != null">
+                #{carType,jdbcType=VARCHAR},
+            </if>
+            <if test="carId != null">
+                #{carId,jdbcType=BIGINT},
+            </if>
+            <if test="carSerialno != null">
+                #{carSerialno,jdbcType=VARCHAR},
+            </if>
+            <if test="carBrand != null">
+                #{carBrand,jdbcType=VARCHAR},
+            </if>
+            <if test="carBrandName != null">
+                #{carBrandName,jdbcType=VARCHAR},
+            </if>
+            <if test="carMake != null">
+                #{carMake,jdbcType=VARCHAR},
+            </if>
+            <if test="carMakeName != null">
+                #{carMakeName,jdbcType=VARCHAR},
+            </if>
+            <if test="carModel != null">
+                #{carModel,jdbcType=VARCHAR},
+            </if>
+            <if test="carModelName != null">
+                #{carModelName,jdbcType=VARCHAR},
+            </if>
+            <if test="isImported != null">
+                #{isImported,jdbcType=INTEGER},
+            </if>
+            <if test="isAdvance != null">
+                #{isAdvance,jdbcType=INTEGER},
+            </if>
+            <if test="onlinePrice != null">
+                #{onlinePrice,jdbcType=DECIMAL},
+            </if>
+            <if test="billingPrice != null">
+                #{billingPrice,jdbcType=DECIMAL},
+            </if>
+            <if test="evaluationPrice != null">
+                #{evaluationPrice,jdbcType=DECIMAL},
+            </if>
+            <if test="sellPrice != null">
+                #{sellPrice,jdbcType=DECIMAL},
+            </if>
+            <if test="secondHandCarPrice != null">
+                #{secondHandCarPrice,jdbcType=DECIMAL},
+            </if>
+            <if test="loanAmount != null">
+                #{loanAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="requiredAmount != null">
+                #{requiredAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="loanTerm != null">
+                #{loanTerm,jdbcType=INTEGER},
+            </if>
+            <if test="loanRatio != null">
+                #{loanRatio,jdbcType=DECIMAL},
+            </if>
+            <if test="handingFee != null">
+                #{handingFee,jdbcType=DECIMAL},
+            </if>
+            <if test="repaymentAmount != null">
+                #{repaymentAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="downPaymentAmount != null">
+                #{downPaymentAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="paymentMethod != null">
+                #{paymentMethod,jdbcType=INTEGER},
+            </if>
+            <if test="deliveryMethod != null">
+                #{deliveryMethod,jdbcType=INTEGER},
+            </if>
+            <if test="paymentLevel != null">
+                #{paymentLevel,jdbcType=INTEGER},
+            </if>
+            <if test="settleMethod != null">
+                #{settleMethod,jdbcType=INTEGER},
+            </if>
+            <if test="testedRepaymentAmount != null">
+                #{testedRepaymentAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="guaranteeCorporationId != null">
+                #{guaranteeCorporationId,jdbcType=BIGINT},
+            </if>
+            <if test="guaranteeCorporationName != null">
+                #{guaranteeCorporationName,jdbcType=VARCHAR},
+            </if>
+            <if test="receivableAmount != null">
+                #{receivableAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="collectedAmount != null">
+                #{collectedAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="collectedDate != null">
+                #{collectedDate,jdbcType=DATE},
+            </if>
+            <if test="preCollectedAmount != null">
+                #{preCollectedAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="payableAmount != null">
+                #{payableAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="mainSignerId != null">
+                #{mainSignerId,jdbcType=BIGINT},
+            </if>
+            <if test="mainSignerName != null">
+                #{mainSignerName,jdbcType=VARCHAR},
+            </if>
+            <if test="mainSignerWeight != null">
+                #{mainSignerWeight,jdbcType=DECIMAL},
+            </if>
+            <if test="viceSignerId != null">
+                #{viceSignerId,jdbcType=BIGINT},
+            </if>
+            <if test="viceSignerName != null">
+                #{viceSignerName,jdbcType=VARCHAR},
+            </if>
+            <if test="viceSignerWeight != null">
+                #{viceSignerWeight,jdbcType=DECIMAL},
+            </if>
+            <if test="signDate != null">
+                #{signDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="launchDate != null">
+                #{launchDate,jdbcType=DATE},
+            </if>
+            <if test="launchUserId != null">
+                #{launchUserId,jdbcType=BIGINT},
+            </if>
+            <if test="launchUserName != null">
+                #{launchUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="reviewDate != null">
+                #{reviewDate,jdbcType=DATE},
+            </if>
+            <if test="reviewUserId != null">
+                #{reviewUserId,jdbcType=BIGINT},
+            </if>
+            <if test="reviewUserName != null">
+                #{reviewUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="approveDate != null">
+                #{approveDate,jdbcType=DATE},
+            </if>
+            <if test="approveUserId != null">
+                #{approveUserId,jdbcType=BIGINT},
+            </if>
+            <if test="approveUserName != null">
+                #{approveUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="dealerId != null">
+                #{dealerId,jdbcType=BIGINT},
+            </if>
+            <if test="dealerName != null">
+                #{dealerName,jdbcType=VARCHAR},
+            </if>
+            <if test="dealerFeeId != null">
+                #{dealerFeeId,jdbcType=BIGINT},
+            </if>
+            <if test="dealerFeeName != null">
+                #{dealerFeeName,jdbcType=VARCHAR},
+            </if>
+            <if test="coBankId != null">
+                #{coBankId,jdbcType=BIGINT},
+            </if>
+            <if test="coBankName != null">
+                #{coBankName,jdbcType=VARCHAR},
+            </if>
+            <if test="isPublicLicense != null">
+                #{isPublicLicense,jdbcType=INTEGER},
+            </if>
+            <if test="licenseCompany != null">
+                #{licenseCompany,jdbcType=VARCHAR},
+            </if>
+            <if test="isConcernedCustomer != null">
+                #{isConcernedCustomer,jdbcType=INTEGER},
+            </if>
+            <if test="isAgency != null">
+                #{isAgency,jdbcType=INTEGER},
+            </if>
+            <if test="isGpsInstalled1 != null">
+                #{isGpsInstalled1,jdbcType=INTEGER},
+            </if>
+            <if test="isGpsInstalled2 != null">
+                #{isGpsInstalled2,jdbcType=INTEGER},
+            </if>
+            <if test="policyFinishFlag != null">
+                #{policyFinishFlag,jdbcType=INTEGER},
+            </if>
+            <if test="visitAddressPid != null">
+                #{visitAddressPid,jdbcType=VARCHAR},
+            </if>
+            <if test="visitAddressPname != null">
+                #{visitAddressPname,jdbcType=VARCHAR},
+            </if>
+            <if test="visitAddressCid != null">
+                #{visitAddressCid,jdbcType=VARCHAR},
+            </if>
+            <if test="visitAddressCname != null">
+                #{visitAddressCname,jdbcType=VARCHAR},
+            </if>
+            <if test="visitAddressRid != null">
+                #{visitAddressRid,jdbcType=VARCHAR},
+            </if>
+            <if test="visitAddressRname != null">
+                #{visitAddressRname,jdbcType=VARCHAR},
+            </if>
+            <if test="visitAddressDetail != null">
+                #{visitAddressDetail,jdbcType=VARCHAR},
+            </if>
+            <if test="visitAddressLongitude != null">
+                #{visitAddressLongitude,jdbcType=DECIMAL},
+            </if>
+            <if test="visitAddressLatitude != null">
+                #{visitAddressLatitude,jdbcType=DECIMAL},
+            </if>
+            <if test="visitAddressGpsDetail != null">
+                #{visitAddressGpsDetail,jdbcType=VARCHAR},
+            </if>
+            <if test="visitAddressGpsName != null">
+                #{visitAddressGpsName,jdbcType=VARCHAR},
+            </if>
+            <if test="realAddressPid != null">
+                #{realAddressPid,jdbcType=VARCHAR},
+            </if>
+            <if test="realAddressPname != null">
+                #{realAddressPname,jdbcType=VARCHAR},
+            </if>
+            <if test="realAddressCid != null">
+                #{realAddressCid,jdbcType=VARCHAR},
+            </if>
+            <if test="realAddressCname != null">
+                #{realAddressCname,jdbcType=VARCHAR},
+            </if>
+            <if test="realAddressRid != null">
+                #{realAddressRid,jdbcType=VARCHAR},
+            </if>
+            <if test="realAddressRname != null">
+                #{realAddressRname,jdbcType=VARCHAR},
+            </if>
+            <if test="realAddressDetail != null">
+                #{realAddressDetail,jdbcType=VARCHAR},
+            </if>
+            <if test="realAddressLongitude != null">
+                #{realAddressLongitude,jdbcType=DECIMAL},
+            </if>
+            <if test="realAddressLatitude != null">
+                #{realAddressLatitude,jdbcType=DECIMAL},
+            </if>
+            <if test="gpsNo != null">
+                #{gpsNo,jdbcType=VARCHAR},
+            </if>
+            <if test="gpsUseDate != null">
+                #{gpsUseDate,jdbcType=DATE},
+            </if>
+            <if test="isInuse != null">
+                #{isInuse,jdbcType=INTEGER},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=BIGINT},
+            </if>
+            <if test="userName != null">
+                #{userName,jdbcType=VARCHAR},
+            </if>
+            <if test="userGroupId != null">
+                #{userGroupId,jdbcType=BIGINT},
+            </if>
+            <if test="userGroupName != null">
+                #{userGroupName,jdbcType=VARCHAR},
+            </if>
+            <if test="managerId != null">
+                #{managerId,jdbcType=BIGINT},
+            </if>
+            <if test="managerName != null">
+                #{managerName,jdbcType=VARCHAR},
+            </if>
+            <if test="orgId != null">
+                #{orgId,jdbcType=BIGINT},
+            </if>
+            <if test="orgName != null">
+                #{orgName,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="modifyTime != null">
+                #{modifyTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.cgw360.cls.model.approve.LoanApproveProjectExample"
+            resultType="java.lang.Integer">
+        select count(*) from loan_approve_project
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update loan_approve_project
+        <set>
+            <if test="record.id != null">
+                id = #{record.id,jdbcType=BIGINT},
+            </if>
+            <if test="record.projectId != null">
+                project_id = #{record.projectId,jdbcType=BIGINT},
+            </if>
+            <if test="record.relativeApplyId1 != null">
+                relative_apply_id1 = #{record.relativeApplyId1,jdbcType=BIGINT},
+            </if>
+            <if test="record.relativeApplyId2 != null">
+                relative_apply_id2 = #{record.relativeApplyId2,jdbcType=BIGINT},
+            </if>
+            <!-- 贷款修改审批否决的，恢复原值-->
+            <if test="record.relativeApplyId2 == null">
+                relative_apply_id2 = #{record.relativeApplyId2,jdbcType=BIGINT},
+            </if>
+            <if test="record.flowType != null">
+                flow_type = #{record.flowType,jdbcType=VARCHAR},
+            </if>
+            <if test="record.nodeKey != null">
+                node_key = #{record.nodeKey,jdbcType=VARCHAR},
+            </if>
+            <if test="record.creditId != null">
+                credit_id = #{record.creditId,jdbcType=BIGINT},
+            </if>
+            <if test="record.projectNo != null">
+                project_no = #{record.projectNo,jdbcType=VARCHAR},
+            </if>
+            <if test="record.businessTypeId != null">
+                business_type_id = #{record.businessTypeId,jdbcType=INTEGER},
+            </if>
+            <if test="record.businessTypeName != null">
+                business_type_name = #{record.businessTypeName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.productId != null">
+                product_id = #{record.productId,jdbcType=INTEGER},
+            </if>
+            <if test="record.productName != null">
+                product_name = #{record.productName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.status != null">
+                status = #{record.status,jdbcType=INTEGER},
+            </if>
+            <if test="record.dataSource != null">
+                data_source = #{record.dataSource,jdbcType=INTEGER},
+            </if>
+            <if test="record.carType != null">
+                car_type = #{record.carType,jdbcType=VARCHAR},
+            </if>
+            <if test="record.carId != null">
+                car_id = #{record.carId,jdbcType=BIGINT},
+            </if>
+            <if test="record.carSerialno != null">
+                car_serialno = #{record.carSerialno,jdbcType=VARCHAR},
+            </if>
+            <if test="record.carBrand != null">
+                car_brand = #{record.carBrand,jdbcType=VARCHAR},
+            </if>
+            <if test="record.carBrandName != null">
+                car_brand_name = #{record.carBrandName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.carMake != null">
+                car_make = #{record.carMake,jdbcType=VARCHAR},
+            </if>
+            <if test="record.carMakeName != null">
+                car_make_name = #{record.carMakeName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.carModel != null">
+                car_model = #{record.carModel,jdbcType=VARCHAR},
+            </if>
+            <if test="record.carModelName != null">
+                car_model_name = #{record.carModelName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.isImported != null">
+                is_imported = #{record.isImported,jdbcType=INTEGER},
+            </if>
+            <if test="record.isAdvance != null">
+                is_advance = #{record.isAdvance,jdbcType=INTEGER},
+            </if>
+            <if test="record.onlinePrice != null">
+                online_price = #{record.onlinePrice,jdbcType=DECIMAL},
+            </if>
+            <if test="record.billingPrice != null">
+                billing_price = #{record.billingPrice,jdbcType=DECIMAL},
+            </if>
+            <if test="record.evaluationPrice != null">
+                evaluation_price = #{record.evaluationPrice,jdbcType=DECIMAL},
+            </if>
+            <if test="record.sellPrice != null">
+                sell_price = #{record.sellPrice,jdbcType=DECIMAL},
+            </if>
+            <if test="record.secondHandCarPrice != null">
+                second_hand_car_price = #{record.secondHandCarPrice,jdbcType=DECIMAL},
+            </if>
+            <if test="record.loanAmount != null">
+                loan_amount = #{record.loanAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="record.requiredAmount != null">
+                required_amount = #{record.requiredAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="record.loanTerm != null">
+                loan_term = #{record.loanTerm,jdbcType=INTEGER},
+            </if>
+            <if test="record.loanRatio != null">
+                loan_ratio = #{record.loanRatio,jdbcType=DECIMAL},
+            </if>
+            <if test="record.handingFee != null">
+                handing_fee = #{record.handingFee,jdbcType=DECIMAL},
+            </if>
+            <if test="record.repaymentAmount != null">
+                repayment_amount = #{record.repaymentAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="record.downPaymentAmount != null">
+                down_payment_amount = #{record.downPaymentAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="record.paymentMethod != null">
+                payment_method = #{record.paymentMethod,jdbcType=INTEGER},
+            </if>
+            <if test="record.deliveryMethod != null">
+                delivery_method = #{record.deliveryMethod,jdbcType=INTEGER},
+            </if>
+            <if test="record.paymentLevel != null">
+                payment_level = #{record.paymentLevel,jdbcType=INTEGER},
+            </if>
+            <if test="record.settleMethod != null">
+                settle_method = #{record.settleMethod,jdbcType=INTEGER},
+            </if>
+            <if test="record.testedRepaymentAmount != null">
+                tested_repayment_amount = #{record.testedRepaymentAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="record.guaranteeCorporationId != null">
+                guarantee_corporation_id = #{record.guaranteeCorporationId,jdbcType=BIGINT},
+            </if>
+            <if test="record.guaranteeCorporationName != null">
+                guarantee_corporation_name = #{record.guaranteeCorporationName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.receivableAmount != null">
+                receivable_amount = #{record.receivableAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="record.collectedAmount != null">
+                collected_amount = #{record.collectedAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="record.collectedDate != null">
+                collected_date = #{record.collectedDate,jdbcType=DATE},
+            </if>
+            <if test="record.preCollectedAmount != null">
+                pre_collected_amount = #{record.preCollectedAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="record.payableAmount != null">
+                payable_amount = #{record.payableAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="record.mainSignerId != null">
+                main_signer_id = #{record.mainSignerId,jdbcType=BIGINT},
+            </if>
+            <if test="record.mainSignerName != null">
+                main_signer_name = #{record.mainSignerName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.mainSignerWeight != null">
+                main_signer_weight = #{record.mainSignerWeight,jdbcType=DECIMAL},
+            </if>
+            <if test="record.viceSignerId != null">
+                vice_signer_id = #{record.viceSignerId,jdbcType=BIGINT},
+            </if>
+            <if test="record.viceSignerName != null">
+                vice_signer_name = #{record.viceSignerName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.viceSignerWeight != null">
+                vice_signer_weight = #{record.viceSignerWeight,jdbcType=DECIMAL},
+            </if>
+            <if test="record.signDate != null">
+                sign_date = #{record.signDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.launchDate != null">
+                launch_date = #{record.launchDate,jdbcType=DATE},
+            </if>
+            <if test="record.launchUserId != null">
+                launch_user_id = #{record.launchUserId,jdbcType=BIGINT},
+            </if>
+            <if test="record.launchUserName != null">
+                launch_user_name = #{record.launchUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.reviewDate != null">
+                review_date = #{record.reviewDate,jdbcType=DATE},
+            </if>
+            <if test="record.reviewUserId != null">
+                review_user_id = #{record.reviewUserId,jdbcType=BIGINT},
+            </if>
+            <if test="record.reviewUserName != null">
+                review_user_name = #{record.reviewUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.approveDate != null">
+                approve_date = #{record.approveDate,jdbcType=DATE},
+            </if>
+            <if test="record.approveUserId != null">
+                approve_user_id = #{record.approveUserId,jdbcType=BIGINT},
+            </if>
+            <if test="record.approveUserName != null">
+                approve_user_name = #{record.approveUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.dealerId != null">
+                dealer_id = #{record.dealerId,jdbcType=BIGINT},
+            </if>
+            <if test="record.dealerName != null">
+                dealer_name = #{record.dealerName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.dealerFeeId != null">
+                dealer_fee_id = #{record.dealerFeeId,jdbcType=BIGINT},
+            </if>
+            <if test="record.dealerFeeName != null">
+                dealer_fee_name = #{record.dealerFeeName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.coBankId != null">
+                co_bank_id = #{record.coBankId,jdbcType=BIGINT},
+            </if>
+            <if test="record.coBankName != null">
+                co_bank_name = #{record.coBankName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.isPublicLicense != null">
+                is_public_license = #{record.isPublicLicense,jdbcType=INTEGER},
+            </if>
+            <if test="record.licenseCompany != null">
+                license_company = #{record.licenseCompany,jdbcType=VARCHAR},
+            </if>
+            <if test="record.isConcernedCustomer != null">
+                is_concerned_customer = #{record.isConcernedCustomer,jdbcType=INTEGER},
+            </if>
+            <if test="record.isAgency != null">
+                is_agency = #{record.isAgency,jdbcType=INTEGER},
+            </if>
+            <if test="record.isGpsInstalled1 != null">
+                is_gps_installed1 = #{record.isGpsInstalled1,jdbcType=INTEGER},
+            </if>
+            <if test="record.isGpsInstalled2 != null">
+                is_gps_installed2 = #{record.isGpsInstalled2,jdbcType=INTEGER},
+            </if>
+            <if test="record.policyFinishFlag != null">
+                policy_finish_flag = #{record.policyFinishFlag,jdbcType=INTEGER},
+            </if>
+            <if test="record.visitAddressPid != null">
+                visit_address_pid = #{record.visitAddressPid,jdbcType=VARCHAR},
+            </if>
+            <if test="record.visitAddressPname != null">
+                visit_address_pname = #{record.visitAddressPname,jdbcType=VARCHAR},
+            </if>
+            <if test="record.visitAddressCid != null">
+                visit_address_cid = #{record.visitAddressCid,jdbcType=VARCHAR},
+            </if>
+            <if test="record.visitAddressCname != null">
+                visit_address_cname = #{record.visitAddressCname,jdbcType=VARCHAR},
+            </if>
+            <if test="record.visitAddressRid != null">
+                visit_address_rid = #{record.visitAddressRid,jdbcType=VARCHAR},
+            </if>
+            <if test="record.visitAddressRname != null">
+                visit_address_rname = #{record.visitAddressRname,jdbcType=VARCHAR},
+            </if>
+            <if test="record.visitAddressDetail != null">
+                visit_address_detail = #{record.visitAddressDetail,jdbcType=VARCHAR},
+            </if>
+            <if test="record.visitAddressLongitude != null">
+                visit_address_longitude = #{record.visitAddressLongitude,jdbcType=DECIMAL},
+            </if>
+            <if test="record.visitAddressLatitude != null">
+                visit_address_latitude = #{record.visitAddressLatitude,jdbcType=DECIMAL},
+            </if>
+            <if test="record.visitAddressGpsDetail != null">
+                visit_address_gps_detail = #{record.visitAddressGpsDetail,jdbcType=VARCHAR},
+            </if>
+            <if test="record.visitAddressGpsName != null">
+                visit_address_gps_name = #{record.visitAddressGpsName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.realAddressPid != null">
+                real_address_pid = #{record.realAddressPid,jdbcType=VARCHAR},
+            </if>
+            <if test="record.realAddressPname != null">
+                real_address_pname = #{record.realAddressPname,jdbcType=VARCHAR},
+            </if>
+            <if test="record.realAddressCid != null">
+                real_address_cid = #{record.realAddressCid,jdbcType=VARCHAR},
+            </if>
+            <if test="record.realAddressCname != null">
+                real_address_cname = #{record.realAddressCname,jdbcType=VARCHAR},
+            </if>
+            <if test="record.realAddressRid != null">
+                real_address_rid = #{record.realAddressRid,jdbcType=VARCHAR},
+            </if>
+            <if test="record.realAddressRname != null">
+                real_address_rname = #{record.realAddressRname,jdbcType=VARCHAR},
+            </if>
+            <if test="record.realAddressDetail != null">
+                real_address_detail = #{record.realAddressDetail,jdbcType=VARCHAR},
+            </if>
+            <if test="record.realAddressLongitude != null">
+                real_address_longitude = #{record.realAddressLongitude,jdbcType=DECIMAL},
+            </if>
+            <if test="record.realAddressLatitude != null">
+                real_address_latitude = #{record.realAddressLatitude,jdbcType=DECIMAL},
+            </if>
+            <if test="record.gpsNo != null">
+                gps_no = #{record.gpsNo,jdbcType=VARCHAR},
+            </if>
+            <if test="record.gpsUseDate != null">
+                gps_use_date = #{record.gpsUseDate,jdbcType=DATE},
+            </if>
+            <if test="record.isInuse != null">
+                is_inuse = #{record.isInuse,jdbcType=INTEGER},
+            </if>
+            <if test="record.userId != null">
+                user_id = #{record.userId,jdbcType=BIGINT},
+            </if>
+            <if test="record.userName != null">
+                user_name = #{record.userName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.userGroupId != null">
+                user_group_id = #{record.userGroupId,jdbcType=BIGINT},
+            </if>
+            <if test="record.userGroupName != null">
+                user_group_name = #{record.userGroupName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.managerId != null">
+                manager_id = #{record.managerId,jdbcType=BIGINT},
+            </if>
+            <if test="record.managerName != null">
+                manager_name = #{record.managerName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.orgId != null">
+                org_id = #{record.orgId,jdbcType=BIGINT},
+            </if>
+            <if test="record.orgName != null">
+                org_name = #{record.orgName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.createTime != null">
+                create_time = #{record.createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.modifyTime != null">
+                modify_time = #{record.modifyTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update loan_approve_project
+        set id = #{record.id,jdbcType=BIGINT},
+        project_id = #{record.projectId,jdbcType=BIGINT},
+        relative_apply_id1 = #{record.relativeApplyId1,jdbcType=BIGINT},
+        relative_apply_id2 = #{record.relativeApplyId2,jdbcType=BIGINT},
+        flow_type = #{record.flowType,jdbcType=VARCHAR},
+        node_key = #{record.nodeKey,jdbcType=VARCHAR},
+        credit_id = #{record.creditId,jdbcType=BIGINT},
+        project_no = #{record.projectNo,jdbcType=VARCHAR},
+        business_type_id = #{record.businessTypeId,jdbcType=INTEGER},
+        business_type_name = #{record.businessTypeName,jdbcType=VARCHAR},
+        product_id = #{record.productId,jdbcType=INTEGER},
+        product_name = #{record.productName,jdbcType=VARCHAR},
+        status = #{record.status,jdbcType=INTEGER},
+        data_source = #{record.dataSource,jdbcType=INTEGER},
+        car_type = #{record.carType,jdbcType=VARCHAR},
+        car_id = #{record.carId,jdbcType=BIGINT},
+        car_serialno = #{record.carSerialno,jdbcType=VARCHAR},
+        car_brand = #{record.carBrand,jdbcType=VARCHAR},
+        car_brand_name = #{record.carBrandName,jdbcType=VARCHAR},
+        car_make = #{record.carMake,jdbcType=VARCHAR},
+        car_make_name = #{record.carMakeName,jdbcType=VARCHAR},
+        car_model = #{record.carModel,jdbcType=VARCHAR},
+        car_model_name = #{record.carModelName,jdbcType=VARCHAR},
+        is_imported = #{record.isImported,jdbcType=INTEGER},
+        is_advance = #{record.isAdvance,jdbcType=INTEGER},
+        online_price = #{record.onlinePrice,jdbcType=DECIMAL},
+        billing_price = #{record.billingPrice,jdbcType=DECIMAL},
+        evaluation_price = #{record.evaluationPrice,jdbcType=DECIMAL},
+        sell_price = #{record.sellPrice,jdbcType=DECIMAL},
+        second_hand_car_price = #{record.secondHandCarPrice,jdbcType=DECIMAL},
+        loan_amount = #{record.loanAmount,jdbcType=DECIMAL},
+        required_amount = #{record.requiredAmount,jdbcType=DECIMAL},
+        loan_term = #{record.loanTerm,jdbcType=INTEGER},
+        loan_ratio = #{record.loanRatio,jdbcType=DECIMAL},
+        handing_fee = #{record.handingFee,jdbcType=DECIMAL},
+        repayment_amount = #{record.repaymentAmount,jdbcType=DECIMAL},
+        down_payment_amount = #{record.downPaymentAmount,jdbcType=DECIMAL},
+        payment_method = #{record.paymentMethod,jdbcType=INTEGER},
+        delivery_method = #{record.deliveryMethod,jdbcType=INTEGER},
+        payment_level = #{record.paymentLevel,jdbcType=INTEGER},
+        settle_method = #{record.settleMethod,jdbcType=INTEGER},
+        tested_repayment_amount = #{record.testedRepaymentAmount,jdbcType=DECIMAL},
+        guarantee_corporation_id = #{record.guaranteeCorporationId,jdbcType=BIGINT},
+        guarantee_corporation_name = #{record.guaranteeCorporationName,jdbcType=VARCHAR},
+        receivable_amount = #{record.receivableAmount,jdbcType=DECIMAL},
+        collected_amount = #{record.collectedAmount,jdbcType=DECIMAL},
+        collected_date = #{record.collectedDate,jdbcType=DATE},
+        pre_collected_amount = #{record.preCollectedAmount,jdbcType=DECIMAL},
+        payable_amount = #{record.payableAmount,jdbcType=DECIMAL},
+        main_signer_id = #{record.mainSignerId,jdbcType=BIGINT},
+        main_signer_name = #{record.mainSignerName,jdbcType=VARCHAR},
+        main_signer_weight = #{record.mainSignerWeight,jdbcType=DECIMAL},
+        vice_signer_id = #{record.viceSignerId,jdbcType=BIGINT},
+        vice_signer_name = #{record.viceSignerName,jdbcType=VARCHAR},
+        vice_signer_weight = #{record.viceSignerWeight,jdbcType=DECIMAL},
+        sign_date = #{record.signDate,jdbcType=TIMESTAMP},
+        launch_date = #{record.launchDate,jdbcType=DATE},
+        launch_user_id = #{record.launchUserId,jdbcType=BIGINT},
+        launch_user_name = #{record.launchUserName,jdbcType=VARCHAR},
+        review_date = #{record.reviewDate,jdbcType=DATE},
+        review_user_id = #{record.reviewUserId,jdbcType=BIGINT},
+        review_user_name = #{record.reviewUserName,jdbcType=VARCHAR},
+        approve_date = #{record.approveDate,jdbcType=DATE},
+        approve_user_id = #{record.approveUserId,jdbcType=BIGINT},
+        approve_user_name = #{record.approveUserName,jdbcType=VARCHAR},
+        dealer_id = #{record.dealerId,jdbcType=BIGINT},
+        dealer_name = #{record.dealerName,jdbcType=VARCHAR},
+        dealer_fee_id = #{record.dealerFeeId,jdbcType=BIGINT},
+        dealer_fee_name = #{record.dealerFeeName,jdbcType=VARCHAR},
+        co_bank_id = #{record.coBankId,jdbcType=BIGINT},
+        co_bank_name = #{record.coBankName,jdbcType=VARCHAR},
+        is_public_license = #{record.isPublicLicense,jdbcType=INTEGER},
+        license_company = #{record.licenseCompany,jdbcType=VARCHAR},
+        is_concerned_customer = #{record.isConcernedCustomer,jdbcType=INTEGER},
+        is_agency = #{record.isAgency,jdbcType=INTEGER},
+        is_gps_installed1 = #{record.isGpsInstalled1,jdbcType=INTEGER},
+        is_gps_installed2 = #{record.isGpsInstalled2,jdbcType=INTEGER},
+        policy_finish_flag = #{record.policyFinishFlag,jdbcType=INTEGER},
+        visit_address_pid = #{record.visitAddressPid,jdbcType=VARCHAR},
+        visit_address_pname = #{record.visitAddressPname,jdbcType=VARCHAR},
+        visit_address_cid = #{record.visitAddressCid,jdbcType=VARCHAR},
+        visit_address_cname = #{record.visitAddressCname,jdbcType=VARCHAR},
+        visit_address_rid = #{record.visitAddressRid,jdbcType=VARCHAR},
+        visit_address_rname = #{record.visitAddressRname,jdbcType=VARCHAR},
+        visit_address_detail = #{record.visitAddressDetail,jdbcType=VARCHAR},
+        visit_address_longitude = #{record.visitAddressLongitude,jdbcType=DECIMAL},
+        visit_address_latitude = #{record.visitAddressLatitude,jdbcType=DECIMAL},
+        visit_address_gps_detail = #{record.visitAddressGpsDetail,jdbcType=VARCHAR},
+        visit_address_gps_name = #{record.visitAddressGpsName,jdbcType=VARCHAR},
+        real_address_pid = #{record.realAddressPid,jdbcType=VARCHAR},
+        real_address_pname = #{record.realAddressPname,jdbcType=VARCHAR},
+        real_address_cid = #{record.realAddressCid,jdbcType=VARCHAR},
+        real_address_cname = #{record.realAddressCname,jdbcType=VARCHAR},
+        real_address_rid = #{record.realAddressRid,jdbcType=VARCHAR},
+        real_address_rname = #{record.realAddressRname,jdbcType=VARCHAR},
+        real_address_detail = #{record.realAddressDetail,jdbcType=VARCHAR},
+        real_address_longitude = #{record.realAddressLongitude,jdbcType=DECIMAL},
+        real_address_latitude = #{record.realAddressLatitude,jdbcType=DECIMAL},
+        gps_no = #{record.gpsNo,jdbcType=VARCHAR},
+        gps_use_date = #{record.gpsUseDate,jdbcType=DATE},
+        is_inuse = #{record.isInuse,jdbcType=INTEGER},
+        user_id = #{record.userId,jdbcType=BIGINT},
+        user_name = #{record.userName,jdbcType=VARCHAR},
+        user_group_id = #{record.userGroupId,jdbcType=BIGINT},
+        user_group_name = #{record.userGroupName,jdbcType=VARCHAR},
+        manager_id = #{record.managerId,jdbcType=BIGINT},
+        manager_name = #{record.managerName,jdbcType=VARCHAR},
+        org_id = #{record.orgId,jdbcType=BIGINT},
+        org_name = #{record.orgName,jdbcType=VARCHAR},
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+        modify_time = #{record.modifyTime,jdbcType=TIMESTAMP}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.cgw360.cls.model.approve.LoanApproveProject">
+        update loan_approve_project
+        <set>
+            <if test="projectId != null">
+                project_id = #{projectId,jdbcType=BIGINT},
+            </if>
+            <if test="relativeApplyId1 != null">
+                relative_apply_id1 = #{relativeApplyId1,jdbcType=BIGINT},
+            </if>
+            <if test="relativeApplyId2 != null">
+                relative_apply_id2 = #{relativeApplyId2,jdbcType=BIGINT},
+            </if>
+            <if test="flowType != null">
+                flow_type = #{flowType,jdbcType=VARCHAR},
+            </if>
+            <if test="nodeKey != null">
+                node_key = #{nodeKey,jdbcType=VARCHAR},
+            </if>
+            <if test="creditId != null">
+                credit_id = #{creditId,jdbcType=BIGINT},
+            </if>
+            <if test="projectNo != null">
+                project_no = #{projectNo,jdbcType=VARCHAR},
+            </if>
+            <if test="businessTypeId != null">
+                business_type_id = #{businessTypeId,jdbcType=INTEGER},
+            </if>
+            <if test="businessTypeName != null">
+                business_type_name = #{businessTypeName,jdbcType=VARCHAR},
+            </if>
+            <if test="productId != null">
+                product_id = #{productId,jdbcType=INTEGER},
+            </if>
+            <if test="productName != null">
+                product_name = #{productName,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=INTEGER},
+            </if>
+            <if test="dataSource != null">
+                data_source = #{dataSource,jdbcType=INTEGER},
+            </if>
+            <if test="carType != null">
+                car_type = #{carType,jdbcType=VARCHAR},
+            </if>
+            <if test="carId != null">
+                car_id = #{carId,jdbcType=BIGINT},
+            </if>
+            <if test="carSerialno != null">
+                car_serialno = #{carSerialno,jdbcType=VARCHAR},
+            </if>
+            <if test="carBrand != null">
+                car_brand = #{carBrand,jdbcType=VARCHAR},
+            </if>
+            <if test="carBrandName != null">
+                car_brand_name = #{carBrandName,jdbcType=VARCHAR},
+            </if>
+            <if test="carMake != null">
+                car_make = #{carMake,jdbcType=VARCHAR},
+            </if>
+            <if test="carMakeName != null">
+                car_make_name = #{carMakeName,jdbcType=VARCHAR},
+            </if>
+            <if test="carModel != null">
+                car_model = #{carModel,jdbcType=VARCHAR},
+            </if>
+            <if test="carModelName != null">
+                car_model_name = #{carModelName,jdbcType=VARCHAR},
+            </if>
+            <if test="isImported != null">
+                is_imported = #{isImported,jdbcType=INTEGER},
+            </if>
+            <if test="isAdvance != null">
+                is_advance = #{isAdvance,jdbcType=INTEGER},
+            </if>
+            <if test="onlinePrice != null">
+                online_price = #{onlinePrice,jdbcType=DECIMAL},
+            </if>
+            <if test="billingPrice != null">
+                billing_price = #{billingPrice,jdbcType=DECIMAL},
+            </if>
+            <if test="evaluationPrice != null">
+                evaluation_price = #{evaluationPrice,jdbcType=DECIMAL},
+            </if>
+            <if test="sellPrice != null">
+                sell_price = #{sellPrice,jdbcType=DECIMAL},
+            </if>
+            <if test="secondHandCarPrice != null">
+                second_hand_car_price = #{secondHandCarPrice,jdbcType=DECIMAL},
+            </if>
+            <if test="loanAmount != null">
+                loan_amount = #{loanAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="requiredAmount != null">
+                required_amount = #{requiredAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="loanTerm != null">
+                loan_term = #{loanTerm,jdbcType=INTEGER},
+            </if>
+            <if test="loanRatio != null">
+                loan_ratio = #{loanRatio,jdbcType=DECIMAL},
+            </if>
+            <if test="handingFee != null">
+                handing_fee = #{handingFee,jdbcType=DECIMAL},
+            </if>
+            <if test="repaymentAmount != null">
+                repayment_amount = #{repaymentAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="downPaymentAmount != null">
+                down_payment_amount = #{downPaymentAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="paymentMethod != null">
+                payment_method = #{paymentMethod,jdbcType=INTEGER},
+            </if>
+            <if test="deliveryMethod != null">
+                delivery_method = #{deliveryMethod,jdbcType=INTEGER},
+            </if>
+            <if test="paymentLevel != null">
+                payment_level = #{paymentLevel,jdbcType=INTEGER},
+            </if>
+            <if test="settleMethod != null">
+                settle_method = #{settleMethod,jdbcType=INTEGER},
+            </if>
+            <if test="testedRepaymentAmount != null">
+                tested_repayment_amount = #{testedRepaymentAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="guaranteeCorporationId != null">
+                guarantee_corporation_id = #{guaranteeCorporationId,jdbcType=BIGINT},
+            </if>
+            <if test="guaranteeCorporationName != null">
+                guarantee_corporation_name = #{guaranteeCorporationName,jdbcType=VARCHAR},
+            </if>
+            <if test="receivableAmount != null">
+                receivable_amount = #{receivableAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="collectedAmount != null">
+                collected_amount = #{collectedAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="collectedDate != null">
+                collected_date = #{collectedDate,jdbcType=DATE},
+            </if>
+            <if test="preCollectedAmount != null">
+                pre_collected_amount = #{preCollectedAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="payableAmount != null">
+                payable_amount = #{payableAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="mainSignerId != null">
+                main_signer_id = #{mainSignerId,jdbcType=BIGINT},
+            </if>
+            <if test="mainSignerName != null">
+                main_signer_name = #{mainSignerName,jdbcType=VARCHAR},
+            </if>
+            <if test="mainSignerWeight != null">
+                main_signer_weight = #{mainSignerWeight,jdbcType=DECIMAL},
+            </if>
+            <if test="viceSignerId != null">
+                vice_signer_id = #{viceSignerId,jdbcType=BIGINT},
+            </if>
+            <if test="viceSignerName != null">
+                vice_signer_name = #{viceSignerName,jdbcType=VARCHAR},
+            </if>
+            <if test="viceSignerWeight != null">
+                vice_signer_weight = #{viceSignerWeight,jdbcType=DECIMAL},
+            </if>
+            <if test="signDate != null">
+                sign_date = #{signDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="launchDate != null">
+                launch_date = #{launchDate,jdbcType=DATE},
+            </if>
+            <if test="launchUserId != null">
+                launch_user_id = #{launchUserId,jdbcType=BIGINT},
+            </if>
+            <if test="launchUserName != null">
+                launch_user_name = #{launchUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="reviewDate != null">
+                review_date = #{reviewDate,jdbcType=DATE},
+            </if>
+            <if test="reviewUserId != null">
+                review_user_id = #{reviewUserId,jdbcType=BIGINT},
+            </if>
+            <if test="reviewUserName != null">
+                review_user_name = #{reviewUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="approveDate != null">
+                approve_date = #{approveDate,jdbcType=DATE},
+            </if>
+            <if test="approveUserId != null">
+                approve_user_id = #{approveUserId,jdbcType=BIGINT},
+            </if>
+            <if test="approveUserName != null">
+                approve_user_name = #{approveUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="dealerId != null">
+                dealer_id = #{dealerId,jdbcType=BIGINT},
+            </if>
+            <if test="dealerName != null">
+                dealer_name = #{dealerName,jdbcType=VARCHAR},
+            </if>
+            <if test="dealerFeeId != null">
+                dealer_fee_id = #{dealerFeeId,jdbcType=BIGINT},
+            </if>
+            <if test="dealerFeeName != null">
+                dealer_fee_name = #{dealerFeeName,jdbcType=VARCHAR},
+            </if>
+            <if test="coBankId != null">
+                co_bank_id = #{coBankId,jdbcType=BIGINT},
+            </if>
+            <if test="coBankName != null">
+                co_bank_name = #{coBankName,jdbcType=VARCHAR},
+            </if>
+            <if test="isPublicLicense != null">
+                is_public_license = #{isPublicLicense,jdbcType=INTEGER},
+            </if>
+            <if test="licenseCompany != null">
+                license_company = #{licenseCompany,jdbcType=VARCHAR},
+            </if>
+            <if test="isConcernedCustomer != null">
+                is_concerned_customer = #{isConcernedCustomer,jdbcType=INTEGER},
+            </if>
+            <if test="isAgency != null">
+                is_agency = #{isAgency,jdbcType=INTEGER},
+            </if>
+            <if test="isGpsInstalled1 != null">
+                is_gps_installed1 = #{isGpsInstalled1,jdbcType=INTEGER},
+            </if>
+            <if test="isGpsInstalled2 != null">
+                is_gps_installed2 = #{isGpsInstalled2,jdbcType=INTEGER},
+            </if>
+            <if test="policyFinishFlag != null">
+                policy_finish_flag = #{policyFinishFlag,jdbcType=INTEGER},
+            </if>
+            <if test="visitAddressPid != null">
+                visit_address_pid = #{visitAddressPid,jdbcType=VARCHAR},
+            </if>
+            <if test="visitAddressPname != null">
+                visit_address_pname = #{visitAddressPname,jdbcType=VARCHAR},
+            </if>
+            <if test="visitAddressCid != null">
+                visit_address_cid = #{visitAddressCid,jdbcType=VARCHAR},
+            </if>
+            <if test="visitAddressCname != null">
+                visit_address_cname = #{visitAddressCname,jdbcType=VARCHAR},
+            </if>
+            <if test="visitAddressRid != null">
+                visit_address_rid = #{visitAddressRid,jdbcType=VARCHAR},
+            </if>
+            <if test="visitAddressRname != null">
+                visit_address_rname = #{visitAddressRname,jdbcType=VARCHAR},
+            </if>
+            <if test="visitAddressDetail != null">
+                visit_address_detail = #{visitAddressDetail,jdbcType=VARCHAR},
+            </if>
+            <if test="visitAddressLongitude != null">
+                visit_address_longitude = #{visitAddressLongitude,jdbcType=DECIMAL},
+            </if>
+            <if test="visitAddressLatitude != null">
+                visit_address_latitude = #{visitAddressLatitude,jdbcType=DECIMAL},
+            </if>
+            <if test="visitAddressGpsDetail != null">
+                visit_address_gps_detail = #{visitAddressGpsDetail,jdbcType=VARCHAR},
+            </if>
+            <if test="visitAddressGpsName != null">
+                visit_address_gps_name = #{visitAddressGpsName,jdbcType=VARCHAR},
+            </if>
+            <if test="realAddressPid != null">
+                real_address_pid = #{realAddressPid,jdbcType=VARCHAR},
+            </if>
+            <if test="realAddressPname != null">
+                real_address_pname = #{realAddressPname,jdbcType=VARCHAR},
+            </if>
+            <if test="realAddressCid != null">
+                real_address_cid = #{realAddressCid,jdbcType=VARCHAR},
+            </if>
+            <if test="realAddressCname != null">
+                real_address_cname = #{realAddressCname,jdbcType=VARCHAR},
+            </if>
+            <if test="realAddressRid != null">
+                real_address_rid = #{realAddressRid,jdbcType=VARCHAR},
+            </if>
+            <if test="realAddressRname != null">
+                real_address_rname = #{realAddressRname,jdbcType=VARCHAR},
+            </if>
+            <if test="realAddressDetail != null">
+                real_address_detail = #{realAddressDetail,jdbcType=VARCHAR},
+            </if>
+            <if test="realAddressLongitude != null">
+                real_address_longitude = #{realAddressLongitude,jdbcType=DECIMAL},
+            </if>
+            <if test="realAddressLatitude != null">
+                real_address_latitude = #{realAddressLatitude,jdbcType=DECIMAL},
+            </if>
+            <if test="gpsNo != null">
+                gps_no = #{gpsNo,jdbcType=VARCHAR},
+            </if>
+            <if test="gpsUseDate != null">
+                gps_use_date = #{gpsUseDate,jdbcType=DATE},
+            </if>
+            <if test="isInuse != null">
+                is_inuse = #{isInuse,jdbcType=INTEGER},
+            </if>
+            <if test="userId != null">
+                user_id = #{userId,jdbcType=BIGINT},
+            </if>
+            <if test="userName != null">
+                user_name = #{userName,jdbcType=VARCHAR},
+            </if>
+            <if test="userGroupId != null">
+                user_group_id = #{userGroupId,jdbcType=BIGINT},
+            </if>
+            <if test="userGroupName != null">
+                user_group_name = #{userGroupName,jdbcType=VARCHAR},
+            </if>
+            <if test="managerId != null">
+                manager_id = #{managerId,jdbcType=BIGINT},
+            </if>
+            <if test="managerName != null">
+                manager_name = #{managerName,jdbcType=VARCHAR},
+            </if>
+            <if test="orgId != null">
+                org_id = #{orgId,jdbcType=BIGINT},
+            </if>
+            <if test="orgName != null">
+                org_name = #{orgName,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="modifyTime != null">
+                modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.cgw360.cls.model.approve.LoanApproveProject">
+    update loan_approve_project
+    set project_id = #{projectId,jdbcType=BIGINT},
+      relative_apply_id1 = #{relativeApplyId1,jdbcType=BIGINT},
+      relative_apply_id2 = #{relativeApplyId2,jdbcType=BIGINT},
+      flow_type = #{flowType,jdbcType=VARCHAR},
+      node_key = #{nodeKey,jdbcType=VARCHAR},
+      credit_id = #{creditId,jdbcType=BIGINT},
+      project_no = #{projectNo,jdbcType=VARCHAR},
+      business_type_id = #{businessTypeId,jdbcType=INTEGER},
+      business_type_name = #{businessTypeName,jdbcType=VARCHAR},
+      product_id = #{productId,jdbcType=INTEGER},
+      product_name = #{productName,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      data_source = #{dataSource,jdbcType=INTEGER},
+      car_type = #{carType,jdbcType=VARCHAR},
+      car_id = #{carId,jdbcType=BIGINT},
+      car_serialno = #{carSerialno,jdbcType=VARCHAR},
+      car_brand = #{carBrand,jdbcType=VARCHAR},
+      car_brand_name = #{carBrandName,jdbcType=VARCHAR},
+      car_make = #{carMake,jdbcType=VARCHAR},
+      car_make_name = #{carMakeName,jdbcType=VARCHAR},
+      car_model = #{carModel,jdbcType=VARCHAR},
+      car_model_name = #{carModelName,jdbcType=VARCHAR},
+      is_imported = #{isImported,jdbcType=INTEGER},
+      is_advance = #{isAdvance,jdbcType=INTEGER},
+      online_price = #{onlinePrice,jdbcType=DECIMAL},
+      billing_price = #{billingPrice,jdbcType=DECIMAL},
+      evaluation_price = #{evaluationPrice,jdbcType=DECIMAL},
+      sell_price = #{sellPrice,jdbcType=DECIMAL},
+      second_hand_car_price = #{secondHandCarPrice,jdbcType=DECIMAL},
+      loan_amount = #{loanAmount,jdbcType=DECIMAL},
+      required_amount = #{requiredAmount,jdbcType=DECIMAL},
+      loan_term = #{loanTerm,jdbcType=INTEGER},
+      loan_ratio = #{loanRatio,jdbcType=DECIMAL},
+      handing_fee = #{handingFee,jdbcType=DECIMAL},
+      repayment_amount = #{repaymentAmount,jdbcType=DECIMAL},
+      down_payment_amount = #{downPaymentAmount,jdbcType=DECIMAL},
+      payment_method = #{paymentMethod,jdbcType=INTEGER},
+      delivery_method = #{deliveryMethod,jdbcType=INTEGER},
+      payment_level = #{paymentLevel,jdbcType=INTEGER},
+      settle_method = #{settleMethod,jdbcType=INTEGER},
+      tested_repayment_amount = #{testedRepaymentAmount,jdbcType=DECIMAL},
+      guarantee_corporation_id = #{guaranteeCorporationId,jdbcType=BIGINT},
+      guarantee_corporation_name = #{guaranteeCorporationName,jdbcType=VARCHAR},
+      receivable_amount = #{receivableAmount,jdbcType=DECIMAL},
+      collected_amount = #{collectedAmount,jdbcType=DECIMAL},
+      collected_date = #{collectedDate,jdbcType=DATE},
+      pre_collected_amount = #{preCollectedAmount,jdbcType=DECIMAL},
+      payable_amount = #{payableAmount,jdbcType=DECIMAL},
+      main_signer_id = #{mainSignerId,jdbcType=BIGINT},
+      main_signer_name = #{mainSignerName,jdbcType=VARCHAR},
+      main_signer_weight = #{mainSignerWeight,jdbcType=DECIMAL},
+      vice_signer_id = #{viceSignerId,jdbcType=BIGINT},
+      vice_signer_name = #{viceSignerName,jdbcType=VARCHAR},
+      vice_signer_weight = #{viceSignerWeight,jdbcType=DECIMAL},
+      sign_date = #{signDate,jdbcType=TIMESTAMP},
+      launch_date = #{launchDate,jdbcType=DATE},
+      launch_user_id = #{launchUserId,jdbcType=BIGINT},
+      launch_user_name = #{launchUserName,jdbcType=VARCHAR},
+      review_date = #{reviewDate,jdbcType=DATE},
+      review_user_id = #{reviewUserId,jdbcType=BIGINT},
+      review_user_name = #{reviewUserName,jdbcType=VARCHAR},
+      approve_date = #{approveDate,jdbcType=DATE},
+      approve_user_id = #{approveUserId,jdbcType=BIGINT},
+      approve_user_name = #{approveUserName,jdbcType=VARCHAR},
+      dealer_id = #{dealerId,jdbcType=BIGINT},
+      dealer_name = #{dealerName,jdbcType=VARCHAR},
+      dealer_fee_id = #{dealerFeeId,jdbcType=BIGINT},
+      dealer_fee_name = #{dealerFeeName,jdbcType=VARCHAR},
+      co_bank_id = #{coBankId,jdbcType=BIGINT},
+      co_bank_name = #{coBankName,jdbcType=VARCHAR},
+      is_public_license = #{isPublicLicense,jdbcType=INTEGER},
+      license_company = #{licenseCompany,jdbcType=VARCHAR},
+      is_concerned_customer = #{isConcernedCustomer,jdbcType=INTEGER},
+      is_agency = #{isAgency,jdbcType=INTEGER},
+      is_gps_installed1 = #{isGpsInstalled1,jdbcType=INTEGER},
+      is_gps_installed2 = #{isGpsInstalled2,jdbcType=INTEGER},
+      policy_finish_flag = #{policyFinishFlag,jdbcType=INTEGER},
+      visit_address_pid = #{visitAddressPid,jdbcType=VARCHAR},
+      visit_address_pname = #{visitAddressPname,jdbcType=VARCHAR},
+      visit_address_cid = #{visitAddressCid,jdbcType=VARCHAR},
+      visit_address_cname = #{visitAddressCname,jdbcType=VARCHAR},
+      visit_address_rid = #{visitAddressRid,jdbcType=VARCHAR},
+      visit_address_rname = #{visitAddressRname,jdbcType=VARCHAR},
+      visit_address_detail = #{visitAddressDetail,jdbcType=VARCHAR},
+      visit_address_longitude = #{visitAddressLongitude,jdbcType=DECIMAL},
+      visit_address_latitude = #{visitAddressLatitude,jdbcType=DECIMAL},
+      visit_address_gps_detail = #{visitAddressGpsDetail,jdbcType=VARCHAR},
+      visit_address_gps_name = #{visitAddressGpsName,jdbcType=VARCHAR},
+      real_address_pid = #{realAddressPid,jdbcType=VARCHAR},
+      real_address_pname = #{realAddressPname,jdbcType=VARCHAR},
+      real_address_cid = #{realAddressCid,jdbcType=VARCHAR},
+      real_address_cname = #{realAddressCname,jdbcType=VARCHAR},
+      real_address_rid = #{realAddressRid,jdbcType=VARCHAR},
+      real_address_rname = #{realAddressRname,jdbcType=VARCHAR},
+      real_address_detail = #{realAddressDetail,jdbcType=VARCHAR},
+      real_address_longitude = #{realAddressLongitude,jdbcType=DECIMAL},
+      real_address_latitude = #{realAddressLatitude,jdbcType=DECIMAL},
+      gps_no = #{gpsNo,jdbcType=VARCHAR},
+      gps_use_date = #{gpsUseDate,jdbcType=DATE},
+      is_inuse = #{isInuse,jdbcType=INTEGER},
+      user_id = #{userId,jdbcType=BIGINT},
+      user_name = #{userName,jdbcType=VARCHAR},
+      user_group_id = #{userGroupId,jdbcType=BIGINT},
+      user_group_name = #{userGroupName,jdbcType=VARCHAR},
+      manager_id = #{managerId,jdbcType=BIGINT},
+      manager_name = #{managerName,jdbcType=VARCHAR},
+      org_id = #{orgId,jdbcType=BIGINT},
+      org_name = #{orgName,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      modify_time = #{modifyTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <update id="updateGpsInfoByProjectId" parameterType="com.cgw360.cls.model.approve.LoanApproveProject">
+        update loan_approve_project
+        set gps_no = #{gpsNo,jdbcType=VARCHAR},
+        gps_use_date = #{gpsUseDate,jdbcType=DATE},
+        modify_time = #{modifyTime,jdbcType=TIMESTAMP}
+        where project_id = #{projectId,jdbcType=BIGINT}
+    </update>
+</mapper>

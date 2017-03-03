@@ -1,0 +1,425 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cgw360.cls.dao.inloan.ILoanContractInfoDao">
+	<resultMap id="myResultMap" type="com.cgw360.cls.model.inloan.LoanContractInfo" autoMapping="true">
+		<result column="id" property="id" />
+		<result column="project_id" property="projectId" />
+		<result column="contract_no" property="contractNo" />
+		<result column="contract_amount" property="contractAmount" />
+		<result column="bank_no" property="bankNo" />
+		<result column="repayment_no" property="repaymentNo" />
+		<result column="interest_start_date" property="interestStartDate" />
+		<result column="interest_end_date" property="interestEndDate" />
+		<result column="first_repayment_date" property="firstRepaymentDate" />
+		<result column="register_date" property="registerDate" />
+		<result column="note" property="note" />
+		<result column="create_time" property="createTime" />
+		<result column="modify_time" property="modifyTime" />
+	</resultMap>
+
+	<insert id="insertOne" parameterType="com.cgw360.cls.model.inloan.LoanContractInfo" keyProperty="id" useGeneratedKeys="true">
+		<![CDATA[
+  			insert into loan_contract_info
+  			(
+  			  			   			project_id,
+  			  			   			contract_no,
+  			  			   			contract_amount,
+  			  			   			bank_no,
+  			  			   			repayment_no,
+  			  			   			interest_start_date,
+  			  			   			interest_end_date,
+  			  			   			first_repayment_date,
+  			  			   			register_date,
+  			  			   			note,
+  			  			   			create_time,
+  			  			   			modify_time  			   			
+			)values(
+						 			 #{projectId} ,
+						 			 #{contractNo} ,
+						 			 #{contractAmount} ,
+						 			 #{bankNo} ,
+						 			 #{repaymentNo} ,
+						 			 #{interestStartDate} ,
+						 			 #{interestEndDate} ,
+						 			 #{firstRepaymentDate} ,
+						 			 #{registerDate} ,
+						 			 #{note} ,
+						 			 NOW() ,
+						 			 #{modifyTime} 			 			
+			)
+		]]>
+	</insert>
+
+	<insert id="insertList" parameterType="com.cgw360.cls.model.inloan.LoanContractInfo" keyProperty="id" useGeneratedKeys="true">
+		<![CDATA[
+  			insert into loan_contract_info
+  			(
+  			  			   			project_id,
+  			  			   			contract_no,
+  			  			   			contract_amount,
+  			  			   			bank_no,
+  			  			   			repayment_no,
+  			  			   			interest_start_date,
+  			  			   			interest_end_date,
+  			  			   			first_repayment_date,
+  			  			   			register_date,
+  			  			   			note,
+  			  			   			create_time,
+  			  			   			modify_time  			   			
+			)values
+			]]>
+		<foreach collection="list" item="item" index="index" separator=",">
+			(
+			#{item.projectId} ,
+			#{item.contractNo} ,
+			#{item.contractAmount} ,
+			#{item.bankNo} ,
+			#{item.repaymentNo} ,
+			#{item.interestStartDate} ,
+			#{item.interestEndDate} ,
+			#{item.firstRepaymentDate} ,
+			#{item.registerDate} ,
+			#{item.note} ,
+			NOW() ,
+			#{item.modifyTime}
+			)
+		</foreach>
+	</insert>
+
+	<delete id="deleteOne" parameterType="java.lang.Long">
+		<![CDATA[
+			delete from loan_contract_info where id = #{id}
+		]]>
+	</delete>
+
+	<delete id="deleteList">
+		<![CDATA[
+			delete from loan_contract_info where id in
+		]]>
+		<foreach collection="list" item="itemId" index="index" open="(" close=")" separator=",">
+			#{itemId}
+		</foreach>
+	</delete>
+
+	<update id="update" parameterType="com.cgw360.cls.model.inloan.LoanContractInfo">
+		<![CDATA[
+			update loan_contract_info 
+		]]>
+		<set>
+			<if test="projectId != null and projectId != ''"> project_id = #{projectId}, </if>
+			<if test="contractNo != null and contractNo != ''"> contract_no = #{contractNo}, </if>
+			<if test="contractAmount != null and contractAmount != ''"> contract_amount = #{contractAmount}, </if>
+			<if test="bankNo != null and bankNo != ''"> bank_no = #{bankNo}, </if>
+			<if test="repaymentNo != null and repaymentNo != ''"> repayment_no = #{repaymentNo}, </if>
+			<if test="interestStartDate != null and interestStartDate != ''"> interest_start_date = #{interestStartDate}, </if>
+			<if test="interestEndDate != null and interestEndDate != ''"> interest_end_date = #{interestEndDate}, </if>
+			<if test="firstRepaymentDate != null and firstRepaymentDate != ''"> first_repayment_date = #{firstRepaymentDate}, </if>
+			<if test="registerDate != null and registerDate != ''"> register_date = #{registerDate}, </if>
+			<if test="note != null and note != ''"> note = #{note}, </if>
+			<if test="createTime != null and createTime != ''"> create_time = #{createTime}, </if>
+			<if test="modifyTime != null and modifyTime != ''"> modify_time = #{modifyTime}, </if>
+		</set>
+		<![CDATA[
+			where id = #{id}
+		]]>
+	</update>
+
+	<select id="selectOne" parameterType="java.lang.Long" resultMap="myResultMap">
+		<![CDATA[
+			select * from loan_contract_info where id = #{id} limit 1
+		]]>
+	</select>
+	<select id="selectList" resultMap="myResultMap">
+		<![CDATA[
+			select * from loan_contract_info where id in
+		]]>
+		<foreach collection="list" item="itemId" index="index" open="(" close=")" separator=",">
+			#{itemId}
+		</foreach>
+	</select>
+	<!-- common statement -->
+	<sql id="common_where">
+		<!-- and username like '%${username}%' -->
+		<where>
+			<if test="projectId != null and projectId != ''">
+				AND project_id = #{projectId}
+			</if>
+			<if test="contractNo != null and contractNo != ''">
+				AND contract_no = #{contractNo}
+			</if>
+			<if test="contractAmount != null and contractAmount != ''">
+				AND contract_amount = #{contractAmount}
+			</if>
+			<if test="bankNo != null and bankNo != ''">
+				AND bank_no = #{bankNo}
+			</if>
+			<if test="repaymentNo != null and repaymentNo != ''">
+				AND repayment_no = #{repaymentNo}
+			</if>
+			<if test="interestStartDate != null and interestStartDate != ''">
+				AND interest_start_date = #{interestStartDate}
+			</if>
+			<if test="interestEndDate != null and interestEndDate != ''">
+				AND interest_end_date = #{interestEndDate}
+			</if>
+			<if test="firstRepaymentDate != null and firstRepaymentDate != ''">
+				AND first_repayment_date = #{firstRepaymentDate}
+			</if>
+			<if test="registerDate != null and registerDate != ''">
+				AND register_date = #{registerDate}
+			</if>
+			<if test="note != null and note != ''">
+				AND note = #{note}
+			</if>
+			<if test="createTime != null and createTime != ''">
+				AND create_time = #{createTime}
+			</if>
+			<if test="modifyTime != null and modifyTime != ''">
+				AND modify_time = #{modifyTime}
+			</if>
+		</where>
+	</sql>
+
+	<select id="selectCountByFields" parameterType="java.util.Map" resultType="java.lang.Integer">
+		<![CDATA[
+			select count(1) from loan_contract_info 
+		]]>
+		<include refid="common_where" />
+	</select>
+	<select id="selectByFields" parameterType="java.util.Map" resultMap="myResultMap">
+		<![CDATA[
+			select * from loan_contract_info 
+		]]>
+		<include refid="common_where" />
+		<choose>
+			<when test="sortField != null and sortField == 'createTimeAsc'">
+				<![CDATA[order by case when create_time is null then '2039-01-01 00:00:00' else create_time end asc]]>
+			</when>
+			<when test="sortField != null and sortField == 'createTimeDesc'">
+				<![CDATA[order by case when create_time is null then '1969-12-31 23:59:59' else create_time end desc]]>
+			</when>
+			<otherwise>
+				<![CDATA[order by case when create_time is null then '1969-12-31 23:59:59' else create_time end desc]]>
+			</otherwise>
+		</choose>
+		<choose>
+			<when test="limitStart != null and limitNum != null">
+				limit #{limitStart}, #{limitNum}
+			</when>
+			<when test="limitNum != null">
+				limit #{limitNum}
+			</when>
+			<otherwise></otherwise>
+		</choose>
+	</select>
+	
+	<sql id="criteria_condition">
+		<if test="loanStatuses != null">
+			<choose>
+				<when test="loanStatuses.size() > 0">
+					lap1.status in
+					<foreach collection="loanStatuses" item="tag" open=" (" separator=", " close=" )">
+						${tag}
+					</foreach>
+				</when>
+				<otherwise>
+					and 1 = -1
+				</otherwise>
+			</choose>
+		</if>	
+		<choose>
+    		<when test="isRegistered==1">
+    			and (lci.id is not null)	 			
+    		</when>
+    		<otherwise>
+    			and (lci.id is null)	
+    		</otherwise>
+    	</choose>	
+  		<if test="projectNo !=null and projectNo != ''">
+	 		 and lap1.project_no like concat("%",#{projectNo},"%") 		  
+	 	</if>
+	 	<if test="customerName !=null and customerName != ''">
+	 		 and lap1.customer_name like concat("%",#{customerName},"%") 		  
+	 	</if>
+	 	<if test="cardNo !=null and cardNo != ''">
+	 		and lap1.card_no like concat("%",#{cardNo},"%") 		  
+	 	</if>
+	 	<if test="mobilePhone !=null and mobilePhone != ''">
+	 		and lap1.mobile_phone like concat("%",#{mobilePhone},"%") 		  
+	 	</if>
+	 	<if test="plateNo !=null and plateNo != ''">
+	 		and lpi.plate_no like concat("%",#{plateNo},"%") 		  
+	 	</if>	 	
+	 	<if test="applyIds!=null">
+	 		<choose>
+		 		<when test="applyIds.size() > 0 ">
+		 			and lap1.relative_apply_id1 in 
+	    			<foreach collection="applyIds" item="tag" open=" (" separator=" ," close=")">
+						${tag}
+					</foreach>			
+	    		</when>
+	    		<otherwise>
+	    			and 1 = -1
+	    		</otherwise>	
+	    	</choose>  
+	 	</if>
+	 	<if test="dataOrgScope != null or dataGroupScope != null">
+	 		and(
+	 			<if test="dataOrgScope != null">
+	 				lap1.org_id in 
+	 				<foreach collection="dataOrgScope" item="tag" open=" )" separator=" ," close=") ">
+						  ${tag}
+					</foreach>
+	 			</if>
+	 			<if test="dataOrgScope != null and dataGroupScope != null"> 
+	 				or 
+	 			</if>
+				<if test="dataGroupScope != null">
+					lap1.user_group_id in 
+	 				<foreach collection="dataGroupScope" item="tag" open=" (" separator=" ," close=") ">
+						  ${tag} 
+					</foreach>
+	 			</if>
+			)
+		</if>
+  	</sql>
+	 <select id="countByCriteria" resultType="java.lang.Integer" parameterType="java.util.Map" >
+	    select 
+	    	count(1)
+		from loan_info_view lap1
+		left join loan_car_info lai on lai.project_id = lap1.project_id
+		left join license_plate_info lpi on lpi.loan_car_id = lai.id 
+		left join loan_contract_info lci on lci.project_id = lap1.project_id
+		<trim prefix="where" prefixOverrides="and|or">
+		    <include refid="criteria_condition" />
+	  	</trim>
+	</select>
+	<select id="selectByCriteria" parameterType="java.util.Map" resultType="java.util.Map">
+		select 
+			lap1.relative_apply_id1 applyId, 
+			lap1.project_id projectId, 
+			lap1.project_no projectNo,
+			lap1.customer_name customerName, 
+			lap1.card_no cardNo, 
+			lap1.mobile_phone mobilePhone,
+			lap1.loan_amount loanAmount,
+			lap1.loan_term loanTerm,
+			lpi.plate_no plateNo,
+			
+			lci.contract_no contractNo
+		from loan_info_view lap1
+		left join loan_car_info lai on lai.project_id = lap1.project_id
+		left join license_plate_info lpi on lpi.loan_car_id = lai.id 
+		left join loan_contract_info lci on lci.project_id = lap1.project_id
+
+		<trim prefix="where" prefixOverrides="and|or">
+		    <include refid="criteria_condition" />
+	  	</trim>
+  		order by lap1.create_time desc
+  		<choose>
+			<when test="limitStart != null and limitNum != null">
+				limit #{limitStart}, #{limitNum}
+			</when>
+			<when test="limitNum != null">
+				limit #{limitNum}
+			</when>
+			<otherwise></otherwise>
+		</choose>
+  	</select>
+	
+	<select id="selectByProjectId" parameterType="java.lang.Long" resultType="java.util.Map">
+		select 
+			lap1.relative_apply_id1 applyId, 
+			lap1.project_id projectId, 
+			lap1.project_no projectNo,
+			lap1.customer_id customerId,
+			lap1.customer_name customerName,
+			lap1.product_name productName,
+			lap1.loan_amount loanAmount,
+			lap1.loan_term loanTerm,
+			lap1.required_amount requiredAmount,
+			lap1.co_bank_name coBankName,
+			
+			laf.bank_installment_fee bankInstallmentFee,
+			"等额本息" repayType,
+			laf.notice_downpayment_capital noticeDownpaymentCapital,
+			laf.notice_downpayment_interest noticeDownpaymentInterest,	
+			laf.notice_downpayment_amount noticeDownpaymentAmount,
+			laf.notice_periodpayment_capital noticePeriodpaymentCapital,
+			laf.notice_periodpayment_interest noticePeriodpaymentInterest,
+			laf.notice_periodpayment_amount noticePeriodpaymentAmount,
+			laf.notice_finalpayment_capital noticeFinalpaymentCapital,
+			laf.notice_finalpayment_interest noticeFinalpaymentInterest,
+			laf.notice_finalpayment_amount noticeFinalpaymentAmount,
+			laf.contract_downpayment_capital contractDownpaymentCapital,
+			laf.contract_downpayment_interest contractDownpaymentInterest,	
+			laf.contract_downpayment_amount contractDownpaymentAmount,
+			laf.contract_periodpayment_capital contractPeriodpaymentCapital,
+			laf.contract_periodpayment_interest contractPeriodpaymentInterest,
+			laf.contract_periodpayment_amount contractPeriodpaymentAmount,
+			laf.contract_finalpayment_capital contractFinalpaymentCapital,
+			laf.contract_finalpayment_interest contractFinalpaymentInterest,
+			laf.contract_finalpayment_amount contractFinalpaymentAmount,
+	    	laf.bill_date billDate,
+		
+			lci.id id,
+			lci.contract_no contractNo,
+			lci.contract_amount contractAmount,
+			lci.bank_no bankNo,
+			lci.repayment_no repaymentNo,
+			lci.interest_start_date interestStartDate,
+			lci.interest_end_date interestEndDate,
+			lci.first_repayment_date firstRepaymentDate,
+			lci.register_date registerDate,
+			lci.note note
+		from loan_info_view lap1
+		left join loan_approve_fee laf on laf.project_id = lap1.project_id
+		left join loan_contract_info lci on lci.project_id = lap1.project_id
+		where lap1.project_id = #{projectId}
+  	</select>
+  	
+  	<select id="selectOverdueMatchLoanInfo" parameterType="java.util.Map" resultType="com.cgw360.cls.model.inloan.OverdueMatchLoanInfo">
+  		select 
+			liv.project_id projectId, 
+			liv.project_no projectNo,
+			liv.customer_id customerId,
+			liv.customer_name loanCustomerName, 
+			liv.card_type cardType, 
+			liv.card_no loanCardNo, 
+			liv.mobile_phone loanMobilePhone,
+			lci.repayment_no repaymentNo,
+			liv.loan_amount loanAmount, 
+			concat(liv.car_brand_name,liv.car_model_name,liv.car_make_name) carInfo,
+			liv.loan_term loanTerm, 
+			liv.org_id orgId,
+			liv.org_name orgName,
+			liv.user_group_id userGroupId,
+			liv.user_group_name userGroupName,
+			lpi.plate_no plateNo,
+			laf.bill_date billDate,
+			lcrp.id loanContractRepayPlanId, 
+			lcrp.plan_no planNo
+		from loan_contract_info lci
+		left join license_plate_info lpi on lpi.project_id = lci.project_id
+		left join loan_info_view liv on lci.project_id = liv.project_id  
+		left join loan_approve_fee laf on laf.project_id = lci.project_id
+		left join loan_contract_repay_plan lcrp ON lci.id = lcrp.contract_id
+		where
+		DATE_FORMAT(lcrp.end_time,'%Y-%m') =
+		(
+			case when DATE_FORMAT(#{exportTime},'%Y-%m') > DATE_FORMAT(lci.interest_end_date,'%Y-%m') then DATE_FORMAT(lci.interest_end_date,'%Y-%m')
+			when DAYOFMONTH(#{exportTime}) >=  laf.bill_date then DATE_FORMAT(#{exportTime},'%Y-%m') 
+			else DATE_FORMAT(date_add(#{exportTime}, interval -1 MONTH),'%Y-%m')
+			end
+		)
+		<if test="cardNo != null">
+			and liv.card_no = #{cardNo}
+		</if>
+		<if test="customerName != null">
+			and liv.customer_name = #{customerName}
+		</if>
+		<if test="repaymentNo != null">
+			and lci.repayment_no = #{repaymentNo}
+		</if>
+  	</select>
+</mapper>

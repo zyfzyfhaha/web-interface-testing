@@ -1,0 +1,452 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cgw360.cls.dao.loan.LoanDocumentMapper">
+    <resultMap id="BaseResultMap" type="com.cgw360.cls.model.loan.LoanDocument">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="object_type" property="objectType" jdbcType="VARCHAR"/>
+        <result column="object_no" property="objectNo" jdbcType="BIGINT"/>
+        <result column="dir_id" property="dirId" jdbcType="BIGINT"/>
+        <result column="file_type" property="fileType" jdbcType="VARCHAR"/>
+        <result column="file_name" property="fileName" jdbcType="VARCHAR"/>
+        <result column="file_size" property="fileSize" jdbcType="DECIMAL"/>
+        <result column="file_format" property="fileFormat" jdbcType="VARCHAR"/>
+        <result column="file_path" property="filePath" jdbcType="VARCHAR"/>
+        <result column="photograph_longitude" property="photographLongitude" jdbcType="DECIMAL"/>
+        <result column="photograph_latitude" property="photographLatitude" jdbcType="DECIMAL"/>
+        <result column="is_inuse" property="isInuse" jdbcType="INTEGER"/>
+        <result column="user_id" property="userId" jdbcType="BIGINT"/>
+        <result column="user_name" property="userName" jdbcType="VARCHAR"/>
+        <result column="org_id" property="orgId" jdbcType="BIGINT"/>
+        <result column="org_name" property="orgName" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP"/>
+        <result column="modify_realname" property="modifyRealname" jdbcType="VARCHAR"/>
+        <result column="modify_uid" property="modifyUid" jdbcType="BIGINT"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Base_Column_List">
+    id, object_type, object_no, dir_id, file_type, file_name, file_size, file_format,
+    file_path, photograph_longitude, photograph_latitude, is_inuse, user_id, user_name,
+    org_id, org_name, create_time, modify_time,modify_realname,modify_uid
+    </sql>
+
+    <insert id="insert" parameterType="com.cgw360.cls.model.loan.LoanDocument" useGeneratedKeys="true"
+            keyColumn="id" keyProperty="id">
+    insert into loan_document (object_type, object_no,
+      dir_id, file_type, file_name,
+      file_size, file_format, file_path,
+      photograph_longitude, photograph_latitude,
+      is_inuse, user_id, user_name,
+      org_id, org_name, create_time,
+      modify_time)
+    values (#{objectType,jdbcType=VARCHAR}, #{objectNo,jdbcType=BIGINT},
+      #{dirId,jdbcType=BIGINT}, #{fileType,jdbcType=VARCHAR}, #{fileName,jdbcType=VARCHAR},
+      #{fileSize,jdbcType=DECIMAL}, #{fileFormat,jdbcType=VARCHAR}, #{filePath,jdbcType=VARCHAR},
+      #{photographLongitude,jdbcType=DECIMAL}, #{photographLatitude,jdbcType=DECIMAL},
+      #{isInuse,jdbcType=INTEGER}, #{userId,jdbcType=BIGINT}, #{userName,jdbcType=VARCHAR},
+      #{orgId,jdbcType=BIGINT}, #{orgName,jdbcType=VARCHAR}, now(),now())
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.cgw360.cls.model.loan.LoanDocument" useGeneratedKeys="true"
+            keyColumn="id" keyProperty="id">
+        insert into loan_document
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="objectType != null">
+                object_type,
+            </if>
+            <if test="objectNo != null">
+                object_no,
+            </if>
+            <if test="dirId != null">
+                dir_id,
+            </if>
+            <if test="fileType != null">
+                file_type,
+            </if>
+            <if test="fileName != null">
+                file_name,
+            </if>
+            <if test="fileSize != null">
+                file_size,
+            </if>
+            <if test="fileFormat != null">
+                file_format,
+            </if>
+            <if test="filePath != null">
+                file_path,
+            </if>
+            <if test="photographLongitude != null">
+                photograph_longitude,
+            </if>
+            <if test="photographLatitude != null">
+                photograph_latitude,
+            </if>
+            <if test="isInuse != null">
+                is_inuse,
+            </if>
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="userName != null">
+                user_name,
+            </if>
+            <if test="orgId != null">
+                org_id,
+            </if>
+            <if test="orgName != null">
+                org_name,
+            </if>
+            create_time,
+            modify_time,
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="objectType != null">
+                #{objectType,jdbcType=VARCHAR},
+            </if>
+            <if test="objectNo != null">
+                #{objectNo,jdbcType=BIGINT},
+            </if>
+            <if test="dirId != null">
+                #{dirId,jdbcType=BIGINT},
+            </if>
+            <if test="fileType != null">
+                #{fileType,jdbcType=VARCHAR},
+            </if>
+            <if test="fileName != null">
+                #{fileName,jdbcType=VARCHAR},
+            </if>
+            <if test="fileSize != null">
+                #{fileSize,jdbcType=DECIMAL},
+            </if>
+            <if test="fileFormat != null">
+                #{fileFormat,jdbcType=VARCHAR},
+            </if>
+            <if test="filePath != null">
+                #{filePath,jdbcType=VARCHAR},
+            </if>
+            <if test="photographLongitude != null">
+                #{photographLongitude,jdbcType=DECIMAL},
+            </if>
+            <if test="photographLatitude != null">
+                #{photographLatitude,jdbcType=DECIMAL},
+            </if>
+            <if test="isInuse != null">
+                #{isInuse,jdbcType=INTEGER},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=BIGINT},
+            </if>
+            <if test="userName != null">
+                #{userName,jdbcType=VARCHAR},
+            </if>
+            <if test="orgId != null">
+                #{orgId,jdbcType=BIGINT},
+            </if>
+            <if test="orgName != null">
+                #{orgName,jdbcType=VARCHAR},
+            </if>
+            now(),
+            now(),
+        </trim>
+    </insert>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete from loan_document
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+
+    <delete id="deleteByExample" parameterType="com.cgw360.cls.model.loan.LoanDocumentExample">
+        delete from loan_document
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+
+    <update id="updateByPrimaryKey" parameterType="com.cgw360.cls.model.loan.LoanDocument">
+        update loan_document
+        set object_type = #{objectType,jdbcType=VARCHAR},
+          object_no = #{objectNo,jdbcType=BIGINT},
+          dir_id = #{dirId,jdbcType=BIGINT},
+          file_type = #{fileType,jdbcType=VARCHAR},
+          file_name = #{fileName,jdbcType=VARCHAR},
+          file_size = #{fileSize,jdbcType=DECIMAL},
+          file_format = #{fileFormat,jdbcType=VARCHAR},
+          file_path = #{filePath,jdbcType=VARCHAR},
+          photograph_longitude = #{photographLongitude,jdbcType=DECIMAL},
+          photograph_latitude = #{photographLatitude,jdbcType=DECIMAL},
+          is_inuse = #{isInuse,jdbcType=INTEGER},
+          user_id = #{userId,jdbcType=BIGINT},
+          user_name = #{userName,jdbcType=VARCHAR},
+          org_id = #{orgId,jdbcType=BIGINT},
+          org_name = #{orgName,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.cgw360.cls.model.loan.LoanDocument">
+        update loan_document
+        <set>
+            <if test="objectType != null">
+                object_type = #{objectType,jdbcType=VARCHAR},
+            </if>
+            <if test="objectNo != null">
+                object_no = #{objectNo,jdbcType=BIGINT},
+            </if>
+            <if test="dirId != null">
+                dir_id = #{dirId,jdbcType=BIGINT},
+            </if>
+            <if test="fileType != null">
+                file_type = #{fileType,jdbcType=VARCHAR},
+            </if>
+            <if test="fileName != null">
+                file_name = #{fileName,jdbcType=VARCHAR},
+            </if>
+            <if test="fileSize != null">
+                file_size = #{fileSize,jdbcType=DECIMAL},
+            </if>
+            <if test="fileFormat != null">
+                file_format = #{fileFormat,jdbcType=VARCHAR},
+            </if>
+            <if test="filePath != null">
+                file_path = #{filePath,jdbcType=VARCHAR},
+            </if>
+            <if test="photographLongitude != null">
+                photograph_longitude = #{photographLongitude,jdbcType=DECIMAL},
+            </if>
+            <if test="photographLatitude != null">
+                photograph_latitude = #{photographLatitude,jdbcType=DECIMAL},
+            </if>
+            <if test="isInuse != null">
+                is_inuse = #{isInuse,jdbcType=INTEGER},
+            </if>
+            <if test="userId != null">
+                user_id = #{userId,jdbcType=BIGINT},
+            </if>
+            <if test="userName != null">
+                user_name = #{userName,jdbcType=VARCHAR},
+            </if>
+            <if test="orgId != null">
+                org_id = #{orgId,jdbcType=BIGINT},
+            </if>
+            <if test="orgName != null">
+                org_name = #{orgName,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <update id="updateByExampleSelective" parameterType="map">
+        update loan_document
+        <set>
+            <if test="record.objectType != null">
+                object_type = #{record.objectType,jdbcType=VARCHAR},
+            </if>
+            <if test="record.objectNo != null">
+                object_no = #{record.objectNo,jdbcType=BIGINT},
+            </if>
+            <if test="record.dirId != null">
+                dir_id = #{record.dirId,jdbcType=BIGINT},
+            </if>
+            <if test="record.fileType != null">
+                file_type = #{record.fileType,jdbcType=VARCHAR},
+            </if>
+            <if test="record.fileName != null">
+                file_name = #{record.fileName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.fileSize != null">
+                file_size = #{record.fileSize,jdbcType=DECIMAL},
+            </if>
+            <if test="record.fileFormat != null">
+                file_format = #{record.fileFormat,jdbcType=VARCHAR},
+            </if>
+            <if test="record.filePath != null">
+                file_path = #{record.filePath,jdbcType=VARCHAR},
+            </if>
+            <if test="record.photographLongitude != null">
+                photograph_longitude = #{record.photographLongitude,jdbcType=DECIMAL},
+            </if>
+            <if test="record.photographLatitude != null">
+                photograph_latitude = #{record.photographLatitude,jdbcType=DECIMAL},
+            </if>
+            <if test="record.isInuse != null">
+                is_inuse = #{record.isInuse,jdbcType=INTEGER},
+            </if>
+            <if test="record.userId != null">
+                user_id = #{record.userId,jdbcType=BIGINT},
+            </if>
+            <if test="record.userName != null">
+                user_name = #{record.userName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.orgId != null">
+                org_id = #{record.orgId,jdbcType=BIGINT},
+            </if>
+            <if test="record.orgName != null">
+                org_name = #{record.orgName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.modifyRealname != null">
+                modify_realname = #{record.modifyRealname,jdbcType=VARCHAR},
+            </if>
+            <if test="record.modifyUid != null">
+                modify_uid = #{record.modifyUid,jdbcType=BIGINT},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+
+    <select id="selectByExample" resultMap="BaseResultMap"
+            parameterType="com.cgw360.cls.model.loan.LoanDocumentExample">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from loan_document
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from loan_document
+        where is_inuse = 1
+        and id = #{id,jdbcType=BIGINT}
+    </select>
+
+    <select id="countByExample" parameterType="com.cgw360.cls.model.loan.LoanDocumentExample"
+            resultType="java.lang.Integer">
+        select count(*) from loan_document
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+
+    <select id="selectDocListByPage" resultMap="BaseResultMap" parameterType="java.util.Map">
+        select
+        <include refid="Base_Column_List"/>
+        from loan_document
+        where is_inuse = 1
+        <if test="objectType != null">
+            and object_type = #{objectType,jdbcType=VARCHAR}
+        </if>
+        <if test="objectNo != null">
+            and object_no = #{objectNo,jdbcType=BIGINT}
+        </if>
+        <if test="dirId != null">
+            and dir_id = #{dirId,jdbcType=BIGINT}
+        </if>
+        order by create_time desc
+    </select>
+
+    <select id="selectDocListWithoutPage" resultMap="BaseResultMap" parameterType="java.util.Map">
+        select
+        <include refid="Base_Column_List"/>
+        from loan_document
+        where is_inuse = 1
+        <if test="objectType != null">
+            and object_type = #{objectType,jdbcType=BIGINT}
+        </if>
+        <if test="objectNo != null">
+            and object_no = #{objectNo,jdbcType=BIGINT}
+        </if>
+        <if test="dirId != null">
+            and dir_id = #{dirId,jdbcType=BIGINT}
+        </if>
+    </select>
+
+    <select id="getImageByFlowInfo" resultMap="BaseResultMap" parameterType="java.util.Map">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM
+        loan_document ld
+        INNER JOIN loan_document_dir_flow lddf ON lddf.dir_id = ld.dir_id
+        AND lddf.flow_type = #{flowNo,jdbcType=VARCHAR}
+        AND lddf.node_code = #{flowNodeNo,jdbcType=VARCHAR}
+        WHERE ld.is_inuse = 1
+        AND lddf.is_inuse = 1
+        AND ld.object_type = #{objectType,jdbcType=VARCHAR}
+        AND ld.object_no = #{objectNo,jdbcType=BIGINT}
+        AND ld.dir_id = #{dirId,jdbcType=BIGINT}
+        AND ld.file_type = #{fileType,jdbcType=VARCHAR}
+        ORDER BY ld.dir_id,ld.create_time DESC
+    </select>
+
+    <select id="getImageListWithoutFLowInfo" resultMap="BaseResultMap" parameterType="java.util.Map">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM
+        loan_document ld
+        WHERE ld.is_inuse = 1
+        AND ld.object_type = #{objectType,jdbcType=VARCHAR}
+        AND ld.object_no = #{objectNo,jdbcType=BIGINT}
+        AND ld.dir_id = #{dirId,jdbcType=BIGINT}
+        AND ld.file_type = #{fileType,jdbcType=VARCHAR}
+        ORDER BY ld.dir_id,ld.create_time DESC
+    </select>
+</mapper>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://code.alibabatech.com/schema/dubbo
+        http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+    <dubbo:service ref="customerAssetServiceImpl" 
+                   interface="com.cgw360.cls.api.customer.ICustomerAssetService"
+                   group="${dubbo.cheguo.cls.group}" version="${dubbo.cheguo.cls.version}" timeout="6000"/>
+
+    <dubbo:service ref="customerImportImpl" 
+                   interface="com.cgw360.cls.api.customer.ICustomerImportService"
+                   group="${dubbo.cheguo.cls.group}" version="${dubbo.cheguo.cls.version}" timeout="6000"/>
+    
+    <dubbo:service ref="customerRelationshipServiceImpl" 
+                   interface="com.cgw360.cls.api.customer.ICustomerRelationshipService"
+                   group="${dubbo.cheguo.cls.group}" version="${dubbo.cheguo.cls.version}" timeout="6000"/>
+    
+    <dubbo:service ref="customerServiceImpl" 
+                   interface="com.cgw360.cls.api.customer.ICustomerService"
+                   group="${dubbo.cheguo.cls.group}" version="${dubbo.cheguo.cls.version}" timeout="6000"/>
+</beans>

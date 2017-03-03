@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://code.alibabatech.com/schema/dubbo
+        http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+    <dubbo:service ref="loanCarInfoService"
+                   interface="com.cgw360.cls.api.inloan.ILoanCarInfoService"
+                   group="${dubbo.cheguo.cls.group}" version="${dubbo.cheguo.cls.version}" timeout="6000"/>
+
+    <dubbo:service ref="licensePlateInfoService"
+                   interface="com.cgw360.cls.api.inloan.ILicensePlateInfoService"
+                   group="${dubbo.cheguo.cls.group}" version="${dubbo.cheguo.cls.version}" timeout="6000"/>
+
+    <dubbo:service ref="licensePlateInfoVoService"
+                   interface="com.cgw360.cls.api.inloan.ILicensePlateInfoVoService"
+                   group="${dubbo.cheguo.cls.group}" version="${dubbo.cheguo.cls.version}" timeout="2000"/>
+
+    <dubbo:service ref="pledgeInfoService"
+                   interface="com.cgw360.cls.api.inloan.IPledgeInfoService"
+                   group="${dubbo.cheguo.cls.group}" version="${dubbo.cheguo.cls.version}" timeout="6000"/>
+
+    <dubbo:service ref="loanContractInfoService"
+                   interface="com.cgw360.cls.api.inloan.ILoanContractInfoService"
+                   group="${dubbo.cheguo.cls.group}" version="${dubbo.cheguo.cls.version}" timeout="6000"/>
+
+    <dubbo:service ref="loanContractRepayPlanService"
+                   interface="com.cgw360.cls.api.inloan.ILoanContractRepayPlanService"
+                   group="${dubbo.cheguo.cls.group}" version="${dubbo.cheguo.cls.version}" timeout="6000"/>
+
+    <dubbo:service ref="bankRemittanceInfoService"
+                   interface="com.cgw360.cls.api.inloan.IBankRemittanceInfoService"
+                   group="${dubbo.cheguo.cls.group}" version="${dubbo.cheguo.cls.version}" timeout="6000"/>
+
+    <dubbo:service ref="repaymentCardInfoService"
+                   interface="com.cgw360.cls.api.inloan.IRepaymentCardInfoService"
+                   group="${dubbo.cheguo.cls.group}" version="${dubbo.cheguo.cls.version}" timeout="6000"/>
+                   
+    <dubbo:service ref="loanCarPlateAreaService"
+                   interface="com.cgw360.cls.api.inloan.ILoanCarPlateAreaService"
+                   group="${dubbo.cheguo.cls.group}" version="${dubbo.cheguo.cls.version}" timeout="6000"/>              
+
+</beans>

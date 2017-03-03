@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cgw360.cls.dao.loan.LoanAssetsInfoMapper">
+    <resultMap id="BaseResultMap" type="com.cgw360.cls.model.loan.LoanAssetsInfo">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="apply_id" property="applyId" jdbcType="BIGINT"/>
+        <result column="project_id" property="projectId" jdbcType="BIGINT"/>
+        <result column="asset_no" property="assetNo" jdbcType="VARCHAR"/>
+        <result column="asset_name" property="assetName" jdbcType="VARCHAR"/>
+        <result column="asset_value" property="assetValue" jdbcType="DECIMAL"/>
+        <result column="currency" property="currency" jdbcType="INTEGER"/>
+        <result column="applied_guaranteed_amount" property="appliedGuaranteedAmount" jdbcType="DECIMAL"/>
+        <result column="setted_guaranteed_amount" property="settedGuaranteedAmount" jdbcType="DECIMAL"/>
+        <result column="guarantee_type" property="guaranteeType" jdbcType="INTEGER"/>
+        <result column="is_inuse" property="isInuse" jdbcType="INTEGER"/>
+        <result column="user_id" property="userId" jdbcType="BIGINT"/>
+        <result column="user_name" property="userName" jdbcType="VARCHAR"/>
+        <result column="org_id" property="orgId" jdbcType="BIGINT"/>
+        <result column="org_name" property="orgName" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Base_Column_List">
+    id, apply_id, project_id, asset_no, asset_name, asset_value, currency, applied_guaranteed_amount,
+    setted_guaranteed_amount, guarantee_type, is_inuse, user_id, user_name, org_id, org_name, 
+    create_time, modify_time
+    </sql>
+    <!--插入一条记录-->
+    <insert id="insert" parameterType="com.cgw360.cls.model.loan.LoanAssetsInfo" useGeneratedKeys="true"
+            keyColumn="id" keyProperty="id">
+        insert into loan_assets_info (apply_id, project_id, asset_no,
+        asset_name, asset_value, currency,
+        applied_guaranteed_amount, setted_guaranteed_amount,
+        guarantee_type, is_inuse, user_id,
+        user_name, org_id, org_name,
+        create_time, modify_time)
+        values (#{applyId,jdbcType=BIGINT}, #{projectId,jdbcType=BIGINT}, #{assetNo,jdbcType=VARCHAR},
+        #{assetName,jdbcType=VARCHAR}, #{assetValue,jdbcType=DECIMAL}, #{currency,jdbcType=INTEGER},
+        #{appliedGuaranteedAmount,jdbcType=DECIMAL}, #{settedGuaranteedAmount,jdbcType=DECIMAL},
+        #{guaranteeType,jdbcType=INTEGER}, #{isInuse,jdbcType=INTEGER}, #{userId,jdbcType=BIGINT},
+        #{userName,jdbcType=VARCHAR}, #{orgId,jdbcType=BIGINT}, #{orgName,jdbcType=VARCHAR}, now(), now())
+    </insert>
+    <!--拷贝一条记录-->
+    <insert id="insertSelective" parameterType="com.cgw360.cls.model.loan.LoanAssetsInfo" useGeneratedKeys="true"
+            keyProperty="id">
+        insert into loan_assets_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="applyId != null">
+                apply_id,
+            </if>
+            <if test="projectId != null">
+                project_id,
+            </if>
+            <if test="assetNo != null">
+                asset_no,
+            </if>
+            <if test="assetName != null">
+                asset_name,
+            </if>
+            <if test="assetValue != null">
+                asset_value,
+            </if>
+            <if test="currency != null">
+                currency,
+            </if>
+            <if test="appliedGuaranteedAmount != null">
+                applied_guaranteed_amount,
+            </if>
+            <if test="settedGuaranteedAmount != null">
+                setted_guaranteed_amount,
+            </if>
+            <if test="guaranteeType != null">
+                guarantee_type,
+            </if>
+            <if test="isInuse != null">
+                is_inuse,
+            </if>
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="userName != null">
+                user_name,
+            </if>
+            <if test="orgId != null">
+                org_id,
+            </if>
+            <if test="orgName != null">
+                org_name,
+            </if>
+            create_time,
+            modify_time,
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="applyId != null">
+                #{applyId,jdbcType=BIGINT},
+            </if>
+            <if test="projectId != null">
+                #{projectId,jdbcType=BIGINT},
+            </if>
+            <if test="assetNo != null">
+                #{assetNo,jdbcType=VARCHAR},
+            </if>
+            <if test="assetName != null">
+                #{assetName,jdbcType=VARCHAR},
+            </if>
+            <if test="assetValue != null">
+                #{assetValue,jdbcType=DECIMAL},
+            </if>
+            <if test="currency != null">
+                #{currency,jdbcType=INTEGER},
+            </if>
+            <if test="appliedGuaranteedAmount != null">
+                #{appliedGuaranteedAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="settedGuaranteedAmount != null">
+                #{settedGuaranteedAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="guaranteeType != null">
+                #{guaranteeType,jdbcType=INTEGER},
+            </if>
+            <if test="isInuse != null">
+                #{isInuse,jdbcType=INTEGER},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=BIGINT},
+            </if>
+            <if test="userName != null">
+                #{userName,jdbcType=VARCHAR},
+            </if>
+            <if test="orgId != null">
+                #{orgId,jdbcType=BIGINT},
+            </if>
+            <if test="orgName != null">
+                #{orgName,jdbcType=VARCHAR},
+            </if>
+            now(),
+            now(),
+        </trim>
+    </insert>
+
+    <!--通过主键删除-->
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from loan_assets_info
+    where id = #{id,jdbcType=BIGINT}
+    </delete>
+    <delete id="deleteByProjectId" parameterType="java.lang.Long">
+        delete from loan_assets_info where project_id = #{projectId,jdbcType=BIGINT}
+    </delete>
+    <!--通过条件删除-->
+    <delete id="deleteByExample" parameterType="com.cgw360.cls.model.loan.LoanAssetsInfoExample">
+        delete from loan_assets_info
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <!--通过条件更新-->
+    <update id="updateByPrimaryKeySelective" parameterType="com.cgw360.cls.model.loan.LoanAssetsInfo">
+        update loan_assets_info
+        <set>
+            <if test="applyId != null">
+                apply_id = #{applyId,jdbcType=BIGINT},
+            </if>
+            <if test="projectId != null">
+                project_id = #{projectId,jdbcType=BIGINT},
+            </if>
+            <if test="assetNo != null">
+                asset_no = #{assetNo,jdbcType=VARCHAR},
+            </if>
+            <if test="assetName != null">
+                asset_name = #{assetName,jdbcType=VARCHAR},
+            </if>
+            <if test="assetValue != null">
+                asset_value = #{assetValue,jdbcType=DECIMAL},
+            </if>
+            <if test="currency != null">
+                currency = #{currency,jdbcType=INTEGER},
+            </if>
+            <if test="appliedGuaranteedAmount != null">
+                applied_guaranteed_amount = #{appliedGuaranteedAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="settedGuaranteedAmount != null">
+                setted_guaranteed_amount = #{settedGuaranteedAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="guaranteeType != null">
+                guarantee_type = #{guaranteeType,jdbcType=INTEGER},
+            </if>
+            <if test="isInuse != null">
+                is_inuse = #{isInuse,jdbcType=INTEGER},
+            </if>
+            <if test="userId != null">
+                user_id = #{userId,jdbcType=BIGINT},
+            </if>
+            <if test="userName != null">
+                user_name = #{userName,jdbcType=VARCHAR},
+            </if>
+            <if test="orgId != null">
+                org_id = #{orgId,jdbcType=BIGINT},
+            </if>
+            <if test="orgName != null">
+                org_name = #{orgName,jdbcType=VARCHAR}
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <!--通过主键更新-->
+    <update id="updateByPrimaryKey" parameterType="com.cgw360.cls.model.loan.LoanAssetsInfo">
+    update loan_assets_info
+    set
+      apply_id = #{applyId,jdbcType=BIGINT},
+      project_id = #{projectId,jdbcType=BIGINT},
+      asset_no = #{assetNo,jdbcType=VARCHAR},
+      asset_name = #{assetName,jdbcType=VARCHAR},
+      asset_value = #{assetValue,jdbcType=DECIMAL},
+      currency = #{currency,jdbcType=INTEGER},
+      applied_guaranteed_amount = #{appliedGuaranteedAmount,jdbcType=DECIMAL},
+      setted_guaranteed_amount = #{settedGuaranteedAmount,jdbcType=DECIMAL},
+      guarantee_type = #{guaranteeType,jdbcType=INTEGER},
+      is_inuse = #{isInuse,jdbcType=INTEGER},
+      user_id = #{userId,jdbcType=BIGINT},
+      user_name = #{userName,jdbcType=VARCHAR},
+      org_id = #{orgId,jdbcType=BIGINT},
+      org_name = #{orgName,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+    </update>
+    <!--通过条件统计-->
+    <select id="countByExample" parameterType="com.cgw360.cls.model.loan.LoanAssetsInfoExample"
+            resultType="java.lang.Integer">
+        select count(*) from loan_assets_info
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <!--通过主键查询-->
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from loan_assets_info
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <!--通过条件查询-->
+    <select id="selectByExample" resultMap="BaseResultMap"
+            parameterType="com.cgw360.cls.model.loan.LoanAssetsInfoExample">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from loan_assets_info
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByApplyId" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from loan_assets_info
+        where is_inuse = 1
+        and apply_id = #{applyId,jdbcType=BIGINT}
+        order by create_time desc
+        limit 1
+    </select>
+</mapper>

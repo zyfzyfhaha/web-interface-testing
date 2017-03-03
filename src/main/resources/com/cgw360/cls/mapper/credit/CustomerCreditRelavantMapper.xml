@@ -1,0 +1,486 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cgw360.cls.dao.credit.CustomerCreditRelavantMapper" >
+  <resultMap id="BaseResultMap" type="com.cgw360.cls.model.credit.CustomerCreditRelavant" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="credit_id" property="creditId" jdbcType="BIGINT" />
+    <result column="full_name" property="fullName" jdbcType="VARCHAR" />
+    <result column="card_type" property="cardType" jdbcType="INTEGER" />
+    <result column="card_id" property="cardId" jdbcType="VARCHAR" />
+    <result column="mobile" property="mobile" jdbcType="CHAR" />
+    <result column="borrower_relationship" property="borrowerRelationship" jdbcType="INTEGER" />
+    <result column="guarantee_relationship" property="guaranteeRelationship" jdbcType="INTEGER" />
+    <result column="check_type" property="checkType" jdbcType="INTEGER" />
+    <result column="check_result" property="checkResult" jdbcType="INTEGER" />
+    <result column="check_result_status" property="checkResultStatus" jdbcType="INTEGER" />
+    <result column="staff_id" property="staffId" jdbcType="BIGINT" />
+    <result column="staff_name" property="staffName" jdbcType="VARCHAR" />
+    <result column="check_date" property="checkDate" jdbcType="TIMESTAMP" />
+    <result column="credit_remark" property="creditRemark" jdbcType="VARCHAR" />
+    <result column="net_result" property="netResult" jdbcType="TINYINT" />
+    <result column="net_report_date" property="netReportDate" jdbcType="TIMESTAMP" />
+    <result column="credit_report_id" property="creditReportId" jdbcType="VARCHAR" />
+    <result column="credit_report_info" property="creditReportInfo" jdbcType="VARCHAR" />
+    <result column="risk_time" property="riskTime" jdbcType="TIMESTAMP" />
+    <result column="risk_status" property="riskStatus" jdbcType="INTEGER" />
+    <result column="risk_detail" property="riskDetail" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, credit_id, full_name, card_type, card_id, mobile, borrower_relationship, guarantee_relationship, 
+    check_type, check_result, check_result_status, staff_id, staff_name, check_date, 
+    credit_remark, net_result, net_report_date, net_report_detail, credit_report_id, credit_report_info, risk_status, risk_time, risk_detail, create_time, modify_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.cgw360.cls.model.credit.CustomerCreditRelavantExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from customer_credit_relavant
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from customer_credit_relavant
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from customer_credit_relavant
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.cgw360.cls.model.credit.CustomerCreditRelavantExample" >
+    delete from customer_credit_relavant
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.cgw360.cls.model.credit.CustomerCreditRelavant" useGeneratedKeys="true" keyProperty="id">
+    insert into customer_credit_relavant (id, credit_id, full_name, 
+      card_type, card_id, mobile, 
+      borrower_relationship, guarantee_relationship, 
+      check_type, check_result, check_result_status, 
+      staff_id, staff_name, check_date, 
+      credit_remark, net_result, net_report_date, 
+      credit_report_id, credit_report_info, create_time, modify_time
+      )
+    values (#{id,jdbcType=BIGINT}, #{creditId,jdbcType=BIGINT}, #{fullName,jdbcType=VARCHAR}, 
+      #{cardType,jdbcType=INTEGER}, #{cardId,jdbcType=VARCHAR}, #{mobile,jdbcType=CHAR}, 
+      #{borrowerRelationship,jdbcType=INTEGER}, #{guaranteeRelationship,jdbcType=INTEGER}, 
+      #{checkType,jdbcType=INTEGER}, #{checkResult,jdbcType=INTEGER}, #{checkResultStatus,jdbcType=INTEGER}, 
+      #{staffId,jdbcType=BIGINT}, #{staffName,jdbcType=VARCHAR}, #{checkDate,jdbcType=TIMESTAMP}, 
+      #{creditRemark,jdbcType=VARCHAR}, #{netResult,jdbcType=TINYINT}, #{netReportDate,jdbcType=TIMESTAMP}, 
+      #{creditReportId,jdbcType=VARCHAR}, #{creditReportInfo,jdbcType=VARCHAR},now(),now()
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.cgw360.cls.model.credit.CustomerCreditRelavant" useGeneratedKeys="true" keyProperty="id">
+    insert into customer_credit_relavant
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="creditId != null" >
+        credit_id,
+      </if>
+      <if test="fullName != null" >
+        full_name,
+      </if>
+      <if test="cardType != null" >
+        card_type,
+      </if>
+      <if test="cardId != null" >
+        card_id,
+      </if>
+      <if test="mobile != null" >
+        mobile,
+      </if>
+      <if test="borrowerRelationship != null" >
+        borrower_relationship,
+      </if>
+      <if test="guaranteeRelationship != null" >
+        guarantee_relationship,
+      </if>
+      <if test="checkType != null" >
+        check_type,
+      </if>
+      <if test="checkResult != null" >
+        check_result,
+      </if>
+      <if test="checkResultStatus != null" >
+        check_result_status,
+      </if>
+      <if test="staffId != null" >
+        staff_id,
+      </if>
+      <if test="staffName != null" >
+        staff_name,
+      </if>
+      <if test="checkDate != null" >
+        check_date,
+      </if>
+      <if test="creditRemark != null" >
+        credit_remark,
+      </if>
+      <if test="netResult != null" >
+        net_result,
+      </if>
+      <if test="netReportDate != null" >
+        net_report_date,
+      </if>
+      <if test="creditReportId != null" >
+        credit_report_id,
+      </if>
+      <if test="creditReportInfo != null" >
+        credit_report_info,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="modifyTime != null" >
+        modify_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="creditId != null" >
+        #{creditId,jdbcType=BIGINT},
+      </if>
+      <if test="fullName != null" >
+        #{fullName,jdbcType=VARCHAR},
+      </if>
+      <if test="cardType != null" >
+        #{cardType,jdbcType=INTEGER},
+      </if>
+      <if test="cardId != null" >
+        #{cardId,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        #{mobile,jdbcType=CHAR},
+      </if>
+      <if test="borrowerRelationship != null" >
+        #{borrowerRelationship,jdbcType=INTEGER},
+      </if>
+      <if test="guaranteeRelationship != null" >
+        #{guaranteeRelationship,jdbcType=INTEGER},
+      </if>
+      <if test="checkType != null" >
+        #{checkType,jdbcType=INTEGER},
+      </if>
+      <if test="checkResult != null" >
+        #{checkResult,jdbcType=INTEGER},
+      </if>
+      <if test="checkResultStatus != null" >
+        #{checkResultStatus,jdbcType=INTEGER},
+      </if>
+      <if test="staffId != null" >
+        #{staffId,jdbcType=BIGINT},
+      </if>
+      <if test="staffName != null" >
+        #{staffName,jdbcType=VARCHAR},
+      </if>
+      <if test="checkDate != null" >
+        #{checkDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creditRemark != null" >
+        #{creditRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="netResult != null" >
+        #{netResult,jdbcType=TINYINT},
+      </if>
+      <if test="netReportDate != null" >
+        #{netReportDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creditReportId != null" >
+        #{creditReportId,jdbcType=VARCHAR},
+      </if>
+      <if test="creditReportInfo != null" >
+        #{creditReportInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        now(),
+      </if>
+      <if test="modifyTime != null" >
+        now(),
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.cgw360.cls.model.credit.CustomerCreditRelavantExample" resultType="java.lang.Integer" >
+    select count(*) from customer_credit_relavant
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update customer_credit_relavant
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.creditId != null" >
+        credit_id = #{record.creditId,jdbcType=BIGINT},
+      </if>
+      <if test="record.fullName != null" >
+        full_name = #{record.fullName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cardType != null" >
+        card_type = #{record.cardType,jdbcType=INTEGER},
+      </if>
+      <if test="record.cardId != null" >
+        card_id = #{record.cardId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mobile != null" >
+        mobile = #{record.mobile,jdbcType=CHAR},
+      </if>
+      <if test="record.borrowerRelationship != null" >
+        borrower_relationship = #{record.borrowerRelationship,jdbcType=INTEGER},
+      </if>
+      <if test="record.guaranteeRelationship != null" >
+        guarantee_relationship = #{record.guaranteeRelationship,jdbcType=INTEGER},
+      </if>
+      <if test="record.checkType != null" >
+        check_type = #{record.checkType,jdbcType=INTEGER},
+      </if>
+      <if test="record.checkResult != null" >
+        check_result = #{record.checkResult,jdbcType=INTEGER},
+      </if>
+      <if test="record.checkResultStatus != null" >
+        check_result_status = #{record.checkResultStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.staffId != null" >
+        staff_id = #{record.staffId,jdbcType=BIGINT},
+      </if>
+      <if test="record.staffName != null" >
+        staff_name = #{record.staffName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.checkDate != null" >
+        check_date = #{record.checkDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.creditRemark != null" >
+        credit_remark = #{record.creditRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.netResult != null" >
+        net_result = #{record.netResult,jdbcType=TINYINT},
+      </if>
+      <if test="record.netReportDate != null" >
+        net_report_date = #{record.netReportDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.creditReportId != null" >
+        credit_report_id = #{record.creditReportId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.creditReportInfo != null" >
+        credit_report_info = #{record.creditReportInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.riskTime != null" >
+        risk_time = #{record.riskTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.riskStatus != null" >
+        risk_status = #{record.riskStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.riskDetail != null" >
+        risk_detail = #{record.riskDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.modifyTime != null" >
+        modify_time = #{record.modifyTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update customer_credit_relavant
+    set id = #{record.id,jdbcType=BIGINT},
+      credit_id = #{record.creditId,jdbcType=BIGINT},
+      full_name = #{record.fullName,jdbcType=VARCHAR},
+      card_type = #{record.cardType,jdbcType=INTEGER},
+      card_id = #{record.cardId,jdbcType=VARCHAR},
+      mobile = #{record.mobile,jdbcType=CHAR},
+      borrower_relationship = #{record.borrowerRelationship,jdbcType=INTEGER},
+      guarantee_relationship = #{record.guaranteeRelationship,jdbcType=INTEGER},
+      check_type = #{record.checkType,jdbcType=INTEGER},
+      check_result = #{record.checkResult,jdbcType=INTEGER},
+      check_result_status = #{record.checkResultStatus,jdbcType=INTEGER},
+      staff_id = #{record.staffId,jdbcType=BIGINT},
+      staff_name = #{record.staffName,jdbcType=VARCHAR},
+      check_date = #{record.checkDate,jdbcType=TIMESTAMP},
+      credit_remark = #{record.creditRemark,jdbcType=VARCHAR},
+      net_result = #{record.netResult,jdbcType=TINYINT},
+      net_report_date = #{record.netReportDate,jdbcType=TIMESTAMP},
+      credit_report_id = #{record.creditReportId,jdbcType=VARCHAR},
+      credit_report_info = #{record.creditReportInfo,jdbcType=VARCHAR},
+      risk_time = #{record.riskTime,jdbcType=TIMESTAMP},
+      risk_status = #{record.riskStatus,jdbcType=INTEGER},
+      risk_detail = #{record.riskDetail,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      modify_time = #{record.modifyTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cgw360.cls.model.credit.CustomerCreditRelavant" >
+    update customer_credit_relavant
+    <set >
+      <if test="creditId != null" >
+        credit_id = #{creditId,jdbcType=BIGINT},
+      </if>
+      <if test="fullName != null" >
+        full_name = #{fullName,jdbcType=VARCHAR},
+      </if>
+      <if test="cardType != null" >
+        card_type = #{cardType,jdbcType=INTEGER},
+      </if>
+      <if test="cardId != null" >
+        card_id = #{cardId,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        mobile = #{mobile,jdbcType=CHAR},
+      </if>
+      <if test="borrowerRelationship != null" >
+        borrower_relationship = #{borrowerRelationship,jdbcType=INTEGER},
+      </if>
+      <if test="guaranteeRelationship != null" >
+        guarantee_relationship = #{guaranteeRelationship,jdbcType=INTEGER},
+      </if>
+      <if test="checkType != null" >
+        check_type = #{checkType,jdbcType=INTEGER},
+      </if>
+      <if test="checkResult != null" >
+        check_result = #{checkResult,jdbcType=INTEGER},
+      </if>
+      <if test="checkResultStatus != null" >
+        check_result_status = #{checkResultStatus,jdbcType=INTEGER},
+      </if>
+      <if test="staffId != null" >
+        staff_id = #{staffId,jdbcType=BIGINT},
+      </if>
+      <if test="staffName != null" >
+        staff_name = #{staffName,jdbcType=VARCHAR},
+      </if>
+      <if test="checkDate != null" >
+        check_date = #{checkDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creditRemark != null" >
+        credit_remark = #{creditRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="netResult != null" >
+        net_result = #{netResult,jdbcType=TINYINT},
+      </if>
+      <if test="netReportDate != null" >
+        net_report_date = #{netReportDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creditReportId != null" >
+        credit_report_id = #{creditReportId,jdbcType=VARCHAR},
+      </if>
+      <if test="creditReportInfo != null" >
+        credit_report_info = #{creditReportInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="riskDetail != null" >
+        risk_detail = #{riskDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="riskTime != null" >
+        risk_time = #{riskTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="riskStatus != null" >
+        risk_status = #{riskStatus,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyTime != null" >
+        modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cgw360.cls.model.credit.CustomerCreditRelavant" >
+    update customer_credit_relavant
+    set credit_id = #{creditId,jdbcType=BIGINT},
+      full_name = #{fullName,jdbcType=VARCHAR},
+      card_type = #{cardType,jdbcType=INTEGER},
+      card_id = #{cardId,jdbcType=VARCHAR},
+      mobile = #{mobile,jdbcType=CHAR},
+      borrower_relationship = #{borrowerRelationship,jdbcType=INTEGER},
+      guarantee_relationship = #{guaranteeRelationship,jdbcType=INTEGER},
+      check_type = #{checkType,jdbcType=INTEGER},
+      check_result = #{checkResult,jdbcType=INTEGER},
+      check_result_status = #{checkResultStatus,jdbcType=INTEGER},
+      staff_id = #{staffId,jdbcType=BIGINT},
+      staff_name = #{staffName,jdbcType=VARCHAR},
+      check_date = #{checkDate,jdbcType=TIMESTAMP},
+      credit_remark = #{creditRemark,jdbcType=VARCHAR},
+      net_result = #{netResult,jdbcType=TINYINT},
+      net_report_date = #{netReportDate,jdbcType=TIMESTAMP},
+      credit_report_id = #{creditReportId,jdbcType=VARCHAR},
+      credit_report_info = #{creditReportInfo,jdbcType=VARCHAR},
+      risk_time = #{riskTime,jdbcType=TIMESTAMP},
+      risk_status = #{riskStatus,jdbcType=INTEGER},
+      risk_detail = #{riskDetail,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      modify_time = #{modifyTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

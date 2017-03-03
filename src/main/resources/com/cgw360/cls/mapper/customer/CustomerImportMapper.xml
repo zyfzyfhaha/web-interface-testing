@@ -1,0 +1,828 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cgw360.cls.dao.customer.CustomerImportMapper" >
+  <resultMap id="BaseResultMap" type="com.cgw360.cls.model.customer.CustomerImport" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="customer_number" property="customerNumber" jdbcType="VARCHAR" />
+    <result column="customer_name" property="customerName" jdbcType="VARCHAR" />
+    <result column="card_type" property="cardType" jdbcType="INTEGER" />
+    <result column="card_no" property="cardNo" jdbcType="VARCHAR" />
+    <result column="mobile" property="mobile" jdbcType="CHAR" />
+    <result column="source" property="source" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="reason" property="reason" jdbcType="INTEGER" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP" />
+    <result column="gender" property="gender" jdbcType="INTEGER" />
+    <result column="car_brand" property="carBrand" jdbcType="VARCHAR" />
+    <result column="car_brand_name" property="carBrandName" jdbcType="VARCHAR" />
+    <result column="car_make" property="carMake" jdbcType="VARCHAR" />
+    <result column="car_make_name" property="carMakeName" jdbcType="VARCHAR" />
+    <result column="car_model" property="carModel" jdbcType="VARCHAR" />
+    <result column="car_model_name" property="carModelName" jdbcType="VARCHAR" />
+    <result column="loan_amount" property="loanAmount" jdbcType="DECIMAL" />
+    <result column="online_price" property="onlinePrice" jdbcType="DECIMAL" />
+    <result column="down_payment_amount" property="downPaymentAmount" jdbcType="DECIMAL" />
+    <result column="loan_ratio" property="loanRatio" jdbcType="DECIMAL" />
+    <result column="loan_term" property="loanTerm" jdbcType="INTEGER" />
+    <result column="rate" property="rate" jdbcType="DECIMAL" />
+    <result column="permanent_address_code" property="permanentAddressCode" jdbcType="VARCHAR" />
+    <result column="permanent_address" property="permanentAddress" jdbcType="VARCHAR" />
+    <result column="family_address" property="familyAddress" jdbcType="VARCHAR" />
+    <result column="home_address" property="homeAddress" jdbcType="VARCHAR" />
+    <result column="housing_status" property="housingStatus" jdbcType="INTEGER" />
+    <result column="profession" property="profession" jdbcType="VARCHAR" />
+    <result column="company" property="company" jdbcType="VARCHAR" />
+    <result column="industry" property="industry" jdbcType="VARCHAR" />
+    <result column="monthly_income" property="monthlyIncome" jdbcType="VARCHAR" />
+    <result column="reserved_funds" property="reservedFunds" jdbcType="VARCHAR" />
+    <result column="marital_status" property="maritalStatus" jdbcType="INTEGER" />
+    <result column="dealer_id" property="dealerId" jdbcType="BIGINT" />
+    <result column="dealer_name" property="dealerName" jdbcType="VARCHAR" />
+    <result column="customer_service" property="customerService" jdbcType="VARCHAR" />
+    <result column="last_contact_time" property="lastContactTime" jdbcType="TIMESTAMP" />
+    <result column="ip_place" property="ipPlace" jdbcType="VARCHAR" />
+    <result column="organization_id" property="organizationId" jdbcType="BIGINT" />
+    <result column="organization_name" property="organizationName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, customer_number, customer_name, card_type, card_no, mobile, source, status, reason, 
+    remark, create_time, modify_time, gender, car_brand, car_brand_name, car_make, car_make_name, 
+    car_model, car_model_name, loan_amount, online_price, down_payment_amount, loan_ratio, 
+    loan_term, rate, permanent_address_code, permanent_address, family_address, home_address, 
+    housing_status, profession, company, industry, monthly_income, reserved_funds, marital_status, 
+    dealer_id, dealer_name, customer_service, last_contact_time, ip_place, organization_id, 
+    organization_name
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.cgw360.cls.model.customer.CustomerImportExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from customer_import
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from customer_import
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from customer_import
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.cgw360.cls.model.customer.CustomerImportExample" >
+    delete from customer_import
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.cgw360.cls.model.customer.CustomerImport" useGeneratedKeys="true" keyProperty="id">
+    insert into customer_import (id, customer_number, customer_name, 
+      card_type, card_no, mobile, 
+      source, status, reason, 
+      remark, create_time, modify_time, 
+      gender, car_brand, car_brand_name, 
+      car_make, car_make_name, car_model, 
+      car_model_name, loan_amount, online_price, 
+      down_payment_amount, loan_ratio, loan_term, 
+      rate, permanent_address_code, permanent_address, 
+      family_address, home_address, housing_status, 
+      profession, company, industry, 
+      monthly_income, reserved_funds, marital_status, 
+      dealer_id, dealer_name, customer_service, 
+      last_contact_time, ip_place, organization_id, 
+      organization_name)
+    values (#{id,jdbcType=BIGINT}, #{customerNumber,jdbcType=VARCHAR}, #{customerName,jdbcType=VARCHAR}, 
+      #{cardType,jdbcType=INTEGER}, #{cardNo,jdbcType=VARCHAR}, #{mobile,jdbcType=CHAR}, 
+      #{source,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, #{reason,jdbcType=INTEGER}, 
+      #{remark,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{modifyTime,jdbcType=TIMESTAMP}, 
+      #{gender,jdbcType=INTEGER}, #{carBrand,jdbcType=VARCHAR}, #{carBrandName,jdbcType=VARCHAR}, 
+      #{carMake,jdbcType=VARCHAR}, #{carMakeName,jdbcType=VARCHAR}, #{carModel,jdbcType=VARCHAR}, 
+      #{carModelName,jdbcType=VARCHAR}, #{loanAmount,jdbcType=DECIMAL}, #{onlinePrice,jdbcType=DECIMAL}, 
+      #{downPaymentAmount,jdbcType=DECIMAL}, #{loanRatio,jdbcType=DECIMAL}, #{loanTerm,jdbcType=INTEGER}, 
+      #{rate,jdbcType=DECIMAL}, #{permanentAddressCode,jdbcType=VARCHAR}, #{permanentAddress,jdbcType=VARCHAR}, 
+      #{familyAddress,jdbcType=VARCHAR}, #{homeAddress,jdbcType=VARCHAR}, #{housingStatus,jdbcType=INTEGER}, 
+      #{profession,jdbcType=VARCHAR}, #{company,jdbcType=VARCHAR}, #{industry,jdbcType=VARCHAR}, 
+      #{monthlyIncome,jdbcType=VARCHAR}, #{reservedFunds,jdbcType=VARCHAR}, #{maritalStatus,jdbcType=INTEGER}, 
+      #{dealerId,jdbcType=BIGINT}, #{dealerName,jdbcType=VARCHAR}, #{customerService,jdbcType=VARCHAR}, 
+      #{lastContactTime,jdbcType=TIMESTAMP}, #{ipPlace,jdbcType=VARCHAR}, #{organizationId,jdbcType=BIGINT}, 
+      #{organizationName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cgw360.cls.model.customer.CustomerImport" useGeneratedKeys="true" keyProperty="id">
+    insert into customer_import
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      id,
+      <if test="customerNumber != null" >
+        customer_number,
+      </if>
+      <if test="customerName != null" >
+        customer_name,
+      </if>
+      <if test="cardType != null" >
+        card_type,
+      </if>
+      <if test="cardNo != null" >
+        card_no,
+      </if>
+      <if test="mobile != null" >
+        mobile,
+      </if>
+      <if test="source != null" >
+        source,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="reason != null" >
+        reason,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="modifyTime != null" >
+        modify_time,
+      </if>
+      <if test="gender != null" >
+        gender,
+      </if>
+      <if test="carBrand != null" >
+        car_brand,
+      </if>
+      <if test="carBrandName != null" >
+        car_brand_name,
+      </if>
+      <if test="carMake != null" >
+        car_make,
+      </if>
+      <if test="carMakeName != null" >
+        car_make_name,
+      </if>
+      <if test="carModel != null" >
+        car_model,
+      </if>
+      <if test="carModelName != null" >
+        car_model_name,
+      </if>
+      <if test="loanAmount != null" >
+        loan_amount,
+      </if>
+      <if test="onlinePrice != null" >
+        online_price,
+      </if>
+      <if test="downPaymentAmount != null" >
+        down_payment_amount,
+      </if>
+      <if test="loanRatio != null" >
+        loan_ratio,
+      </if>
+      <if test="loanTerm != null" >
+        loan_term,
+      </if>
+      <if test="rate != null" >
+        rate,
+      </if>
+      <if test="permanentAddressCode != null" >
+        permanent_address_code,
+      </if>
+      <if test="permanentAddress != null" >
+        permanent_address,
+      </if>
+      <if test="familyAddress != null" >
+        family_address,
+      </if>
+      <if test="homeAddress != null" >
+        home_address,
+      </if>
+      <if test="housingStatus != null" >
+        housing_status,
+      </if>
+      <if test="profession != null" >
+        profession,
+      </if>
+      <if test="company != null" >
+        company,
+      </if>
+      <if test="industry != null" >
+        industry,
+      </if>
+      <if test="monthlyIncome != null" >
+        monthly_income,
+      </if>
+      <if test="reservedFunds != null" >
+        reserved_funds,
+      </if>
+      <if test="maritalStatus != null" >
+        marital_status,
+      </if>
+      <if test="dealerId != null" >
+        dealer_id,
+      </if>
+      <if test="dealerName != null" >
+        dealer_name,
+      </if>
+      <if test="customerService != null" >
+        customer_service,
+      </if>
+      <if test="lastContactTime != null" >
+        last_contact_time,
+      </if>
+      <if test="ipPlace != null" >
+        ip_place,
+      </if>
+      <if test="organizationId != null" >
+        organization_id,
+      </if>
+      <if test="organizationName != null" >
+        organization_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      #{id,jdbcType=BIGINT},
+      <if test="customerNumber != null" >
+        #{customerNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="customerName != null" >
+        #{customerName,jdbcType=VARCHAR},
+      </if>
+      <if test="cardType != null" >
+        #{cardType,jdbcType=INTEGER},
+      </if>
+      <if test="cardNo != null" >
+        #{cardNo,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        #{mobile,jdbcType=CHAR},
+      </if>
+      <if test="source != null" >
+        #{source,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="reason != null" >
+        #{reason,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyTime != null" >
+        #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gender != null" >
+        #{gender,jdbcType=INTEGER},
+      </if>
+      <if test="carBrand != null" >
+        #{carBrand,jdbcType=VARCHAR},
+      </if>
+      <if test="carBrandName != null" >
+        #{carBrandName,jdbcType=VARCHAR},
+      </if>
+      <if test="carMake != null" >
+        #{carMake,jdbcType=VARCHAR},
+      </if>
+      <if test="carMakeName != null" >
+        #{carMakeName,jdbcType=VARCHAR},
+      </if>
+      <if test="carModel != null" >
+        #{carModel,jdbcType=VARCHAR},
+      </if>
+      <if test="carModelName != null" >
+        #{carModelName,jdbcType=VARCHAR},
+      </if>
+      <if test="loanAmount != null" >
+        #{loanAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="onlinePrice != null" >
+        #{onlinePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="downPaymentAmount != null" >
+        #{downPaymentAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="loanRatio != null" >
+        #{loanRatio,jdbcType=DECIMAL},
+      </if>
+      <if test="loanTerm != null" >
+        #{loanTerm,jdbcType=INTEGER},
+      </if>
+      <if test="rate != null" >
+        #{rate,jdbcType=DECIMAL},
+      </if>
+      <if test="permanentAddressCode != null" >
+        #{permanentAddressCode,jdbcType=VARCHAR},
+      </if>
+      <if test="permanentAddress != null" >
+        #{permanentAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="familyAddress != null" >
+        #{familyAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="homeAddress != null" >
+        #{homeAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="housingStatus != null" >
+        #{housingStatus,jdbcType=INTEGER},
+      </if>
+      <if test="profession != null" >
+        #{profession,jdbcType=VARCHAR},
+      </if>
+      <if test="company != null" >
+        #{company,jdbcType=VARCHAR},
+      </if>
+      <if test="industry != null" >
+        #{industry,jdbcType=VARCHAR},
+      </if>
+      <if test="monthlyIncome != null" >
+        #{monthlyIncome,jdbcType=VARCHAR},
+      </if>
+      <if test="reservedFunds != null" >
+        #{reservedFunds,jdbcType=VARCHAR},
+      </if>
+      <if test="maritalStatus != null" >
+        #{maritalStatus,jdbcType=INTEGER},
+      </if>
+      <if test="dealerId != null" >
+        #{dealerId,jdbcType=BIGINT},
+      </if>
+      <if test="dealerName != null" >
+        #{dealerName,jdbcType=VARCHAR},
+      </if>
+      <if test="customerService != null" >
+        #{customerService,jdbcType=VARCHAR},
+      </if>
+      <if test="lastContactTime != null" >
+        #{lastContactTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ipPlace != null" >
+        #{ipPlace,jdbcType=VARCHAR},
+      </if>
+      <if test="organizationId != null" >
+        #{organizationId,jdbcType=BIGINT},
+      </if>
+      <if test="organizationName != null" >
+        #{organizationName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.cgw360.cls.model.customer.CustomerImportExample" resultType="java.lang.Integer" >
+    select count(*) from customer_import
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update customer_import
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.customerNumber != null" >
+        customer_number = #{record.customerNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.customerName != null" >
+        customer_name = #{record.customerName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cardType != null" >
+        card_type = #{record.cardType,jdbcType=INTEGER},
+      </if>
+      <if test="record.cardNo != null" >
+        card_no = #{record.cardNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mobile != null" >
+        mobile = #{record.mobile,jdbcType=CHAR},
+      </if>
+      <if test="record.source != null" >
+        source = #{record.source,jdbcType=INTEGER},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.reason != null" >
+        reason = #{record.reason,jdbcType=INTEGER},
+      </if>
+      <if test="record.remark != null" >
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.modifyTime != null" >
+        modify_time = #{record.modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.gender != null" >
+        gender = #{record.gender,jdbcType=INTEGER},
+      </if>
+      <if test="record.carBrand != null" >
+        car_brand = #{record.carBrand,jdbcType=VARCHAR},
+      </if>
+      <if test="record.carBrandName != null" >
+        car_brand_name = #{record.carBrandName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.carMake != null" >
+        car_make = #{record.carMake,jdbcType=VARCHAR},
+      </if>
+      <if test="record.carMakeName != null" >
+        car_make_name = #{record.carMakeName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.carModel != null" >
+        car_model = #{record.carModel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.carModelName != null" >
+        car_model_name = #{record.carModelName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.loanAmount != null" >
+        loan_amount = #{record.loanAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.onlinePrice != null" >
+        online_price = #{record.onlinePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.downPaymentAmount != null" >
+        down_payment_amount = #{record.downPaymentAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.loanRatio != null" >
+        loan_ratio = #{record.loanRatio,jdbcType=DECIMAL},
+      </if>
+      <if test="record.loanTerm != null" >
+        loan_term = #{record.loanTerm,jdbcType=INTEGER},
+      </if>
+      <if test="record.rate != null" >
+        rate = #{record.rate,jdbcType=DECIMAL},
+      </if>
+      <if test="record.permanentAddressCode != null" >
+        permanent_address_code = #{record.permanentAddressCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.permanentAddress != null" >
+        permanent_address = #{record.permanentAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.familyAddress != null" >
+        family_address = #{record.familyAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.homeAddress != null" >
+        home_address = #{record.homeAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.housingStatus != null" >
+        housing_status = #{record.housingStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.profession != null" >
+        profession = #{record.profession,jdbcType=VARCHAR},
+      </if>
+      <if test="record.company != null" >
+        company = #{record.company,jdbcType=VARCHAR},
+      </if>
+      <if test="record.industry != null" >
+        industry = #{record.industry,jdbcType=VARCHAR},
+      </if>
+      <if test="record.monthlyIncome != null" >
+        monthly_income = #{record.monthlyIncome,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reservedFunds != null" >
+        reserved_funds = #{record.reservedFunds,jdbcType=VARCHAR},
+      </if>
+      <if test="record.maritalStatus != null" >
+        marital_status = #{record.maritalStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.dealerId != null" >
+        dealer_id = #{record.dealerId,jdbcType=BIGINT},
+      </if>
+      <if test="record.dealerName != null" >
+        dealer_name = #{record.dealerName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.customerService != null" >
+        customer_service = #{record.customerService,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lastContactTime != null" >
+        last_contact_time = #{record.lastContactTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.ipPlace != null" >
+        ip_place = #{record.ipPlace,jdbcType=VARCHAR},
+      </if>
+      <if test="record.organizationId != null" >
+        organization_id = #{record.organizationId,jdbcType=BIGINT},
+      </if>
+      <if test="record.organizationName != null" >
+        organization_name = #{record.organizationName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update customer_import
+    set id = #{record.id,jdbcType=BIGINT},
+      customer_number = #{record.customerNumber,jdbcType=VARCHAR},
+      customer_name = #{record.customerName,jdbcType=VARCHAR},
+      card_type = #{record.cardType,jdbcType=INTEGER},
+      card_no = #{record.cardNo,jdbcType=VARCHAR},
+      mobile = #{record.mobile,jdbcType=CHAR},
+      source = #{record.source,jdbcType=INTEGER},
+      status = #{record.status,jdbcType=INTEGER},
+      reason = #{record.reason,jdbcType=INTEGER},
+      remark = #{record.remark,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      modify_time = #{record.modifyTime,jdbcType=TIMESTAMP},
+      gender = #{record.gender,jdbcType=INTEGER},
+      car_brand = #{record.carBrand,jdbcType=VARCHAR},
+      car_brand_name = #{record.carBrandName,jdbcType=VARCHAR},
+      car_make = #{record.carMake,jdbcType=VARCHAR},
+      car_make_name = #{record.carMakeName,jdbcType=VARCHAR},
+      car_model = #{record.carModel,jdbcType=VARCHAR},
+      car_model_name = #{record.carModelName,jdbcType=VARCHAR},
+      loan_amount = #{record.loanAmount,jdbcType=DECIMAL},
+      online_price = #{record.onlinePrice,jdbcType=DECIMAL},
+      down_payment_amount = #{record.downPaymentAmount,jdbcType=DECIMAL},
+      loan_ratio = #{record.loanRatio,jdbcType=DECIMAL},
+      loan_term = #{record.loanTerm,jdbcType=INTEGER},
+      rate = #{record.rate,jdbcType=DECIMAL},
+      permanent_address_code = #{record.permanentAddressCode,jdbcType=VARCHAR},
+      permanent_address = #{record.permanentAddress,jdbcType=VARCHAR},
+      family_address = #{record.familyAddress,jdbcType=VARCHAR},
+      home_address = #{record.homeAddress,jdbcType=VARCHAR},
+      housing_status = #{record.housingStatus,jdbcType=INTEGER},
+      profession = #{record.profession,jdbcType=VARCHAR},
+      company = #{record.company,jdbcType=VARCHAR},
+      industry = #{record.industry,jdbcType=VARCHAR},
+      monthly_income = #{record.monthlyIncome,jdbcType=VARCHAR},
+      reserved_funds = #{record.reservedFunds,jdbcType=VARCHAR},
+      marital_status = #{record.maritalStatus,jdbcType=INTEGER},
+      dealer_id = #{record.dealerId,jdbcType=BIGINT},
+      dealer_name = #{record.dealerName,jdbcType=VARCHAR},
+      customer_service = #{record.customerService,jdbcType=VARCHAR},
+      last_contact_time = #{record.lastContactTime,jdbcType=TIMESTAMP},
+      ip_place = #{record.ipPlace,jdbcType=VARCHAR},
+      organization_id = #{record.organizationId,jdbcType=BIGINT},
+      organization_name = #{record.organizationName,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cgw360.cls.model.customer.CustomerImport" >
+    update customer_import
+    <set >
+      <if test="customerNumber != null" >
+        customer_number = #{customerNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="customerName != null" >
+        customer_name = #{customerName,jdbcType=VARCHAR},
+      </if>
+      <if test="cardType != null" >
+        card_type = #{cardType,jdbcType=INTEGER},
+      </if>
+      <if test="cardNo != null" >
+        card_no = #{cardNo,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        mobile = #{mobile,jdbcType=CHAR},
+      </if>
+      <if test="source != null" >
+        source = #{source,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="reason != null" >
+        reason = #{reason,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyTime != null" >
+        modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gender != null" >
+        gender = #{gender,jdbcType=INTEGER},
+      </if>
+      <if test="carBrand != null" >
+        car_brand = #{carBrand,jdbcType=VARCHAR},
+      </if>
+      <if test="carBrandName != null" >
+        car_brand_name = #{carBrandName,jdbcType=VARCHAR},
+      </if>
+      <if test="carMake != null" >
+        car_make = #{carMake,jdbcType=VARCHAR},
+      </if>
+      <if test="carMakeName != null" >
+        car_make_name = #{carMakeName,jdbcType=VARCHAR},
+      </if>
+      <if test="carModel != null" >
+        car_model = #{carModel,jdbcType=VARCHAR},
+      </if>
+      <if test="carModelName != null" >
+        car_model_name = #{carModelName,jdbcType=VARCHAR},
+      </if>
+      <if test="loanAmount != null" >
+        loan_amount = #{loanAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="onlinePrice != null" >
+        online_price = #{onlinePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="downPaymentAmount != null" >
+        down_payment_amount = #{downPaymentAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="loanRatio != null" >
+        loan_ratio = #{loanRatio,jdbcType=DECIMAL},
+      </if>
+      <if test="loanTerm != null" >
+        loan_term = #{loanTerm,jdbcType=INTEGER},
+      </if>
+      <if test="rate != null" >
+        rate = #{rate,jdbcType=DECIMAL},
+      </if>
+      <if test="permanentAddressCode != null" >
+        permanent_address_code = #{permanentAddressCode,jdbcType=VARCHAR},
+      </if>
+      <if test="permanentAddress != null" >
+        permanent_address = #{permanentAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="familyAddress != null" >
+        family_address = #{familyAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="homeAddress != null" >
+        home_address = #{homeAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="housingStatus != null" >
+        housing_status = #{housingStatus,jdbcType=INTEGER},
+      </if>
+      <if test="profession != null" >
+        profession = #{profession,jdbcType=VARCHAR},
+      </if>
+      <if test="company != null" >
+        company = #{company,jdbcType=VARCHAR},
+      </if>
+      <if test="industry != null" >
+        industry = #{industry,jdbcType=VARCHAR},
+      </if>
+      <if test="monthlyIncome != null" >
+        monthly_income = #{monthlyIncome,jdbcType=VARCHAR},
+      </if>
+      <if test="reservedFunds != null" >
+        reserved_funds = #{reservedFunds,jdbcType=VARCHAR},
+      </if>
+      <if test="maritalStatus != null" >
+        marital_status = #{maritalStatus,jdbcType=INTEGER},
+      </if>
+      <if test="dealerId != null" >
+        dealer_id = #{dealerId,jdbcType=BIGINT},
+      </if>
+      <if test="dealerName != null" >
+        dealer_name = #{dealerName,jdbcType=VARCHAR},
+      </if>
+      <if test="customerService != null" >
+        customer_service = #{customerService,jdbcType=VARCHAR},
+      </if>
+      <if test="lastContactTime != null" >
+        last_contact_time = #{lastContactTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ipPlace != null" >
+        ip_place = #{ipPlace,jdbcType=VARCHAR},
+      </if>
+      <if test="organizationId != null" >
+        organization_id = #{organizationId,jdbcType=BIGINT},
+      </if>
+      <if test="organizationName != null" >
+        organization_name = #{organizationName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cgw360.cls.model.customer.CustomerImport" >
+    update customer_import
+    set customer_number = #{customerNumber,jdbcType=VARCHAR},
+      customer_name = #{customerName,jdbcType=VARCHAR},
+      card_type = #{cardType,jdbcType=INTEGER},
+      card_no = #{cardNo,jdbcType=VARCHAR},
+      mobile = #{mobile,jdbcType=CHAR},
+      source = #{source,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      reason = #{reason,jdbcType=INTEGER},
+      remark = #{remark,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+      gender = #{gender,jdbcType=INTEGER},
+      car_brand = #{carBrand,jdbcType=VARCHAR},
+      car_brand_name = #{carBrandName,jdbcType=VARCHAR},
+      car_make = #{carMake,jdbcType=VARCHAR},
+      car_make_name = #{carMakeName,jdbcType=VARCHAR},
+      car_model = #{carModel,jdbcType=VARCHAR},
+      car_model_name = #{carModelName,jdbcType=VARCHAR},
+      loan_amount = #{loanAmount,jdbcType=DECIMAL},
+      online_price = #{onlinePrice,jdbcType=DECIMAL},
+      down_payment_amount = #{downPaymentAmount,jdbcType=DECIMAL},
+      loan_ratio = #{loanRatio,jdbcType=DECIMAL},
+      loan_term = #{loanTerm,jdbcType=INTEGER},
+      rate = #{rate,jdbcType=DECIMAL},
+      permanent_address_code = #{permanentAddressCode,jdbcType=VARCHAR},
+      permanent_address = #{permanentAddress,jdbcType=VARCHAR},
+      family_address = #{familyAddress,jdbcType=VARCHAR},
+      home_address = #{homeAddress,jdbcType=VARCHAR},
+      housing_status = #{housingStatus,jdbcType=INTEGER},
+      profession = #{profession,jdbcType=VARCHAR},
+      company = #{company,jdbcType=VARCHAR},
+      industry = #{industry,jdbcType=VARCHAR},
+      monthly_income = #{monthlyIncome,jdbcType=VARCHAR},
+      reserved_funds = #{reservedFunds,jdbcType=VARCHAR},
+      marital_status = #{maritalStatus,jdbcType=INTEGER},
+      dealer_id = #{dealerId,jdbcType=BIGINT},
+      dealer_name = #{dealerName,jdbcType=VARCHAR},
+      customer_service = #{customerService,jdbcType=VARCHAR},
+      last_contact_time = #{lastContactTime,jdbcType=TIMESTAMP},
+      ip_place = #{ipPlace,jdbcType=VARCHAR},
+      organization_id = #{organizationId,jdbcType=BIGINT},
+      organization_name = #{organizationName,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+   <select id="getAllotedCustomerList" resultMap="BaseResultMap" parameterType="java.util.Map" >
+    select
+    <include refid="Base_Column_List" />
+    from customer_import a where 1=1
+    <if test="orgId != null" >
+     	and exists (select 1 from customer_import_allot_log b where a.id=b.import_id and b.org_id=#{orgId,jdbcType=BIGINT}) and a.organization_id!=-1
+    </if>
+    <if test="customerName != null and customerName != ''">
+      	and customer_name like CONCAT('%', #{customerName,jdbcType=VARCHAR}, '%')
+	</if>
+	<if test="cardNo != null and cardNo != ''">
+      	and card_no like CONCAT('%', #{cardNo,jdbcType=VARCHAR}, '%')
+	</if>
+	<if test="status != null">
+      	and status = #{status,jdbcType=INTEGER}
+	</if>
+  </select>
+  
+</mapper>

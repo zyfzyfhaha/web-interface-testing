@@ -1,0 +1,865 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cgw360.cls.dao.flow.BusinessObjectProcessInfoMapper">
+    <resultMap id="BaseResultMap" type="com.cgw360.cls.model.flow.BusinessObjectProcessInfo">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="business_object_id" property="businessObjectId" jdbcType="BIGINT"/>
+        <result column="business_type" property="businessType" jdbcType="VARCHAR"/>
+        <result column="borrower_id" property="borrowerId" jdbcType="BIGINT"/>
+        <result column="borrower_name" property="borrowerName" jdbcType="VARCHAR"/>
+        <result column="launch_user_id" property="launchUserId" jdbcType="BIGINT"/>
+        <result column="launch_user_name" property="launchUserName" jdbcType="VARCHAR"/>
+        <result column="launch_organization_id" property="launchOrganizationId" jdbcType="BIGINT"/>
+        <result column="launch_organization_name" property="launchOrganizationName" jdbcType="VARCHAR"/>
+        <result column="business_group_id" property="businessGroupId" jdbcType="BIGINT"/>
+        <result column="business_group_name" property="businessGroupName" jdbcType="VARCHAR"/>
+        <result column="business_num" property="businessNum" jdbcType="VARCHAR"/>
+        <result column="is_submitted" property="isSubmitted" jdbcType="BIT"/>
+        <result column="is_read" property="isRead" jdbcType="BIT"/>
+        <result column="is_finished" property="isFinished" jdbcType="BIT"/>
+        <result column="node_key" property="nodeKey" jdbcType="VARCHAR"/>
+        <result column="node_name" property="nodeName" jdbcType="VARCHAR"/>
+        <result column="node_index" property="nodeIndex" jdbcType="INTEGER"/>
+        <result column="flow_index" property="flowIndex" jdbcType="INTEGER"/>
+        <result column="flow_version" property="flowVersion" jdbcType="VARCHAR"/>
+        <result column="flow_type" property="flowType" jdbcType="VARCHAR"/>
+        <result column="operation_role_key" property="operationRoleKey" jdbcType="VARCHAR"/>
+        <result column="operation_role_name" property="operationRoleName" jdbcType="VARCHAR"/>
+        <result column="operator_id" property="operatorId" jdbcType="BIGINT"/>
+        <result column="operator_name" property="operatorName" jdbcType="VARCHAR"/>
+        <result column="approval_result" property="approvalResult" jdbcType="INTEGER"/>
+        <result column="create_date_time" property="createDateTime" jdbcType="TIMESTAMP"/>
+        <result column="approval_date_time" property="approvalDateTime" jdbcType="TIMESTAMP"/>
+        <result column="submitted_date_time" property="submittedDateTime" jdbcType="TIMESTAMP"/>
+        <result column="approval_note" property="approvalNote" jdbcType="VARCHAR"/>
+        <result column="decline_reason_key" property="declineReasonKey" jdbcType="VARCHAR"/>
+        <result column="RFE_reason_key" property="rfeReasonKey" jdbcType="VARCHAR"/>
+        <result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+        id, business_object_id, business_type, borrower_id, borrower_name, launch_user_id,
+        launch_user_name, launch_organization_id, launch_organization_name, business_group_id,
+        business_group_name, business_num, is_submitted, is_read, is_finished, node_key,
+        node_name, node_index, flow_index, flow_version, flow_type, operation_role_key, operation_role_name,
+        operator_id, operator_name, approval_result, create_date_time, approval_date_time,
+        submitted_date_time, approval_note, decline_reason_key, RFE_reason_key, modify_time
+    </sql>
+    <select id="selectByExample" resultMap="BaseResultMap"
+            parameterType="com.cgw360.cls.model.flow.BusinessObjectProcessInfoExample">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        'false' as QUERYID,
+        <include refid="Base_Column_List"/>
+        from business_object_process_info
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from business_object_process_info
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete from business_object_process_info
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+    <delete id="deleteByExample" parameterType="com.cgw360.cls.model.flow.BusinessObjectProcessInfoExample">
+        delete from business_object_process_info
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id"
+            parameterType="com.cgw360.cls.model.flow.BusinessObjectProcessInfo">
+        insert into business_object_process_info (id, business_object_id, business_type,
+        borrower_id, borrower_name, launch_user_id,
+        launch_user_name, launch_organization_id, launch_organization_name,
+        business_group_id, business_group_name, business_num,
+        is_submitted, is_read, is_finished,
+        node_key, node_name, node_index,
+        flow_index, flow_version, flow_type,
+        operation_role_key, operation_role_name, operator_id,
+        operator_name, approval_result, create_date_time,
+        approval_date_time, submitted_date_time,
+        approval_note, decline_reason_key, RFE_reason_key,
+        modify_time)
+        values (#{id,jdbcType=BIGINT}, #{businessObjectId,jdbcType=BIGINT}, #{businessType,jdbcType=VARCHAR},
+        #{borrowerId,jdbcType=BIGINT}, #{borrowerName,jdbcType=VARCHAR}, #{launchUserId,jdbcType=BIGINT},
+        #{launchUserName,jdbcType=VARCHAR}, #{launchOrganizationId,jdbcType=BIGINT},
+        #{launchOrganizationName,jdbcType=VARCHAR},
+        #{businessGroupId,jdbcType=BIGINT}, #{businessGroupName,jdbcType=VARCHAR}, #{businessNum,jdbcType=VARCHAR},
+        #{isSubmitted,jdbcType=BIT}, #{isRead,jdbcType=BIT}, #{isFinished,jdbcType=BIT},
+        #{nodeKey,jdbcType=VARCHAR}, #{nodeName,jdbcType=VARCHAR}, #{nodeIndex,jdbcType=INTEGER},
+        #{flowIndex,jdbcType=INTEGER}, #{flowVersion,jdbcType=VARCHAR}, #{flowType,jdbcType=VARCHAR},
+        #{operationRoleKey,jdbcType=VARCHAR}, #{operationRoleName,jdbcType=VARCHAR}, #{operatorId,jdbcType=BIGINT},
+        #{operatorName,jdbcType=VARCHAR}, #{approvalResult,jdbcType=INTEGER}, #{createDateTime,jdbcType=TIMESTAMP},
+        #{approvalDateTime,jdbcType=TIMESTAMP}, #{submittedDateTime,jdbcType=TIMESTAMP},
+        #{approvalNote,jdbcType=VARCHAR}, #{declineReasonKey,jdbcType=VARCHAR}, #{rfeReasonKey,jdbcType=VARCHAR},
+        #{modifyTime,jdbcType=TIMESTAMP})
+    </insert>
+    <insert id="insertSelective" parameterType="com.cgw360.cls.model.flow.BusinessObjectProcessInfo"
+            useGeneratedKeys="true" keyProperty="id">
+        insert into business_object_process_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            id,
+            <if test="businessObjectId != null">
+                business_object_id,
+            </if>
+            <if test="businessType != null">
+                business_type,
+            </if>
+            <if test="borrowerId != null">
+                borrower_id,
+            </if>
+            <if test="borrowerName != null">
+                borrower_name,
+            </if>
+            <if test="launchUserId != null">
+                launch_user_id,
+            </if>
+            <if test="launchUserName != null">
+                launch_user_name,
+            </if>
+            <if test="launchOrganizationId != null">
+                launch_organization_id,
+            </if>
+            <if test="launchOrganizationName != null">
+                launch_organization_name,
+            </if>
+            <if test="businessGroupId != null">
+                business_group_id,
+            </if>
+            <if test="businessGroupName != null">
+                business_group_name,
+            </if>
+            <if test="businessNum != null">
+                business_num,
+            </if>
+            <if test="isSubmitted != null">
+                is_submitted,
+            </if>
+            <if test="isRead != null">
+                is_read,
+            </if>
+            <if test="isFinished != null">
+                is_finished,
+            </if>
+            <if test="nodeKey != null">
+                node_key,
+            </if>
+            <if test="nodeName != null">
+                node_name,
+            </if>
+            <if test="nodeIndex != null">
+                node_index,
+            </if>
+            <if test="flowIndex != null">
+                flow_index,
+            </if>
+            <if test="flowVersion != null">
+                flow_version,
+            </if>
+            <if test="flowType != null">
+                flow_type,
+            </if>
+            <if test="operationRoleKey != null">
+                operation_role_key,
+            </if>
+            <if test="operationRoleName != null">
+                operation_role_name,
+            </if>
+            <if test="operatorId != null">
+                operator_id,
+            </if>
+            <if test="operatorName != null">
+                operator_name,
+            </if>
+            <if test="approvalResult != null">
+                approval_result,
+            </if>
+            <if test="createDateTime != null">
+                create_date_time,
+            </if>
+            <if test="approvalDateTime != null">
+                approval_date_time,
+            </if>
+            <if test="submittedDateTime != null">
+                submitted_date_time,
+            </if>
+            <if test="approvalNote != null">
+                approval_note,
+            </if>
+            <if test="declineReasonKey != null">
+                decline_reason_key,
+            </if>
+            <if test="rfeReasonKey != null">
+                RFE_reason_key,
+            </if>
+            <if test="modifyTime != null">
+                modify_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            #{id,jdbcType=BIGINT},
+            <if test="businessObjectId != null">
+                #{businessObjectId,jdbcType=BIGINT},
+            </if>
+            <if test="businessType != null">
+                #{businessType,jdbcType=VARCHAR},
+            </if>
+            <if test="borrowerId != null">
+                #{borrowerId,jdbcType=BIGINT},
+            </if>
+            <if test="borrowerName != null">
+                #{borrowerName,jdbcType=VARCHAR},
+            </if>
+            <if test="launchUserId != null">
+                #{launchUserId,jdbcType=BIGINT},
+            </if>
+            <if test="launchUserName != null">
+                #{launchUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="launchOrganizationId != null">
+                #{launchOrganizationId,jdbcType=BIGINT},
+            </if>
+            <if test="launchOrganizationName != null">
+                #{launchOrganizationName,jdbcType=VARCHAR},
+            </if>
+            <if test="businessGroupId != null">
+                #{businessGroupId,jdbcType=BIGINT},
+            </if>
+            <if test="businessGroupName != null">
+                #{businessGroupName,jdbcType=VARCHAR},
+            </if>
+            <if test="businessNum != null">
+                #{businessNum,jdbcType=VARCHAR},
+            </if>
+            <if test="isSubmitted != null">
+                #{isSubmitted,jdbcType=BIT},
+            </if>
+            <if test="isRead != null">
+                #{isRead,jdbcType=BIT},
+            </if>
+            <if test="isFinished != null">
+                #{isFinished,jdbcType=BIT},
+            </if>
+            <if test="nodeKey != null">
+                #{nodeKey,jdbcType=VARCHAR},
+            </if>
+            <if test="nodeName != null">
+                #{nodeName,jdbcType=VARCHAR},
+            </if>
+            <if test="nodeIndex != null">
+                #{nodeIndex,jdbcType=INTEGER},
+            </if>
+            <if test="flowIndex != null">
+                #{flowIndex,jdbcType=INTEGER},
+            </if>
+            <if test="flowVersion != null">
+                #{flowVersion,jdbcType=VARCHAR},
+            </if>
+            <if test="flowType != null">
+                #{flowType,jdbcType=VARCHAR},
+            </if>
+            <if test="operationRoleKey != null">
+                #{operationRoleKey,jdbcType=VARCHAR},
+            </if>
+            <if test="operationRoleName != null">
+                #{operationRoleName,jdbcType=VARCHAR},
+            </if>
+            <if test="operatorId != null">
+                #{operatorId,jdbcType=BIGINT},
+            </if>
+            <if test="operatorName != null">
+                #{operatorName,jdbcType=VARCHAR},
+            </if>
+            <if test="approvalResult != null">
+                #{approvalResult,jdbcType=INTEGER},
+            </if>
+            <if test="createDateTime != null">
+                #{createDateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="approvalDateTime != null">
+                #{approvalDateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="submittedDateTime != null">
+                #{submittedDateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="approvalNote != null">
+                #{approvalNote,jdbcType=VARCHAR},
+            </if>
+            <if test="declineReasonKey != null">
+                #{declineReasonKey,jdbcType=VARCHAR},
+            </if>
+            <if test="rfeReasonKey != null">
+                #{rfeReasonKey,jdbcType=VARCHAR},
+            </if>
+            <if test="modifyTime != null">
+                #{modifyTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByExampleSelective" parameterType="map">
+        update business_object_process_info
+        <set>
+            <if test="record.id != null">
+                id = #{record.id,jdbcType=BIGINT},
+            </if>
+            <if test="record.businessObjectId != null">
+                business_object_id = #{record.businessObjectId,jdbcType=BIGINT},
+            </if>
+            <if test="record.businessType != null">
+                business_type = #{record.businessType,jdbcType=VARCHAR},
+            </if>
+            <if test="record.borrowerId != null">
+                borrower_id = #{record.borrowerId,jdbcType=BIGINT},
+            </if>
+            <if test="record.borrowerName != null">
+                borrower_name = #{record.borrowerName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.launchUserId != null">
+                launch_user_id = #{record.launchUserId,jdbcType=BIGINT},
+            </if>
+            <if test="record.launchUserName != null">
+                launch_user_name = #{record.launchUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.launchOrganizationId != null">
+                launch_organization_id = #{record.launchOrganizationId,jdbcType=BIGINT},
+            </if>
+            <if test="record.launchOrganizationName != null">
+                launch_organization_name = #{record.launchOrganizationName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.businessGroupId != null">
+                business_group_id = #{record.businessGroupId,jdbcType=BIGINT},
+            </if>
+            <if test="record.businessGroupName != null">
+                business_group_name = #{record.businessGroupName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.businessNum != null">
+                business_num = #{record.businessNum,jdbcType=VARCHAR},
+            </if>
+            <if test="record.isSubmitted != null">
+                is_submitted = #{record.isSubmitted,jdbcType=BIT},
+            </if>
+            <if test="record.isRead != null">
+                is_read = #{record.isRead,jdbcType=BIT},
+            </if>
+            <if test="record.isFinished != null">
+                is_finished = #{record.isFinished,jdbcType=BIT},
+            </if>
+            <if test="record.nodeKey != null">
+                node_key = #{record.nodeKey,jdbcType=VARCHAR},
+            </if>
+            <if test="record.nodeName != null">
+                node_name = #{record.nodeName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.nodeIndex != null">
+                node_index = #{record.nodeIndex,jdbcType=INTEGER},
+            </if>
+            <if test="record.flowIndex != null">
+                flow_index = #{record.flowIndex,jdbcType=INTEGER},
+            </if>
+            <if test="record.flowVersion != null">
+                flow_version = #{record.flowVersion,jdbcType=VARCHAR},
+            </if>
+            <if test="record.flowType != null">
+                flow_type = #{record.flowType,jdbcType=VARCHAR},
+            </if>
+            <if test="record.operationRoleKey != null">
+                operation_role_key = #{record.operationRoleKey,jdbcType=VARCHAR},
+            </if>
+            <if test="record.operationRoleName != null">
+                operation_role_name = #{record.operationRoleName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.operatorId != null">
+                operator_id = #{record.operatorId,jdbcType=BIGINT},
+            </if>
+            <if test="record.operatorName != null">
+                operator_name = #{record.operatorName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.approvalResult != null">
+                approval_result = #{record.approvalResult,jdbcType=INTEGER},
+            </if>
+            <if test="record.createDateTime != null">
+                create_date_time = #{record.createDateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.approvalDateTime != null">
+                approval_date_time = #{record.approvalDateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.submittedDateTime != null">
+                submitted_date_time = #{record.submittedDateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.approvalNote != null">
+                approval_note = #{record.approvalNote,jdbcType=VARCHAR},
+            </if>
+            <if test="record.declineReasonKey != null">
+                decline_reason_key = #{record.declineReasonKey,jdbcType=VARCHAR},
+            </if>
+            <if test="record.rfeReasonKey != null">
+                RFE_reason_key = #{record.rfeReasonKey,jdbcType=VARCHAR},
+            </if>
+            <if test="record.modifyTime != null">
+                modify_time = #{record.modifyTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update business_object_process_info
+        set id = #{record.id,jdbcType=BIGINT},
+        business_object_id = #{record.businessObjectId,jdbcType=BIGINT},
+        business_type = #{record.businessType,jdbcType=VARCHAR},
+        borrower_id = #{record.borrowerId,jdbcType=BIGINT},
+        borrower_name = #{record.borrowerName,jdbcType=VARCHAR},
+        launch_user_id = #{record.launchUserId,jdbcType=BIGINT},
+        launch_user_name = #{record.launchUserName,jdbcType=VARCHAR},
+        launch_organization_id = #{record.launchOrganizationId,jdbcType=BIGINT},
+        launch_organization_name = #{record.launchOrganizationName,jdbcType=VARCHAR},
+        business_group_id = #{record.businessGroupId,jdbcType=BIGINT},
+        business_group_name = #{record.businessGroupName,jdbcType=VARCHAR},
+        business_num = #{record.businessNum,jdbcType=VARCHAR},
+        is_submitted = #{record.isSubmitted,jdbcType=BIT},
+        is_read = #{record.isRead,jdbcType=BIT},
+        is_finished = #{record.isFinished,jdbcType=BIT},
+        node_key = #{record.nodeKey,jdbcType=VARCHAR},
+        node_name = #{record.nodeName,jdbcType=VARCHAR},
+        node_index = #{record.nodeIndex,jdbcType=INTEGER},
+        flow_index = #{record.flowIndex,jdbcType=INTEGER},
+        flow_version = #{record.flowVersion,jdbcType=VARCHAR},
+        flow_type = #{record.flowType,jdbcType=VARCHAR},
+        operation_role_key = #{record.operationRoleKey,jdbcType=VARCHAR},
+        operation_role_name = #{record.operationRoleName,jdbcType=VARCHAR},
+        operator_id = #{record.operatorId,jdbcType=BIGINT},
+        operator_name = #{record.operatorName,jdbcType=VARCHAR},
+        approval_result = #{record.approvalResult,jdbcType=INTEGER},
+        create_date_time = #{record.createDateTime,jdbcType=TIMESTAMP},
+        approval_date_time = #{record.approvalDateTime,jdbcType=TIMESTAMP},
+        submitted_date_time = #{record.submittedDateTime,jdbcType=TIMESTAMP},
+        approval_note = #{record.approvalNote,jdbcType=VARCHAR},
+        decline_reason_key = #{record.declineReasonKey,jdbcType=VARCHAR},
+        RFE_reason_key = #{record.rfeReasonKey,jdbcType=VARCHAR},
+        modify_time = #{record.modifyTime,jdbcType=TIMESTAMP}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.cgw360.cls.model.flow.BusinessObjectProcessInfo">
+        update business_object_process_info
+        <set>
+            <if test="businessObjectId != null">
+                business_object_id = #{businessObjectId,jdbcType=BIGINT},
+            </if>
+            <if test="businessType != null">
+                business_type = #{businessType,jdbcType=VARCHAR},
+            </if>
+            <if test="borrowerId != null">
+                borrower_id = #{borrowerId,jdbcType=BIGINT},
+            </if>
+            <if test="borrowerName != null">
+                borrower_name = #{borrowerName,jdbcType=VARCHAR},
+            </if>
+            <if test="launchUserId != null">
+                launch_user_id = #{launchUserId,jdbcType=BIGINT},
+            </if>
+            <if test="launchUserName != null">
+                launch_user_name = #{launchUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="launchOrganizationId != null">
+                launch_organization_id = #{launchOrganizationId,jdbcType=BIGINT},
+            </if>
+            <if test="launchOrganizationName != null">
+                launch_organization_name = #{launchOrganizationName,jdbcType=VARCHAR},
+            </if>
+            <if test="businessGroupId != null">
+                business_group_id = #{businessGroupId,jdbcType=BIGINT},
+            </if>
+            <if test="businessGroupName != null">
+                business_group_name = #{businessGroupName,jdbcType=VARCHAR},
+            </if>
+            <if test="businessNum != null">
+                business_num = #{businessNum,jdbcType=VARCHAR},
+            </if>
+            <if test="isSubmitted != null">
+                is_submitted = #{isSubmitted,jdbcType=BIT},
+            </if>
+            <if test="isRead != null">
+                is_read = #{isRead,jdbcType=BIT},
+            </if>
+            <if test="isFinished != null">
+                is_finished = #{isFinished,jdbcType=BIT},
+            </if>
+            <if test="nodeKey != null">
+                node_key = #{nodeKey,jdbcType=VARCHAR},
+            </if>
+            <if test="nodeName != null">
+                node_name = #{nodeName,jdbcType=VARCHAR},
+            </if>
+            <if test="nodeIndex != null">
+                node_index = #{nodeIndex,jdbcType=INTEGER},
+            </if>
+            <if test="flowIndex != null">
+                flow_index = #{flowIndex,jdbcType=INTEGER},
+            </if>
+            <if test="flowVersion != null">
+                flow_version = #{flowVersion,jdbcType=VARCHAR},
+            </if>
+            <if test="flowType != null">
+                flow_type = #{flowType,jdbcType=VARCHAR},
+            </if>
+            <if test="operationRoleKey != null">
+                operation_role_key = #{operationRoleKey,jdbcType=VARCHAR},
+            </if>
+            <if test="operationRoleName != null">
+                operation_role_name = #{operationRoleName,jdbcType=VARCHAR},
+            </if>
+            <if test="operatorId != null">
+                operator_id = #{operatorId,jdbcType=BIGINT},
+            </if>
+            <if test="operatorName != null">
+                operator_name = #{operatorName,jdbcType=VARCHAR},
+            </if>
+            <if test="approvalResult != null">
+                approval_result = #{approvalResult,jdbcType=INTEGER},
+            </if>
+            <if test="createDateTime != null">
+                create_date_time = #{createDateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="approvalDateTime != null">
+                approval_date_time = #{approvalDateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="submittedDateTime != null">
+                submitted_date_time = #{submittedDateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="approvalNote != null">
+                approval_note = #{approvalNote,jdbcType=VARCHAR},
+            </if>
+            <if test="declineReasonKey != null">
+                decline_reason_key = #{declineReasonKey,jdbcType=VARCHAR},
+            </if>
+            <if test="rfeReasonKey != null">
+                RFE_reason_key = #{rfeReasonKey,jdbcType=VARCHAR},
+            </if>
+            <if test="modifyTime != null">
+                modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.cgw360.cls.model.flow.BusinessObjectProcessInfo">
+        update business_object_process_info
+        set business_object_id = #{businessObjectId,jdbcType=BIGINT},
+        business_type = #{businessType,jdbcType=VARCHAR},
+        borrower_id = #{borrowerId,jdbcType=BIGINT},
+        borrower_name = #{borrowerName,jdbcType=VARCHAR},
+        launch_user_id = #{launchUserId,jdbcType=BIGINT},
+        launch_user_name = #{launchUserName,jdbcType=VARCHAR},
+        launch_organization_id = #{launchOrganizationId,jdbcType=BIGINT},
+        launch_organization_name = #{launchOrganizationName,jdbcType=VARCHAR},
+        business_group_id = #{businessGroupId,jdbcType=BIGINT},
+        business_group_name = #{businessGroupName,jdbcType=VARCHAR},
+        business_num = #{businessNum,jdbcType=VARCHAR},
+        is_submitted = #{isSubmitted,jdbcType=BIT},
+        is_read = #{isRead,jdbcType=BIT},
+        is_finished = #{isFinished,jdbcType=BIT},
+        node_key = #{nodeKey,jdbcType=VARCHAR},
+        node_name = #{nodeName,jdbcType=VARCHAR},
+        node_index = #{nodeIndex,jdbcType=INTEGER},
+        flow_index = #{flowIndex,jdbcType=INTEGER},
+        flow_version = #{flowVersion,jdbcType=VARCHAR},
+        flow_type = #{flowType,jdbcType=VARCHAR},
+        operation_role_key = #{operationRoleKey,jdbcType=VARCHAR},
+        operation_role_name = #{operationRoleName,jdbcType=VARCHAR},
+        operator_id = #{operatorId,jdbcType=BIGINT},
+        operator_name = #{operatorName,jdbcType=VARCHAR},
+        approval_result = #{approvalResult,jdbcType=INTEGER},
+        create_date_time = #{createDateTime,jdbcType=TIMESTAMP},
+        approval_date_time = #{approvalDateTime,jdbcType=TIMESTAMP},
+        submitted_date_time = #{submittedDateTime,jdbcType=TIMESTAMP},
+        approval_note = #{approvalNote,jdbcType=VARCHAR},
+        decline_reason_key = #{declineReasonKey,jdbcType=VARCHAR},
+        RFE_reason_key = #{rfeReasonKey,jdbcType=VARCHAR},
+        modify_time = #{modifyTime,jdbcType=TIMESTAMP}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <select id="selectAll" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from business_object_process_info
+    </select>
+
+    <!--以下为自增逻辑-->
+
+    <select id="selectProcessingInfoOfBO" resultMap="BaseResultMap" parameterType="java.util.Map">
+        select
+        <include refid="Base_Column_List"/>
+        from business_object_process_info
+        where business_object_id = #{boId,jdbcType=BIGINT} and is_submitted = FALSE and business_type =
+        #{businessType,jdbcType=VARCHAR}
+    </select>
+
+    <select id="selectBOProcessFlowInfos" resultMap="BaseResultMap" parameterType="java.util.Map">
+        select
+        <include refid="Base_Column_List"/>
+        from business_object_process_info
+        where business_object_id = #{boId,jdbcType=BIGINT} and business_type = #{businessType,jdbcType=VARCHAR} ORDER by
+        flow_index DESC
+    </select>
+
+    <select id="selectAllProcessInfoOfOneUser" resultMap="BaseResultMap" parameterType="java.util.Map">
+        select
+        <include refid="Base_Column_List"/>
+        from business_object_process_info
+        where operator_id = #{operatorId,jdbcType=BIGINT} and is_submitted = #{isSubmitted,jdbcType=BIT}
+    </select>
+    <!--
+        <select id="selectAllProcessedInfoOfOneUser" resultMap="BaseResultMap" parameterType="java.lang.Long">
+            select id, business_object_id, business_type, borrower_id, borrower_name, launch_user_id,launch_user_name,launch_organization_id,launch_organization_name,business_num,is_submitted, node_key,
+            node_name, node_index, flow_index, flow_version, flow_type, operation_role_key, operation_role_name,
+            operator_id, operator_name, approval_result,create_date_time, approval_date_time,submitted_date_time,
+            approval_note, decline_reason_key,
+            RFE_reason_key, modify_time
+            from business_object_process_info
+            where operator_id = #{operatorId,jdbcType=BIGINT} and is_submitted = TRUE
+        </select>
+    -->
+    <select id="searchProcessInfoOfOneUser" resultMap="BaseResultMap" parameterType="java.util.Map">
+        select
+        <include refid="Base_Column_List"/>
+        from business_object_process_info t1
+        <if test="isSubmitted != null and isSubmitted">
+            INNER JOIN(
+            SELECT
+            MAX(id)AS task_id
+            FROM
+            business_object_process_info
+            WHERE operator_id = #{operatorId,jdbcType=BIGINT} AND is_submitted = TRUE
+            <if test="borrowerName != null and borrowerName!=''">
+                AND borrower_name LIKE CONCAT(CONCAT('%', #{borrowerName,jdbcType=VARCHAR}), '%')
+            </if>
+            <if test="businessNum != null and businessNum!=''">
+                AND business_num LIKE CONCAT(CONCAT('%', #{businessNum,jdbcType=VARCHAR}), '%')
+            </if>
+            <if test="launchOrganizationId != null">
+                AND launch_organization_id = #{launchOrganizationId,jdbcType=BIGINT}
+            </if>
+            <if test="businessType != null and businessType!=''">
+                AND business_type = #{businessType,jdbcType=VARCHAR}
+            </if>
+            GROUP BY
+            business_object_id,
+            business_type,
+            node_key
+            )t2 ON t1.id = t2.task_id
+        </if>
+        <if test="isSubmitted != null and !isSubmitted">
+            where operator_id = #{operatorId,jdbcType=BIGINT} and is_submitted = FALSE
+            <if test="borrowerName != null and borrowerName!=''">
+                AND borrower_name LIKE CONCAT(CONCAT('%', #{borrowerName,jdbcType=VARCHAR}), '%')
+            </if>
+            <if test="businessNum != null and businessNum!=''">
+                AND business_num LIKE CONCAT(CONCAT('%', #{businessNum,jdbcType=VARCHAR}), '%')
+            </if>
+            <if test="launchOrganizationId != null">
+                AND launch_organization_id = #{launchOrganizationId,jdbcType=BIGINT}
+            </if>
+            <if test="businessType != null and businessType!=''">
+                AND business_type = #{businessType,jdbcType=VARCHAR}
+            </if>
+        </if>
+        ORDER BY create_date_time DESC
+    </select>
+
+    <select id="selectBOPInfoOfOneFlowNode" resultMap="BaseResultMap" parameterType="java.util.Map">
+        select
+        <include refid="Base_Column_List"/>
+        from business_object_process_info
+        where business_object_id = #{boId,jdbcType=BIGINT}
+        and business_type = #{businessType,jdbcType=VARCHAR}
+        and node_key = #{nodeKey,jdbcType=VARCHAR}
+    </select>
+
+    <select id="getTaskCountOfOneUser" resultType="java.lang.Long" parameterType="java.lang.Long">
+        select count(id)
+        from business_object_process_info
+        where operator_id = #{userId,jdbcType=BIGINT} and is_submitted = FALSE
+    </select>
+
+    <select id="getTaskTimesOfOneUser" resultType="java.lang.Double" parameterType="java.lang.Long">
+        select ifnull(sum(UNIX_TIMESTAMP(approval_date_time)-UNIX_TIMESTAMP(create_date_time)),0) as taskTimes
+        from business_object_process_info
+        where operator_id = #{userId,jdbcType=BIGINT} and is_submitted = FALSE
+    </select>
+
+    <select id="getNeedLoanOfOneOrganization" resultType="java.lang.Long" parameterType="java.util.Map">
+        select business_object_id
+        from business_object_process_info
+        where launch_organization_id = #{organizationId,jdbcType=BIGINT}
+        and is_submitted = FALSE
+        and business_type=#{businessType,jdbcType=VARCHAR}
+        and node_key = #{nodeKey,jdbcType=VARCHAR}
+    </select>
+
+    <delete id="deleteByBusinessObjectId" parameterType="java.util.Map">
+        delete from business_object_process_info
+        where business_object_id = #{businessObjectId,jdbcType=BIGINT} and
+        business_type=#{businessType,jdbcType=VARCHAR}
+    </delete>
+
+    <update id="businessPrincipalBatchChange" parameterType="java.util.Map">
+        UPDATE business_object_process_info
+        <set>
+            <if test="borrowerId != null">
+                borrower_id = #{borrowerId,jdbcType=BIGINT},
+            </if>
+            <if test="borrowerName != null">
+                borrower_name = #{borrowerName,jdbcType=VARCHAR},
+            </if>
+        </set>
+        WHERE business_object_id = #{boId,jdbcType=BIGINT} and business_type=#{businessType,jdbcType=VARCHAR}
+    </update>
+
+    <select id="getBusinessObjectsIdsByExample" resultType="java.lang.Long"
+            parameterType="com.cgw360.cls.model.flow.BusinessObjectProcessInfoExample">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        business_object_id
+        from business_object_process_info
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="getUnreadTaskCountOfAUser" resultType="java.lang.Long" parameterType="java.lang.Long">
+        SELECT count(1) from business_object_process_info WHERE operator_id = #{operatorId,jdbcType=BIGINT} and
+        is_submitted = FALSE and is_read = FALSE
+    </select>
+
+    <select id="getLoanApplyIdsIncludeAndAfterAFlowNode" resultType="java.lang.Long" parameterType="java.util.Map">
+        SELECT DISTINCT
+        business_object_id
+        from business_object_process_info
+        where launch_organization_id=#{launchOrganizationId,jdbcType=BIGINT} and
+        business_type=#{businessType,jdbcType=VARCHAR}
+        and business_group_id IN
+        <foreach collection="businessGroupIds" item="businessGroupId" open="(" close=")" separator=",">
+            #{businessGroupId,jdbcType=BIGINT}
+        </foreach>
+        and ((node_index>=#{nodeIndex,jdbcType=INTEGER} and is_submitted= FALSE ) or is_finished = TRUE )
+    </select>
+
+    <!--根据条件查询补件贷款项目-->
+    <select id="searchProcessInfoOfPatch" resultMap="BaseResultMap" parameterType="java.util.Map">
+        select a.* from
+        (
+            select bopi.*
+            from business_object_process_info bopi
+            inner join loan_customer_info lci
+            on bopi.business_object_id = lci.apply_id
+            <if test="businessObjectId != null and businessObjectId!=''">
+                AND bopi.business_object_id = #{businessObjectId,jdbcType=BIGINT}
+            </if>
+            where bopi.operator_id = #{operatorId,jdbcType=BIGINT}
+            and bopi.is_submitted = #{isSubmitted,jdbcType=BIT}
+            and bopi.is_finished = FALSE
+            <if test="borrowerName != null and borrowerName!=''">
+                AND bopi.borrower_name LIKE CONCAT(CONCAT('%', #{borrowerName,jdbcType=VARCHAR}), '%')
+            </if>
+            <if test="cardNo != null and cardNo!=''">
+                AND lci.card_no LIKE CONCAT(CONCAT('%', #{cardNo,jdbcType=VARCHAR}), '%')
+            </if>
+            <if test="mobilePhone != null and mobilePhone!=''">
+                AND lci.mobile_phone LIKE CONCAT(CONCAT('%', #{mobilePhone,jdbcType=VARCHAR}), '%')
+            </if>
+            <if test="businessTypes != null and businessTypes != ''">
+                and bopi.business_type in
+                <foreach collection="businessTypes" item="listItem" open="(" close=")" separator=",">
+                    #{listItem}
+                </foreach>
+            </if>
+            <if test="nodeKeys != null and nodeKeys != ''">
+                and bopi.node_key in
+                <foreach collection="nodeKeys" item="listItem" open="(" close=")" separator=",">
+                    #{listItem}
+                </foreach>
+            </if>
+            ORDER BY bopi.create_date_time DESC
+        ) a
+        group by a.business_object_id
+
+    </select>
+</mapper>

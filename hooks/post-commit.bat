@@ -1,0 +1,1 @@
+%~dp0wget.exe -q http://10.10.14.177:8081/jenkins/job/cls-web-interface-test/build?delay=0sec

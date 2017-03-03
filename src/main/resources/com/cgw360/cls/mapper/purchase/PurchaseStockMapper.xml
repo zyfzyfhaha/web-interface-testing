@@ -1,0 +1,369 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cgw360.cls.dao.purchase.PurchaseStockMapper">
+    <resultMap id="BaseResultMap" type="com.cgw360.cls.model.purchase.PurchaseStock">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="supplier" property="supplier" jdbcType="VARCHAR"/>
+        <result column="apply_org_id" property="applyOrgId" jdbcType="BIGINT"/>
+        <result column="apply_org_name" property="applyOrgName" jdbcType="VARCHAR"/>
+        <result column="stock_number" property="stockNumber" jdbcType="BIGINT"/>
+        <result column="item_name" property="itemName" jdbcType="VARCHAR"/>
+        <result column="model_type" property="modelType" jdbcType="VARCHAR"/>
+        <result column="other_request" property="otherRequest" jdbcType="VARCHAR"/>
+        <result column="gps_num" property="gpsNum" jdbcType="VARCHAR"/>
+        <result column="stock_time" property="stockTime" jdbcType="TIMESTAMP"/>
+        <result column="stock_group_id" property="stockGroupId" jdbcType="BIGINT"/>
+        <result column="stock_group_Name" property="stockGroupName" jdbcType="VARCHAR"/>
+        <result column="other_attribute" property="otherAttribute" jdbcType="VARCHAR"/>
+        <result column="stock_status" property="stockStatus" jdbcType="VARCHAR"/>
+        <result column="purchase_apply_id" property="purchaseApplyId" jdbcType="BIGINT"/>
+        <result column="purchase_contract_id" property="purchaseContractId" jdbcType="BIGINT"/>
+        <result column="purchase_stock_num" property="purchaseStockNum" jdbcType="VARCHAR"/>
+        <result column="apply_num" property="applyNum" jdbcType="VARCHAR"/>
+        <result column="contract_num" property="contractNum" jdbcType="VARCHAR"/>
+        <result column="remarks" property="remarks" jdbcType="VARCHAR"/>
+        <result column="stock" property="stock" jdbcType="BIGINT"/>
+        <result column="install_time" property="installTime" jdbcType="TIMESTAMP"/>
+        <result column="install_user_name" property="installName" jdbcType="VARCHAR"/>
+        <result column="purchase_stock_detail_id" property="purchaseStockDetailId" jdbcType="BIGINT"/>
+        <result column="project_id" property="projectId" jdbcType="BIGINT"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+   <insert id="insertSelective" parameterType="com.cgw360.cls.model.purchase.PurchaseStock" >
+    insert into purchase_stock_detail
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="purchaseStockNum != null" >
+        purchase_stock_num,
+      </if>
+      <if test="purchaseApplyId != null" >
+        purchase_apply_id,
+      </if>
+      <if test="purchaseContractId != null" >
+        purchase_contract_id,
+      </if>
+      <if test="gpsNum != null" >
+        gps_num,
+      </if>
+      <if test="otherAttribute != null" >
+        other_attribute,
+      </if>
+      <if test="stockGroupId != null" >
+        stock_group_id,
+      </if>
+      <if test="stockGroupName != null" >
+        stock_group_name,
+      </if>
+      <if test="stockTime != null" >
+        stock_time,
+      </if>
+      <if test="remarks != null" >
+        remarks,
+      </if>
+      <if test="delFlag != null" >
+        del_flag,
+      </if>
+      <if test="stockNumber != null" >
+        stock_number,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="updateUserId != null" >
+        update_user_id,
+      </if>
+      <if test="createUserId != null" >
+        create_user_id,
+      </if>
+      <if test="stockStatus != null" >
+        stock_status,
+      </if>
+      <if test="purchaseStockDetailId != null" >
+        purchase_stock_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="purchaseStockNum != null" >
+        #{purchaseStockNum,jdbcType=VARCHAR},
+      </if>
+      <if test="purchaseApplyId != null" >
+        #{purchaseApplyId,jdbcType=BIGINT},
+      </if>
+      <if test="purchaseContractId != null" >
+        #{purchaseContractId,jdbcType=BIGINT},
+      </if>
+      <if test="gpsNum != null" >
+        #{gpsNum,jdbcType=VARCHAR},
+      </if>
+      <if test="otherAttribute != null" >
+        #{otherAttribute,jdbcType=VARCHAR},
+      </if>
+      <if test="stockGroupId != null" >
+        #{stockGroupId,jdbcType=BIGINT},
+      </if>
+      <if test="stockGroupName != null" >
+        #{stockGroupName,jdbcType=VARCHAR},
+      </if>
+      <if test="stockTime != null" >
+        #{stockTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remarks != null" >
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null" >
+        #{delFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="stockNumber != null" >
+        #{stockNumber,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUserId != null" >
+        #{updateUserId,jdbcType=BIGINT},
+      </if>
+      <if test="createUserId != null" >
+        #{createUserId,jdbcType=BIGINT},
+      </if>
+      <if test="stockStatus != null" >
+        #{stockStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="purchaseStockDetailId != null" >
+        #{purchaseStockDetailId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.cgw360.cls.model.purchase.PurchaseStock" >
+    update purchase_stock_detail
+    <set >
+      <if test="purchaseStockNum != null" >
+        purchase_stock_num = #{purchaseStockNum,jdbcType=VARCHAR},
+      </if>
+      <if test="purchaseApplyId != null" >
+        purchase_apply_id = #{purchaseApplyId,jdbcType=BIGINT},
+      </if>
+      <if test="purchaseContractId != null" >
+        purchase_contract_id = #{purchaseContractId,jdbcType=BIGINT},
+      </if>
+      <if test="gpsNum != null" >
+        gps_num = #{gpsNum,jdbcType=VARCHAR},
+      </if>
+      <if test="otherAttribute != null" >
+        other_attribute = #{otherAttribute,jdbcType=VARCHAR},
+      </if>
+      <if test="stockGroupId != null" >
+        stock_group_id = #{stockGroupId,jdbcType=BIGINT},
+      </if>
+      <if test="stockGroupName != null" >
+        stock_group_name = #{stockGroupName,jdbcType=VARCHAR},
+      </if>
+      <if test="stockTime != null" >
+        stock_time = #{stockTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remarks != null" >
+        remarks = #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null" >
+        del_flag = #{delFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="stockNumber != null" >
+        stock_number = #{stockNumber,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUserId != null" >
+        update_user_id = #{updateUserId,jdbcType=BIGINT},
+      </if>
+      <if test="stockStatus != null" >
+        stock_status = #{stockStatus,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.cgw360.cls.model.purchase.PurchaseStockExample" >
+    select
+		psd.id,ps.supplier,ps.apply_org_name,psd.stock_number,ps.item_name,
+		ps.model_type,ps.other_request,psd.gps_num,psd.other_attribute,
+		psd.stock_group_name,ps.stock_time,psr.install_time,psr.install_user_name,psr.remarks
+	from purchase_stock_detail psd
+    left join purchase_stock ps on psd.purchase_stock_id = ps.id
+    and ps.del_flag = '1'
+    left join purchase_stock_record psr on psd.id = psr.purchase_stock_detail_id
+    and psr.del_flag = '1'
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <insert id="insertPurchaseStockRecord" parameterType="com.cgw360.cls.model.purchase.PurchaseStockRecord" >
+    insert into purchase_stock_record
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="purchaseStockDetailId != null" >
+        purchase_stock_detail_id,
+      </if>
+      <if test="projectId != null" >
+        project_id,
+      </if>
+      <if test="delFlag != null" >
+        del_flag,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="createUserId != null" >
+        create_user_id,
+      </if>
+      <if test="installTime != null" >
+        install_time,
+      </if>
+      <if test="installName != null" >
+        install_user_name,
+      </if>
+      <if test="remarks != null" >
+        remarks,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="purchaseStockDetailId != null" >
+        #{purchaseStockDetailId,jdbcType=BIGINT},
+      </if>
+      <if test="projectId != null" >
+        #{projectId,jdbcType=BIGINT},
+      </if>
+      <if test="delFlag != null" >
+        #{delFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUserId != null" >
+        #{createUserId,jdbcType=BIGINT},
+      </if>
+      
+       <if test="installTime != null" >
+        #{installTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="installName != null" >
+        #{installName,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null" >
+        #{remarks,jdbcType=VARCHAR},  
+      </if>
+    </trim>
+  </insert>
+  
+  <select id="selectUserStockByExample" resultMap="BaseResultMap" parameterType="com.cgw360.cls.model.purchase.PurchaseStockExample" >
+    select 
+    	id, purchase_stock_detail_id , project_id , install_time, install_user_name , remarks
+    from purchase_stock_record
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  
+  <select id="selectStockByExample" resultMap="BaseResultMap" parameterType="com.cgw360.cls.model.purchase.PurchaseStockExample" >
+    select 
+    	psd.id,psd.stock_number,psd.gps_num,psd.stock_time,psd.stock_group_id,psd.stock_group_Name,
+    	psd.other_attribute,psd.stock_status,ps.apply_org_name,ps.item_name,ps.model_type,ps.other_request
+    from purchase_stock_detail psd
+    left join purchase_stock ps on psd.purchase_stock_id = ps.id
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteStockRecordById" parameterType="java.lang.Long" >
+    update purchase_stock_detail set del_flag = '2'
+    where stock_status = '1' and  purchase_stock_id = #{id,jdbcType=BIGINT}
+  </delete>
+   <delete id="deleteStockByPrimaryKeyId" parameterType="java.lang.Long" >
+    update purchase_stock_record set del_flag = '2'
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  
+  <select id="selectPurchaseStockByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    id, purchase_apply_id, purchase_contract_id,
+	purchase_stock_num ,stock_time,supplier, item_name,
+	model_type, other_request,apply_num,contract_num,
+	remarks,stock, apply_org_id ,apply_org_name,stock_time,remarks
+    from purchase_stock
+    where id = #{id,jdbcType=BIGINT} 
+  </select>
+</mapper>

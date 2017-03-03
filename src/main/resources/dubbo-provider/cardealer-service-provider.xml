@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://code.alibabatech.com/schema/dubbo
+        http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+
+	<dubbo:service ref="carAccountService" interface="com.cgw360.cls.api.cardealer.ICarAccountService" group="${dubbo.cheguo.cls.group}"
+		version="${dubbo.cheguo.cls.version}" timeout="6000" />
+
+	<dubbo:service ref="carDealerFeeService" interface="com.cgw360.cls.api.cardealer.ICarDealerFeeService" group="${dubbo.cheguo.cls.group}"
+		version="${dubbo.cheguo.cls.version}" timeout="6000" />
+
+	<dubbo:service ref="carDealerService" interface="com.cgw360.cls.api.cardealer.ICarDealerService" group="${dubbo.cheguo.cls.group}"
+		version="${dubbo.cheguo.cls.version}" timeout="6000" />
+
+	<dubbo:service ref="carManagerTeamService" interface="com.cgw360.cls.api.cardealer.ICarManagerTeamService" group="${dubbo.cheguo.cls.group}"
+		version="${dubbo.cheguo.cls.version}" timeout="6000" />
+
+</beans>

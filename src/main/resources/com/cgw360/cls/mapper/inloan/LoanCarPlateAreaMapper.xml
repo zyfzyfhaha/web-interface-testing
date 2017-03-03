@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cgw360.cls.dao.inloan.LoanCarPlateAreaMapper" >
+  <resultMap id="BaseResultMap" type="com.cgw360.cls.model.inloan.LoanCarPlateArea" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="area_full_name" property="areaFullName" jdbcType="VARCHAR" />
+    <result column="area_name" property="areaName" jdbcType="VARCHAR" />
+    <result column="parent_id" property="parentId" jdbcType="BIGINT" />
+    <result column="seq" property="seq" jdbcType="DOUBLE" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, area_full_name, area_name, parent_id, seq
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from loan_car_plate_area
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from loan_car_plate_area
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.cgw360.cls.model.inloan.LoanCarPlateArea" >
+    insert into loan_car_plate_area (id, area_full_name, area_name, 
+      parent_id, seq)
+    values (#{id,jdbcType=BIGINT}, #{areaFullName,jdbcType=VARCHAR}, #{areaName,jdbcType=VARCHAR}, 
+      #{parentId,jdbcType=BIGINT}, #{seq,jdbcType=DOUBLE})
+  </insert>
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.cgw360.cls.model.inloan.LoanCarPlateArea" >
+    update loan_car_plate_area
+    <set >
+      <if test="areaFullName != null" >
+        area_full_name = #{areaFullName,jdbcType=VARCHAR},
+      </if>
+      <if test="areaName != null" >
+        area_name = #{areaName,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null" >
+        parent_id = #{parentId,jdbcType=BIGINT},
+      </if>
+      <if test="seq != null" >
+        seq = #{seq,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+  <sql id="criteria_condition">
+  	<if test="queryMap.areaName != null">
+  		and area_name = #{queryMap.areaName,jdbcType=VARCHAR}
+  	</if>
+  </sql>
+  <select id="selectLoanCarPlateAreasByCriteria" resultMap="BaseResultMap" parameterType="java.util.Map" >
+    select 
+    <include refid="Base_Column_List" />
+    from loan_car_plate_area
+    <trim prefix="where" prefixOverrides="and|or">
+		<include refid="criteria_condition" />
+	</trim>
+  </select>
+</mapper>

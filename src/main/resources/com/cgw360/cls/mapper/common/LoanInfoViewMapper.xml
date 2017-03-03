@@ -1,0 +1,388 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cgw360.cls.dao.common.LoanInfoViewMapper">
+    <resultMap id="BaseResultMap"
+               type="com.cgw360.cls.model.common.LoanInfoView">
+        <result column="relative_apply_id1" property="relativeApplyId1" jdbcType="BIGINT"/>
+        <result column="relative_apply_id2" property="relativeApplyId2" jdbcType="BIGINT"/>
+        <result column="flow_type" property="flowType" jdbcType="VARCHAR"/>
+        <result column="node_key" property="nodeKey" jdbcType="VARCHAR"/>
+        <result column="credit_id" property="creditId" jdbcType="BIGINT"/>
+        <result column="project_id" property="projectId" jdbcType="BIGINT"/>
+        <result column="project_no" property="projectNo" jdbcType="VARCHAR"/>
+        <result column="customer_id" property="customerId" jdbcType="BIGINT"/>
+        <result column="customer_no" property="customerNo" jdbcType="VARCHAR"/>
+        <result column="customer_name" property="customerName" jdbcType="VARCHAR"/>
+        <result column="card_type" property="cardType" jdbcType="INTEGER"/>
+        <result column="card_no" property="cardNo" jdbcType="VARCHAR"/>
+        <result column="mobile_phone" property="mobilePhone" jdbcType="VARCHAR"/>
+        <result column="joint_obligor" property="jointObligor" jdbcType="VARCHAR"/>
+        <result column="home_address" property="homeAddress" jdbcType="VARCHAR"/>
+        <result column="business_type_id" property="businessTypeId" jdbcType="INTEGER"/>
+        <result column="business_type_name" property="businessTypeName" jdbcType="VARCHAR"/>
+        <result column="product_id" property="productId" jdbcType="INTEGER"/>
+        <result column="product_name" property="productName" jdbcType="VARCHAR"/>
+        <result column="STATUS" property="status" jdbcType="INTEGER"/>
+        <result column="data_source" property="dataSource" jdbcType="INTEGER"/>
+        <result column="car_type" property="carType" jdbcType="VARCHAR"/>
+        <result column="car_serialno" property="carSerialno" jdbcType="VARCHAR"/>
+        <result column="car_brand" property="carBrand" jdbcType="VARCHAR"/>
+        <result column="car_brand_name" property="carBrandName" jdbcType="VARCHAR"/>
+        <result column="car_make" property="carMake" jdbcType="VARCHAR"/>
+        <result column="car_make_name" property="carMakeName" jdbcType="VARCHAR"/>
+        <result column="car_model" property="carModel" jdbcType="VARCHAR"/>
+        <result column="car_model_name" property="carModelName" jdbcType="VARCHAR"/>
+        <result column="loan_amount" property="loanAmount" jdbcType="DECIMAL"/>
+        <result column="required_amount" property="requiredAmount" jdbcType="DECIMAL"/>
+        <result column="loan_term" property="loanTerm" jdbcType="INTEGER"/>
+        <result column="loan_ratio" property="loanRatio" jdbcType="DECIMAL"/>
+        <result column="handing_fee" property="handingFee" jdbcType="DECIMAL"/>
+        <result column="repayment_amount" property="repaymentAmount" jdbcType="DECIMAL"/>
+        <result column="down_payment_amount" property="downPaymentAmount" jdbcType="DECIMAL"/>
+        <result column="payment_method" property="paymentMethod" jdbcType="INTEGER"/>
+        <result column="delivery_method" property="deliveryMethod" jdbcType="INTEGER"/>
+        <result column="payment_level" property="paymentLevel" jdbcType="INTEGER"/>
+        <result column="settle_method" property="settleMethod" jdbcType="INTEGER"/>
+        <result column="tested_repayment_amount" property="testedRepaymentAmount" jdbcType="DECIMAL"/>
+        <result column="receivable_amount" property="receivableAmount" jdbcType="DECIMAL"/>
+        <result column="collected_amount" property="collectedAmount" jdbcType="DECIMAL"/>
+        <result column="pre_collected_amount" property="preCollectedAmount" jdbcType="DECIMAL"/>
+        <result column="payable_amount" property="payableAmount" jdbcType="DECIMAL"/>
+        <result column="policy_finish_flag" property="policyFinishFlag" jdbcType="INTEGER"/>
+        <result column="launch_date" property="launchDate" jdbcType="DATE"/>
+        <result column="launch_user_id" property="launchUserId" jdbcType="BIGINT"/>
+        <result column="launch_user_name" property="launchUserName" jdbcType="VARCHAR"/>
+        <result column="sign_date" property="signDate" jdbcType="TIMESTAMP"/>
+        <result column="main_signer_id" property="mainSignerId" jdbcType="BIGINT"/>
+        <result column="main_signer_name" property="mainSignerName" jdbcType="VARCHAR"/>
+        <result column="review_date" property="reviewDate" jdbcType="DATE"/>
+        <result column="review_user_id" property="reviewUserId" jdbcType="BIGINT"/>
+        <result column="review_user_name" property="reviewUserName" jdbcType="VARCHAR"/>
+        <result column="approve_date" property="approveDate" jdbcType="DATE"/>
+        <result column="approve_user_id" property="approveUserId" jdbcType="BIGINT"/>
+        <result column="approve_user_name" property="approveUserName" jdbcType="VARCHAR"/>
+        <result column="dealer_id" property="dealerId" jdbcType="BIGINT"/>
+        <result column="dealer_name" property="dealerName" jdbcType="VARCHAR"/>
+        <result column="co_bank_id" property="coBankId" jdbcType="BIGINT"/>
+        <result column="co_bank_name" property="coBankName" jdbcType="VARCHAR"/>
+        <result column="user_id" property="userId" jdbcType="BIGINT"/>
+        <result column="user_name" property="userName" jdbcType="VARCHAR"/>
+        <result column="user_group_id" property="userGroupId" jdbcType="BIGINT"/>
+        <result column="user_group_name" property="userGroupName" jdbcType="VARCHAR"/>
+        <result column="manager_id" property="managerId" jdbcType="BIGINT"/>
+        <result column="manager_name" property="managerName" jdbcType="VARCHAR"/>
+        <result column="org_id" property="orgId" jdbcType="BIGINT"/>
+        <result column="org_name" property="orgName" jdbcType="VARCHAR"/>
+        <result column="gps_no" property="gpsNo" jdbcType="VARCHAR"/>
+        <result column="gps_use_date" property="gpsUseDate" jdbcType="DATE"/>
+        <result column="guarantee_corporation_payment_date" property="guaranteeCorporationPaymentDate" jdbcType="DATE"/>
+        <result column="guarantee_corporation_payment_amount" property="guaranteeCorporationPaymentAmount"
+                jdbcType="DECIMAL"/>
+        <result column="dealer_payment_date" property="dealerPaymentDate" jdbcType="DATE"/>
+        <result column="dealer_payment_amount" property="dealerPaymentAmount" jdbcType="DECIMAL"/>
+        <result column="bank_payment_date" property="bankPaymentDate" jdbcType="DATE"/>
+        <result column="bank_payment_amount" property="bankPaymentAmount" jdbcType="DECIMAL"/>
+        <result column="bank_payment_status" property="bankPaymentStatus" jdbcType="INTEGER"/>
+        <result column="plate_no" property="plateNo" jdbcType="VARCHAR"/>
+        <result column="gps_number" property="gpsNumber" jdbcType="INTEGER"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria"
+                     item="criteria"
+                     separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="("
+                          suffix=")"
+                          prefixOverrides="and">
+                        <foreach collection="criteria.criteria"
+                                 item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">and ${criterion.condition}</when>
+                                <when test="criterion.singleValue">and ${criterion.condition} #{criterion.value}</when>
+                                <when test="criterion.betweenValue">and ${criterion.condition} #{criterion.value} and
+                                    #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">and ${criterion.condition}
+                                    <foreach collection="criterion.value"
+                                             item="listItem"
+                                             open="("
+                                             close=")"
+                                             separator=",">#{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+        loan_info_view.relative_apply_id1,
+        loan_info_view.relative_apply_id2,
+        loan_info_view.flow_type,
+        loan_info_view.node_key,
+        loan_info_view.credit_id,
+        loan_info_view.project_id,
+        loan_info_view.project_no,
+        loan_info_view.customer_id,
+        loan_info_view.customer_no,
+        loan_info_view.customer_name,
+        loan_info_view.card_type,
+        loan_info_view.card_no,
+        loan_info_view.mobile_phone,
+        loan_info_view.joint_obligor,
+        loan_info_view.home_address,
+        loan_info_view.business_type_id,
+        loan_info_view.business_type_name,
+        loan_info_view.product_id,
+        loan_info_view.product_name,
+        loan_info_view.STATUS,
+        loan_info_view.data_source,
+        loan_info_view.car_type,
+        loan_info_view.car_serialno,
+        loan_info_view.car_brand,
+        loan_info_view.car_brand_name,
+        loan_info_view.car_make,
+        loan_info_view.car_make_name,
+        loan_info_view.car_model,
+        loan_info_view.car_model_name,
+        loan_info_view.loan_amount,
+        loan_info_view.required_amount,
+        loan_info_view.loan_term,
+        loan_info_view.loan_ratio,
+        loan_info_view.handing_fee,
+        loan_info_view.repayment_amount,
+        loan_info_view.down_payment_amount,
+        loan_info_view.payment_method,
+        loan_info_view.delivery_method,
+        loan_info_view.payment_level,
+        loan_info_view.settle_method,
+        loan_info_view.tested_repayment_amount,
+        loan_info_view.receivable_amount,
+        loan_info_view.collected_amount,
+        loan_info_view.pre_collected_amount,
+        loan_info_view.payable_amount,
+        loan_info_view.policy_finish_flag,
+        loan_info_view.launch_date,
+        loan_info_view.launch_user_id,
+        loan_info_view.launch_user_name,
+        loan_info_view.sign_date,
+        loan_info_view.main_signer_id,
+        loan_info_view.main_signer_name,
+        loan_info_view.review_date,
+        loan_info_view.review_user_id,
+        loan_info_view.review_user_name,
+        loan_info_view.approve_date,
+        loan_info_view.approve_user_id,
+        loan_info_view.approve_user_name,
+        loan_info_view.dealer_id,
+        loan_info_view.dealer_name,
+        loan_info_view.co_bank_id,
+        loan_info_view.co_bank_name,
+        loan_info_view.user_id,
+        loan_info_view.user_name,
+        loan_info_view.user_group_id,
+        loan_info_view.user_group_name,
+        loan_info_view.manager_id,
+        loan_info_view.manager_name,
+        loan_info_view.org_id,
+        loan_info_view.org_name,
+        loan_info_view.gps_no,
+        loan_info_view.gps_use_date,
+        loan_info_view.guarantee_corporation_payment_date,
+        loan_info_view.guarantee_corporation_payment_amount,
+        loan_info_view.dealer_payment_date,
+        loan_info_view.dealer_payment_amount,
+        loan_info_view.bank_payment_date,
+        loan_info_view.bank_payment_amount,
+        loan_info_view.bank_payment_status,
+        loan_info_view.create_time,
+        loan_info_view.modify_time
+    </sql>
+    <select id="selectByExample"
+            resultMap="BaseResultMap"
+            parameterType="com.cgw360.cls.model.common.LoanInfoViewExample">select
+        <if test="distinct">distinct</if>
+          <include refid="Base_Column_List"/>
+          ,
+          license_plate_info.plate_no,
+          loan_approve_fee.gps_number
+          from loan_info_view
+          LEFT JOIN license_plate_info ON loan_info_view.project_id = license_plate_info.project_id
+          LEFT JOIN loan_approve_fee ON loan_info_view.project_id = loan_approve_fee.project_id
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">order by ${orderByClause}</if>
+    </select>
+    <select id="countByExample"
+            parameterType="com.cgw360.cls.model.common.LoanInfoViewExample"
+            resultType="java.lang.Integer">select count(*) from loan_info_view
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <select id="selectLoanInfo" resultMap="BaseResultMap" parameterType="com.cgw360.cls.model.common.LoanInfoQueryParamDto">
+        select
+        loan_info_view.relative_apply_id1,
+        loan_info_view.relative_apply_id2,
+        loan_info_view.flow_type,
+        loan_info_view.node_key,
+        loan_info_view.credit_id,
+        loan_info_view.project_id,
+        loan_info_view.project_no,
+        loan_info_view.customer_id,
+        loan_info_view.customer_no,
+        loan_info_view.customer_name,
+        loan_info_view.card_type,
+        loan_info_view.card_no,
+        loan_info_view.mobile_phone,
+        loan_info_view.joint_obligor,
+        loan_info_view.home_address,
+        loan_info_view.business_type_id,
+        loan_info_view.business_type_name,
+        loan_info_view.product_id,
+        loan_info_view.product_name,
+        loan_info_view.STATUS,
+        loan_info_view.car_type,
+        loan_info_view.car_serialno,
+        loan_info_view.car_brand,
+        loan_info_view.car_brand_name,
+        loan_info_view.car_make,
+        loan_info_view.car_make_name,
+        loan_info_view.car_model,
+        loan_info_view.car_model_name,
+        loan_info_view.loan_amount,
+        loan_info_view.required_amount,
+        loan_info_view.loan_term,
+        loan_info_view.loan_ratio,
+        loan_info_view.handing_fee,
+        loan_info_view.repayment_amount,
+        loan_info_view.down_payment_amount,
+        loan_info_view.payment_method,
+        loan_info_view.delivery_method,
+        loan_info_view.payment_level,
+        loan_info_view.settle_method,
+        loan_info_view.tested_repayment_amount,
+        loan_info_view.receivable_amount,
+        loan_info_view.collected_amount,
+        loan_info_view.pre_collected_amount,
+        loan_info_view.payable_amount,
+        loan_info_view.policy_finish_flag,
+        loan_info_view.launch_date,
+        loan_info_view.launch_user_id,
+        loan_info_view.launch_user_name,
+        loan_info_view.sign_date,
+        loan_info_view.main_signer_id,
+        loan_info_view.main_signer_name,
+        loan_info_view.review_date,
+        loan_info_view.review_user_id,
+        loan_info_view.review_user_name,
+        loan_info_view.approve_date,
+        loan_info_view.approve_user_id,
+        loan_info_view.approve_user_name,
+        loan_info_view.dealer_id,
+        loan_info_view.dealer_name,
+        loan_info_view.co_bank_id,
+        loan_info_view.co_bank_name,
+        loan_info_view.user_id,
+        loan_info_view.user_name,
+        loan_info_view.user_group_id,
+        loan_info_view.user_group_name,
+        loan_info_view.manager_id,
+        loan_info_view.manager_name,
+        loan_info_view.org_id,
+        loan_info_view.org_name,
+        loan_info_view.guarantee_corporation_payment_date,
+        loan_info_view.guarantee_corporation_payment_amount,
+        loan_info_view.dealer_payment_date,
+        loan_info_view.dealer_payment_amount,
+        loan_info_view.bank_payment_date,
+        loan_info_view.bank_payment_amount,
+        loan_info_view.bank_payment_status,
+        loan_info_view.create_time
+        from loan_info_view
+        loan_info_view left join license_plate_info lp on loan_info_view.project_id = lp.project_id
+        where 1=1
+        <if test="paramDto.customerName != null and paramDto.customerName.length()&gt;0">and
+            loan_info_view.customer_name like &#39;%${paramDto.customerName}%&#39;</if>
+        <if test="paramDto.mobilePhone != null and paramDto.mobilePhone.length()&gt;0">and loan_info_view.mobile_phone
+            like &#39;%${paramDto.mobilePhone}%&#39;</if>
+        <if test="paramDto.flowTypeList != null and paramDto.flowTypeList.size()&gt;0">and loan_info_view.flow_type in
+            <foreach collection="paramDto.flowTypeList"
+                     item="flowType"
+                     separator=","
+                     open="("
+                     close=")">#{flowType,jdbcType=BIGINT}
+            </foreach>
+        </if>
+        <if test="paramDto.nodeKeyList != null and paramDto.nodeKeyList.size()&gt;0">and loan_info_view.node_key in
+            <foreach collection="paramDto.nodeKeyList"
+                     item="nodeKey"
+                     separator=","
+                     open="("
+                     close=")">#{nodeKey,jdbcType=BIGINT}
+            </foreach>
+        </if>
+        <if test="paramDto.branchOrgList != null and paramDto.branchOrgList.size()&gt;0">and loan_info_view.org_id in
+            <foreach collection="paramDto.branchOrgList"
+                     item="orgId"
+                     separator=","
+                     open="("
+                     close=")">#{orgId,jdbcType=BIGINT}
+            </foreach>
+        </if>
+        <if test="paramDto.groupIdList != null and paramDto.groupIdList.size()&gt;0">and loan_info_view.user_group_id in
+            <foreach collection="paramDto.groupIdList"
+                     item="groupId"
+                     separator=","
+                     open="("
+                     close=")">#{groupId,jdbcType=BIGINT}
+            </foreach>
+        </if>
+        <if test="paramDto.userId !=null">and loan_info_view.user_id = #{paramDto.userId,jdbcType=BIGINT}</if>
+        <if test="paramDto.status !=null">and loan_info_view.status = #{paramDto.status,jdbcType=INTEGER}</if>
+        <if test="paramDto.branchCashFinishWhereClause !=null and paramDto.branchCashFinishWhereClause.length() &gt;0">
+            and #{paramDto.branchCashFinishWhereClause,jdbcType=VARCHAR}
+        </if>
+        <if test="paramDto.bankCashFinishWhereClause !=null and paramDto.bankCashFinishWhereClause.length() &gt;0">and
+            #{paramDto.bankCashFinishWhereClause,jdbcType=VARCHAR}
+        </if>
+        <if test="paramDto.signDateBegin != null">
+            <![CDATA[ and loan_info_view.sign_date>=#{paramDto.signDateBegin,jdbcType=TIMESTAMP}]]>
+        </if>
+        <if test="paramDto.signDateEnd != null">
+            <![CDATA[ and loan_info_view.sign_date<=#{paramDto.signDateEnd,jdbcType=TIMESTAMP} ]]>
+        </if>
+        <if test="paramDto.paymentDateBegin != null">
+            <![CDATA[ and loan_info_view.dealer_payment_date>=#{paramDto.paymentDateBegin,jdbcType=TIMESTAMP}]]>
+        </if>
+        <if test="paramDto.paymentDateEnd != null">
+            <![CDATA[ and loan_info_view.dealer_payment_date<=#{paramDto.paymentDateEnd,jdbcType=TIMESTAMP} ]]>
+        </if>
+        <if test="paramDto.putoutDateBegin != null">
+            <![CDATA[ and loan_info_view.bank_payment_date>=#{paramDto.putoutDateBegin,jdbcType=TIMESTAMP}]]>
+        </if>
+        <if test="paramDto.putoutDateEnd != null">
+            <![CDATA[ and loan_info_view.bank_payment_date<=#{paramDto.putoutDateEnd,jdbcType=TIMESTAMP} ]]>
+        </if>
+        <if test="paramDto.carNumber !=null and paramDto.carNumber.length()&gt;0">and lp.plate_no like &#39;%${paramDto.carNumber}%&#39;</if>
+        order by loan_info_view.modify_time desc
+    </select>
+    <select id="selectLoanInfoByCardTypeAndCardNo"
+            resultMap="BaseResultMap"
+            parameterType="java.util.Map">
+        SELECT
+          DISTINCT <include refid="Base_Column_List"/>
+        FROM loan_info_view LEFT JOIN loan_approve_guarantor on loan_info_view.project_id =loan_approve_guarantor.project_id
+        WHERE (loan_info_view.card_type =#{cardType,jdbcType=INTEGER} and loan_info_view.card_no=#{cardNo,jdbcType=VARCHAR})
+        <if test="isContainGuarantorLoan!=null and isContainGuarantorLoan=1">OR (loan_approve_guarantor.card_type
+            =#{cardType,jdbcType=INTEGER} and loan_approve_guarantor.card_no=#{cardNo,jdbcType=VARCHAR});
+        </if>
+    </select>
+</mapper>

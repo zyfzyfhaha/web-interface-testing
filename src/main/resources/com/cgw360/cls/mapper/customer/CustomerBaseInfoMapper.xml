@@ -1,0 +1,1153 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cgw360.cls.dao.customer.CustomerBaseInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.cgw360.cls.model.customer.CustomerBaseInfo" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="customer_name" property="customerName" jdbcType="VARCHAR" />
+    <result column="customer_no" property="customerNo" jdbcType="VARCHAR" />
+    <result column="customer_number" property="customerNumber" jdbcType="VARCHAR" />
+    <result column="source" property="source" jdbcType="INTEGER" />
+    <result column="manager_id" property="managerId" jdbcType="BIGINT" />
+    <result column="register_date" property="registerDate" jdbcType="TIMESTAMP" />
+    <result column="gender" property="gender" jdbcType="INTEGER" />
+    <result column="card_type" property="cardType" jdbcType="INTEGER" />
+    <result column="card_no" property="cardNo" jdbcType="VARCHAR" />
+    <result column="birthday" property="birthday" jdbcType="DATE" />
+    <result column="age" property="age" jdbcType="INTEGER" />
+    <result column="marital_status" property="maritalStatus" jdbcType="INTEGER" />
+    <result column="mobile" property="mobile" jdbcType="CHAR" />
+    <result column="home_phone" property="homePhone" jdbcType="VARCHAR" />
+    <result column="native_place" property="nativePlace" jdbcType="VARCHAR" />
+    <result column="education" property="education" jdbcType="VARCHAR" />
+    <result column="housing_status" property="housingStatus" jdbcType="INTEGER" />
+    <result column="month_repayment" property="monthRepayment" jdbcType="VARCHAR" />
+    <result column="profession" property="profession" jdbcType="VARCHAR" />
+    <result column="industry" property="industry" jdbcType="VARCHAR" />
+    <result column="monthly_income" property="monthlyIncome" jdbcType="VARCHAR" />
+    <result column="company" property="company" jdbcType="VARCHAR" />
+    <result column="work_phone" property="workPhone" jdbcType="CHAR" />
+    <result column="reserved_funds" property="reservedFunds" jdbcType="VARCHAR" />
+    <result column="company_address_province_code" property="companyAddressProvinceCode" jdbcType="VARCHAR" />
+    <result column="company_address_province" property="companyAddressProvince" jdbcType="VARCHAR" />
+    <result column="company_address_city_code" property="companyAddressCityCode" jdbcType="VARCHAR" />
+    <result column="company_address_city" property="companyAddressCity" jdbcType="VARCHAR" />
+    <result column="company_address_county_code" property="companyAddressCountyCode" jdbcType="VARCHAR" />
+    <result column="company_address_county" property="companyAddressCounty" jdbcType="VARCHAR" />
+    <result column="company_address" property="companyAddress" jdbcType="VARCHAR" />
+    <result column="home_address_province_code" property="homeAddressProvinceCode" jdbcType="VARCHAR" />
+    <result column="home_address_province" property="homeAddressProvince" jdbcType="VARCHAR" />
+    <result column="home_address_city_code" property="homeAddressCityCode" jdbcType="VARCHAR" />
+    <result column="home_address_city" property="homeAddressCity" jdbcType="VARCHAR" />
+    <result column="home_address_county_code" property="homeAddressCountyCode" jdbcType="VARCHAR" />
+    <result column="home_address_county" property="homeAddressCounty" jdbcType="VARCHAR" />
+    <result column="home_address_village" property="homeAddressVillage" jdbcType="VARCHAR" />
+    <result column="spouse_name" property="spouseName" jdbcType="VARCHAR" />
+    <result column="spouse_card_type" property="spouseCardType" jdbcType="INTEGER" />
+    <result column="spouse_card_no" property="spouseCardNo" jdbcType="VARCHAR" />
+    <result column="spouse_mobile" property="spouseMobile" jdbcType="VARCHAR" />
+    <result column="spouse_native_place" property="spouseNativePlace" jdbcType="VARCHAR" />
+    <result column="spouse_reserved_funds" property="spouseReservedFunds" jdbcType="INTEGER" />
+    <result column="spouse_company" property="spouseCompany" jdbcType="VARCHAR" />
+    <result column="spouse_company_phone" property="spouseCompanyPhone" jdbcType="VARCHAR" />
+    <result column="spouse_company_addr_province_code" property="spouseCompanyAddrProvinceCode" jdbcType="VARCHAR" />
+    <result column="spouse_company_addr_province" property="spouseCompanyAddrProvince" jdbcType="VARCHAR" />
+    <result column="spouse_company_addr_city_code" property="spouseCompanyAddrCityCode" jdbcType="VARCHAR" />
+    <result column="spouse_company_addr_city" property="spouseCompanyAddrCity" jdbcType="VARCHAR" />
+    <result column="spouse_company_addr_county_code" property="spouseCompanyAddrCountyCode" jdbcType="VARCHAR" />
+    <result column="spouse_company_addr_county" property="spouseCompanyAddrCounty" jdbcType="VARCHAR" />
+    <result column="spouse_company_addr" property="spouseCompanyAddr" jdbcType="VARCHAR" />
+    <result column="spouse_monthly_income" property="spouseMonthlyIncome" jdbcType="INTEGER" />
+    <result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="risk_time" property="riskTime" jdbcType="TIMESTAMP" />
+    <result column="risk_status" property="riskStatus" jdbcType="INTEGER" />
+    <result column="risk_detail" property="riskDetail" jdbcType="VARCHAR" />
+    <result column="is_read" property="isRead" jdbcType="BIT"/>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} ${criterion.value} and ${criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    ${listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, customer_name, customer_number, source, customer_no, manager_id, register_date, gender, card_type, card_no, 
+    birthday, age, marital_status, mobile, home_phone, native_place, education, housing_status, 
+    month_repayment, profession, industry, monthly_income, company, work_phone, reserved_funds, 
+    company_address_province_code, company_address_province, company_address_city_code, 
+    company_address_city, company_address_county_code, company_address_county, company_address, 
+    home_address_province_code, home_address_province, home_address_city_code, home_address_city, 
+    home_address_county_code, home_address_county, home_address_village, spouse_name, 
+    spouse_card_type, spouse_card_no, spouse_mobile, spouse_native_place, spouse_reserved_funds, 
+    spouse_company, spouse_company_phone, spouse_company_addr_province_code, spouse_company_addr_province, 
+    spouse_company_addr_city_code, spouse_company_addr_city, spouse_company_addr_county_code, 
+    spouse_company_addr_county, spouse_company_addr, spouse_monthly_income, modify_time, status, risk_status, risk_time, risk_detail
+  </sql>
+  <sql id="Base_Column_List_4_His" >
+    id, customer_name, customer_number, source, customer_no, manager_id, register_date, gender, card_type, card_no, 
+    birthday, age, marital_status, mobile, home_phone, native_place, education, housing_status, 
+    month_repayment, profession, industry, monthly_income, company, work_phone, reserved_funds, 
+    company_address_province_code, company_address_province, company_address_city_code, 
+    company_address_city, company_address_county_code, company_address_county, company_address, 
+    home_address_province_code, home_address_province, home_address_city_code, home_address_city, 
+    home_address_county_code, home_address_county, home_address_village, spouse_name, 
+    spouse_card_type, spouse_card_no, spouse_mobile, spouse_native_place, spouse_reserved_funds, 
+    spouse_company, spouse_company_phone, spouse_company_addr_province_code, spouse_company_addr_province, 
+    spouse_company_addr_city_code, spouse_company_addr_city, spouse_company_addr_county_code, 
+    spouse_company_addr_county, spouse_company_addr, spouse_monthly_income, modify_time, status, risk_status, risk_time, risk_detail
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.cgw360.cls.model.customer.CustomerBaseInfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from customer_base_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExampleWithAuth" resultMap="BaseResultMap" parameterType="java.util.Map" >
+    select cb.id, cb.customer_name, cb.customer_number, cb.source, cb.customer_no, cb.manager_id, cb.register_date, cb.gender, cb.card_type, cb.card_no, 
+    cb.birthday, cb.age, cb.marital_status, cb.mobile, cb.home_phone, cb.native_place, cb.education, cb.housing_status, 
+    cb.month_repayment, cb.profession, cb.industry, cb.monthly_income, cb.company, cb.work_phone, cb.reserved_funds, 
+    cb.company_address_province_code, cb.company_address_province, cb.company_address_city_code, 
+    cb.company_address_city, cb.company_address_county_code, cb.company_address_county, cb.company_address, 
+    cb.home_address_province_code, cb.home_address_province, cb.home_address_city_code, cb.home_address_city, 
+    cb.home_address_county_code, cb.home_address_county, cb.home_address_village, cb.spouse_name, 
+    cb.spouse_card_type, cb.spouse_card_no, cb.spouse_mobile, cb.spouse_native_place, cb.spouse_reserved_funds, 
+    cb.spouse_company, cb.spouse_company_phone, cb.spouse_company_addr_province_code, cb.spouse_company_addr_province, 
+    cb.spouse_company_addr_city_code, cb.spouse_company_addr_city, cb.spouse_company_addr_county_code, 
+    cb.spouse_company_addr_county, cb.spouse_company_addr, cb.spouse_monthly_income, cb.modify_time, cb.status, cb.risk_status, cb.risk_time, cm.is_read from customer_base_info cb
+    join customer_manager cm on cb.id=cm.customer_id and cm.manager_id = #{managerId,jdbcType=BIGINT} and cm.status=1
+	<where>
+		<if test="customerStatus != null ">
+	      	and cb.status = #{customerStatus,jdbcType=INTEGER}
+		</if>
+		<if test="customerName != null and customerName != ''">
+	      	and cb.customer_name like CONCAT('%', #{customerName,jdbcType=VARCHAR}, '%')
+		</if>
+		<if test="cardNo != null and cardNo != ''">
+	      	and cb.card_no like CONCAT('%', #{cardNo,jdbcType=VARCHAR}, '%')
+		</if>
+		<if test="customerNo != null and customerNo != ''">
+	      	and cb.customer_no like CONCAT('%', #{customerNo,jdbcType=VARCHAR}, '%')
+		</if>
+		<if test="mobile != null and mobile != ''">
+	      	and cb.mobile like CONCAT('%', #{mobile,jdbcType=VARCHAR}, '%')
+		</if>
+    </where>
+     order by cm.is_read,cb.id desc
+  </select>
+  <select id="selectHistoryByPrimaryKey" resultMap="BaseResultMap" parameterType="java.util.Map" >
+    select 
+    <include refid="Base_Column_List_4_His" />
+    from customer_base_info_his
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectHistory4Compare" resultMap="BaseResultMap" parameterType="java.util.Map" >
+    select 
+    <include refid="Base_Column_List_4_His" />
+    from customer_base_info_his
+    where id = #{id,jdbcType=BIGINT} and modify_time &lt;= #{modifyTime,jdbcType=VARCHAR} order by modify_time desc limit 2
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from customer_base_info
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from customer_base_info
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.cgw360.cls.model.customer.CustomerBaseInfoExample" >
+    delete from customer_base_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.cgw360.cls.model.customer.CustomerBaseInfo" useGeneratedKeys="true" keyProperty="id">
+    insert into customer_base_info (id, customer_name, customer_no, customer_number, source, 
+      manager_id, register_date, gender, 
+      card_type, card_no, birthday, 
+      age, marital_status, mobile, 
+      home_phone, native_place, education, 
+      housing_status, month_repayment, profession, 
+      industry, monthly_income, company, 
+      work_phone, reserved_funds, company_address_province_code, 
+      company_address_province, company_address_city_code, 
+      company_address_city, company_address_county_code, 
+      company_address_county, company_address, home_address_province_code, 
+      home_address_province, home_address_city_code, 
+      home_address_city, home_address_county_code, 
+      home_address_county, home_address_village, 
+      spouse_name, spouse_card_type, spouse_card_no, 
+      spouse_mobile, spouse_native_place, spouse_reserved_funds, 
+      spouse_company, spouse_company_phone, spouse_company_addr_province_code, 
+      spouse_company_addr_province, spouse_company_addr_city_code, 
+      spouse_company_addr_city, spouse_company_addr_county_code, 
+      spouse_company_addr_county, spouse_company_addr, 
+      spouse_monthly_income, modify_time, status)
+    values (#{id,jdbcType=BIGINT}, #{customerName,jdbcType=VARCHAR}, #{customerNo,jdbcType=VARCHAR}, #{customerNumber,jdbcType=VARCHAR}, #{source,jdbcType=INTEGER}, 
+      #{managerId,jdbcType=BIGINT}, #{registerDate,jdbcType=TIMESTAMP}, #{gender,jdbcType=INTEGER}, 
+      #{cardType,jdbcType=INTEGER}, #{cardNo,jdbcType=VARCHAR}, #{birthday,jdbcType=DATE}, 
+      #{age,jdbcType=INTEGER}, #{maritalStatus,jdbcType=INTEGER}, #{mobile,jdbcType=CHAR}, 
+      #{homePhone,jdbcType=VARCHAR}, #{nativePlace,jdbcType=VARCHAR}, #{education,jdbcType=VARCHAR}, 
+      #{housingStatus,jdbcType=INTEGER}, #{monthRepayment,jdbcType=VARCHAR}, #{profession,jdbcType=VARCHAR}, 
+      #{industry,jdbcType=VARCHAR}, #{monthlyIncome,jdbcType=VARCHAR}, #{company,jdbcType=VARCHAR}, 
+      #{workPhone,jdbcType=CHAR}, #{reservedFunds,jdbcType=VARCHAR}, #{companyAddressProvinceCode,jdbcType=VARCHAR}, 
+      #{companyAddressProvince,jdbcType=VARCHAR}, #{companyAddressCityCode,jdbcType=VARCHAR}, 
+      #{companyAddressCity,jdbcType=VARCHAR}, #{companyAddressCountyCode,jdbcType=VARCHAR}, 
+      #{companyAddressCounty,jdbcType=VARCHAR}, #{companyAddress,jdbcType=VARCHAR}, #{homeAddressProvinceCode,jdbcType=VARCHAR}, 
+      #{homeAddressProvince,jdbcType=VARCHAR}, #{homeAddressCityCode,jdbcType=VARCHAR}, 
+      #{homeAddressCity,jdbcType=VARCHAR}, #{homeAddressCountyCode,jdbcType=VARCHAR}, 
+      #{homeAddressCounty,jdbcType=VARCHAR}, #{homeAddressVillage,jdbcType=VARCHAR}, 
+      #{spouseName,jdbcType=VARCHAR}, #{spouseCardType,jdbcType=INTEGER}, #{spouseCardNo,jdbcType=VARCHAR}, 
+      #{spouseMobile,jdbcType=VARCHAR}, #{spouseNativePlace,jdbcType=VARCHAR}, #{spouseReservedFunds,jdbcType=INTEGER}, 
+      #{spouseCompany,jdbcType=VARCHAR}, #{spouseCompanyPhone,jdbcType=VARCHAR}, #{spouseCompanyAddrProvinceCode,jdbcType=VARCHAR}, 
+      #{spouseCompanyAddrProvince,jdbcType=VARCHAR}, #{spouseCompanyAddrCityCode,jdbcType=VARCHAR}, 
+      #{spouseCompanyAddrCity,jdbcType=VARCHAR}, #{spouseCompanyAddrCountyCode,jdbcType=VARCHAR}, 
+      #{spouseCompanyAddrCounty,jdbcType=VARCHAR}, #{spouseCompanyAddr,jdbcType=VARCHAR}, 
+      #{spouseMonthlyIncome,jdbcType=INTEGER}, #{modifyTime,jdbcType=TIMESTAMP}, #{status,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertHistory" parameterType="java.lang.Long" >
+    insert into customer_base_info_his (id, customer_name, customer_no, customer_number, source, 
+      manager_id, register_date, gender, card_type, card_no, birthday, age, marital_status, mobile, 
+      home_phone, native_place, education, housing_status, month_repayment, profession, 
+      industry, monthly_income, company, work_phone, reserved_funds, company_address_province_code, 
+      company_address_province, company_address_city_code, company_address_city, company_address_county_code, 
+      company_address_county, company_address, home_address_province_code, 
+      home_address_province, home_address_city_code, home_address_city, home_address_county_code, 
+      home_address_county, home_address_village, spouse_name, spouse_card_type, spouse_card_no, 
+      spouse_mobile, spouse_native_place, spouse_reserved_funds, spouse_company, spouse_company_phone, spouse_company_addr_province_code, 
+      spouse_company_addr_province, spouse_company_addr_city_code,spouse_company_addr_city, spouse_company_addr_county_code, 
+      spouse_company_addr_county, spouse_company_addr, spouse_monthly_income, status, risk_status, risk_time, risk_detail)
+    SELECT id, customer_name, customer_no, customer_number, source, manager_id, register_date, gender, card_type, card_no, birthday, age, marital_status, mobile, 
+      home_phone, native_place, education, housing_status, month_repayment, profession, 
+      industry, monthly_income, company, work_phone, reserved_funds, company_address_province_code, 
+      company_address_province, company_address_city_code, company_address_city, company_address_county_code, 
+      company_address_county, company_address, home_address_province_code, 
+      home_address_province, home_address_city_code, home_address_city, home_address_county_code, 
+      home_address_county, home_address_village, spouse_name, spouse_card_type, spouse_card_no, 
+      spouse_mobile, spouse_native_place, spouse_reserved_funds, spouse_company, spouse_company_phone, spouse_company_addr_province_code, 
+      spouse_company_addr_province, spouse_company_addr_city_code, spouse_company_addr_city, spouse_company_addr_county_code, 
+      spouse_company_addr_county, spouse_company_addr, spouse_monthly_income, status, risk_status, risk_time, risk_detail FROM customer_base_info WHERE id = #{id,jdbcType=BIGINT}
+  </insert>
+  <insert id="insertSelective" parameterType="com.cgw360.cls.model.customer.CustomerBaseInfo" useGeneratedKeys="true" keyProperty="id">
+    insert into customer_base_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="customerName != null" >
+        customer_name,
+      </if>
+      <if test="customerNo != null" >
+        customer_no,
+      </if>
+      <if test="customerNumber != null" >
+        customer_number,
+      </if>
+      <if test="source != null" >
+        source,
+      </if>
+      <if test="managerId != null" >
+        manager_id,
+      </if>
+      <if test="registerDate != null" >
+        register_date,
+      </if>
+      <if test="gender != null" >
+        gender,
+      </if>
+      <if test="cardType != null" >
+        card_type,
+      </if>
+      <if test="cardNo != null" >
+        card_no,
+      </if>
+      <if test="birthday != null" >
+        birthday,
+      </if>
+      <if test="age != null" >
+        age,
+      </if>
+      <if test="maritalStatus != null" >
+        marital_status,
+      </if>
+      <if test="mobile != null" >
+        mobile,
+      </if>
+      <if test="homePhone != null" >
+        home_phone,
+      </if>
+      <if test="nativePlace != null" >
+        native_place,
+      </if>
+      <if test="education != null" >
+        education,
+      </if>
+      <if test="housingStatus != null" >
+        housing_status,
+      </if>
+      <if test="monthRepayment != null" >
+        month_repayment,
+      </if>
+      <if test="profession != null" >
+        profession,
+      </if>
+      <if test="industry != null" >
+        industry,
+      </if>
+      <if test="monthlyIncome != null" >
+        monthly_income,
+      </if>
+      <if test="company != null" >
+        company,
+      </if>
+      <if test="workPhone != null" >
+        work_phone,
+      </if>
+      <if test="reservedFunds != null" >
+        reserved_funds,
+      </if>
+      <if test="companyAddressProvinceCode != null" >
+        company_address_province_code,
+      </if>
+      <if test="companyAddressProvince != null" >
+        company_address_province,
+      </if>
+      <if test="companyAddressCityCode != null" >
+        company_address_city_code,
+      </if>
+      <if test="companyAddressCity != null" >
+        company_address_city,
+      </if>
+      <if test="companyAddressCountyCode != null" >
+        company_address_county_code,
+      </if>
+      <if test="companyAddressCounty != null" >
+        company_address_county,
+      </if>
+      <if test="companyAddress != null" >
+        company_address,
+      </if>
+      <if test="homeAddressProvinceCode != null" >
+        home_address_province_code,
+      </if>
+      <if test="homeAddressProvince != null" >
+        home_address_province,
+      </if>
+      <if test="homeAddressCityCode != null" >
+        home_address_city_code,
+      </if>
+      <if test="homeAddressCity != null" >
+        home_address_city,
+      </if>
+      <if test="homeAddressCountyCode != null" >
+        home_address_county_code,
+      </if>
+      <if test="homeAddressCounty != null" >
+        home_address_county,
+      </if>
+      <if test="homeAddressVillage != null" >
+        home_address_village,
+      </if>
+      <if test="spouseName != null" >
+        spouse_name,
+      </if>
+      <if test="spouseCardType != null" >
+        spouse_card_type,
+      </if>
+      <if test="spouseCardNo != null" >
+        spouse_card_no,
+      </if>
+      <if test="spouseMobile != null" >
+        spouse_mobile,
+      </if>
+      <if test="spouseNativePlace != null" >
+        spouse_native_place,
+      </if>
+      <if test="spouseReservedFunds != null" >
+        spouse_reserved_funds,
+      </if>
+      <if test="spouseCompany != null" >
+        spouse_company,
+      </if>
+      <if test="spouseCompanyPhone != null" >
+        spouse_company_phone,
+      </if>
+      <if test="spouseCompanyAddrProvinceCode != null" >
+        spouse_company_addr_province_code,
+      </if>
+      <if test="spouseCompanyAddrProvince != null" >
+        spouse_company_addr_province,
+      </if>
+      <if test="spouseCompanyAddrCityCode != null" >
+        spouse_company_addr_city_code,
+      </if>
+      <if test="spouseCompanyAddrCity != null" >
+        spouse_company_addr_city,
+      </if>
+      <if test="spouseCompanyAddrCountyCode != null" >
+        spouse_company_addr_county_code,
+      </if>
+      <if test="spouseCompanyAddrCounty != null" >
+        spouse_company_addr_county,
+      </if>
+      <if test="spouseCompanyAddr != null" >
+        spouse_company_addr,
+      </if>
+      <if test="spouseMonthlyIncome != null" >
+        spouse_monthly_income,
+      </if>
+      <if test="modifyTime != null" >
+        modify_time,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="customerName != null" >
+        #{customerName,jdbcType=VARCHAR},
+      </if>
+      <if test="customerNo != null" >
+        #{customerNo,jdbcType=VARCHAR},
+      </if>
+      <if test="customerNumber != null" >
+        #{customerNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="source != null" >
+        #{source,jdbcType=INTEGER},
+      </if>
+      <if test="managerId != null" >
+        #{managerId,jdbcType=BIGINT},
+      </if>
+      <if test="registerDate != null" >
+        #{registerDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gender != null" >
+        #{gender,jdbcType=INTEGER},
+      </if>
+      <if test="cardType != null" >
+        #{cardType,jdbcType=INTEGER},
+      </if>
+      <if test="cardNo != null" >
+        #{cardNo,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null" >
+        #{birthday,jdbcType=DATE},
+      </if>
+      <if test="age != null" >
+        #{age,jdbcType=INTEGER},
+      </if>
+      <if test="maritalStatus != null" >
+        #{maritalStatus,jdbcType=INTEGER},
+      </if>
+      <if test="mobile != null" >
+        #{mobile,jdbcType=CHAR},
+      </if>
+      <if test="homePhone != null" >
+        #{homePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="nativePlace != null" >
+        #{nativePlace,jdbcType=VARCHAR},
+      </if>
+      <if test="education != null" >
+        #{education,jdbcType=VARCHAR},
+      </if>
+      <if test="housingStatus != null" >
+        #{housingStatus,jdbcType=INTEGER},
+      </if>
+      <if test="monthRepayment != null" >
+        #{monthRepayment,jdbcType=VARCHAR},
+      </if>
+      <if test="profession != null" >
+        #{profession,jdbcType=VARCHAR},
+      </if>
+      <if test="industry != null" >
+        #{industry,jdbcType=VARCHAR},
+      </if>
+      <if test="monthlyIncome != null" >
+        #{monthlyIncome,jdbcType=VARCHAR},
+      </if>
+      <if test="company != null" >
+        #{company,jdbcType=VARCHAR},
+      </if>
+      <if test="workPhone != null" >
+        #{workPhone,jdbcType=CHAR},
+      </if>
+      <if test="reservedFunds != null" >
+        #{reservedFunds,jdbcType=VARCHAR},
+      </if>
+      <if test="companyAddressProvinceCode != null" >
+        #{companyAddressProvinceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="companyAddressProvince != null" >
+        #{companyAddressProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="companyAddressCityCode != null" >
+        #{companyAddressCityCode,jdbcType=VARCHAR},
+      </if>
+      <if test="companyAddressCity != null" >
+        #{companyAddressCity,jdbcType=VARCHAR},
+      </if>
+      <if test="companyAddressCountyCode != null" >
+        #{companyAddressCountyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="companyAddressCounty != null" >
+        #{companyAddressCounty,jdbcType=VARCHAR},
+      </if>
+      <if test="companyAddress != null" >
+        #{companyAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="homeAddressProvinceCode != null" >
+        #{homeAddressProvinceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="homeAddressProvince != null" >
+        #{homeAddressProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="homeAddressCityCode != null" >
+        #{homeAddressCityCode,jdbcType=VARCHAR},
+      </if>
+      <if test="homeAddressCity != null" >
+        #{homeAddressCity,jdbcType=VARCHAR},
+      </if>
+      <if test="homeAddressCountyCode != null" >
+        #{homeAddressCountyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="homeAddressCounty != null" >
+        #{homeAddressCounty,jdbcType=VARCHAR},
+      </if>
+      <if test="homeAddressVillage != null" >
+        #{homeAddressVillage,jdbcType=VARCHAR},
+      </if>
+      <if test="spouseName != null" >
+        #{spouseName,jdbcType=VARCHAR},
+      </if>
+      <if test="spouseCardType != null" >
+        #{spouseCardType,jdbcType=INTEGER},
+      </if>
+      <if test="spouseCardNo != null" >
+        #{spouseCardNo,jdbcType=VARCHAR},
+      </if>
+      <if test="spouseMobile != null" >
+        #{spouseMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="spouseNativePlace != null" >
+        #{spouseNativePlace,jdbcType=VARCHAR},
+      </if>
+      <if test="spouseReservedFunds != null" >
+        #{spouseReservedFunds,jdbcType=INTEGER},
+      </if>
+      <if test="spouseCompany != null" >
+        #{spouseCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="spouseCompanyPhone != null" >
+        #{spouseCompanyPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="spouseCompanyAddrProvinceCode != null" >
+        #{spouseCompanyAddrProvinceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="spouseCompanyAddrProvince != null" >
+        #{spouseCompanyAddrProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="spouseCompanyAddrCityCode != null" >
+        #{spouseCompanyAddrCityCode,jdbcType=VARCHAR},
+      </if>
+      <if test="spouseCompanyAddrCity != null" >
+        #{spouseCompanyAddrCity,jdbcType=VARCHAR},
+      </if>
+      <if test="spouseCompanyAddrCountyCode != null" >
+        #{spouseCompanyAddrCountyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="spouseCompanyAddrCounty != null" >
+        #{spouseCompanyAddrCounty,jdbcType=VARCHAR},
+      </if>
+      <if test="spouseCompanyAddr != null" >
+        #{spouseCompanyAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="spouseMonthlyIncome != null" >
+        #{spouseMonthlyIncome,jdbcType=INTEGER},
+      </if>
+      <if test="modifyTime != null" >
+        #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  
+  <select id="countByExample" parameterType="com.cgw360.cls.model.customer.CustomerBaseInfoExample" resultType="java.lang.Integer" >
+    select count(*) from customer_base_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update customer_base_info
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.customerName != null" >
+        customer_name = #{record.customerName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.customerNo != null" >
+        customer_no = #{record.customerNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.customerNumber != null" >
+        customer_number = #{record.customerNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.source != null" >
+        source = #{record.source,jdbcType=INTEGER},
+      </if>
+      <if test="record.managerId != null" >
+        manager_id = #{record.managerId,jdbcType=BIGINT},
+      </if>
+      <if test="record.registerDate != null" >
+        register_date = #{record.registerDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.gender != null" >
+        gender = #{record.gender,jdbcType=INTEGER},
+      </if>
+      <if test="record.cardType != null" >
+        card_type = #{record.cardType,jdbcType=INTEGER},
+      </if>
+      <if test="record.cardNo != null" >
+        card_no = #{record.cardNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.birthday != null" >
+        birthday = #{record.birthday,jdbcType=DATE},
+      </if>
+      <if test="record.age != null" >
+        age = #{record.age,jdbcType=INTEGER},
+      </if>
+      <if test="record.maritalStatus != null" >
+        marital_status = #{record.maritalStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.mobile != null" >
+        mobile = #{record.mobile,jdbcType=CHAR},
+      </if>
+      <if test="record.homePhone != null" >
+        home_phone = #{record.homePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nativePlace != null" >
+        native_place = #{record.nativePlace,jdbcType=VARCHAR},
+      </if>
+      <if test="record.education != null" >
+        education = #{record.education,jdbcType=VARCHAR},
+      </if>
+      <if test="record.housingStatus != null" >
+        housing_status = #{record.housingStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.monthRepayment != null" >
+        month_repayment = #{record.monthRepayment,jdbcType=VARCHAR},
+      </if>
+      <if test="record.profession != null" >
+        profession = #{record.profession,jdbcType=VARCHAR},
+      </if>
+      <if test="record.industry != null" >
+        industry = #{record.industry,jdbcType=VARCHAR},
+      </if>
+      <if test="record.monthlyIncome != null" >
+        monthly_income = #{record.monthlyIncome,jdbcType=VARCHAR},
+      </if>
+      <if test="record.company != null" >
+        company = #{record.company,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workPhone != null" >
+        work_phone = #{record.workPhone,jdbcType=CHAR},
+      </if>
+      <if test="record.reservedFunds != null" >
+        reserved_funds = #{record.reservedFunds,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companyAddressProvinceCode != null" >
+        company_address_province_code = #{record.companyAddressProvinceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companyAddressProvince != null" >
+        company_address_province = #{record.companyAddressProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companyAddressCityCode != null" >
+        company_address_city_code = #{record.companyAddressCityCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companyAddressCity != null" >
+        company_address_city = #{record.companyAddressCity,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companyAddressCountyCode != null" >
+        company_address_county_code = #{record.companyAddressCountyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companyAddressCounty != null" >
+        company_address_county = #{record.companyAddressCounty,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companyAddress != null" >
+        company_address = #{record.companyAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.homeAddressProvinceCode != null" >
+        home_address_province_code = #{record.homeAddressProvinceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.homeAddressProvince != null" >
+        home_address_province = #{record.homeAddressProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="record.homeAddressCityCode != null" >
+        home_address_city_code = #{record.homeAddressCityCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.homeAddressCity != null" >
+        home_address_city = #{record.homeAddressCity,jdbcType=VARCHAR},
+      </if>
+      <if test="record.homeAddressCountyCode != null" >
+        home_address_county_code = #{record.homeAddressCountyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.homeAddressCounty != null" >
+        home_address_county = #{record.homeAddressCounty,jdbcType=VARCHAR},
+      </if>
+      <if test="record.homeAddressVillage != null" >
+        home_address_village = #{record.homeAddressVillage,jdbcType=VARCHAR},
+      </if>
+      <if test="record.spouseName != null" >
+        spouse_name = #{record.spouseName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.spouseCardType != null" >
+        spouse_card_type = #{record.spouseCardType,jdbcType=INTEGER},
+      </if>
+      <if test="record.spouseCardNo != null" >
+        spouse_card_no = #{record.spouseCardNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.spouseMobile != null" >
+        spouse_mobile = #{record.spouseMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.spouseNativePlace != null" >
+        spouse_native_place = #{record.spouseNativePlace,jdbcType=VARCHAR},
+      </if>
+      <if test="record.spouseReservedFunds != null" >
+        spouse_reserved_funds = #{record.spouseReservedFunds,jdbcType=INTEGER},
+      </if>
+      <if test="record.spouseCompany != null" >
+        spouse_company = #{record.spouseCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="record.spouseCompanyPhone != null" >
+        spouse_company_phone = #{record.spouseCompanyPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.spouseCompanyAddrProvinceCode != null" >
+        spouse_company_addr_province_code = #{record.spouseCompanyAddrProvinceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.spouseCompanyAddrProvince != null" >
+        spouse_company_addr_province = #{record.spouseCompanyAddrProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="record.spouseCompanyAddrCityCode != null" >
+        spouse_company_addr_city_code = #{record.spouseCompanyAddrCityCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.spouseCompanyAddrCity != null" >
+        spouse_company_addr_city = #{record.spouseCompanyAddrCity,jdbcType=VARCHAR},
+      </if>
+      <if test="record.spouseCompanyAddrCountyCode != null" >
+        spouse_company_addr_county_code = #{record.spouseCompanyAddrCountyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.spouseCompanyAddrCounty != null" >
+        spouse_company_addr_county = #{record.spouseCompanyAddrCounty,jdbcType=VARCHAR},
+      </if>
+      <if test="record.spouseCompanyAddr != null" >
+        spouse_company_addr = #{record.spouseCompanyAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.spouseMonthlyIncome != null" >
+        spouse_monthly_income = #{record.spouseMonthlyIncome,jdbcType=INTEGER},
+      </if>
+      <if test="record.modifyTime != null" >
+        modify_time = #{record.modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.riskTime != null" >
+        risk_time = #{record.riskTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.riskStatus != null" >
+        risk_status = #{record.riskStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.riskDetail != null" >
+        risk_detail = #{record.riskDetail,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update customer_base_info
+    set id = #{record.id,jdbcType=BIGINT},
+      customer_name = #{record.customerName,jdbcType=VARCHAR},
+      customer_no = #{record.customerNo,jdbcType=VARCHAR},
+      customer_number = #{record.customerNumber,jdbcType=VARCHAR},
+      source = #{record.source,jdbcType=INTEGER},
+      manager_id = #{record.managerId,jdbcType=BIGINT},
+      register_date = #{record.registerDate,jdbcType=TIMESTAMP},
+      gender = #{record.gender,jdbcType=INTEGER},
+      card_type = #{record.cardType,jdbcType=INTEGER},
+      card_no = #{record.cardNo,jdbcType=VARCHAR},
+      birthday = #{record.birthday,jdbcType=DATE},
+      age = #{record.age,jdbcType=INTEGER},
+      marital_status = #{record.maritalStatus,jdbcType=INTEGER},
+      mobile = #{record.mobile,jdbcType=CHAR},
+      home_phone = #{record.homePhone,jdbcType=VARCHAR},
+      native_place = #{record.nativePlace,jdbcType=VARCHAR},
+      education = #{record.education,jdbcType=VARCHAR},
+      housing_status = #{record.housingStatus,jdbcType=INTEGER},
+      month_repayment = #{record.monthRepayment,jdbcType=VARCHAR},
+      profession = #{record.profession,jdbcType=VARCHAR},
+      industry = #{record.industry,jdbcType=VARCHAR},
+      monthly_income = #{record.monthlyIncome,jdbcType=VARCHAR},
+      company = #{record.company,jdbcType=VARCHAR},
+      work_phone = #{record.workPhone,jdbcType=CHAR},
+      reserved_funds = #{record.reservedFunds,jdbcType=VARCHAR},
+      company_address_province_code = #{record.companyAddressProvinceCode,jdbcType=VARCHAR},
+      company_address_province = #{record.companyAddressProvince,jdbcType=VARCHAR},
+      company_address_city_code = #{record.companyAddressCityCode,jdbcType=VARCHAR},
+      company_address_city = #{record.companyAddressCity,jdbcType=VARCHAR},
+      company_address_county_code = #{record.companyAddressCountyCode,jdbcType=VARCHAR},
+      company_address_county = #{record.companyAddressCounty,jdbcType=VARCHAR},
+      company_address = #{record.companyAddress,jdbcType=VARCHAR},
+      home_address_province_code = #{record.homeAddressProvinceCode,jdbcType=VARCHAR},
+      home_address_province = #{record.homeAddressProvince,jdbcType=VARCHAR},
+      home_address_city_code = #{record.homeAddressCityCode,jdbcType=VARCHAR},
+      home_address_city = #{record.homeAddressCity,jdbcType=VARCHAR},
+      home_address_county_code = #{record.homeAddressCountyCode,jdbcType=VARCHAR},
+      home_address_county = #{record.homeAddressCounty,jdbcType=VARCHAR},
+      home_address_village = #{record.homeAddressVillage,jdbcType=VARCHAR},
+      spouse_name = #{record.spouseName,jdbcType=VARCHAR},
+      spouse_card_type = #{record.spouseCardType,jdbcType=INTEGER},
+      spouse_card_no = #{record.spouseCardNo,jdbcType=VARCHAR},
+      spouse_mobile = #{record.spouseMobile,jdbcType=VARCHAR},
+      spouse_native_place = #{record.spouseNativePlace,jdbcType=VARCHAR},
+      spouse_reserved_funds = #{record.spouseReservedFunds,jdbcType=INTEGER},
+      spouse_company = #{record.spouseCompany,jdbcType=VARCHAR},
+      spouse_company_phone = #{record.spouseCompanyPhone,jdbcType=VARCHAR},
+      spouse_company_addr_province_code = #{record.spouseCompanyAddrProvinceCode,jdbcType=VARCHAR},
+      spouse_company_addr_province = #{record.spouseCompanyAddrProvince,jdbcType=VARCHAR},
+      spouse_company_addr_city_code = #{record.spouseCompanyAddrCityCode,jdbcType=VARCHAR},
+      spouse_company_addr_city = #{record.spouseCompanyAddrCity,jdbcType=VARCHAR},
+      spouse_company_addr_county_code = #{record.spouseCompanyAddrCountyCode,jdbcType=VARCHAR},
+      spouse_company_addr_county = #{record.spouseCompanyAddrCounty,jdbcType=VARCHAR},
+      spouse_company_addr = #{record.spouseCompanyAddr,jdbcType=VARCHAR},
+      spouse_monthly_income = #{record.spouseMonthlyIncome,jdbcType=INTEGER},
+      modify_time = #{record.modifyTime,jdbcType=TIMESTAMP},
+      status = #{record.status,jdbcType=INTEGER},
+      risk_time = #{record.riskTime,jdbcType=TIMESTAMP},
+      risk_status = #{record.riskStatus,jdbcType=INTEGER},
+      risk_detail = #{record.riskDetail,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cgw360.cls.model.customer.CustomerBaseInfo" >
+    update customer_base_info
+    <set >
+      <if test="customerName != null" >
+        customer_name = #{customerName,jdbcType=VARCHAR},
+      </if>
+      <if test="customerNo != null" >
+        customer_no = #{customerNo,jdbcType=VARCHAR},
+      </if>
+      <if test="customerNumber != null" >
+        customer_number = #{customerNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="source != null" >
+        source = #{source,jdbcType=INTEGER},
+      </if>
+      <if test="managerId != null" >
+        manager_id = #{managerId,jdbcType=BIGINT},
+      </if>
+      <if test="registerDate != null" >
+        register_date = #{registerDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gender != null" >
+        gender = #{gender,jdbcType=INTEGER},
+      </if>
+      <if test="cardType != null" >
+        card_type = #{cardType,jdbcType=INTEGER},
+      </if>
+      <if test="cardNo != null" >
+        card_no = #{cardNo,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null" >
+        birthday = #{birthday,jdbcType=DATE},
+      </if>
+      <if test="age != null" >
+        age = #{age,jdbcType=INTEGER},
+      </if>
+      <if test="maritalStatus != null" >
+        marital_status = #{maritalStatus,jdbcType=INTEGER},
+      </if>
+      <if test="mobile != null" >
+        mobile = #{mobile,jdbcType=CHAR},
+      </if>
+      <if test="homePhone != null" >
+        home_phone = #{homePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="nativePlace != null" >
+        native_place = #{nativePlace,jdbcType=VARCHAR},
+      </if>
+      <if test="education != null" >
+        education = #{education,jdbcType=VARCHAR},
+      </if>
+      <if test="housingStatus != null" >
+        housing_status = #{housingStatus,jdbcType=INTEGER},
+      </if>
+      <if test="monthRepayment != null" >
+        month_repayment = #{monthRepayment,jdbcType=VARCHAR},
+      </if>
+      <if test="profession != null" >
+        profession = #{profession,jdbcType=VARCHAR},
+      </if>
+      <if test="industry != null" >
+        industry = #{industry,jdbcType=VARCHAR},
+      </if>
+      <if test="monthlyIncome != null" >
+        monthly_income = #{monthlyIncome,jdbcType=VARCHAR},
+      </if>
+      <if test="company != null" >
+        company = #{company,jdbcType=VARCHAR},
+      </if>
+      <if test="workPhone != null" >
+        work_phone = #{workPhone,jdbcType=CHAR},
+      </if>
+      <if test="reservedFunds != null" >
+        reserved_funds = #{reservedFunds,jdbcType=VARCHAR},
+      </if>
+      <if test="companyAddressProvinceCode != null" >
+        company_address_province_code = #{companyAddressProvinceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="companyAddressProvince != null" >
+        company_address_province = #{companyAddressProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="companyAddressCityCode != null" >
+        company_address_city_code = #{companyAddressCityCode,jdbcType=VARCHAR},
+      </if>
+      <if test="companyAddressCity != null" >
+        company_address_city = #{companyAddressCity,jdbcType=VARCHAR},
+      </if>
+      <if test="companyAddressCountyCode != null" >
+        company_address_county_code = #{companyAddressCountyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="companyAddressCounty != null" >
+        company_address_county = #{companyAddressCounty,jdbcType=VARCHAR},
+      </if>
+      <if test="companyAddress != null" >
+        company_address = #{companyAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="homeAddressProvinceCode != null" >
+        home_address_province_code = #{homeAddressProvinceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="homeAddressProvince != null" >
+        home_address_province = #{homeAddressProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="homeAddressCityCode != null" >
+        home_address_city_code = #{homeAddressCityCode,jdbcType=VARCHAR},
+      </if>
+      <if test="homeAddressCity != null" >
+        home_address_city = #{homeAddressCity,jdbcType=VARCHAR},
+      </if>
+      <if test="homeAddressCountyCode != null" >
+        home_address_county_code = #{homeAddressCountyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="homeAddressCounty != null" >
+        home_address_county = #{homeAddressCounty,jdbcType=VARCHAR},
+      </if>
+      <if test="homeAddressVillage != null" >
+        home_address_village = #{homeAddressVillage,jdbcType=VARCHAR},
+      </if>
+      <if test="spouseName != null" >
+        spouse_name = #{spouseName,jdbcType=VARCHAR},
+      </if>
+      <if test="spouseCardType != null" >
+        spouse_card_type = #{spouseCardType,jdbcType=INTEGER},
+      </if>
+      <if test="spouseCardNo != null" >
+        spouse_card_no = #{spouseCardNo,jdbcType=VARCHAR},
+      </if>
+      <if test="spouseMobile != null" >
+        spouse_mobile = #{spouseMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="spouseNativePlace != null" >
+        spouse_native_place = #{spouseNativePlace,jdbcType=VARCHAR},
+      </if>
+      <if test="spouseReservedFunds != null" >
+        spouse_reserved_funds = #{spouseReservedFunds,jdbcType=INTEGER},
+      </if>
+      <if test="spouseCompany != null" >
+        spouse_company = #{spouseCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="spouseCompanyPhone != null" >
+        spouse_company_phone = #{spouseCompanyPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="spouseCompanyAddrProvinceCode != null" >
+        spouse_company_addr_province_code = #{spouseCompanyAddrProvinceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="spouseCompanyAddrProvince != null" >
+        spouse_company_addr_province = #{spouseCompanyAddrProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="spouseCompanyAddrCityCode != null" >
+        spouse_company_addr_city_code = #{spouseCompanyAddrCityCode,jdbcType=VARCHAR},
+      </if>
+      <if test="spouseCompanyAddrCity != null" >
+        spouse_company_addr_city = #{spouseCompanyAddrCity,jdbcType=VARCHAR},
+      </if>
+      <if test="spouseCompanyAddrCountyCode != null" >
+        spouse_company_addr_county_code = #{spouseCompanyAddrCountyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="spouseCompanyAddrCounty != null" >
+        spouse_company_addr_county = #{spouseCompanyAddrCounty,jdbcType=VARCHAR},
+      </if>
+      <if test="spouseCompanyAddr != null" >
+        spouse_company_addr = #{spouseCompanyAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="spouseMonthlyIncome != null" >
+        spouse_monthly_income = #{spouseMonthlyIncome,jdbcType=INTEGER},
+      </if>
+      <if test="modifyTime != null" >
+        modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="riskDetail != null" >
+        risk_detail = #{riskDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="riskTime != null" >
+        risk_time = #{riskTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="riskStatus != null" >
+        risk_status = #{riskStatus,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cgw360.cls.model.customer.CustomerBaseInfo" >
+    update customer_base_info
+    set customer_name = #{customerName,jdbcType=VARCHAR},
+      customer_no = #{customerNo,jdbcType=VARCHAR},
+      customer_number = #{customerNumber,jdbcType=VARCHAR},
+      source = #{source,jdbcType=INTEGER},
+      manager_id = #{managerId,jdbcType=BIGINT},
+      register_date = #{registerDate,jdbcType=TIMESTAMP},
+      gender = #{gender,jdbcType=INTEGER},
+      card_type = #{cardType,jdbcType=INTEGER},
+      card_no = #{cardNo,jdbcType=VARCHAR},
+      birthday = #{birthday,jdbcType=DATE},
+      age = #{age,jdbcType=INTEGER},
+      marital_status = #{maritalStatus,jdbcType=INTEGER},
+      mobile = #{mobile,jdbcType=CHAR},
+      home_phone = #{homePhone,jdbcType=VARCHAR},
+      native_place = #{nativePlace,jdbcType=VARCHAR},
+      education = #{education,jdbcType=VARCHAR},
+      housing_status = #{housingStatus,jdbcType=INTEGER},
+      month_repayment = #{monthRepayment,jdbcType=VARCHAR},
+      profession = #{profession,jdbcType=VARCHAR},
+      industry = #{industry,jdbcType=VARCHAR},
+      monthly_income = #{monthlyIncome,jdbcType=VARCHAR},
+      company = #{company,jdbcType=VARCHAR},
+      work_phone = #{workPhone,jdbcType=CHAR},
+      reserved_funds = #{reservedFunds,jdbcType=VARCHAR},
+      company_address_province_code = #{companyAddressProvinceCode,jdbcType=VARCHAR},
+      company_address_province = #{companyAddressProvince,jdbcType=VARCHAR},
+      company_address_city_code = #{companyAddressCityCode,jdbcType=VARCHAR},
+      company_address_city = #{companyAddressCity,jdbcType=VARCHAR},
+      company_address_county_code = #{companyAddressCountyCode,jdbcType=VARCHAR},
+      company_address_county = #{companyAddressCounty,jdbcType=VARCHAR},
+      company_address = #{companyAddress,jdbcType=VARCHAR},
+      home_address_province_code = #{homeAddressProvinceCode,jdbcType=VARCHAR},
+      home_address_province = #{homeAddressProvince,jdbcType=VARCHAR},
+      home_address_city_code = #{homeAddressCityCode,jdbcType=VARCHAR},
+      home_address_city = #{homeAddressCity,jdbcType=VARCHAR},
+      home_address_county_code = #{homeAddressCountyCode,jdbcType=VARCHAR},
+      home_address_county = #{homeAddressCounty,jdbcType=VARCHAR},
+      home_address_village = #{homeAddressVillage,jdbcType=VARCHAR},
+      spouse_name = #{spouseName,jdbcType=VARCHAR},
+      spouse_card_type = #{spouseCardType,jdbcType=INTEGER},
+      spouse_card_no = #{spouseCardNo,jdbcType=VARCHAR},
+      spouse_mobile = #{spouseMobile,jdbcType=VARCHAR},
+      spouse_native_place = #{spouseNativePlace,jdbcType=VARCHAR},
+      spouse_reserved_funds = #{spouseReservedFunds,jdbcType=INTEGER},
+      spouse_company = #{spouseCompany,jdbcType=VARCHAR},
+      spouse_company_phone = #{spouseCompanyPhone,jdbcType=VARCHAR},
+      spouse_company_addr_province_code = #{spouseCompanyAddrProvinceCode,jdbcType=VARCHAR},
+      spouse_company_addr_province = #{spouseCompanyAddrProvince,jdbcType=VARCHAR},
+      spouse_company_addr_city_code = #{spouseCompanyAddrCityCode,jdbcType=VARCHAR},
+      spouse_company_addr_city = #{spouseCompanyAddrCity,jdbcType=VARCHAR},
+      spouse_company_addr_county_code = #{spouseCompanyAddrCountyCode,jdbcType=VARCHAR},
+      spouse_company_addr_county = #{spouseCompanyAddrCounty,jdbcType=VARCHAR},
+      spouse_company_addr = #{spouseCompanyAddr,jdbcType=VARCHAR},
+      spouse_monthly_income = #{spouseMonthlyIncome,jdbcType=INTEGER},
+      modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=INTEGER},
+      risk_time = #{riskTime,jdbcType=TIMESTAMP},
+      risk_status = #{riskStatus,jdbcType=INTEGER},
+      risk_detail = #{riskDetail,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="getUnReadCount" resultType="java.lang.Integer" parameterType="java.lang.Long" >
+    select count(1) from customer_base_info cb 
+    left join customer_manager cm on cb.id=cm.customer_id
+    where cm.manager_id = #{managerId,jdbcType=BIGINT} and cm.status=1 and cm.is_read=0 
+  </select>
+</mapper>

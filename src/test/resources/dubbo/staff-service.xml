@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://code.alibabatech.com/schema/dubbo
+        http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+    <dubbo:application name="za_user_serivce"/>
+    <dubbo:registry id="staff_center" register="false" protocol="dubbo" address="${dubbo.cheguo.staff.address}"/>
+
+    <dubbo:reference id="zaUserService" registry="staff_center" interface="com.za.api.IZaUserService"
+         group="${dubbo.cheguo.staff.group}" version="${dubbo.cheguo.staff.version}" check="false"/>
+
+    <dubbo:reference id="zaOrganizationService" registry="staff_center" interface="com.za.api.IZaOrganizationService"
+         group="${dubbo.cheguo.staff.group}" version="${dubbo.cheguo.staff.version}" check="false"/>
+
+    <dubbo:reference id="zaRoleService" registry="staff_center" interface="com.za.api.IZaRoleService"
+         group="${dubbo.cheguo.staff.group}" version="${dubbo.cheguo.staff.version}" check="false"/>
+
+    <dubbo:reference id="zaUserRoleService" registry="staff_center" interface="com.za.api.IZaUserRoleService"
+         group="${dubbo.cheguo.staff.group}" version="${dubbo.cheguo.staff.version}" check="false"/>
+
+    <dubbo:reference id="zaSysMenuService" registry="staff_center" interface="com.za.api.IZaSysMenuService"
+         group="${dubbo.cheguo.staff.group}" version="${dubbo.cheguo.staff.version}" check="false"/>
+</beans>

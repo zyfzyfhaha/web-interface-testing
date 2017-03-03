@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cgw360.cls.dao.customer.CustomerAssetMapper" >
+  <resultMap id="BaseResultMap" type="com.cgw360.cls.model.customer.CustomerAsset" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="customer_id" property="customerId" jdbcType="BIGINT" />
+    <result column="asset_num" property="assetNum" jdbcType="VARCHAR" />
+    <result column="asset_name" property="assetName" jdbcType="VARCHAR" />
+    <result column="asset_type" property="assetType" jdbcType="INTEGER" />
+    <result column="currency" property="currency" jdbcType="INTEGER" />
+    <result column="guarantee_type" property="guaranteeType" jdbcType="INTEGER" />
+    <result column="asset_value" property="assetValue" jdbcType="DECIMAL" />
+    <result column="applied_guaranteed_amount" property="appliedGuaranteedAmount" jdbcType="DECIMAL" />
+    <result column="guaranteed_amount" property="guaranteedAmount" jdbcType="DECIMAL" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, customer_id, asset_num, asset_name, asset_type, currency, guarantee_type, asset_value, applied_guaranteed_amount, 
+    guaranteed_amount, remark, create_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.cgw360.cls.model.customer.CustomerAssetExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from customer_asset
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from customer_asset
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from customer_asset
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.cgw360.cls.model.customer.CustomerAssetExample" >
+    delete from customer_asset
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.cgw360.cls.model.customer.CustomerAsset" >
+    insert into customer_asset (id, customer_id, asset_num, asset_name,
+      asset_type, currency, guarantee_type, 
+      asset_value, applied_guaranteed_amount, guaranteed_amount, 
+      remark, create_time)
+    values (#{id,jdbcType=BIGINT}, #{customerId,jdbcType=BIGINT}, #{assetNum,jdbcType=VARCHAR}, #{assetName,jdbcType=VARCHAR}, 
+      #{assetType,jdbcType=INTEGER}, #{currency,jdbcType=INTEGER}, #{guaranteeType,jdbcType=INTEGER}, 
+      #{assetValue,jdbcType=DECIMAL}, #{appliedGuaranteedAmount,jdbcType=DECIMAL}, #{guaranteedAmount,jdbcType=DECIMAL}, 
+      #{remark,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cgw360.cls.model.customer.CustomerAsset" >
+    insert into customer_asset
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="customerId != null" >
+        customer_id,
+      </if>
+      <if test="assetNum != null" >
+        asset_num,
+      </if>
+      <if test="assetName != null" >
+        asset_name,
+      </if>
+      <if test="assetType != null" >
+        asset_type,
+      </if>
+      <if test="currency != null" >
+        currency,
+      </if>
+      <if test="guaranteeType != null" >
+        guarantee_type,
+      </if>
+      <if test="assetValue != null" >
+        asset_value,
+      </if>
+      <if test="appliedGuaranteedAmount != null" >
+        applied_guaranteed_amount,
+      </if>
+      <if test="guaranteedAmount != null" >
+        guaranteed_amount,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="customerId != null" >
+        #{customerId,jdbcType=BIGINT},
+      </if>
+      <if test="assetNum != null" >
+        #{assetNum,jdbcType=VARCHAR},
+      </if>
+      <if test="assetName != null" >
+        #{assetName,jdbcType=VARCHAR},
+      </if>
+      <if test="assetType != null" >
+        #{assetType,jdbcType=INTEGER},
+      </if>
+      <if test="currency != null" >
+        #{currency,jdbcType=INTEGER},
+      </if>
+      <if test="guaranteeType != null" >
+        #{guaranteeType,jdbcType=INTEGER},
+      </if>
+      <if test="assetValue != null" >
+        #{assetValue,jdbcType=DECIMAL},
+      </if>
+      <if test="appliedGuaranteedAmount != null" >
+        #{appliedGuaranteedAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="guaranteedAmount != null" >
+        #{guaranteedAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.cgw360.cls.model.customer.CustomerAssetExample" resultType="java.lang.Integer" >
+    select count(*) from customer_asset
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update customer_asset
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.customerId != null" >
+        customer_id = #{record.customerId,jdbcType=BIGINT},
+      </if>
+      <if test="record.assetNum != null" >
+        asset_num = #{record.assetNum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.assetName != null" >
+        asset_name = #{record.assetName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.assetType != null" >
+        asset_type = #{record.assetType,jdbcType=INTEGER},
+      </if>
+      <if test="record.currency != null" >
+        currency = #{record.currency,jdbcType=INTEGER},
+      </if>
+      <if test="record.guaranteeType != null" >
+        guarantee_type = #{record.guaranteeType,jdbcType=INTEGER},
+      </if>
+      <if test="record.assetValue != null" >
+        asset_value = #{record.assetValue,jdbcType=DECIMAL},
+      </if>
+      <if test="record.appliedGuaranteedAmount != null" >
+        applied_guaranteed_amount = #{record.appliedGuaranteedAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.guaranteedAmount != null" >
+        guaranteed_amount = #{record.guaranteedAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.remark != null" >
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update customer_asset
+    set id = #{record.id,jdbcType=BIGINT},
+      customer_id = #{record.customerId,jdbcType=BIGINT},
+      asset_num = #{record.assetNum,jdbcType=VARCHAR},
+      asset_name = #{record.assetName,jdbcType=VARCHAR},
+      asset_type = #{record.assetType,jdbcType=INTEGER},
+      currency = #{record.currency,jdbcType=INTEGER},
+      guarantee_type = #{record.guaranteeType,jdbcType=INTEGER},
+      asset_value = #{record.assetValue,jdbcType=DECIMAL},
+      applied_guaranteed_amount = #{record.appliedGuaranteedAmount,jdbcType=DECIMAL},
+      guaranteed_amount = #{record.guaranteedAmount,jdbcType=DECIMAL},
+      remark = #{record.remark,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cgw360.cls.model.customer.CustomerAsset" >
+    update customer_asset
+    <set >
+      <if test="customerId != null" >
+        customer_id = #{customerId,jdbcType=BIGINT},
+      </if>
+      <if test="assetNum != null" >
+        asset_num = #{assetNum,jdbcType=VARCHAR},
+      </if>
+      <if test="assetName != null" >
+        asset_name = #{assetName,jdbcType=VARCHAR},
+      </if>
+      <if test="assetType != null" >
+        asset_type = #{assetType,jdbcType=INTEGER},
+      </if>
+      <if test="currency != null" >
+        currency = #{currency,jdbcType=INTEGER},
+      </if>
+      <if test="guaranteeType != null" >
+        guarantee_type = #{guaranteeType,jdbcType=INTEGER},
+      </if>
+      <if test="assetValue != null" >
+        asset_value = #{assetValue,jdbcType=DECIMAL},
+      </if>
+      <if test="appliedGuaranteedAmount != null" >
+        applied_guaranteed_amount = #{appliedGuaranteedAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="guaranteedAmount != null" >
+        guaranteed_amount = #{guaranteedAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cgw360.cls.model.customer.CustomerAsset" >
+    update customer_asset
+    set customer_id = #{customerId,jdbcType=BIGINT},
+      asset_num = #{assetNum,jdbcType=VARCHAR},
+      asset_name = #{assetName,jdbcType=VARCHAR},
+      asset_type = #{assetType,jdbcType=INTEGER},
+      currency = #{currency,jdbcType=INTEGER},
+      guarantee_type = #{guaranteeType,jdbcType=INTEGER},
+      asset_value = #{assetValue,jdbcType=DECIMAL},
+      applied_guaranteed_amount = #{appliedGuaranteedAmount,jdbcType=DECIMAL},
+      guaranteed_amount = #{guaranteedAmount,jdbcType=DECIMAL},
+      remark = #{remark,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

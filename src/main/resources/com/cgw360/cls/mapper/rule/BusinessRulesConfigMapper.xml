@@ -1,0 +1,466 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cgw360.cls.dao.rule.BusinessRulesConfigMapper">
+  <resultMap id="BaseResultMap" type="com.cgw360.cls.model.rule.BusinessRulesConfig">
+    <id column="id" property="id" jdbcType="BIGINT"/>
+    <result column="business_type_code" property="businessTypeCode" jdbcType="VARCHAR"/>
+    <result column="business_type_name" property="businessTypeName" jdbcType="VARCHAR"/>
+    <result column="node_code" property="nodeCode" jdbcType="VARCHAR"/>
+    <result column="node_name" property="nodeName" jdbcType="VARCHAR"/>
+    <result column="effictive_begin" property="effictiveBegin" jdbcType="TIMESTAMP"/>
+    <result column="effictive_end" property="effictiveEnd" jdbcType="TIMESTAMP"/>
+    <result column="company_id" property="companyId" jdbcType="BIGINT"/>
+    <result column="company_name" property="companyName" jdbcType="VARCHAR"/>
+    <result column="business_group_id" property="businessGroupId" jdbcType="BIGINT"/>
+    <result column="business_group_name" property="businessGroupName" jdbcType="VARCHAR"/>
+    <result column="car_type_key" property="carTypeKey" jdbcType="VARCHAR"/>
+    <result column="car_type_name" property="carTypeName" jdbcType="VARCHAR"/>
+    <result column="loan_quota_low" property="loanQuotaLow" jdbcType="DECIMAL"/>
+    <result column="loan_quota_high" property="loanQuotaHigh" jdbcType="DECIMAL"/>
+    <result column="expression" property="expression" jdbcType="VARCHAR"/>
+    <result column="operator_id" property="operatorId" jdbcType="BIGINT"/>
+    <result column="operator_name" property="operatorName" jdbcType="VARCHAR"/>
+    <result column="status" property="status" jdbcType="INTEGER"/>
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+    <result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP"/>
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" suffix=")" prefixOverrides="and">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" suffix=")" prefixOverrides="and">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, business_type_code, business_type_name, node_code, node_name, effictive_begin, 
+    effictive_end, company_id, company_name, business_group_id, business_group_name,
+    car_type_key, car_type_name, loan_quota_low, loan_quota_high, expression, operator_id, 
+    operator_name, status, create_time, modify_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap"
+          parameterType="com.cgw360.cls.model.rule.BusinessRulesConfigExample">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List"/>
+    from business_rules_config
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause"/>
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+    select
+    <include refid="Base_Column_List"/>
+    from business_rules_config
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from business_rules_config
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.cgw360.cls.model.rule.BusinessRulesConfigExample">
+    delete from business_rules_config
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause"/>
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.cgw360.cls.model.rule.BusinessRulesConfig" useGeneratedKeys="true"
+          keyProperty="id">
+    insert into business_rules_config (business_type_code, business_type_name,
+    node_code, node_name, effictive_begin,
+    effictive_end, company_id, company_name,
+    business_group_id, business_group_name, car_type_key,
+    car_type_name, loan_quota_low, loan_quota_high,
+    expression, operator_id, operator_name,
+    status, create_time, modify_time
+    )
+    values (#{businessTypeCode,jdbcType=VARCHAR}, #{businessTypeName,jdbcType=VARCHAR},
+    #{nodeCode,jdbcType=VARCHAR}, #{nodeName,jdbcType=VARCHAR}, #{effictiveBegin,jdbcType=TIMESTAMP},
+    #{effictiveEnd,jdbcType=TIMESTAMP}, #{companyId,jdbcType=BIGINT}, #{companyName,jdbcType=VARCHAR},
+    #{businessGroupId,jdbcType=BIGINT}, #{businessGroupName,jdbcType=VARCHAR}, #{carTypeKey,jdbcType=VARCHAR},
+    #{carTypeName,jdbcType=VARCHAR}, #{loanQuotaLow,jdbcType=DECIMAL}, #{loanQuotaHigh,jdbcType=DECIMAL},
+    #{expression,jdbcType=VARCHAR}, #{operatorId,jdbcType=BIGINT}, #{operatorName,jdbcType=VARCHAR},
+    #{status,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{modifyTime,jdbcType=TIMESTAMP}
+    )
+  </insert>
+  <insert id="insertSelective" parameterType="com.cgw360.cls.model.rule.BusinessRulesConfig">
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into business_rules_config
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="businessTypeCode != null">
+        business_type_code,
+      </if>
+      <if test="businessTypeName != null">
+        business_type_name,
+      </if>
+      <if test="nodeCode != null">
+        node_code,
+      </if>
+      <if test="nodeName != null">
+        node_name,
+      </if>
+      <if test="effictiveBegin != null">
+        effictive_begin,
+      </if>
+      <if test="effictiveEnd != null">
+        effictive_end,
+      </if>
+      <if test="companyId != null">
+        company_id,
+      </if>
+      <if test="companyName != null">
+        company_name,
+      </if>
+      <if test="businessGroupId != null">
+        business_group_id,
+      </if>
+      <if test="businessGroupName != null">
+        business_group_name,
+      </if>
+      <if test="carTypeKey != null">
+        car_type_key,
+      </if>
+      <if test="carTypeName != null">
+        car_type_name,
+      </if>
+      <if test="loanQuotaLow != null">
+        loan_quota_low,
+      </if>
+      <if test="loanQuotaHigh != null">
+        loan_quota_high,
+      </if>
+      <if test="expression != null">
+        expression,
+      </if>
+      <if test="operatorId != null">
+        operator_id,
+      </if>
+      <if test="operatorName != null">
+        operator_name,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="modifyTime != null">
+        modify_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="businessTypeCode != null">
+        #{businessTypeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="businessTypeName != null">
+        #{businessTypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="nodeCode != null">
+        #{nodeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="nodeName != null">
+        #{nodeName,jdbcType=VARCHAR},
+      </if>
+      <if test="effictiveBegin != null">
+        #{effictiveBegin,jdbcType=TIMESTAMP},
+      </if>
+      <if test="effictiveEnd != null">
+        #{effictiveEnd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="companyId != null">
+        #{companyId,jdbcType=BIGINT},
+      </if>
+      <if test="companyName != null">
+        #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="businessGroupId != null">
+        #{businessGroupId,jdbcType=BIGINT},
+      </if>
+      <if test="businessGroupName != null">
+        #{businessGroupName,jdbcType=VARCHAR},
+      </if>
+      <if test="carTypeKey != null">
+        #{carTypeKey,jdbcType=VARCHAR},
+      </if>
+      <if test="carTypeName != null">
+        #{carTypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="loanQuotaLow != null">
+        #{loanQuotaLow,jdbcType=DECIMAL},
+      </if>
+      <if test="loanQuotaHigh != null">
+        #{loanQuotaHigh,jdbcType=DECIMAL},
+      </if>
+      <if test="expression != null">
+        #{expression,jdbcType=VARCHAR},
+      </if>
+      <if test="operatorId != null">
+        #{operatorId,jdbcType=BIGINT},
+      </if>
+      <if test="operatorName != null">
+        #{operatorName,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyTime != null">
+        #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.cgw360.cls.model.rule.BusinessRulesConfigExample"
+          resultType="java.lang.Integer">
+    select count(*) from business_rules_config
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause"/>
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update business_rules_config
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.businessTypeCode != null">
+        business_type_code = #{record.businessTypeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.businessTypeName != null">
+        business_type_name = #{record.businessTypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nodeCode != null">
+        node_code = #{record.nodeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nodeName != null">
+        node_name = #{record.nodeName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.effictiveBegin != null">
+        effictive_begin = #{record.effictiveBegin,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.effictiveEnd != null">
+        effictive_end = #{record.effictiveEnd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.companyId != null">
+        company_id = #{record.companyId,jdbcType=BIGINT},
+      </if>
+      <if test="record.companyName != null">
+        company_name = #{record.companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.businessGroupId != null">
+        business_group_id = #{record.businessGroupId,jdbcType=BIGINT},
+      </if>
+      <if test="record.businessGroupName != null">
+        business_group_name = #{record.businessGroupName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.carTypeKey != null">
+        car_type_key = #{record.carTypeKey,jdbcType=VARCHAR},
+      </if>
+      <if test="record.carTypeName != null">
+        car_type_name = #{record.carTypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.loanQuotaLow != null">
+        loan_quota_low = #{record.loanQuotaLow,jdbcType=DECIMAL},
+      </if>
+      <if test="record.loanQuotaHigh != null">
+        loan_quota_high = #{record.loanQuotaHigh,jdbcType=DECIMAL},
+      </if>
+      <if test="record.expression != null">
+        expression = #{record.expression,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operatorId != null">
+        operator_id = #{record.operatorId,jdbcType=BIGINT},
+      </if>
+      <if test="record.operatorName != null">
+        operator_name = #{record.operatorName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.modifyTime != null">
+        modify_time = #{record.modifyTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause"/>
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update business_rules_config
+    set id = #{record.id,jdbcType=BIGINT},
+    business_type_code = #{record.businessTypeCode,jdbcType=VARCHAR},
+    business_type_name = #{record.businessTypeName,jdbcType=VARCHAR},
+    node_code = #{record.nodeCode,jdbcType=VARCHAR},
+    node_name = #{record.nodeName,jdbcType=VARCHAR},
+    effictive_begin = #{record.effictiveBegin,jdbcType=TIMESTAMP},
+    effictive_end = #{record.effictiveEnd,jdbcType=TIMESTAMP},
+    company_id = #{record.companyId,jdbcType=BIGINT},
+    company_name = #{record.companyName,jdbcType=VARCHAR},
+    business_group_id = #{record.businessGroupId,jdbcType=BIGINT},
+    business_group_name = #{record.businessGroupName,jdbcType=VARCHAR},
+    car_type_key = #{record.carTypeKey,jdbcType=VARCHAR},
+    car_type_name = #{record.carTypeName,jdbcType=VARCHAR},
+    loan_quota_low = #{record.loanQuotaLow,jdbcType=DECIMAL},
+    loan_quota_high = #{record.loanQuotaHigh,jdbcType=DECIMAL},
+    expression = #{record.expression,jdbcType=VARCHAR},
+    operator_id = #{record.operatorId,jdbcType=BIGINT},
+    operator_name = #{record.operatorName,jdbcType=VARCHAR},
+    status = #{record.status,jdbcType=INTEGER},
+    create_time = #{record.createTime,jdbcType=TIMESTAMP},
+    modify_time = #{record.modifyTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause"/>
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cgw360.cls.model.rule.BusinessRulesConfig">
+    update business_rules_config
+    <set>
+      <if test="businessTypeCode != null">
+        business_type_code = #{businessTypeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="businessTypeName != null">
+        business_type_name = #{businessTypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="nodeCode != null">
+        node_code = #{nodeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="nodeName != null">
+        node_name = #{nodeName,jdbcType=VARCHAR},
+      </if>
+      <if test="effictiveBegin != null">
+        effictive_begin = #{effictiveBegin,jdbcType=TIMESTAMP},
+      </if>
+      <if test="effictiveEnd != null">
+        effictive_end = #{effictiveEnd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="companyId != null">
+        company_id = #{companyId,jdbcType=BIGINT},
+      </if>
+      <if test="companyName != null">
+        company_name = #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="businessGroupId != null">
+        business_group_id = #{businessGroupId,jdbcType=BIGINT},
+      </if>
+      <if test="businessGroupName != null">
+        business_group_name = #{businessGroupName,jdbcType=VARCHAR},
+      </if>
+      <if test="carTypeKey != null">
+        car_type_key = #{carTypeKey,jdbcType=VARCHAR},
+      </if>
+      <if test="carTypeName != null">
+        car_type_name = #{carTypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="loanQuotaLow != null">
+        loan_quota_low = #{loanQuotaLow,jdbcType=DECIMAL},
+      </if>
+      <if test="loanQuotaHigh != null">
+        loan_quota_high = #{loanQuotaHigh,jdbcType=DECIMAL},
+      </if>
+      <if test="expression != null">
+        expression = #{expression,jdbcType=VARCHAR},
+      </if>
+      <if test="operatorId != null">
+        operator_id = #{operatorId,jdbcType=BIGINT},
+      </if>
+      <if test="operatorName != null">
+        operator_name = #{operatorName,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyTime != null">
+        modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cgw360.cls.model.rule.BusinessRulesConfig">
+    update business_rules_config
+    set business_type_code = #{businessTypeCode,jdbcType=VARCHAR},
+      business_type_name = #{businessTypeName,jdbcType=VARCHAR},
+      node_code = #{nodeCode,jdbcType=VARCHAR},
+      node_name = #{nodeName,jdbcType=VARCHAR},
+      effictive_begin = #{effictiveBegin,jdbcType=TIMESTAMP},
+      effictive_end = #{effictiveEnd,jdbcType=TIMESTAMP},
+      company_id = #{companyId,jdbcType=BIGINT},
+      company_name = #{companyName,jdbcType=VARCHAR},
+      business_group_id = #{businessGroupId,jdbcType=BIGINT},
+      business_group_name = #{businessGroupName,jdbcType=VARCHAR},
+      car_type_key = #{carTypeKey,jdbcType=VARCHAR},
+      car_type_name = #{carTypeName,jdbcType=VARCHAR},
+      loan_quota_low = #{loanQuotaLow,jdbcType=DECIMAL},
+      loan_quota_high = #{loanQuotaHigh,jdbcType=DECIMAL},
+    expression = #{expression,jdbcType=VARCHAR},
+      operator_id = #{operatorId,jdbcType=BIGINT},
+      operator_name = #{operatorName,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      modify_time = #{modifyTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

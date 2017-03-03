@@ -1,0 +1,346 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cgw360.cls.dao.deliver.DocumentDeliverMapper" >
+  <resultMap id="BaseResultMap" type="com.cgw360.cls.model.deliver.DocumentDeliver" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="project_id" property="projectId" jdbcType="BIGINT" />
+    <result column="document_no" property="documentNo" jdbcType="VARCHAR" />
+    <result column="staff_id" property="staffId" jdbcType="BIGINT" />
+    <result column="deliver_status" property="deliverStatus" jdbcType="INTEGER" />
+    <result column="deliver_time" property="deliverTime" jdbcType="TIMESTAMP" />
+    <result column="file_sended" property="fileSended" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Select_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+      <if test="sendedStatus != null" >
+          and file_sended &amp; ${sendedStatus} != ${sendedStatus}
+      </if>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, project_id, document_no, staff_id, deliver_status, deliver_time, file_sended, create_time, 
+    modify_time, remark
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.cgw360.cls.model.deliver.DocumentDeliverExample" >
+    select
+    <include refid="Base_Column_List" />
+    from document_deliver
+    <if test="_parameter != null" >
+      <include refid="Select_By_Example_Where_Clause" />
+      <if test="example.orderByClause != null" >
+	      order by ${example.orderByClause}
+	  </if>
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from document_deliver
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from document_deliver
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.cgw360.cls.model.deliver.DocumentDeliverExample" >
+    delete from document_deliver
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.cgw360.cls.model.deliver.DocumentDeliver" useGeneratedKeys="true" keyProperty="id">
+    insert into document_deliver (id, project_id, document_no, staff_id, 
+      deliver_status, deliver_time, file_sended, 
+      create_time, modify_time, remark)
+    values (#{id,jdbcType=BIGINT}, #{projectId,jdbcType=BIGINT}, #{documentNo,jdbcType=VARCHAR},#{staffId,jdbcType=BIGINT}, 
+      #{deliverStatus,jdbcType=INTEGER}, #{deliverTime,jdbcType=TIMESTAMP}, #{fileSended,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{modifyTime,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cgw360.cls.model.deliver.DocumentDeliver" useGeneratedKeys="true" keyProperty="id">
+    insert into document_deliver
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="projectId != null" >
+        project_id,
+      </if>
+      <if test="documentNo != null" >
+        document_no,
+      </if>
+      <if test="staffId != null" >
+        staff_id,
+      </if>
+      <if test="deliverStatus != null" >
+        deliver_status,
+      </if>
+      <if test="deliverTime != null" >
+        deliver_time,
+      </if>
+      <if test="fileSended != null" >
+        file_sended,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="modifyTime != null" >
+        modify_time,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="projectId != null" >
+        #{projectId,jdbcType=BIGINT},
+      </if>
+      <if test="documentNo != null" >
+        #{documentNo,jdbcType=VARCHAR},
+      </if>
+      <if test="staffId != null" >
+        #{staffId,jdbcType=BIGINT},
+      </if>
+      <if test="deliverStatus != null" >
+        #{deliverStatus,jdbcType=INTEGER},
+      </if>
+      <if test="deliverTime != null" >
+        #{deliverTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fileSended != null" >
+        #{fileSended,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyTime != null" >
+        #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.cgw360.cls.model.deliver.DocumentDeliverExample" resultType="java.lang.Integer" >
+    select count(*) from document_deliver
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update document_deliver
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.projectId != null" >
+        project_id = #{record.projectId,jdbcType=BIGINT},
+      </if>
+      <if test="record.documentNo != null" >
+        document_no = #{record.documentNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.staffId != null" >
+        staff_id = #{record.staffId,jdbcType=BIGINT},
+      </if>
+      <if test="record.deliverStatus != null" >
+        deliver_status = #{record.deliverStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.deliverTime != null" >
+        deliver_time = #{record.deliverTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.fileSended != null" >
+        file_sended = #{record.fileSended,jdbcType=INTEGER},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.modifyTime != null" >
+        modify_time = #{record.modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.remark != null" >
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update document_deliver
+    set id = #{record.id,jdbcType=BIGINT},
+      project_id = #{record.projectId,jdbcType=BIGINT},
+      document_no = #{record.documentNo,jdbcType=BIGINT},
+      staff_id = #{record.staffId,jdbcType=BIGINT},
+      deliver_status = #{record.deliverStatus,jdbcType=INTEGER},
+      deliver_time = #{record.deliverTime,jdbcType=TIMESTAMP},
+      file_sended = #{record.fileSended,jdbcType=INTEGER},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      modify_time = #{record.modifyTime,jdbcType=TIMESTAMP},
+      remark = #{record.remark,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cgw360.cls.model.deliver.DocumentDeliver" >
+    update document_deliver
+    <set >
+      <if test="projectId != null" >
+        project_id = #{projectId,jdbcType=BIGINT},
+      </if>
+      <if test="documentNo != null" >
+        document_no = #{documentNo,jdbcType=VARCHAR},
+      </if>
+      <if test="staffId != null" >
+        staff_id = #{staffId,jdbcType=BIGINT},
+      </if>
+      <if test="deliverStatus != null" >
+        deliver_status = #{deliverStatus,jdbcType=INTEGER},
+      </if>
+      <if test="deliverTime != null" >
+        deliver_time = #{deliverTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fileSended != null" >
+        file_sended = #{fileSended,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyTime != null" >
+        modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cgw360.cls.model.deliver.DocumentDeliver" >
+    update document_deliver
+    set project_id = #{projectId,jdbcType=BIGINT},
+      document_no = #{documentNo,jdbcType=VARCHAR},
+      staff_id = #{staffId,jdbcType=BIGINT},
+      deliver_status = #{deliverStatus,jdbcType=INTEGER},
+      deliver_time = #{deliverTime,jdbcType=TIMESTAMP},
+      file_sended = #{fileSended,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+      remark = #{remark,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+  <select id="getWaitDocumentDeliverList4Bank" resultMap="BaseResultMap" parameterType="java.util.Map" >
+      select a.* from document_deliver a 
+      LEFT JOIN document_deliver_express_bill_list c on a.id=c.document_deliver_id 
+      LEFT JOIN document_deliver_express_bill b on c.bill_id=b.id 
+      where a.file_sended &amp; 28 != 28 and b.recipient_status=3 and c.recipient_status=3 and c.file_list &amp; 2=2 and b.recipient_type=2 
+      <if test="bankIds != null" >
+          and b.recipient_id in
+          <foreach collection="bankIds" item="listItem" open="(" close=")" separator="," >
+               #{listItem}
+          </foreach>
+      </if>
+      <if test="orgId != null" >
+          and b.org_id = #{orgId,jdbcType=BIGINT}
+      </if>
+      <!-- <if test="documentDeliverIds != null" >
+          and b.document_deliver_id in
+          <foreach collection="documentDeliverIds" item="listItem" open="(" close=")" separator="," >
+               #{listItem}
+          </foreach>
+      </if> -->
+      <if test="projectIds != null" >
+          and a.project_id in
+          <foreach collection="projectIds" item="listItem" open="(" close=")" separator="," >
+               #{listItem}
+          </foreach>
+      </if>
+  </select>
+</mapper>

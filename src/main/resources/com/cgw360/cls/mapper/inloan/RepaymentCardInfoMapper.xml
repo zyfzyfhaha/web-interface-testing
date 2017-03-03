@@ -1,0 +1,375 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cgw360.cls.dao.inloan.IRepaymentCardInfoDao">
+	<resultMap id="myResultMap" type="com.cgw360.cls.model.inloan.RepaymentCardInfo" autoMapping="true">
+		<result column="id" property="id" />
+		<result column="project_id" property="projectId" />
+		<result column="bank_name" property="bankName" />
+		<result column="card_no" property="cardNo" />
+		<result column="deliver_type" property="deliverType" />
+		<result column="express_company" property="expressCompany" />
+		<result column="express_no" property="expressNo" />
+		<result column="deliver_userid" property="deliverUserid" />
+		<result column="deliver_realname" property="deliverRealname" />
+		<result column="deliver_date" property="deliverDate" />
+		<result column="deliver_addr" property="deliverAddr" />
+		<result column="note" property="note" />
+		<result column="create_time" property="createTime" />
+		<result column="modify_time" property="modifyTime" />
+	</resultMap>
+
+	<insert id="insertOne" parameterType="com.cgw360.cls.model.inloan.RepaymentCardInfo" keyProperty="id" useGeneratedKeys="true">
+		<![CDATA[
+  			insert into repayment_card_info
+  			(
+  			  			   			project_id,
+  			  			   			bank_name,
+  			  			   			card_no,
+  			  			   			deliver_type,
+  			  			   			express_company,
+  			  			   			express_no,
+  			  			   			deliver_userid,
+  			  			   			deliver_realname,
+  			  			   			deliver_date,
+  			  			   			deliver_addr,
+  			  			   			note,
+  			  			   			create_time,
+  			  			   			modify_time  			   			
+			)values(
+						 			 #{projectId} ,
+						 			 #{bankName} ,
+						 			 #{cardNo} ,
+						 			 #{deliverType} ,
+						 			 #{expressCompany} ,
+						 			 #{expressNo} ,
+						 			 #{deliverUserid} ,
+						 			 #{deliverRealname} ,
+						 			 #{deliverDate} ,
+						 			 #{deliverAddr} ,
+						 			 #{note} ,
+						 			 NOW() ,
+						 			 #{modifyTime} 			 			
+			)
+		]]>
+	</insert>
+
+	<insert id="insertList" parameterType="com.cgw360.cls.model.inloan.RepaymentCardInfo" keyProperty="id" useGeneratedKeys="true">
+		<![CDATA[
+  			insert into repayment_card_info
+  			(
+  			  			   			project_id,
+  			  			   			bank_name,
+  			  			   			card_no,
+  			  			   			deliver_type,
+  			  			   			express_company,
+  			  			   			express_no,
+  			  			   			deliver_userid,
+  			  			   			deliver_realname,
+  			  			   			deliver_date,
+  			  			   			deliver_addr,
+  			  			   			note,
+  			  			   			create_time,
+  			  			   			modify_time  			   			
+			)values
+			]]>
+		<foreach collection="list" item="item" index="index" separator=",">
+			(
+			#{item.projectId} ,
+			#{item.bankName} ,
+			#{item.cardNo} ,
+			#{item.deliverType} ,
+			#{item.expressCompany} ,
+			#{item.expressNo} ,
+			#{item.deliverUserid} ,
+			#{item.deliverRealname} ,
+			#{item.deliverDate} ,
+			#{item.deliverAddr} ,
+			#{item.note} ,
+			NOW() ,
+			#{item.modifyTime}
+			)
+		</foreach>
+	</insert>
+
+	<delete id="deleteOne" parameterType="java.lang.Long">
+		<![CDATA[
+			delete from repayment_card_info where id = #{id}
+		]]>
+	</delete>
+
+	<delete id="deleteList">
+		<![CDATA[
+			delete from repayment_card_info where id in
+		]]>
+		<foreach collection="list" item="itemId" index="index" open="(" close=")" separator=",">
+			#{itemId}
+		</foreach>
+	</delete>
+
+	<update id="update" parameterType="com.cgw360.cls.model.inloan.RepaymentCardInfo">
+		<![CDATA[
+			update repayment_card_info 
+		]]>
+		<set>
+			<if test="projectId != null and projectId != ''"> project_id = #{projectId}, </if>
+			<if test="bankName != null and bankName != ''"> bank_name = #{bankName}, </if>
+			<if test="cardNo != null and cardNo != ''"> card_no = #{cardNo}, </if>
+			<if test="deliverType != null and deliverType != ''"> deliver_type = #{deliverType}, </if>
+			<if test="expressCompany != null and expressCompany != ''"> express_company = #{expressCompany}, </if>
+			<if test="expressNo != null and expressNo != ''"> express_no = #{expressNo}, </if>
+			<if test="deliverUserid != null and deliverUserid != ''"> deliver_userid = #{deliverUserid}, </if>
+			<if test="deliverRealname != null and deliverRealname != ''"> deliver_realname = #{deliverRealname}, </if>
+			<if test="deliverDate != null and deliverDate != ''"> deliver_date = #{deliverDate}, </if>
+			<if test="deliverAddr != null and deliverAddr != ''"> deliver_addr = #{deliverAddr}, </if>
+			<if test="note != null and note != ''"> note = #{note}, </if>
+			<if test="createTime != null and createTime != ''"> create_time = #{createTime}, </if>
+			<if test="modifyTime != null and modifyTime != ''"> modify_time = #{modifyTime}, </if>
+		</set>
+		<![CDATA[
+			where id = #{id}
+		]]>
+	</update>
+
+	<select id="selectOne" parameterType="java.lang.Long" resultMap="myResultMap">
+		<![CDATA[
+			select * from repayment_card_info where id = #{id} limit 1
+		]]>
+	</select>
+	<select id="selectList" resultMap="myResultMap">
+		<![CDATA[
+			select * from repayment_card_info where id in
+		]]>
+		<foreach collection="list" item="itemId" index="index" open="(" close=")" separator=",">
+			#{itemId}
+		</foreach>
+	</select>
+	<!-- common statement -->
+	<sql id="common_where">
+		<!-- and username like '%${username}%' -->
+		<where>
+			<if test="projectId != null and projectId != ''">
+				AND project_id = #{projectId}
+			</if>
+			<if test="bankName != null and bankName != ''">
+				AND bank_name = #{bankName}
+			</if>
+			<if test="cardNo != null and cardNo != ''">
+				AND card_no = #{cardNo}
+			</if>
+			<if test="deliverType != null and deliverType != ''">
+				AND deliver_type = #{deliverType}
+			</if>
+			<if test="expressCompany != null and expressCompany != ''">
+				AND express_company = #{expressCompany}
+			</if>
+			<if test="expressNo != null and expressNo != ''">
+				AND express_no = #{expressNo}
+			</if>
+			<if test="deliverUserid != null and deliverUserid != ''">
+				AND deliver_userid = #{deliverUserid}
+			</if>
+			<if test="deliverRealname != null and deliverRealname != ''">
+				AND deliver_realname = #{deliverRealname}
+			</if>
+			<if test="deliverDate != null and deliverDate != ''">
+				AND deliver_date = #{deliverDate}
+			</if>
+			<if test="deliverAddr != null and deliverAddr != ''">
+				AND deliver_addr = #{deliverAddr}
+			</if>
+			<if test="note != null and note != ''">
+				AND note = #{note}
+			</if>
+			<if test="createTime != null and createTime != ''">
+				AND create_time = #{createTime}
+			</if>
+			<if test="modifyTime != null and modifyTime != ''">
+				AND modify_time = #{modifyTime}
+			</if>
+		</where>
+	</sql>
+
+	<select id="selectCountByFields" parameterType="java.util.Map" resultType="java.lang.Integer">
+		<![CDATA[
+			select count(1) from repayment_card_info 
+		]]>
+		<include refid="common_where" />
+	</select>
+	<select id="selectByFields" parameterType="java.util.Map" resultMap="myResultMap">
+		<![CDATA[
+			select * from repayment_card_info 
+		]]>
+		<include refid="common_where" />
+		<choose>
+			<when test="sortField != null and sortField == 'createTimeAsc'">
+				<![CDATA[order by case when create_time is null then '2039-01-01 00:00:00' else create_time end asc]]>
+			</when>
+			<when test="sortField != null and sortField == 'createTimeDesc'">
+				<![CDATA[order by case when create_time is null then '1969-12-31 23:59:59' else create_time end desc]]>
+			</when>
+			<otherwise>
+				<![CDATA[order by case when create_time is null then '1969-12-31 23:59:59' else create_time end desc]]>
+			</otherwise>
+		</choose>
+		<choose>
+			<when test="limitStart != null and limitNum != null">
+				limit #{limitStart}, #{limitNum}
+			</when>
+			<when test="limitNum != null">
+				limit #{limitNum}
+			</when>
+			<otherwise></otherwise>
+		</choose>
+	</select>
+	
+	<sql id="criteria_condition">
+		<if test="loanStatuses != null">
+			<choose>
+				<when test="loanStatuses.size() > 0">
+					lap1.status in
+					<foreach collection="loanStatuses" item="tag" open=" (" separator=", " close=" )">
+						${tag}
+					</foreach>
+				</when>
+				<otherwise>
+					and 1 = -1
+				</otherwise>
+			</choose>
+		</if>	
+		<choose>
+    		<when test="isDelivered==1">
+    			and (rci.id is not null)	 			
+    		</when>
+    		<otherwise>
+    			and (rci.id is null)	
+    		</otherwise>
+    	</choose>	
+  		<if test="projectNo !=null and projectNo != ''">
+	 		 and lap1.project_no like concat("%",#{projectNo},"%") 		  
+	 	</if>
+	 	<if test="customerName !=null and customerName != ''">
+	 		 and lap1.customer_name like concat("%",#{customerName},"%") 		  
+	 	</if>
+	 	<if test="cardNo !=null and cardNo != ''">
+	 		and lap1.card_no like concat("%",#{cardNo},"%") 		  
+	 	</if>
+	 	<if test="mobilePhone !=null and mobilePhone != ''">
+	 		and lap1.mobile_phone like concat("%",#{mobilePhone},"%") 		  
+	 	</if>
+	 	<if test="repayCardNo !=null and repayCardNo != ''">
+	 		and (
+	 				rci.card_no  like concat("%",#{repayCardNo}	,"%") 	  
+	 			or  lci.repayment_no  like concat("%",#{repayCardNo}	,"%") 	  
+	 			)
+	 	</if>	 	
+	 	<if test="applyIds!=null">
+	 		<choose>
+		 		<when test="applyIds.size() > 0 ">
+		 			and lap1.relative_apply_id1 in 
+	    			<foreach collection="applyIds" item="tag" open=" (" separator=" ," close=")">
+						${tag}
+					</foreach>			
+	    		</when>
+	    		<otherwise>
+	    			and 1 = -1
+	    		</otherwise>	
+	    	</choose>  
+	 	</if>
+	 	<if test="dataOrgScope != null or dataGroupScope != null">
+	 		and(
+	 			<if test="dataOrgScope != null">
+	 				lap1.org_id in 
+	 				<foreach collection="dataOrgScope" item="tag" open=" )" separator=" ," close=") ">
+						  ${tag}
+					</foreach>
+	 			</if>
+	 			<if test="dataOrgScope != null and dataGroupScope != null"> 
+	 				or 
+	 			</if>
+				<if test="dataGroupScope != null">
+					lap1.user_group_id in 
+	 				<foreach collection="dataGroupScope" item="tag" open=" (" separator=" ," close=") ">
+						  ${tag} 
+					</foreach>
+	 			</if>
+			)
+		</if>
+  	</sql>
+	 <select id="countByCriteria" resultType="java.lang.Integer" parameterType="java.util.Map" >
+	    select 
+	    	count(1)
+		from loan_info_view lap1
+		left join loan_contract_info lci on lci.project_id = lap1.project_id
+		left join repayment_card_info rci on rci.project_id = lap1.project_id
+		<trim prefix="where" prefixOverrides="and|or">
+		    <include refid="criteria_condition" />
+	  	</trim>
+	</select>
+	<select id="selectByCriteria" parameterType="java.util.Map" resultType="java.util.Map">
+		select 
+			lap1.relative_apply_id1 applyId, 
+			lap1.project_id projectId, 
+			lap1.project_no projectNo,
+			lap1.customer_name customerName, 
+			lap1.card_no cardNo, 
+			lap1.loan_amount loanAmount,
+			lap1.loan_term loanTerm,
+			lap1.co_bank_name coBankName,
+			
+			rci.id id,
+			case when rci.card_no is null  then lci.repayment_no else rci.card_no end repayCardNo,
+			rci.deliver_date deliverDate,
+			rci.deliver_type deliverType
+		from loan_info_view lap1
+		left join loan_contract_info lci on lci.project_id = lap1.project_id
+		left join repayment_card_info rci on rci.project_id = lap1.project_id
+
+		<trim prefix="where" prefixOverrides="and|or">
+		    <include refid="criteria_condition" />
+	  	</trim>
+  		order by lap1.create_time desc
+  		<choose>
+			<when test="limitStart != null and limitNum != null">
+				limit #{limitStart}, #{limitNum}
+			</when>
+			<when test="limitNum != null">
+				limit #{limitNum}
+			</when>
+			<otherwise></otherwise>
+		</choose>
+  	</select>
+  	
+	<select id="selectByProjectId" parameterType="java.lang.Long" resultType="java.util.Map">
+		select 
+			lap1.relative_apply_id1 applyId, 
+			lap1.project_id projectId, 
+			lap1.project_no projectNo,
+			lap1.product_name productName,
+			lap1.loan_amount loanAmount,
+			lap1.co_bank_name coBankName,
+		
+			lap1.customer_id customerId,
+			lap1.customer_no customerNo,
+			lap1.customer_name customerName,
+			lap1.card_type cardType,
+			lap1.card_no cardNo,
+			lap1.mobile_phone mobilePhone,
+			lap1.joint_obligor jointObligor,
+		
+			rci.id id,
+			case when rci.card_no is null  then lci.repayment_no else rci.card_no end repayCardNo,
+			rci.deliver_type deliverType,
+			rci.express_company expressCompany,
+			rci.express_no expressNo,
+			rci.deliver_userid deliverUserid,
+			rci.deliver_realname deliverRealname,
+			rci.deliver_date deliverDate,
+			case when rci.deliver_addr is null then lap1.home_address else rci.deliver_addr end deliverAddr,
+			rci.note note
+		from loan_info_view lap1
+		left join loan_contract_info lci on lci.project_id = lap1.project_id
+		left join repayment_card_info rci on rci.project_id = lap1.project_id
+
+		where lap1.project_id = #{projectId}
+  	</select>
+</mapper>

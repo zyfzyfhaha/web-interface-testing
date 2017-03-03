@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop" xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+    <context:property-placeholder location="classpath*:/cls.conf" ignore-unresolvable="true"/>
+
+    <context:component-scan base-package="com.cgw360" annotation-config="true"/>
+    <aop:aspectj-autoproxy proxy-target-class="true"/>
+
+    <!--===================================================贷款发起流程开始===================================================-->
+
+    <!--=================================================正常贷款发起流程映射=================================================-->
+    <util:map id="loanProcessNodeActionMap" key-type="java.lang.String"
+              value-type="com.cgw360.cls.bss.flow.loan.ILoanProcessFlowAction">
+        <entry key="LOAN_APPLY_FLOW#LOAN_LAUNCH" value-ref="P1LoanProcessLaunchActionImpl"/>
+        <entry key="LOAN_APPLY_FLOW#LOAN_BILL_ASSIGN" value-ref="P2BillAssignActionImpl"/>
+        <entry key="LOAN_APPLY_FLOW#LOAN_BILL_RESEARCH" value-ref="P3MainBillResearchActionImpl"/>
+        <entry key="LOAN_APPLY_FLOW#LOAN_VICE_BILL_RESEARCH" value-ref="P3_1ViceBillResearchActionImpl"/>
+        <entry key="LOAN_APPLY_FLOW#LOAN_OFFICE_STAFF_BUDGET" value-ref="P4OfficeStaffBudgetActionImpl"/>
+        <entry key="LOAN_APPLY_FLOW#LOAN_REGIONAL_MANAGER" value-ref="P5RegionalManagerActionImpl"/>
+        <entry key="LOAN_APPLY_FLOW#LOAN_APPROVE_OFFICE_STAFF" value-ref="P6ApproveOfficeStaffActionImpl"/>
+        <entry key="LOAN_APPLY_FLOW#LOAN_GENERAL_MANAGER" value-ref="P7GeneralManagerActionImpl"/>
+        <entry key="LOAN_APPLY_FLOW#LOAN_CAR_FINANCE" value-ref="P8CarFinanceActionImpl"/>
+        <entry key="LOAN_APPLY_FLOW#LOAN_CAR_FINANCE_MANAGER" value-ref="P9CarFinanceManagerActionImpl"/>
+        <entry key="LOAN_APPLY_FLOW#LOAN_CAR_FINANCE_MAJORDOMO" value-ref="P10CarFinanceMajordomoActionImpl"/>
+        <entry key="LOAN_APPLY_FLOW#LOAN_GROUP_GENERAL_MANAGER" value-ref="P11GroupGeneralManagerActionImpl"/>
+        <entry key="LOAN_APPLY_FLOW#LOAN_FINANCE_EXECUTIVE" value-ref="P12FinanceExecutiveActionImpl"/>
+        <entry key="LOAN_APPLY_FLOW#LOAN_FUND_DIRECTOR" value-ref="P13FundDirectorActionImpl"/>
+        <entry key="LOAN_APPLY_FLOW#LOAN_GROUP_CASHIER" value-ref="P14GroupCashierActionImpl"/>
+        <entry key="LOAN_APPLY_FLOW#LOAN_BRANCH_CASHIER" value-ref="P15BranchCashierActionImpl"/>
+    </util:map>
+
+    <bean id="loanProcessNodeActionMapper" class="com.cgw360.cls.bss.flow.ProcessNodeActionMapper">
+        <property name="nodeActionMapper" ref="loanProcessNodeActionMap"/>
+    </bean>
+
+    <!--=================================================贷款作废发起流程映射=================================================-->
+    <util:map id="loanCancelProcessNodeActionMap" key-type="java.lang.String"
+              value-type="com.cgw360.cls.bss.flow.loan.ILoanProcessFlowAction">
+        <entry key="LOAN_CANCEL_FLOW#LOAN_CANCEL_OFFICE_STAFF_BUDGET"
+               value-ref="loanCancelP1OfficeStaffBudgetActionImpl"/>
+        <entry key="LOAN_CANCEL_FLOW#LOAN_CANCEL_REGIONAL_MANAGER" value-ref="loanCancelP2RegionalManagerActionImpl"/>
+        <entry key="LOAN_CANCEL_FLOW#LOAN_CANCEL_APPROVE_OFFICE_STAFF"
+               value-ref="loanCancelP3ApproveOfficeStaffActionImpl"/>
+        <entry key="LOAN_CANCEL_FLOW#LOAN_CANCEL_GENERAL_MANAGER" value-ref="loanCancelP4GeneralManagerActionImpl"/>
+        <entry key="LOAN_CANCEL_FLOW#LOAN_CANCEL_CAR_FINANCE" value-ref="loanCancelP5CarFinanceActionImpl"/>
+        <entry key="LOAN_CANCEL_FLOW#LOAN_CANCEL_FINANCE_EXECUTIVE" value-ref="loanCancelP6FinanceExecutiveActionImpl"/>
+        <entry key="LOAN_CANCEL_FLOW#LOAN_CANCEL_BRANCH_CASHIER" value-ref="loanCancelP7BranchCashierActionImpl"/>
+        <entry key="LOAN_CANCEL_FLOW#LOAN_CANCEL_GROUP_CASHIER" value-ref="loanCancelP8GroupCashierActionImpl"/>
+
+    </util:map>
+
+    <bean id="loanCancelProcessNodeActionMapper" class="com.cgw360.cls.bss.flow.ProcessNodeActionMapper">
+        <property name="nodeActionMapper" ref="loanCancelProcessNodeActionMap"/>
+    </bean>
+
+    <!--=================================================贷款修改发起流程映射=================================================-->
+    <util:map id="loanModifyProcessNodeActionMap" key-type="java.lang.String"
+              value-type="com.cgw360.cls.bss.flow.loan.ILoanProcessFlowAction">
+        <entry key="LOAN_MODIFY_FLOW#LOAN_MODIFY_OFFICE_STAFF_BUDGET"
+               value-ref="loanModifyP4OfficeStaffBudgetActionImpl"/>
+        <entry key="LOAN_MODIFY_FLOW#LOAN_MODIFY_REGIONAL_MANAGER" value-ref="loanModifyP5RegionalManagerActionImpl"/>
+        <entry key="LOAN_MODIFY_FLOW#LOAN_MODIFY_APPROVE_OFFICE_STAFF"
+               value-ref="loanModifyP6ApproveOfficeStaffActionImpl"/>
+        <entry key="LOAN_MODIFY_FLOW#LOAN_MODIFY_GENERAL_MANAGER" value-ref="loanModifyP7GeneralManagerActionImpl"/>
+        <entry key="LOAN_MODIFY_FLOW#LOAN_MODIFY_CAR_FINANCE" value-ref="loanModifyP8CarFinanceActionImpl"/>
+        <entry key="LOAN_MODIFY_FLOW#LOAN_MODIFY_FINANCE_EXECUTIVE_1"
+               value-ref="loanModifyP9FinanceExecutiveActionImpl"/>
+        <entry key="LOAN_MODIFY_FLOW#LOAN_MODIFY_BRANCH_CASHIER_1" value-ref="loanModifyP10BranchCashierActionImpl"/>
+        <entry key="LOAN_MODIFY_FLOW#LOAN_MODIFY_GROUP_CASHIER_1" value-ref="loanModifyP11GroupCashierActionImpl"/>
+        <entry key="LOAN_MODIFY_FLOW#LOAN_MODIFY_FINANCE_EXECUTIVE_2"
+               value-ref="loanModifyP12FinanceExecutiveActionImpl"/>
+        <entry key="LOAN_MODIFY_FLOW#LOAN_MODIFY_FUND_DIRECTOR" value-ref="loanModifyP13FundDirectorActionImpl"/>
+        <entry key="LOAN_MODIFY_FLOW#LOAN_MODIFY_GROUP_CASHIER_2" value-ref="loanModifyP14GroupCashierActionImpl"/>
+        <entry key="LOAN_MODIFY_FLOW#LOAN_MODIFY_BRANCH_CASHIER_2" value-ref="loanModifyP15BranchCashierActionImpl"/>
+    </util:map>
+
+    <bean id="loanModifyProcessNodeActionMapper" class="com.cgw360.cls.bss.flow.ProcessNodeActionMapper">
+        <property name="nodeActionMapper" ref="loanModifyProcessNodeActionMap"/>
+    </bean>
+
+</beans>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://code.alibabatech.com/schema/dubbo
+        http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+    <dubbo:registry id="cls_center" register="false" protocol="dubbo" address="${dubbo.cheguo.staff.address}"/>
+    <dubbo:registry id="cheguo_api_center" register="false" protocol="dubbo" address="zookeeper://10.10.13.11:2181"/>
+
+    <dubbo:reference id="chooseCarService" interface="com.cheguo.carmodel.service.IChooseCarService" group="test" version="1.0.1" check="false"/>
+
+    <dubbo:reference id="preLoanService" registry="cheguo_api_center" interface="com.cheguo.credit.service.IPreLoanService"
+                     group="test" version="1.0.1" check="false"/>
+
+    <dubbo:reference id="cooperationBankService" registry="cls_center"
+                     interface="com.za.cls.api.ICooperationBankService"
+                     group="${dubbo.cheguo.staff.group}" version="${dubbo.cheguo.staff.version}" check="false"/>
+
+    <!-- <dubbo:reference id="insuranceCompanyService" registry="cls_center"
+                     interface="com.za.cls.api.IInsuranceCompanyService"
+                     group="${dubbo.cheguo.staff.group}" version="${dubbo.cheguo.staff.version}" check="false"/> -->
+
+    <!--<dubbo:reference id="carDealerService" registry="cls_center" interface="com.za.cls.api.ICarDealerService"-->
+                     <!--group="${dubbo.cheguo.staff.group}" version="${dubbo.cheguo.staff.version}" check="false"/>-->
+
+    <dubbo:reference id="guaranteeCompanyService" registry="cls_center"
+                     interface="com.za.cls.api.IGuaranteeCompanyService"
+                     group="${dubbo.cheguo.staff.group}" version="${dubbo.cheguo.staff.version}" check="false"/>
+</beans>

@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cgw360.cls.dao.inloan.IBankRemittanceInfoDao">
+	<sql id="criteria_condition">
+		<if test="loanStatuses != null">
+			<choose>
+				<when test="loanStatuses.size() > 0">
+					lap1.status in
+					<foreach collection="loanStatuses" item="tag" open=" (" separator=", " close=" )">
+						${tag}
+					</foreach>
+				</when>
+				<otherwise>
+					and 1 = -1
+				</otherwise>
+			</choose>
+		</if>	
+		<choose>
+    		<when test="bankPaymentStatus==2">
+    			and (lap1.bank_payment_status = #{bankPaymentStatus})	 			
+    		</when>
+    		<otherwise>
+    			and (lap1.bank_payment_status is null or lap1.bank_payment_status = #{bankPaymentStatus})	
+    		</otherwise>
+    	</choose>	
+  		<if test="projectNo !=null and projectNo != ''">
+	 		 and lap1.project_no like concat("%",#{projectNo},"%") 		  
+	 	</if>
+	 	<if test="customerName !=null and customerName != ''">
+	 		 and lap1.customer_name like concat("%",#{customerName},"%") 		  
+	 	</if>
+	 	<if test="cardNo !=null and cardNo != ''">
+	 		and lap1.card_no like concat("%",#{cardNo},"%") 		  
+	 	</if>
+	 	<if test="mobilePhone !=null and mobilePhone != ''">
+	 		and lap1.mobile_phone like concat("%",#{mobilePhone},"%") 		  
+	 	</if>
+	 	<if test="applyIds!=null">
+	 		<choose>
+		 		<when test="applyIds.size() > 0 ">
+		 			and lap1.relative_apply_id1 in 
+	    			<foreach collection="applyIds" item="tag" open=" (" separator=" ," close=")">
+						${tag}
+					</foreach>			
+	    		</when>
+	    		<otherwise>
+	    			and 1 = -1
+	    		</otherwise>	
+	    	</choose>  
+	 	</if>
+	 	<if test="dataOrgScope != null or dataGroupScope != null">
+	 		and(
+	 			<if test="dataOrgScope != null">
+	 				lap1.org_id in 
+	 				<foreach collection="dataOrgScope" item="tag" open=" )" separator=" ," close=") ">
+						  ${tag}
+					</foreach>
+	 			</if>
+	 			<if test="dataOrgScope != null and dataGroupScope != null"> 
+	 				or 
+	 			</if>
+				<if test="dataGroupScope != null">
+					lap1.user_group_id in 
+	 				<foreach collection="dataGroupScope" item="tag" open=" (" separator=" ," close=") ">
+						  ${tag} 
+					</foreach>
+	 			</if>
+			)
+		</if>
+  	</sql>
+	 <select id="countByCriteria" resultType="java.lang.Integer" parameterType="java.util.Map" >
+	    select 
+	    	count(1)
+		from loan_info_view lap1
+		<trim prefix="where" prefixOverrides="and|or">
+		    <include refid="criteria_condition" />
+	  	</trim>
+	</select>
+	<select id="selectByCriteria" parameterType="java.util.Map" resultType="java.util.Map">
+		select 
+			lap1.relative_apply_id1 applyId, 
+			lap1.project_id projectId, 
+			lap1.project_no projectNo,
+			lap1.customer_name customerName, 
+			lap1.card_no cardNo, 		
+			lap1.mobile_phone mobilePhone, 
+			lap1.loan_amount loanAmount,
+			lap1.loan_term loanTerm,
+			lap1.launch_date launchDate,
+			lap1.dealer_payment_date dealerPaymentDate,
+			lap1.co_bank_name coBankName,
+			lap1.bank_payment_date bankPaymentDate,
+			lap1.bank_payment_amount bankPaymentAmount
+		from loan_info_view lap1
+
+		<trim prefix="where" prefixOverrides="and|or">
+		    <include refid="criteria_condition" />
+	  	</trim>
+  		order by lap1.create_time desc
+  		<choose>
+			<when test="limitStart != null and limitNum != null">
+				limit #{limitStart}, #{limitNum}
+			</when>
+			<when test="limitNum != null">
+				limit #{limitNum}
+			</when>
+			<otherwise></otherwise>
+		</choose>
+  	</select>
+  	
+  	<select id="selectByProjectId" parameterType="java.lang.Long" resultType="java.util.Map">
+		select 
+			lap1.relative_apply_id1 applyId, 
+			lap1.project_id projectId, 
+			lap1.project_no projectNo,
+			lap1.product_name productName,
+			lap1.loan_amount loanAmount,
+
+			lap1.customer_id customerId,
+			lap1.customer_no customerNo,
+			lap1.customer_name customerName,
+			lap1.card_type cardType,
+			lap1.card_no cardNo,
+			lap1.mobile_phone mobilePhone,
+			lap1.joint_obligor jointObligor
+		from loan_info_view lap1
+		where lap1.project_id = #{projectId}
+  	</select>
+</mapper>

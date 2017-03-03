@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+	<context:property-placeholder location="classpath*:/cls.conf" ignore-unresolvable="true" />
+	<context:annotation-config />
+    <context:component-scan base-package="com.cgw360,com.cgw360.cls.service.loan.apply" annotation-config="true"/>
+	<aop:aspectj-autoproxy proxy-target-class="true" />
+
+	<import resource="classpath*:/spring/cls-datasource.xml" />
+	<import resource="classpath*:/spring/cls-credit-flow-context.xml" />
+	<import resource="classpath*:/spring/cls-loan-flow-context.xml" />
+	<import resource="classpath*:/spring/flow-context.xml" />
+	<import resource="classpath*:/spring/flow-rule-context.xml"/>
+	<!-- define the SqlSessionFactory -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="mapperLocations">
+			<list>
+				<value>classpath*:com/cgw360/cls/mapper/**/*.xml</value>
+			</list>
+		</property>
+		<property name="plugins">
+			<array>
+				<bean class="com.cgw360.cls.base.mybatis.interceptor.PageInterceptor">
+					<property name="dialect" value="mysql" />
+				</bean>
+			</array>
+		</property>
+	</bean>
+
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+        <property name="basePackage" value="com.cgw360.cls.dao"/>
+    </bean>
+
+	<!-- transaction manager, use JtaTransactionManager for global tx -->
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	<!-- 声明式事务 -->
+	<tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true" />
+	<!-- 编程式事务 -->
+	<bean id="txDefinition" class="org.springframework.transaction.support.DefaultTransactionDefinition" />
+
+	<!--=========================================通用提交流程======================================== -->
+
+	<bean id="submitPipeline" class="com.cgw360.cls.base.pipeline.SimplePipeline">
+		<property name="valves">
+			<list>
+				<ref bean="submitHandleBOPNodeValve" />
+				<ref bean="confirmSubmitValve" />
+                <ref bean="updateLoanFlowInfoValve"/>
+                <ref bean="handleSecondHandCarLoanValve"/>
+                <ref bean="notificationValve"/>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="rollbackPipeline" class="com.cgw360.cls.base.pipeline.SimplePipeline">
+		<property name="valves">
+			<list>
+				<ref bean="rollbackHandleBOPNodeValve" />
+				<ref bean="confirmSubmitValve" />
+                <ref bean="updateLoanFlowInfoValve"/>
+                <ref bean="handleSecondHandCarLoanValve"/>
+                <ref bean="notificationValve"/>
+			</list>
+		</property>
+	</bean>
+
+
+	<bean id="permissionCheckPipeline" class="com.cgw360.cls.base.pipeline.SimplePipeline">
+		<property name="valves">
+			<list>
+                <ref bean="checkOwnerValve"/>
+                <ref bean="checkViceBillResearchValve"/>
+                <ref bean="checkPermissionValve"/>
+			</list>
+		</property>
+	</bean>
+
+	<!-- dubbo 服务，本地测试时可以注释掉 -->
+	<import resource="dubbo-consumer.xml" />
+	<import resource="dubbo-provider.xml" />
+</beans>

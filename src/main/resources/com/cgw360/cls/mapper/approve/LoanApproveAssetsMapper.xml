@@ -1,0 +1,581 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cgw360.cls.dao.approve.LoanApproveAssetsMapper">
+    <resultMap id="BaseResultMap" type="com.cgw360.cls.model.approve.LoanApproveAssets">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="project_id" property="projectId" jdbcType="BIGINT"/>
+        <result column="asset_no" property="assetNo" jdbcType="VARCHAR"/>
+        <result column="asset_name" property="assetName" jdbcType="VARCHAR"/>
+        <result column="asset_value" property="assetValue" jdbcType="DECIMAL"/>
+        <result column="currency" property="currency" jdbcType="INTEGER"/>
+        <result column="applied_guaranteed_amount" property="appliedGuaranteedAmount" jdbcType="DECIMAL"/>
+        <result column="setted_guaranteed_amount" property="settedGuaranteedAmount" jdbcType="DECIMAL"/>
+        <result column="guarantee_type" property="guaranteeType" jdbcType="INTEGER"/>
+        <result column="assets_package_id" property="assetsPackageId" jdbcType="BIGINT"/>
+        <result column="assets_package_status" property="assetsPackageStatus" jdbcType="INTEGER"/>
+        <result column="assets_package_add_time" property="assetsPackageAddTime" jdbcType="TIMESTAMP"/>
+        <result column="assets_past_time" property="assetsPastTime" jdbcType="TIMESTAMP"/>
+        <result column="is_inuse" property="isInuse" jdbcType="INTEGER"/>
+        <result column="user_id" property="userId" jdbcType="BIGINT"/>
+        <result column="user_name" property="userName" jdbcType="VARCHAR"/>
+        <result column="org_id" property="orgId" jdbcType="BIGINT"/>
+        <result column="org_name" property="orgName" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+        id, project_id, asset_no, asset_name, asset_value, currency, applied_guaranteed_amount,
+        setted_guaranteed_amount, guarantee_type, assets_package_id, assets_package_status,
+        assets_package_add_time, assets_past_time, is_inuse, user_id, user_name, org_id,
+        org_name, create_time, modify_time
+    </sql>
+    <select id="selectByExample" resultMap="BaseResultMap"
+            parameterType="com.cgw360.cls.model.approve.LoanApproveAssetsExample">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from loan_approve_assets
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from loan_approve_assets
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete from loan_approve_assets
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+    <delete id="deleteByExample" parameterType="com.cgw360.cls.model.approve.LoanApproveAssetsExample">
+        delete from loan_approve_assets
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.cgw360.cls.model.approve.LoanApproveAssets">
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into loan_approve_assets (project_id, asset_no, asset_name,
+        asset_value, currency, applied_guaranteed_amount,
+        setted_guaranteed_amount, guarantee_type,
+        assets_package_id, assets_package_status, assets_package_add_time,
+        assets_past_time, is_inuse, user_id,
+        user_name, org_id, org_name,
+        create_time, modify_time)
+        values (#{projectId,jdbcType=BIGINT}, #{assetNo,jdbcType=VARCHAR}, #{assetName,jdbcType=VARCHAR},
+        #{assetValue,jdbcType=DECIMAL}, #{currency,jdbcType=INTEGER}, #{appliedGuaranteedAmount,jdbcType=DECIMAL},
+        #{settedGuaranteedAmount,jdbcType=DECIMAL}, #{guaranteeType,jdbcType=INTEGER},
+        #{assetsPackageId,jdbcType=BIGINT}, #{assetsPackageStatus,jdbcType=INTEGER},
+        #{assetsPackageAddTime,jdbcType=TIMESTAMP},
+        #{assetsPastTime,jdbcType=TIMESTAMP}, #{isInuse,jdbcType=INTEGER}, #{userId,jdbcType=BIGINT},
+        #{userName,jdbcType=VARCHAR}, #{orgId,jdbcType=BIGINT}, #{orgName,jdbcType=VARCHAR},
+        #{createTime,jdbcType=TIMESTAMP}, #{modifyTime,jdbcType=TIMESTAMP})
+    </insert>
+    <insert id="insertSelective" parameterType="com.cgw360.cls.model.approve.LoanApproveAssets">
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into loan_approve_assets
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="projectId != null">
+                project_id,
+            </if>
+            <if test="assetNo != null">
+                asset_no,
+            </if>
+            <if test="assetName != null">
+                asset_name,
+            </if>
+            <if test="assetValue != null">
+                asset_value,
+            </if>
+            <if test="currency != null">
+                currency,
+            </if>
+            <if test="appliedGuaranteedAmount != null">
+                applied_guaranteed_amount,
+            </if>
+            <if test="settedGuaranteedAmount != null">
+                setted_guaranteed_amount,
+            </if>
+            <if test="guaranteeType != null">
+                guarantee_type,
+            </if>
+            <if test="assetsPackageId != null">
+                assets_package_id,
+            </if>
+            <if test="assetsPackageStatus != null">
+                assets_package_status,
+            </if>
+            <if test="assetsPackageAddTime != null">
+                assets_package_add_time,
+            </if>
+            <if test="assetsPastTime != null">
+                assets_past_time,
+            </if>
+            <if test="isInuse != null">
+                is_inuse,
+            </if>
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="userName != null">
+                user_name,
+            </if>
+            <if test="orgId != null">
+                org_id,
+            </if>
+            <if test="orgName != null">
+                org_name,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="modifyTime != null">
+                modify_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="projectId != null">
+                #{projectId,jdbcType=BIGINT},
+            </if>
+            <if test="assetNo != null">
+                #{assetNo,jdbcType=VARCHAR},
+            </if>
+            <if test="assetName != null">
+                #{assetName,jdbcType=VARCHAR},
+            </if>
+            <if test="assetValue != null">
+                #{assetValue,jdbcType=DECIMAL},
+            </if>
+            <if test="currency != null">
+                #{currency,jdbcType=INTEGER},
+            </if>
+            <if test="appliedGuaranteedAmount != null">
+                #{appliedGuaranteedAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="settedGuaranteedAmount != null">
+                #{settedGuaranteedAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="guaranteeType != null">
+                #{guaranteeType,jdbcType=INTEGER},
+            </if>
+            <if test="assetsPackageId != null">
+                #{assetsPackageId,jdbcType=BIGINT},
+            </if>
+            <if test="assetsPackageStatus != null">
+                #{assetsPackageStatus,jdbcType=INTEGER},
+            </if>
+            <if test="assetsPackageAddTime != null">
+                #{assetsPackageAddTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="assetsPastTime != null">
+                #{assetsPastTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="isInuse != null">
+                #{isInuse,jdbcType=INTEGER},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=BIGINT},
+            </if>
+            <if test="userName != null">
+                #{userName,jdbcType=VARCHAR},
+            </if>
+            <if test="orgId != null">
+                #{orgId,jdbcType=BIGINT},
+            </if>
+            <if test="orgName != null">
+                #{orgName,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="modifyTime != null">
+                #{modifyTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.cgw360.cls.model.approve.LoanApproveAssetsExample"
+            resultType="java.lang.Integer">
+        select count(*) from loan_approve_assets
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update loan_approve_assets
+        <set>
+            <if test="record.projectId != null">
+                project_id = #{record.projectId,jdbcType=BIGINT},
+            </if>
+            <if test="record.assetNo != null">
+                asset_no = #{record.assetNo,jdbcType=VARCHAR},
+            </if>
+            <if test="record.assetName != null">
+                asset_name = #{record.assetName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.assetValue != null">
+                asset_value = #{record.assetValue,jdbcType=DECIMAL},
+            </if>
+            <if test="record.currency != null">
+                currency = #{record.currency,jdbcType=INTEGER},
+            </if>
+            <if test="record.appliedGuaranteedAmount != null">
+                applied_guaranteed_amount = #{record.appliedGuaranteedAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="record.settedGuaranteedAmount != null">
+                setted_guaranteed_amount = #{record.settedGuaranteedAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="record.guaranteeType != null">
+                guarantee_type = #{record.guaranteeType,jdbcType=INTEGER},
+            </if>
+            <if test="record.assetsPackageId != null">
+                assets_package_id = #{record.assetsPackageId,jdbcType=BIGINT},
+            </if>
+            <if test="record.assetsPackageStatus != null">
+                assets_package_status = #{record.assetsPackageStatus,jdbcType=INTEGER},
+            </if>
+            <if test="record.assetsPackageAddTime != null">
+                assets_package_add_time = #{record.assetsPackageAddTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.assetsPastTime != null">
+                assets_past_time = #{record.assetsPastTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.isInuse != null">
+                is_inuse = #{record.isInuse,jdbcType=INTEGER},
+            </if>
+            <if test="record.userId != null">
+                user_id = #{record.userId,jdbcType=BIGINT},
+            </if>
+            <if test="record.userName != null">
+                user_name = #{record.userName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.orgId != null">
+                org_id = #{record.orgId,jdbcType=BIGINT},
+            </if>
+            <if test="record.orgName != null">
+                org_name = #{record.orgName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.createTime != null">
+                create_time = #{record.createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.modifyTime != null">
+                modify_time = #{record.modifyTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update loan_approve_assets
+        set
+        project_id = #{record.projectId,jdbcType=BIGINT},
+        asset_no = #{record.assetNo,jdbcType=VARCHAR},
+        asset_name = #{record.assetName,jdbcType=VARCHAR},
+        asset_value = #{record.assetValue,jdbcType=DECIMAL},
+        currency = #{record.currency,jdbcType=INTEGER},
+        applied_guaranteed_amount = #{record.appliedGuaranteedAmount,jdbcType=DECIMAL},
+        setted_guaranteed_amount = #{record.settedGuaranteedAmount,jdbcType=DECIMAL},
+        guarantee_type = #{record.guaranteeType,jdbcType=INTEGER},
+        assets_package_id = #{record.assetsPackageId,jdbcType=BIGINT},
+        assets_package_status = #{record.assetsPackageStatus,jdbcType=INTEGER},
+        assets_package_add_time = #{record.assetsPackageAddTime,jdbcType=TIMESTAMP},
+        assets_past_time = #{record.assetsPastTime,jdbcType=TIMESTAMP},
+        is_inuse = #{record.isInuse,jdbcType=INTEGER},
+        user_id = #{record.userId,jdbcType=BIGINT},
+        user_name = #{record.userName,jdbcType=VARCHAR},
+        org_id = #{record.orgId,jdbcType=BIGINT},
+        org_name = #{record.orgName,jdbcType=VARCHAR},
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+        modify_time = #{record.modifyTime,jdbcType=TIMESTAMP}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.cgw360.cls.model.approve.LoanApproveAssets">
+        update loan_approve_assets
+        <set>
+            <if test="projectId != null">
+                project_id = #{projectId,jdbcType=BIGINT},
+            </if>
+            <if test="assetNo != null">
+                asset_no = #{assetNo,jdbcType=VARCHAR},
+            </if>
+            <if test="assetName != null">
+                asset_name = #{assetName,jdbcType=VARCHAR},
+            </if>
+            <if test="assetValue != null">
+                asset_value = #{assetValue,jdbcType=DECIMAL},
+            </if>
+            <if test="currency != null">
+                currency = #{currency,jdbcType=INTEGER},
+            </if>
+            <if test="appliedGuaranteedAmount != null">
+                applied_guaranteed_amount = #{appliedGuaranteedAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="settedGuaranteedAmount != null">
+                setted_guaranteed_amount = #{settedGuaranteedAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="guaranteeType != null">
+                guarantee_type = #{guaranteeType,jdbcType=INTEGER},
+            </if>
+            <if test="assetsPackageId != null">
+                assets_package_id = #{assetsPackageId,jdbcType=BIGINT},
+            </if>
+            <if test="assetsPackageStatus != null">
+                assets_package_status = #{assetsPackageStatus,jdbcType=INTEGER},
+            </if>
+            <if test="assetsPackageAddTime != null">
+                assets_package_add_time = #{assetsPackageAddTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="assetsPastTime != null">
+                assets_past_time = #{assetsPastTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="isInuse != null">
+                is_inuse = #{isInuse,jdbcType=INTEGER},
+            </if>
+            <if test="userId != null">
+                user_id = #{userId,jdbcType=BIGINT},
+            </if>
+            <if test="userName != null">
+                user_name = #{userName,jdbcType=VARCHAR},
+            </if>
+            <if test="orgId != null">
+                org_id = #{orgId,jdbcType=BIGINT},
+            </if>
+            <if test="orgName != null">
+                org_name = #{orgName,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="modifyTime != null">
+                modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.cgw360.cls.model.approve.LoanApproveAssets">
+        update loan_approve_assets
+        set project_id = #{projectId,jdbcType=BIGINT},
+        asset_no = #{assetNo,jdbcType=VARCHAR},
+        asset_name = #{assetName,jdbcType=VARCHAR},
+        asset_value = #{assetValue,jdbcType=DECIMAL},
+        currency = #{currency,jdbcType=INTEGER},
+        applied_guaranteed_amount = #{appliedGuaranteedAmount,jdbcType=DECIMAL},
+        setted_guaranteed_amount = #{settedGuaranteedAmount,jdbcType=DECIMAL},
+        guarantee_type = #{guaranteeType,jdbcType=INTEGER},
+        assets_package_id = #{assetsPackageId,jdbcType=BIGINT},
+        assets_package_status = #{assetsPackageStatus,jdbcType=INTEGER},
+        assets_package_add_time = #{assetsPackageAddTime,jdbcType=TIMESTAMP},
+        assets_past_time = #{assetsPastTime,jdbcType=TIMESTAMP},
+        is_inuse = #{isInuse,jdbcType=INTEGER},
+        user_id = #{userId,jdbcType=BIGINT},
+        user_name = #{userName,jdbcType=VARCHAR},
+        org_id = #{orgId,jdbcType=BIGINT},
+        org_name = #{orgName,jdbcType=VARCHAR},
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+        modify_time = #{modifyTime,jdbcType=TIMESTAMP}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <resultMap id="LoanApproveAssetsVoResultMap" type="com.cgw360.cls.model.approve.LoanApproveAssetsVo">
+        <result column="id" property="id" jdbcType="BIGINT"/>
+        <result column="relative_apply_id1" property="relativeApplyId1" jdbcType="BIGINT"/>
+        <result column="project_id" property="projectId" jdbcType="BIGINT"/>
+        <result column="project_no" property="projectNo" jdbcType="VARCHAR"/>
+        <result column="asset_no" property="assetNo" jdbcType="VARCHAR"/>
+        <result column="customer_name" property="customerName" jdbcType="VARCHAR"/>
+        <result column="card_type" property="cardType" jdbcType="INTEGER"/>
+        <result column="card_no" property="cardNo" jdbcType="VARCHAR"/>
+        <result column="asset_value" property="assetValue" jdbcType="DECIMAL"/>
+        <result column="loan_term" property="loanTerm" jdbcType="INTEGER"/>
+        <result column="dealer_payment_date" property="dealerPaymentDate" jdbcType="DATE"/>
+        <result column="bank_payment_date" property="bankPaymentDate" jdbcType="DATE"/>
+        <result column="assets_package_id" property="assetsPackageId" jdbcType="BIGINT"/>
+        <result column="assets_package_status" property="assetsPackageStatus" jdbcType="INTEGER"/>
+        <result column="assets_package_add_time" property="assetsPackageAddTime" jdbcType="TIMESTAMP"/>
+        <result column="assets_past_time" property="assetsPastTime" jdbcType="TIMESTAMP"/>
+        <result column="is_inuse" property="isInuse" jdbcType="INTEGER"/>
+        <result column="user_id" property="userId" jdbcType="BIGINT"/>
+        <result column="user_name" property="userName" jdbcType="VARCHAR"/>
+        <result column="org_id" property="orgId" jdbcType="BIGINT"/>
+        <result column="org_name" property="orgName" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <select id="selectAddableAssetsList" resultMap="LoanApproveAssetsVoResultMap" parameterType="java.util.Map">
+        select laa.id,
+        laa.project_id,
+        laa.asset_no,
+        lac.customer_name,
+        lac.card_type,
+        lac.card_no,
+        laa.org_name,
+        lapro.loan_amount as asset_value,
+        laa.assets_package_id,
+        laa.assets_package_status,
+        laa.assets_package_add_time,
+        laa.assets_past_time,
+        lapro.loan_term,
+        lapay.dealer_payment_date
+        from loan_approve_assets laa
+        inner join loan_approve_payment lapay
+        on laa.project_id = lapay.project_id
+        inner join loan_approve_customer lac
+        on laa.project_id = lac.project_id
+        inner join loan_approve_project lapro
+        on laa.project_id = lapro.project_id
+        where laa.assets_package_status = 1
+        and laa.assets_package_id is null
+        and lapro.status = 2
+        <if test="orgId != null">
+            and laa.org_id = #{orgId,jdbcType=BIGINT}
+        </if>
+        <if test="projectNo != null and projectNo != ''">
+            and lapro.project_no like concat('%',#{projectNo,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="assetNo != null and assetNo != ''">
+            and laa.asset_no like concat('%',#{assetNo,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="customerNames != null and customerNames != ''">
+            and lac.customer_name in
+            <foreach collection="customerNames" item="listItem" open="(" close=")" separator=",">
+                #{listItem}
+            </foreach>
+        </if>
+        <if test="dealerPaymentDateMax != null and dealerPaymentDateMax != ''">
+            <![CDATA[
+            and lapay.dealer_payment_date <= #{dealerPaymentDateMax,jdbcType=DATE}
+            ]]>
+        </if>
+        <if test="dealerPaymentDateMin != null and dealerPaymentDateMin != ''">
+            <![CDATA[
+            and lapay.dealer_payment_date >= #{dealerPaymentDateMin,jdbcType=DATE}
+            ]]>
+        </if>
+        order by lapay.dealer_payment_date desc
+    </select>
+
+    <select id="selectVoInAssetsPackage" resultMap="LoanApproveAssetsVoResultMap" parameterType="java.util.Map">
+        select laa.asset_no,
+        laa.project_id,
+        lac.customer_name,
+        lac.card_type,
+        lac.card_no,
+        laa.org_name,
+        lapro.loan_amount as asset_value,
+        lapro.loan_term,
+        lapro.relative_apply_id1,
+        lapay.dealer_payment_date,
+        lapay.bank_payment_date
+        from loan_approve_assets laa
+        inner join loan_approve_payment lapay
+        on laa.project_id = lapay.project_id
+        inner join loan_approve_customer lac
+        on laa.project_id = lac.project_id
+        inner join loan_approve_project lapro
+        on laa.project_id = lapro.project_id
+        where 1 = 1
+        <if test="assetsPackageStatus != null">
+            and laa.assets_package_status = #{assetsPackageStatus,jdbcType=INTEGER}
+        </if>
+        <if test="assetsPackageId != null">
+            and laa.assets_package_id = #{assetsPackageId,jdbcType=BIGINT}
+        </if>
+    </select>
+
+    <select id="selectInAssetsPackage" resultMap="BaseResultMap" parameterType="java.util.Map">
+        select laa.*
+        from loan_approve_assets laa
+        where 1=1
+        <if test="assetsPackageId != null">
+            and laa.assets_package_id = #{assetsPackageId,jdbcType=BIGINT}
+        </if>
+        <if test="assetsPackageStatus != null">
+            and laa.assets_package_status = #{assetsPackageStatus,jdbcType=INTEGER}
+        </if>
+    </select>
+
+    <select id="selectBankPaymentAssets" resultMap="BaseResultMap" parameterType="java.util.Map">
+        select laa.*
+        from loan_approve_assets laa
+        inner join loan_approve_payment lapay
+        on laa.project_id = lapay.project_id
+        where 1=1
+        <![CDATA[
+          and lapay.bank_payment_date <= #{bankPaymentDate,jdbcType=DATE}
+        ]]>
+    </select>
+</mapper>

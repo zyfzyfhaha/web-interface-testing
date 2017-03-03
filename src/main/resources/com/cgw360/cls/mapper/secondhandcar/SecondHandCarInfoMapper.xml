@@ -1,0 +1,972 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cgw360.cls.dao.secondhandcar.SecondHandCarInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.cgw360.cls.model.secondhandcar.SecondHandCarInfo" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="estimate_num" property="estimateNum" jdbcType="VARCHAR" />
+    <result column="launch_user_id" property="launchUserId" jdbcType="BIGINT" />
+    <result column="launch_user_name" property="launchUserName" jdbcType="VARCHAR" />
+    <result column="launch_organization_id" property="launchOrganizationId" jdbcType="BIGINT" />
+    <result column="launch_organization_name" property="launchOrganizationName" jdbcType="VARCHAR" />
+    <result column="launch_business_group_id" property="launchBusinessGroupId" jdbcType="BIGINT" />
+    <result column="launch_business_group_name" property="launchBusinessGroupName" jdbcType="VARCHAR" />
+    <result column="card_type" property="cardType" jdbcType="VARCHAR" />
+    <result column="card_type_num" property="cardTypeNum" jdbcType="VARCHAR" />
+    <result column="card_num" property="cardNum" jdbcType="VARCHAR" />
+    <result column="customer_id" property="customerId" jdbcType="BIGINT" />
+    <result column="customer_name" property="customerName" jdbcType="VARCHAR" />
+    <result column="car_brand_key" property="carBrandKey" jdbcType="VARCHAR" />
+    <result column="car_brand" property="carBrand" jdbcType="VARCHAR" />
+    <result column="car_series_key" property="carSeriesKey" jdbcType="VARCHAR" />
+    <result column="car_series_name" property="carSeriesName" jdbcType="VARCHAR" />
+    <result column="car_model_key" property="carModelKey" jdbcType="VARCHAR" />
+    <result column="car_mode_name" property="carModeName" jdbcType="VARCHAR" />
+    <result column="license_date" property="licenseDate" jdbcType="DATE" />
+    <result column="kilometres" property="kilometres" jdbcType="INTEGER" />
+    <result column="car_colour" property="carColour" jdbcType="VARCHAR" />
+    <result column="car_identify_num" property="carIdentifyNum" jdbcType="VARCHAR" />
+    <result column="commercial_insurance_expired_date" property="commercialInsuranceExpiredDate" jdbcType="DATE" />
+    <result column="traffic_compulsory_insurance_expired_date" property="trafficCompulsoryInsuranceExpiredDate" jdbcType="DATE" />
+    <result column="new_car_price" property="newCarPrice" jdbcType="DECIMAL" />
+    <result column="second_hand_car_price" property="secondHandCarPrice" jdbcType="DECIMAL" />
+    <result column="create_datetime" property="createDatetime" jdbcType="TIMESTAMP" />
+    <result column="memo" property="memo" jdbcType="VARCHAR" />
+    <result column="first_estimate_source_key" property="firstEstimateSourceKey" jdbcType="VARCHAR" />
+    <result column="first_estimate_source_name" property="firstEstimateSourceName" jdbcType="VARCHAR" />
+    <result column="first_estimate_user_id" property="firstEstimateUserId" jdbcType="BIGINT" />
+    <result column="first_estimate_user_name" property="firstEstimateUserName" jdbcType="VARCHAR" />
+    <result column="original_estimate_num" property="originalEstimateNum" jdbcType="VARCHAR" />
+    <result column="estimate_organization_key" property="estimateOrganizationKey" jdbcType="VARCHAR" />
+    <result column="estimate_organization_name" property="estimateOrganizationName" jdbcType="VARCHAR" />
+    <result column="first_estimate_price" property="firstEstimatePrice" jdbcType="DECIMAL" />
+    <result column="first_estimate_desc" property="firstEstimateDesc" jdbcType="VARCHAR" />
+    <result column="first_estimate_datetime" property="firstEstimateDatetime" jdbcType="TIMESTAMP" />
+    <result column="second_estimate_user_id" property="secondEstimateUserId" jdbcType="BIGINT" />
+    <result column="second_estimate_user_name" property="secondEstimateUserName" jdbcType="VARCHAR" />
+    <result column="second_estimate_price" property="secondEstimatePrice" jdbcType="DECIMAL" />
+    <result column="second_estimate_desc" property="secondEstimateDesc" jdbcType="VARCHAR" />
+    <result column="second_estimate_datetime" property="secondEstimateDatetime" jdbcType="TIMESTAMP" />
+    <result column="estimate_status" property="estimateStatus" jdbcType="INTEGER" />
+    <result column="transfer_date" property="transferDate" jdbcType="DATE" />
+    <result column="invoice_price" property="invoicePrice" jdbcType="DECIMAL" />
+    <result column="transfer_memo" property="transferMemo" jdbcType="VARCHAR" />
+    <result column="transfer_status" property="transferStatus" jdbcType="INTEGER" />
+    <result column="loan_apply_id" property="loanApplyId" jdbcType="BIGINT" />
+    <result column="loan_num" property="loanNum" jdbcType="VARCHAR" />
+    <result column="loan_launch_datetime" property="loanLaunchDatetime" jdbcType="TIMESTAMP" />
+    <result column="modify_datetime" property="modifyDatetime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, estimate_num, launch_user_id, launch_user_name, launch_organization_id, launch_organization_name, 
+    launch_business_group_id, launch_business_group_name, card_type, card_type_num, card_num, 
+    customer_id, customer_name, car_brand_key, car_brand, car_series_key, car_series_name, 
+    car_model_key, car_mode_name, license_date, kilometres, car_colour, car_identify_num, 
+    commercial_insurance_expired_date, traffic_compulsory_insurance_expired_date, new_car_price, 
+    second_hand_car_price, create_datetime, memo, first_estimate_source_key, first_estimate_source_name, 
+    first_estimate_user_id, first_estimate_user_name, original_estimate_num, estimate_organization_key, 
+    estimate_organization_name, first_estimate_price, first_estimate_desc, first_estimate_datetime, 
+    second_estimate_user_id, second_estimate_user_name, second_estimate_price, second_estimate_desc, 
+    second_estimate_datetime, estimate_status, transfer_date, invoice_price, transfer_memo, 
+    transfer_status, loan_apply_id, loan_num, loan_launch_datetime, modify_datetime
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.cgw360.cls.model.secondhandcar.SecondHandCarInfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from second_hand_car_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from second_hand_car_info
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from second_hand_car_info
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.cgw360.cls.model.secondhandcar.SecondHandCarInfoExample" >
+    delete from second_hand_car_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.cgw360.cls.model.secondhandcar.SecondHandCarInfo" useGeneratedKeys="true"
+          keyProperty="id">
+    insert into second_hand_car_info (id, estimate_num, launch_user_id, 
+      launch_user_name, launch_organization_id, launch_organization_name, 
+      launch_business_group_id, launch_business_group_name, 
+      card_type, card_type_num, card_num, 
+      customer_id, customer_name, car_brand_key, 
+      car_brand, car_series_key, car_series_name, 
+      car_model_key, car_mode_name, license_date, 
+      kilometres, car_colour, car_identify_num, 
+      commercial_insurance_expired_date, traffic_compulsory_insurance_expired_date, 
+      new_car_price, second_hand_car_price, create_datetime, 
+      memo, first_estimate_source_key, first_estimate_source_name, 
+      first_estimate_user_id, first_estimate_user_name, 
+      original_estimate_num, estimate_organization_key, 
+      estimate_organization_name, first_estimate_price, 
+      first_estimate_desc, first_estimate_datetime, 
+      second_estimate_user_id, second_estimate_user_name, 
+      second_estimate_price, second_estimate_desc, 
+      second_estimate_datetime, estimate_status, 
+      transfer_date, invoice_price, transfer_memo, 
+      transfer_status, loan_apply_id, loan_num, 
+      loan_launch_datetime, modify_datetime)
+    values (#{id,jdbcType=BIGINT}, #{estimateNum,jdbcType=VARCHAR}, #{launchUserId,jdbcType=BIGINT}, 
+      #{launchUserName,jdbcType=VARCHAR}, #{launchOrganizationId,jdbcType=BIGINT}, #{launchOrganizationName,jdbcType=VARCHAR}, 
+      #{launchBusinessGroupId,jdbcType=BIGINT}, #{launchBusinessGroupName,jdbcType=VARCHAR}, 
+      #{cardType,jdbcType=VARCHAR}, #{cardTypeNum,jdbcType=VARCHAR}, #{cardNum,jdbcType=VARCHAR}, 
+      #{customerId,jdbcType=BIGINT}, #{customerName,jdbcType=VARCHAR}, #{carBrandKey,jdbcType=VARCHAR}, 
+      #{carBrand,jdbcType=VARCHAR}, #{carSeriesKey,jdbcType=VARCHAR}, #{carSeriesName,jdbcType=VARCHAR}, 
+      #{carModelKey,jdbcType=VARCHAR}, #{carModeName,jdbcType=VARCHAR}, #{licenseDate,jdbcType=DATE}, 
+      #{kilometres,jdbcType=INTEGER}, #{carColour,jdbcType=VARCHAR}, #{carIdentifyNum,jdbcType=VARCHAR}, 
+      #{commercialInsuranceExpiredDate,jdbcType=DATE}, #{trafficCompulsoryInsuranceExpiredDate,jdbcType=DATE}, 
+      #{newCarPrice,jdbcType=DECIMAL}, #{secondHandCarPrice,jdbcType=DECIMAL}, #{createDatetime,jdbcType=TIMESTAMP}, 
+      #{memo,jdbcType=VARCHAR}, #{firstEstimateSourceKey,jdbcType=VARCHAR}, #{firstEstimateSourceName,jdbcType=VARCHAR}, 
+      #{firstEstimateUserId,jdbcType=BIGINT}, #{firstEstimateUserName,jdbcType=VARCHAR}, 
+      #{originalEstimateNum,jdbcType=VARCHAR}, #{estimateOrganizationKey,jdbcType=VARCHAR}, 
+      #{estimateOrganizationName,jdbcType=VARCHAR}, #{firstEstimatePrice,jdbcType=DECIMAL}, 
+      #{firstEstimateDesc,jdbcType=VARCHAR}, #{firstEstimateDatetime,jdbcType=TIMESTAMP}, 
+      #{secondEstimateUserId,jdbcType=BIGINT}, #{secondEstimateUserName,jdbcType=VARCHAR}, 
+      #{secondEstimatePrice,jdbcType=DECIMAL}, #{secondEstimateDesc,jdbcType=VARCHAR}, 
+      #{secondEstimateDatetime,jdbcType=TIMESTAMP}, #{estimateStatus,jdbcType=INTEGER}, 
+      #{transferDate,jdbcType=DATE}, #{invoicePrice,jdbcType=DECIMAL}, #{transferMemo,jdbcType=VARCHAR}, 
+      #{transferStatus,jdbcType=INTEGER}, #{loanApplyId,jdbcType=BIGINT}, #{loanNum,jdbcType=VARCHAR}, 
+      #{loanLaunchDatetime,jdbcType=TIMESTAMP}, #{modifyDatetime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cgw360.cls.model.secondhandcar.SecondHandCarInfo"
+          useGeneratedKeys="true" keyProperty="id">
+    insert into second_hand_car_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      id,
+      <if test="estimateNum != null" >
+        estimate_num,
+      </if>
+      <if test="launchUserId != null" >
+        launch_user_id,
+      </if>
+      <if test="launchUserName != null" >
+        launch_user_name,
+      </if>
+      <if test="launchOrganizationId != null" >
+        launch_organization_id,
+      </if>
+      <if test="launchOrganizationName != null" >
+        launch_organization_name,
+      </if>
+      <if test="launchBusinessGroupId != null" >
+        launch_business_group_id,
+      </if>
+      <if test="launchBusinessGroupName != null" >
+        launch_business_group_name,
+      </if>
+      <if test="cardType != null" >
+        card_type,
+      </if>
+      <if test="cardTypeNum != null" >
+        card_type_num,
+      </if>
+      <if test="cardNum != null" >
+        card_num,
+      </if>
+      <if test="customerId != null" >
+        customer_id,
+      </if>
+      <if test="customerName != null" >
+        customer_name,
+      </if>
+      <if test="carBrandKey != null" >
+        car_brand_key,
+      </if>
+      <if test="carBrand != null" >
+        car_brand,
+      </if>
+      <if test="carSeriesKey != null" >
+        car_series_key,
+      </if>
+      <if test="carSeriesName != null" >
+        car_series_name,
+      </if>
+      <if test="carModelKey != null" >
+        car_model_key,
+      </if>
+      <if test="carModeName != null" >
+        car_mode_name,
+      </if>
+      <if test="licenseDate != null" >
+        license_date,
+      </if>
+      <if test="kilometres != null" >
+        kilometres,
+      </if>
+      <if test="carColour != null" >
+        car_colour,
+      </if>
+      <if test="carIdentifyNum != null" >
+        car_identify_num,
+      </if>
+      <if test="commercialInsuranceExpiredDate != null" >
+        commercial_insurance_expired_date,
+      </if>
+      <if test="trafficCompulsoryInsuranceExpiredDate != null" >
+        traffic_compulsory_insurance_expired_date,
+      </if>
+      <if test="newCarPrice != null" >
+        new_car_price,
+      </if>
+      <if test="secondHandCarPrice != null" >
+        second_hand_car_price,
+      </if>
+      <if test="createDatetime != null" >
+        create_datetime,
+      </if>
+      <if test="memo != null" >
+        memo,
+      </if>
+      <if test="firstEstimateSourceKey != null" >
+        first_estimate_source_key,
+      </if>
+      <if test="firstEstimateSourceName != null" >
+        first_estimate_source_name,
+      </if>
+      <if test="firstEstimateUserId != null" >
+        first_estimate_user_id,
+      </if>
+      <if test="firstEstimateUserName != null" >
+        first_estimate_user_name,
+      </if>
+      <if test="originalEstimateNum != null" >
+        original_estimate_num,
+      </if>
+      <if test="estimateOrganizationKey != null" >
+        estimate_organization_key,
+      </if>
+      <if test="estimateOrganizationName != null" >
+        estimate_organization_name,
+      </if>
+      <if test="firstEstimatePrice != null" >
+        first_estimate_price,
+      </if>
+      <if test="firstEstimateDesc != null" >
+        first_estimate_desc,
+      </if>
+      <if test="firstEstimateDatetime != null" >
+        first_estimate_datetime,
+      </if>
+      <if test="secondEstimateUserId != null" >
+        second_estimate_user_id,
+      </if>
+      <if test="secondEstimateUserName != null" >
+        second_estimate_user_name,
+      </if>
+      <if test="secondEstimatePrice != null" >
+        second_estimate_price,
+      </if>
+      <if test="secondEstimateDesc != null" >
+        second_estimate_desc,
+      </if>
+      <if test="secondEstimateDatetime != null" >
+        second_estimate_datetime,
+      </if>
+      <if test="estimateStatus != null" >
+        estimate_status,
+      </if>
+      <if test="transferDate != null" >
+        transfer_date,
+      </if>
+      <if test="invoicePrice != null" >
+        invoice_price,
+      </if>
+      <if test="transferMemo != null" >
+        transfer_memo,
+      </if>
+      <if test="transferStatus != null" >
+        transfer_status,
+      </if>
+      <if test="loanApplyId != null" >
+        loan_apply_id,
+      </if>
+      <if test="loanNum != null" >
+        loan_num,
+      </if>
+      <if test="loanLaunchDatetime != null" >
+        loan_launch_datetime,
+      </if>
+      <if test="modifyDatetime != null" >
+        modify_datetime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      #{id,jdbcType=BIGINT},
+      <if test="estimateNum != null" >
+        #{estimateNum,jdbcType=VARCHAR},
+      </if>
+      <if test="launchUserId != null" >
+        #{launchUserId,jdbcType=BIGINT},
+      </if>
+      <if test="launchUserName != null" >
+        #{launchUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="launchOrganizationId != null" >
+        #{launchOrganizationId,jdbcType=BIGINT},
+      </if>
+      <if test="launchOrganizationName != null" >
+        #{launchOrganizationName,jdbcType=VARCHAR},
+      </if>
+      <if test="launchBusinessGroupId != null" >
+        #{launchBusinessGroupId,jdbcType=BIGINT},
+      </if>
+      <if test="launchBusinessGroupName != null" >
+        #{launchBusinessGroupName,jdbcType=VARCHAR},
+      </if>
+      <if test="cardType != null" >
+        #{cardType,jdbcType=VARCHAR},
+      </if>
+      <if test="cardTypeNum != null" >
+        #{cardTypeNum,jdbcType=VARCHAR},
+      </if>
+      <if test="cardNum != null" >
+        #{cardNum,jdbcType=VARCHAR},
+      </if>
+      <if test="customerId != null" >
+        #{customerId,jdbcType=BIGINT},
+      </if>
+      <if test="customerName != null" >
+        #{customerName,jdbcType=VARCHAR},
+      </if>
+      <if test="carBrandKey != null" >
+        #{carBrandKey,jdbcType=VARCHAR},
+      </if>
+      <if test="carBrand != null" >
+        #{carBrand,jdbcType=VARCHAR},
+      </if>
+      <if test="carSeriesKey != null" >
+        #{carSeriesKey,jdbcType=VARCHAR},
+      </if>
+      <if test="carSeriesName != null" >
+        #{carSeriesName,jdbcType=VARCHAR},
+      </if>
+      <if test="carModelKey != null" >
+        #{carModelKey,jdbcType=VARCHAR},
+      </if>
+      <if test="carModeName != null" >
+        #{carModeName,jdbcType=VARCHAR},
+      </if>
+      <if test="licenseDate != null" >
+        #{licenseDate,jdbcType=DATE},
+      </if>
+      <if test="kilometres != null" >
+        #{kilometres,jdbcType=INTEGER},
+      </if>
+      <if test="carColour != null" >
+        #{carColour,jdbcType=VARCHAR},
+      </if>
+      <if test="carIdentifyNum != null" >
+        #{carIdentifyNum,jdbcType=VARCHAR},
+      </if>
+      <if test="commercialInsuranceExpiredDate != null" >
+        #{commercialInsuranceExpiredDate,jdbcType=DATE},
+      </if>
+      <if test="trafficCompulsoryInsuranceExpiredDate != null" >
+        #{trafficCompulsoryInsuranceExpiredDate,jdbcType=DATE},
+      </if>
+      <if test="newCarPrice != null" >
+        #{newCarPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="secondHandCarPrice != null" >
+        #{secondHandCarPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="createDatetime != null" >
+        #{createDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="memo != null" >
+        #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="firstEstimateSourceKey != null" >
+        #{firstEstimateSourceKey,jdbcType=VARCHAR},
+      </if>
+      <if test="firstEstimateSourceName != null" >
+        #{firstEstimateSourceName,jdbcType=VARCHAR},
+      </if>
+      <if test="firstEstimateUserId != null" >
+        #{firstEstimateUserId,jdbcType=BIGINT},
+      </if>
+      <if test="firstEstimateUserName != null" >
+        #{firstEstimateUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="originalEstimateNum != null" >
+        #{originalEstimateNum,jdbcType=VARCHAR},
+      </if>
+      <if test="estimateOrganizationKey != null" >
+        #{estimateOrganizationKey,jdbcType=VARCHAR},
+      </if>
+      <if test="estimateOrganizationName != null" >
+        #{estimateOrganizationName,jdbcType=VARCHAR},
+      </if>
+      <if test="firstEstimatePrice != null" >
+        #{firstEstimatePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="firstEstimateDesc != null" >
+        #{firstEstimateDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="firstEstimateDatetime != null" >
+        #{firstEstimateDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="secondEstimateUserId != null" >
+        #{secondEstimateUserId,jdbcType=BIGINT},
+      </if>
+      <if test="secondEstimateUserName != null" >
+        #{secondEstimateUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="secondEstimatePrice != null" >
+        #{secondEstimatePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="secondEstimateDesc != null" >
+        #{secondEstimateDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="secondEstimateDatetime != null" >
+        #{secondEstimateDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="estimateStatus != null" >
+        #{estimateStatus,jdbcType=INTEGER},
+      </if>
+      <if test="transferDate != null" >
+        #{transferDate,jdbcType=DATE},
+      </if>
+      <if test="invoicePrice != null" >
+        #{invoicePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="transferMemo != null" >
+        #{transferMemo,jdbcType=VARCHAR},
+      </if>
+      <if test="transferStatus != null" >
+        #{transferStatus,jdbcType=INTEGER},
+      </if>
+      <if test="loanApplyId != null" >
+        #{loanApplyId,jdbcType=BIGINT},
+      </if>
+      <if test="loanNum != null" >
+        #{loanNum,jdbcType=VARCHAR},
+      </if>
+      <if test="loanLaunchDatetime != null" >
+        #{loanLaunchDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyDatetime != null" >
+        #{modifyDatetime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update second_hand_car_info
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.estimateNum != null" >
+        estimate_num = #{record.estimateNum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.launchUserId != null" >
+        launch_user_id = #{record.launchUserId,jdbcType=BIGINT},
+      </if>
+      <if test="record.launchUserName != null" >
+        launch_user_name = #{record.launchUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.launchOrganizationId != null" >
+        launch_organization_id = #{record.launchOrganizationId,jdbcType=BIGINT},
+      </if>
+      <if test="record.launchOrganizationName != null" >
+        launch_organization_name = #{record.launchOrganizationName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.launchBusinessGroupId != null" >
+        launch_business_group_id = #{record.launchBusinessGroupId,jdbcType=BIGINT},
+      </if>
+      <if test="record.launchBusinessGroupName != null" >
+        launch_business_group_name = #{record.launchBusinessGroupName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cardType != null" >
+        card_type = #{record.cardType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cardTypeNum != null" >
+        card_type_num = #{record.cardTypeNum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cardNum != null" >
+        card_num = #{record.cardNum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.customerId != null" >
+        customer_id = #{record.customerId,jdbcType=BIGINT},
+      </if>
+      <if test="record.customerName != null" >
+        customer_name = #{record.customerName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.carBrandKey != null" >
+        car_brand_key = #{record.carBrandKey,jdbcType=VARCHAR},
+      </if>
+      <if test="record.carBrand != null" >
+        car_brand = #{record.carBrand,jdbcType=VARCHAR},
+      </if>
+      <if test="record.carSeriesKey != null" >
+        car_series_key = #{record.carSeriesKey,jdbcType=VARCHAR},
+      </if>
+      <if test="record.carSeriesName != null" >
+        car_series_name = #{record.carSeriesName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.carModelKey != null" >
+        car_model_key = #{record.carModelKey,jdbcType=VARCHAR},
+      </if>
+      <if test="record.carModeName != null" >
+        car_mode_name = #{record.carModeName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.licenseDate != null" >
+        license_date = #{record.licenseDate,jdbcType=DATE},
+      </if>
+      <if test="record.kilometres != null" >
+        kilometres = #{record.kilometres,jdbcType=INTEGER},
+      </if>
+      <if test="record.carColour != null" >
+        car_colour = #{record.carColour,jdbcType=VARCHAR},
+      </if>
+      <if test="record.carIdentifyNum != null" >
+        car_identify_num = #{record.carIdentifyNum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.commercialInsuranceExpiredDate != null" >
+        commercial_insurance_expired_date = #{record.commercialInsuranceExpiredDate,jdbcType=DATE},
+      </if>
+      <if test="record.trafficCompulsoryInsuranceExpiredDate != null" >
+        traffic_compulsory_insurance_expired_date = #{record.trafficCompulsoryInsuranceExpiredDate,jdbcType=DATE},
+      </if>
+      <if test="record.newCarPrice != null" >
+        new_car_price = #{record.newCarPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.secondHandCarPrice != null" >
+        second_hand_car_price = #{record.secondHandCarPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.createDatetime != null" >
+        create_datetime = #{record.createDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.memo != null" >
+        memo = #{record.memo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.firstEstimateSourceKey != null" >
+        first_estimate_source_key = #{record.firstEstimateSourceKey,jdbcType=VARCHAR},
+      </if>
+      <if test="record.firstEstimateSourceName != null" >
+        first_estimate_source_name = #{record.firstEstimateSourceName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.firstEstimateUserId != null" >
+        first_estimate_user_id = #{record.firstEstimateUserId,jdbcType=BIGINT},
+      </if>
+      <if test="record.firstEstimateUserName != null" >
+        first_estimate_user_name = #{record.firstEstimateUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.originalEstimateNum != null" >
+        original_estimate_num = #{record.originalEstimateNum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.estimateOrganizationKey != null" >
+        estimate_organization_key = #{record.estimateOrganizationKey,jdbcType=VARCHAR},
+      </if>
+      <if test="record.estimateOrganizationName != null" >
+        estimate_organization_name = #{record.estimateOrganizationName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.firstEstimatePrice != null" >
+        first_estimate_price = #{record.firstEstimatePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.firstEstimateDesc != null" >
+        first_estimate_desc = #{record.firstEstimateDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.firstEstimateDatetime != null" >
+        first_estimate_datetime = #{record.firstEstimateDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.secondEstimateUserId != null" >
+        second_estimate_user_id = #{record.secondEstimateUserId,jdbcType=BIGINT},
+      </if>
+      <if test="record.secondEstimateUserName != null" >
+        second_estimate_user_name = #{record.secondEstimateUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.secondEstimatePrice != null" >
+        second_estimate_price = #{record.secondEstimatePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.secondEstimateDesc != null" >
+        second_estimate_desc = #{record.secondEstimateDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.secondEstimateDatetime != null" >
+        second_estimate_datetime = #{record.secondEstimateDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.estimateStatus != null" >
+        estimate_status = #{record.estimateStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.transferDate != null" >
+        transfer_date = #{record.transferDate,jdbcType=DATE},
+      </if>
+      <if test="record.invoicePrice != null" >
+        invoice_price = #{record.invoicePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.transferMemo != null" >
+        transfer_memo = #{record.transferMemo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.transferStatus != null" >
+        transfer_status = #{record.transferStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.loanApplyId != null" >
+        loan_apply_id = #{record.loanApplyId,jdbcType=BIGINT},
+      </if>
+      <if test="record.loanNum != null" >
+        loan_num = #{record.loanNum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.loanLaunchDatetime != null" >
+        loan_launch_datetime = #{record.loanLaunchDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.modifyDatetime != null" >
+        modify_datetime = #{record.modifyDatetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update second_hand_car_info
+    set id = #{record.id,jdbcType=BIGINT},
+      estimate_num = #{record.estimateNum,jdbcType=VARCHAR},
+      launch_user_id = #{record.launchUserId,jdbcType=BIGINT},
+      launch_user_name = #{record.launchUserName,jdbcType=VARCHAR},
+      launch_organization_id = #{record.launchOrganizationId,jdbcType=BIGINT},
+      launch_organization_name = #{record.launchOrganizationName,jdbcType=VARCHAR},
+      launch_business_group_id = #{record.launchBusinessGroupId,jdbcType=BIGINT},
+      launch_business_group_name = #{record.launchBusinessGroupName,jdbcType=VARCHAR},
+      card_type = #{record.cardType,jdbcType=VARCHAR},
+      card_type_num = #{record.cardTypeNum,jdbcType=VARCHAR},
+      card_num = #{record.cardNum,jdbcType=VARCHAR},
+      customer_id = #{record.customerId,jdbcType=BIGINT},
+      customer_name = #{record.customerName,jdbcType=VARCHAR},
+      car_brand_key = #{record.carBrandKey,jdbcType=VARCHAR},
+      car_brand = #{record.carBrand,jdbcType=VARCHAR},
+      car_series_key = #{record.carSeriesKey,jdbcType=VARCHAR},
+      car_series_name = #{record.carSeriesName,jdbcType=VARCHAR},
+      car_model_key = #{record.carModelKey,jdbcType=VARCHAR},
+      car_mode_name = #{record.carModeName,jdbcType=VARCHAR},
+      license_date = #{record.licenseDate,jdbcType=DATE},
+      kilometres = #{record.kilometres,jdbcType=INTEGER},
+      car_colour = #{record.carColour,jdbcType=VARCHAR},
+      car_identify_num = #{record.carIdentifyNum,jdbcType=VARCHAR},
+      commercial_insurance_expired_date = #{record.commercialInsuranceExpiredDate,jdbcType=DATE},
+      traffic_compulsory_insurance_expired_date = #{record.trafficCompulsoryInsuranceExpiredDate,jdbcType=DATE},
+      new_car_price = #{record.newCarPrice,jdbcType=DECIMAL},
+      second_hand_car_price = #{record.secondHandCarPrice,jdbcType=DECIMAL},
+      create_datetime = #{record.createDatetime,jdbcType=TIMESTAMP},
+      memo = #{record.memo,jdbcType=VARCHAR},
+      first_estimate_source_key = #{record.firstEstimateSourceKey,jdbcType=VARCHAR},
+      first_estimate_source_name = #{record.firstEstimateSourceName,jdbcType=VARCHAR},
+      first_estimate_user_id = #{record.firstEstimateUserId,jdbcType=BIGINT},
+      first_estimate_user_name = #{record.firstEstimateUserName,jdbcType=VARCHAR},
+      original_estimate_num = #{record.originalEstimateNum,jdbcType=VARCHAR},
+      estimate_organization_key = #{record.estimateOrganizationKey,jdbcType=VARCHAR},
+      estimate_organization_name = #{record.estimateOrganizationName,jdbcType=VARCHAR},
+      first_estimate_price = #{record.firstEstimatePrice,jdbcType=DECIMAL},
+      first_estimate_desc = #{record.firstEstimateDesc,jdbcType=VARCHAR},
+      first_estimate_datetime = #{record.firstEstimateDatetime,jdbcType=TIMESTAMP},
+      second_estimate_user_id = #{record.secondEstimateUserId,jdbcType=BIGINT},
+      second_estimate_user_name = #{record.secondEstimateUserName,jdbcType=VARCHAR},
+      second_estimate_price = #{record.secondEstimatePrice,jdbcType=DECIMAL},
+      second_estimate_desc = #{record.secondEstimateDesc,jdbcType=VARCHAR},
+      second_estimate_datetime = #{record.secondEstimateDatetime,jdbcType=TIMESTAMP},
+      estimate_status = #{record.estimateStatus,jdbcType=INTEGER},
+      transfer_date = #{record.transferDate,jdbcType=DATE},
+      invoice_price = #{record.invoicePrice,jdbcType=DECIMAL},
+      transfer_memo = #{record.transferMemo,jdbcType=VARCHAR},
+      transfer_status = #{record.transferStatus,jdbcType=INTEGER},
+      loan_apply_id = #{record.loanApplyId,jdbcType=BIGINT},
+      loan_num = #{record.loanNum,jdbcType=VARCHAR},
+      loan_launch_datetime = #{record.loanLaunchDatetime,jdbcType=TIMESTAMP},
+      modify_datetime = #{record.modifyDatetime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cgw360.cls.model.secondhandcar.SecondHandCarInfo" >
+    update second_hand_car_info
+    <set >
+      <if test="estimateNum != null" >
+        estimate_num = #{estimateNum,jdbcType=VARCHAR},
+      </if>
+      <if test="launchUserId != null" >
+        launch_user_id = #{launchUserId,jdbcType=BIGINT},
+      </if>
+      <if test="launchUserName != null" >
+        launch_user_name = #{launchUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="launchOrganizationId != null" >
+        launch_organization_id = #{launchOrganizationId,jdbcType=BIGINT},
+      </if>
+      <if test="launchOrganizationName != null" >
+        launch_organization_name = #{launchOrganizationName,jdbcType=VARCHAR},
+      </if>
+      <if test="launchBusinessGroupId != null" >
+        launch_business_group_id = #{launchBusinessGroupId,jdbcType=BIGINT},
+      </if>
+      <if test="launchBusinessGroupName != null" >
+        launch_business_group_name = #{launchBusinessGroupName,jdbcType=VARCHAR},
+      </if>
+      <if test="cardType != null" >
+        card_type = #{cardType,jdbcType=VARCHAR},
+      </if>
+      <if test="cardTypeNum != null" >
+        card_type_num = #{cardTypeNum,jdbcType=VARCHAR},
+      </if>
+      <if test="cardNum != null" >
+        card_num = #{cardNum,jdbcType=VARCHAR},
+      </if>
+      <if test="customerId != null" >
+        customer_id = #{customerId,jdbcType=BIGINT},
+      </if>
+      <if test="customerName != null" >
+        customer_name = #{customerName,jdbcType=VARCHAR},
+      </if>
+      <if test="carBrandKey != null" >
+        car_brand_key = #{carBrandKey,jdbcType=VARCHAR},
+      </if>
+      <if test="carBrand != null" >
+        car_brand = #{carBrand,jdbcType=VARCHAR},
+      </if>
+      <if test="carSeriesKey != null" >
+        car_series_key = #{carSeriesKey,jdbcType=VARCHAR},
+      </if>
+      <if test="carSeriesName != null" >
+        car_series_name = #{carSeriesName,jdbcType=VARCHAR},
+      </if>
+      <if test="carModelKey != null" >
+        car_model_key = #{carModelKey,jdbcType=VARCHAR},
+      </if>
+      <if test="carModeName != null" >
+        car_mode_name = #{carModeName,jdbcType=VARCHAR},
+      </if>
+      <if test="licenseDate != null" >
+        license_date = #{licenseDate,jdbcType=DATE},
+      </if>
+      <if test="kilometres != null" >
+        kilometres = #{kilometres,jdbcType=INTEGER},
+      </if>
+      <if test="carColour != null" >
+        car_colour = #{carColour,jdbcType=VARCHAR},
+      </if>
+      <if test="carIdentifyNum != null" >
+        car_identify_num = #{carIdentifyNum,jdbcType=VARCHAR},
+      </if>
+      <if test="commercialInsuranceExpiredDate != null" >
+        commercial_insurance_expired_date = #{commercialInsuranceExpiredDate,jdbcType=DATE},
+      </if>
+      <if test="trafficCompulsoryInsuranceExpiredDate != null" >
+        traffic_compulsory_insurance_expired_date = #{trafficCompulsoryInsuranceExpiredDate,jdbcType=DATE},
+      </if>
+      <if test="newCarPrice != null" >
+        new_car_price = #{newCarPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="secondHandCarPrice != null" >
+        second_hand_car_price = #{secondHandCarPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="createDatetime != null" >
+        create_datetime = #{createDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="memo != null" >
+        memo = #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="firstEstimateSourceKey != null" >
+        first_estimate_source_key = #{firstEstimateSourceKey,jdbcType=VARCHAR},
+      </if>
+      <if test="firstEstimateSourceName != null" >
+        first_estimate_source_name = #{firstEstimateSourceName,jdbcType=VARCHAR},
+      </if>
+      <if test="firstEstimateUserId != null" >
+        first_estimate_user_id = #{firstEstimateUserId,jdbcType=BIGINT},
+      </if>
+      <if test="firstEstimateUserName != null" >
+        first_estimate_user_name = #{firstEstimateUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="originalEstimateNum != null" >
+        original_estimate_num = #{originalEstimateNum,jdbcType=VARCHAR},
+      </if>
+      <if test="estimateOrganizationKey != null" >
+        estimate_organization_key = #{estimateOrganizationKey,jdbcType=VARCHAR},
+      </if>
+      <if test="estimateOrganizationName != null" >
+        estimate_organization_name = #{estimateOrganizationName,jdbcType=VARCHAR},
+      </if>
+      <if test="firstEstimatePrice != null" >
+        first_estimate_price = #{firstEstimatePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="firstEstimateDesc != null" >
+        first_estimate_desc = #{firstEstimateDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="firstEstimateDatetime != null" >
+        first_estimate_datetime = #{firstEstimateDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="secondEstimateUserId != null" >
+        second_estimate_user_id = #{secondEstimateUserId,jdbcType=BIGINT},
+      </if>
+      <if test="secondEstimateUserName != null" >
+        second_estimate_user_name = #{secondEstimateUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="secondEstimatePrice != null" >
+        second_estimate_price = #{secondEstimatePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="secondEstimateDesc != null" >
+        second_estimate_desc = #{secondEstimateDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="secondEstimateDatetime != null" >
+        second_estimate_datetime = #{secondEstimateDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="estimateStatus != null" >
+        estimate_status = #{estimateStatus,jdbcType=INTEGER},
+      </if>
+      <if test="transferDate != null" >
+        transfer_date = #{transferDate,jdbcType=DATE},
+      </if>
+      <if test="invoicePrice != null" >
+        invoice_price = #{invoicePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="transferMemo != null" >
+        transfer_memo = #{transferMemo,jdbcType=VARCHAR},
+      </if>
+      <if test="transferStatus != null" >
+        transfer_status = #{transferStatus,jdbcType=INTEGER},
+      </if>
+      <if test="loanApplyId != null" >
+        loan_apply_id = #{loanApplyId,jdbcType=BIGINT},
+      </if>
+      <if test="loanNum != null" >
+        loan_num = #{loanNum,jdbcType=VARCHAR},
+      </if>
+      <if test="loanLaunchDatetime != null" >
+        loan_launch_datetime = #{loanLaunchDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyDatetime != null" >
+        modify_datetime = #{modifyDatetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cgw360.cls.model.secondhandcar.SecondHandCarInfo" >
+    update second_hand_car_info
+    set estimate_num = #{estimateNum,jdbcType=VARCHAR},
+      launch_user_id = #{launchUserId,jdbcType=BIGINT},
+      launch_user_name = #{launchUserName,jdbcType=VARCHAR},
+      launch_organization_id = #{launchOrganizationId,jdbcType=BIGINT},
+      launch_organization_name = #{launchOrganizationName,jdbcType=VARCHAR},
+      launch_business_group_id = #{launchBusinessGroupId,jdbcType=BIGINT},
+      launch_business_group_name = #{launchBusinessGroupName,jdbcType=VARCHAR},
+      card_type = #{cardType,jdbcType=VARCHAR},
+      card_type_num = #{cardTypeNum,jdbcType=VARCHAR},
+      card_num = #{cardNum,jdbcType=VARCHAR},
+      customer_id = #{customerId,jdbcType=BIGINT},
+      customer_name = #{customerName,jdbcType=VARCHAR},
+      car_brand_key = #{carBrandKey,jdbcType=VARCHAR},
+      car_brand = #{carBrand,jdbcType=VARCHAR},
+      car_series_key = #{carSeriesKey,jdbcType=VARCHAR},
+      car_series_name = #{carSeriesName,jdbcType=VARCHAR},
+      car_model_key = #{carModelKey,jdbcType=VARCHAR},
+      car_mode_name = #{carModeName,jdbcType=VARCHAR},
+      license_date = #{licenseDate,jdbcType=DATE},
+      kilometres = #{kilometres,jdbcType=INTEGER},
+      car_colour = #{carColour,jdbcType=VARCHAR},
+      car_identify_num = #{carIdentifyNum,jdbcType=VARCHAR},
+      commercial_insurance_expired_date = #{commercialInsuranceExpiredDate,jdbcType=DATE},
+      traffic_compulsory_insurance_expired_date = #{trafficCompulsoryInsuranceExpiredDate,jdbcType=DATE},
+      new_car_price = #{newCarPrice,jdbcType=DECIMAL},
+      second_hand_car_price = #{secondHandCarPrice,jdbcType=DECIMAL},
+      create_datetime = #{createDatetime,jdbcType=TIMESTAMP},
+      memo = #{memo,jdbcType=VARCHAR},
+      first_estimate_source_key = #{firstEstimateSourceKey,jdbcType=VARCHAR},
+      first_estimate_source_name = #{firstEstimateSourceName,jdbcType=VARCHAR},
+      first_estimate_user_id = #{firstEstimateUserId,jdbcType=BIGINT},
+      first_estimate_user_name = #{firstEstimateUserName,jdbcType=VARCHAR},
+      original_estimate_num = #{originalEstimateNum,jdbcType=VARCHAR},
+      estimate_organization_key = #{estimateOrganizationKey,jdbcType=VARCHAR},
+      estimate_organization_name = #{estimateOrganizationName,jdbcType=VARCHAR},
+      first_estimate_price = #{firstEstimatePrice,jdbcType=DECIMAL},
+      first_estimate_desc = #{firstEstimateDesc,jdbcType=VARCHAR},
+      first_estimate_datetime = #{firstEstimateDatetime,jdbcType=TIMESTAMP},
+      second_estimate_user_id = #{secondEstimateUserId,jdbcType=BIGINT},
+      second_estimate_user_name = #{secondEstimateUserName,jdbcType=VARCHAR},
+      second_estimate_price = #{secondEstimatePrice,jdbcType=DECIMAL},
+      second_estimate_desc = #{secondEstimateDesc,jdbcType=VARCHAR},
+      second_estimate_datetime = #{secondEstimateDatetime,jdbcType=TIMESTAMP},
+      estimate_status = #{estimateStatus,jdbcType=INTEGER},
+      transfer_date = #{transferDate,jdbcType=DATE},
+      invoice_price = #{invoicePrice,jdbcType=DECIMAL},
+      transfer_memo = #{transferMemo,jdbcType=VARCHAR},
+      transfer_status = #{transferStatus,jdbcType=INTEGER},
+      loan_apply_id = #{loanApplyId,jdbcType=BIGINT},
+      loan_num = #{loanNum,jdbcType=VARCHAR},
+      loan_launch_datetime = #{loanLaunchDatetime,jdbcType=TIMESTAMP},
+      modify_datetime = #{modifyDatetime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

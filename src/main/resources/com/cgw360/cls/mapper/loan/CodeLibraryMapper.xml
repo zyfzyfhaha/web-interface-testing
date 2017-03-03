@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cgw360.cls.dao.loan.CodeLibraryMapper">
+    <resultMap id="BaseResultMap" type="com.cgw360.cls.model.loan.CodeLibrary">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="code_id" property="codeId" jdbcType="VARCHAR"/>
+        <result column="code_name" property="codeName" jdbcType="VARCHAR"/>
+        <result column="code_type" property="codeType" jdbcType="VARCHAR"/>
+        <result column="sort_no" property="sortNo" jdbcType="VARCHAR"/>
+        <result column="describe" property="describe" jdbcType="VARCHAR"/>
+        <result column="is_inuse" property="isInuse" jdbcType="BIT"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <!--基础查询字段配置-->
+    <sql id="BaseSelectSql">
+        code_id, code_name, code_type, sort_no, `describe`
+    </sql>
+
+    <!--查询单条记录-->
+    <select id="selectOne" resultMap="BaseResultMap" parameterType="java.util.Map">
+        select
+        <include refid="BaseSelectSql"/>
+        from code_library
+        where is_inuse = 1
+        and code_type = #{codeType,jdbcType=VARCHAR}
+        and code_id = #{codeId,jdbcType=VARCHAR}
+        order by sort_no
+    </select>
+
+    <!--查询列表记录-->
+    <select id="selectList" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="BaseSelectSql"/>
+        from code_library
+        where is_inuse = 1
+        and code_type = #{codeType,jdbcType=VARCHAR}
+        order by sort_no
+    </select>
+
+    <select id="selectAll" resultMap="BaseResultMap">
+        select
+        <include refid="BaseSelectSql"/>
+        from code_library
+        where is_inuse = 1
+    </select>
+</mapper>

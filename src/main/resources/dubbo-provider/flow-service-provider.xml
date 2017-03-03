@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://code.alibabatech.com/schema/dubbo
+        http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+    <!-- 流程 -->
+    <dubbo:service ref="CGCustomerActionAdapterImpl"
+                   interface="com.cgw360.cls.api.flow.cgcustomer.CGCustomerProcessActionAdapter"
+                   group="flow_adaptor" version="1.0.0" timeout="6000"/>
+
+    <dubbo:service ref="loanFlowProcessActionAdapterImpl"
+                   interface="com.cgw360.cls.api.flow.loan.LoanFlowProcessActionAdapter"
+                   group="loan_flow_adaptor_normal" version="1.0.0" timeout="6000"/>
+
+    <dubbo:service ref="loanModifyFlowProcessActionAdapterImpl"
+                   interface="com.cgw360.cls.api.flow.loan.LoanFlowProcessActionAdapter"
+                   group="loan_flow_adaptor_modify" version="1.0.0" timeout="6000"/>
+
+    <dubbo:service ref="loanCancelFlowProcessActionAdapterImpl"
+                   interface="com.cgw360.cls.api.flow.loan.LoanFlowProcessActionAdapter"
+                   group="loan_flow_adaptor_cancel" version="1.0.0" timeout="6000"/>
+
+    <dubbo:service ref="secondHandCarEstimateActionAdapterImpl"
+                   interface="com.cgw360.cls.api.flow.secondhandcar.SecondHandCarEstimateActionAdapter"
+                   group="flow_adaptor" version="1.0.0" timeout="6000"/>
+
+    <dubbo:service ref="secondHandCarTransferActionAdapterImpl"
+                   interface="com.cgw360.cls.api.flow.secondhandcar.SecondHandCarTransferActionAdapter"
+                   group="flow_adaptor" version="1.0.0" timeout="6000"/>
+
+    <dubbo:service ref="carDealerAddActionAdapterImpl"
+                   interface="com.cgw360.cls.api.flow.cardealer.CarDealerAddActionAdapter"
+                   group="flow_adaptor" version="1.0.0" timeout="6000"/>
+
+    <dubbo:service ref="creditFlowProcessActionAdapterImpl"
+                   interface="com.cgw360.cls.api.flow.credit.CreditFlowProcessActionAdapter"
+                   group="flow_adaptor" version="1.0.0" timeout="6000"/>
+
+    <dubbo:service ref="documentTransmitActionAdapterImpl"
+                   interface="com.cgw360.cls.api.flow.document.DocumentTransmitActionAdapter"
+                   group="flow_adaptor" version="1.0.0" timeout="6000"/>
+
+    <dubbo:service ref="defaultBOProcessInfoService"
+                   interface="com.cgw360.cls.api.flow.IBusinessObjectProcessInfoService"
+                   group="flow_service" version="1.0.0" timeout="6000"/>
+
+    <dubbo:service ref="enumBaseFlowNodeService"
+                   interface="com.za.cls.api.IFlowNodeService"
+                   group="enum_flow_service" version="1.0.0" timeout="6000"/>
+
+    <dubbo:service ref="enumBaseFlowService"
+                   interface="com.za.cls.api.IFlowService"
+                   group="enum_flow_service" version="1.0.0" timeout="6000"/>
+
+    <dubbo:service ref="secondHandCarInfoServiceImpl"
+                   interface="com.cgw360.cls.api.secondhandcar.SecondHandCarInfoService"
+                   group="cls_2th_car_service" version="1.0.0" timeout="6000"/>
+
+    <dubbo:service ref="businessSerialNumServiceImpl"
+                   interface="com.cgw360.cls.api.serialnum.BusinessSerialNumService"
+                   group="cls_2th_car_service" version="1.0.0" timeout="6000"/>
+
+</beans>

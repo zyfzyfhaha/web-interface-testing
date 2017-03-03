@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cgw360.cls.dao.loan.LoanDocumentDirMapper">
+    <resultMap id="BaseResultMap" type="com.cgw360.cls.model.loan.LoanDocumentDir">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="directory_path" property="directoryPath" jdbcType="VARCHAR"/>
+        <result column="parent_dic_id" property="parentDicId" jdbcType="BIGINT"/>
+        <result column="object_type" property="objectType" jdbcType="VARCHAR"/>
+        <result column="dir_class" property="dirClass" jdbcType="VARCHAR"/>
+        <result column="doc_type" property="docType" jdbcType="VARCHAR"/>
+        <result column="sort" property="sort" jdbcType="INTEGER"/>
+        <result column="attribute1" property="attribute1" jdbcType="VARCHAR"/>
+        <result column="attribute2" property="attribute2" jdbcType="VARCHAR"/>
+        <result column="is_inuse" property="isInuse" jdbcType="INTEGER"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP"/>
+        <result column="num" property="num" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Base_Column_List">
+    id, directory_path, parent_dic_id, object_type, dir_class, doc_type, sort, attribute1, 
+    attribute2, is_inuse, create_time, modify_time
+    </sql>
+
+
+    <select id="countByExample" parameterType="com.cgw360.cls.model.loan.LoanDocumentDirExample"
+            resultType="java.lang.Integer">
+        select count(*) from loan_document_dir
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from loan_document_dir
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+
+    <select id="selectByExample" resultMap="BaseResultMap"
+            parameterType="com.cgw360.cls.model.loan.LoanDocumentDirExample">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from loan_document_dir
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+
+
+    <!--查询文档目录信息-->
+    <select id="selectByFlowInfo" parameterType="java.util.Map" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        ,num
+        FROM
+        loan_document_dir ldd
+        INNER JOIN(
+        SELECT
+        lddf.dir_id,
+        (
+        SELECT
+        ifnull(count(ld.id),0) as num
+        FROM
+        loan_document ld
+        WHERE
+        ld.object_type = #{objectType,jdbcType=VARCHAR}
+        AND ld.object_no = #{objectNo,jdbcType=BIGINT}
+        AND ld.dir_id = lddf.dir_id
+        AND is_inuse = 1
+        )num
+        FROM
+        loan_document_dir_flow lddf
+        WHERE
+        lddf.flow_type = #{flowNo,jdbcType=VARCHAR}
+        AND lddf.node_code = #{flowNodeNo,jdbcType=VARCHAR}
+        GROUP BY
+        lddf.dir_id
+        )lt ON ldd.id = lt.dir_id
+        where is_inuse = 1
+        and ldd.object_type like '%${objectType}%'
+        <if test="docType != null">
+            and doc_type = #{docType,jdbcType=VARCHAR}
+        </if>
+        ORDER BY
+        ldd.sort
+    </select>
+
+    <select id="selectByObjectTypeAndObjectNo" parameterType="java.util.Map" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        ,num
+        FROM
+        loan_document_dir ldd
+        LEFT JOIN(
+        SELECT
+        ld.dir_id,
+        ifnull(count(ld.id),0) as num
+        FROM
+        loan_document ld
+        WHERE ld.is_inuse = 1
+        AND ld.object_type = #{objectType,jdbcType=VARCHAR}
+        AND ld.object_no = #{objectNo,jdbcType=BIGINT}
+        GROUP BY ld.dir_id
+        )lt ON ldd.id = lt.dir_id
+        where ldd.is_inuse = 1 and ldd.object_type like '%${objectType}%'
+        order by ldd.sort
+    </select>
+</mapper>

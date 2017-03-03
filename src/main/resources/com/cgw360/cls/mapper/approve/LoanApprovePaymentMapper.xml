@@ -1,0 +1,774 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cgw360.cls.dao.approve.LoanApprovePaymentMapper">
+    <resultMap id="BaseResultMap" type="com.cgw360.cls.model.approve.LoanApprovePayment">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="project_id" property="projectId" jdbcType="BIGINT"/>
+        <result column="guarantee_corporation_id" property="guaranteeCorporationId" jdbcType="BIGINT"/>
+        <result column="guarantee_corporation_name" property="guaranteeCorporationName" jdbcType="VARCHAR"/>
+        <result column="guarantee_corporation_account_name" property="guaranteeCorporationAccountName"
+                jdbcType="VARCHAR"/>
+        <result column="guarantee_corporation_account_no" property="guaranteeCorporationAccountNo" jdbcType="VARCHAR"/>
+        <result column="guarantee_corporation_bank" property="guaranteeCorporationBank" jdbcType="VARCHAR"/>
+        <result column="guarantee_corporation_payment_amount" property="guaranteeCorporationPaymentAmount"
+                jdbcType="DECIMAL"/>
+        <result column="guarantee_corporation_payment_date" property="guaranteeCorporationPaymentDate" jdbcType="DATE"/>
+        <result column="guarantee_corporation_payment_user_id" property="guaranteeCorporationPaymentUserId"
+                jdbcType="BIGINT"/>
+        <result column="guarantee_corporation_payment_user_name" property="guaranteeCorporationPaymentUserName"
+                jdbcType="VARCHAR"/>
+        <result column="guarantee_corporation_payment_remark" property="guaranteeCorporationPaymentRemark"
+                jdbcType="VARCHAR"/>
+        <result column="dealer_id" property="dealerId" jdbcType="BIGINT"/>
+        <result column="dealer_name" property="dealerName" jdbcType="VARCHAR"/>
+        <result column="dealer_account_name" property="dealerAccountName" jdbcType="VARCHAR"/>
+        <result column="dealer_account_no" property="dealerAccountNo" jdbcType="VARCHAR"/>
+        <result column="dealer_bank" property="dealerBank" jdbcType="VARCHAR"/>
+        <result column="dealer_payment_amount" property="dealerPaymentAmount" jdbcType="DECIMAL"/>
+        <result column="dealer_payment_date" property="dealerPaymentDate" jdbcType="DATE"/>
+        <result column="dealer_payment_user_id" property="dealerPaymentUserId" jdbcType="BIGINT"/>
+        <result column="dealer_payment_user_name" property="dealerPaymentUserName" jdbcType="VARCHAR"/>
+        <result column="dealer_payment_remark" property="dealerPaymentRemark" jdbcType="VARCHAR"/>
+        <result column="bank_id" property="bankId" jdbcType="BIGINT"/>
+        <result column="bank_name" property="bankName" jdbcType="VARCHAR"/>
+        <result column="bank_payment_date" property="bankPaymentDate" jdbcType="DATE"/>
+        <result column="bank_payment_amount" property="bankPaymentAmount" jdbcType="DECIMAL"/>
+        <result column="bank_payment_remark" property="bankPaymentRemark" jdbcType="VARCHAR"/>
+        <result column="bank_payment_user_id" property="bankPaymentUserId" jdbcType="BIGINT"/>
+        <result column="bank_payment_user_name" property="bankPaymentUserName" jdbcType="VARCHAR"/>
+        <result column="bank_payment_status" property="bankPaymentStatus" jdbcType="INTEGER"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP"/>
+        
+        <result column="export_status" property="exportStatus" jdbcType="INTEGER"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+        id, project_id, guarantee_corporation_id, guarantee_corporation_name, guarantee_corporation_account_name,
+        guarantee_corporation_account_no, guarantee_corporation_bank, guarantee_corporation_payment_amount,
+        guarantee_corporation_payment_date, guarantee_corporation_payment_user_id,
+        guarantee_corporation_payment_user_name,
+        guarantee_corporation_payment_remark, dealer_id, dealer_name, dealer_account_name,
+        dealer_account_no, dealer_bank, dealer_payment_amount, dealer_payment_date, dealer_payment_user_id,
+        dealer_payment_user_name, dealer_payment_remark, bank_id, bank_name, bank_payment_date,
+        bank_payment_amount, bank_payment_remark, bank_payment_user_id, bank_payment_user_name,
+        bank_payment_status, create_time, modify_time
+    </sql>
+    <select id="selectByExample" resultMap="BaseResultMap"
+            parameterType="com.cgw360.cls.model.approve.LoanApprovePaymentExample">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from loan_approve_payment
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from loan_approve_payment
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete from loan_approve_payment
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+    <delete id="deleteByExample" parameterType="com.cgw360.cls.model.approve.LoanApprovePaymentExample">
+        delete from loan_approve_payment
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.cgw360.cls.model.approve.LoanApprovePayment">
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into loan_approve_payment (project_id, guarantee_corporation_id,
+        guarantee_corporation_name, guarantee_corporation_account_name,
+        guarantee_corporation_account_no, guarantee_corporation_bank,
+        guarantee_corporation_payment_amount, guarantee_corporation_payment_date,
+        guarantee_corporation_payment_user_id, guarantee_corporation_payment_user_name,
+        guarantee_corporation_payment_remark, dealer_id,
+        dealer_name, dealer_account_name, dealer_account_no,
+        dealer_bank, dealer_payment_amount, dealer_payment_date,
+        dealer_payment_user_id, dealer_payment_user_name,
+        dealer_payment_remark, bank_id, bank_name,
+        bank_payment_date, bank_payment_amount, bank_payment_remark,
+        bank_payment_user_id, bank_payment_user_name,
+        bank_payment_status, create_time, modify_time
+        )
+        values (#{projectId,jdbcType=BIGINT}, #{guaranteeCorporationId,jdbcType=BIGINT},
+        #{guaranteeCorporationName,jdbcType=VARCHAR}, #{guaranteeCorporationAccountName,jdbcType=VARCHAR},
+        #{guaranteeCorporationAccountNo,jdbcType=VARCHAR}, #{guaranteeCorporationBank,jdbcType=VARCHAR},
+        #{guaranteeCorporationPaymentAmount,jdbcType=DECIMAL}, #{guaranteeCorporationPaymentDate,jdbcType=DATE},
+        #{guaranteeCorporationPaymentUserId,jdbcType=BIGINT}, #{guaranteeCorporationPaymentUserName,jdbcType=VARCHAR},
+        #{guaranteeCorporationPaymentRemark,jdbcType=VARCHAR}, #{dealerId,jdbcType=BIGINT},
+        #{dealerName,jdbcType=VARCHAR}, #{dealerAccountName,jdbcType=VARCHAR}, #{dealerAccountNo,jdbcType=VARCHAR},
+        #{dealerBank,jdbcType=VARCHAR}, #{dealerPaymentAmount,jdbcType=DECIMAL}, #{dealerPaymentDate,jdbcType=DATE},
+        #{dealerPaymentUserId,jdbcType=BIGINT}, #{dealerPaymentUserName,jdbcType=VARCHAR},
+        #{dealerPaymentRemark,jdbcType=VARCHAR}, #{bankId,jdbcType=BIGINT}, #{bankName,jdbcType=VARCHAR},
+        #{bankPaymentDate,jdbcType=DATE}, #{bankPaymentAmount,jdbcType=DECIMAL}, #{bankPaymentRemark,jdbcType=VARCHAR},
+        #{bankPaymentUserId,jdbcType=BIGINT}, #{bankPaymentUserName,jdbcType=VARCHAR},
+        #{bankPaymentStatus,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{modifyTime,jdbcType=TIMESTAMP}
+        )
+    </insert>
+    <insert id="insertSelective" parameterType="com.cgw360.cls.model.approve.LoanApprovePayment">
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into loan_approve_payment
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="projectId != null">
+                project_id,
+            </if>
+            <if test="guaranteeCorporationId != null">
+                guarantee_corporation_id,
+            </if>
+            <if test="guaranteeCorporationName != null">
+                guarantee_corporation_name,
+            </if>
+            <if test="guaranteeCorporationAccountName != null">
+                guarantee_corporation_account_name,
+            </if>
+            <if test="guaranteeCorporationAccountNo != null">
+                guarantee_corporation_account_no,
+            </if>
+            <if test="guaranteeCorporationBank != null">
+                guarantee_corporation_bank,
+            </if>
+            <if test="guaranteeCorporationPaymentAmount != null">
+                guarantee_corporation_payment_amount,
+            </if>
+            <if test="guaranteeCorporationPaymentDate != null">
+                guarantee_corporation_payment_date,
+            </if>
+            <if test="guaranteeCorporationPaymentUserId != null">
+                guarantee_corporation_payment_user_id,
+            </if>
+            <if test="guaranteeCorporationPaymentUserName != null">
+                guarantee_corporation_payment_user_name,
+            </if>
+            <if test="guaranteeCorporationPaymentRemark != null">
+                guarantee_corporation_payment_remark,
+            </if>
+            <if test="dealerId != null">
+                dealer_id,
+            </if>
+            <if test="dealerName != null">
+                dealer_name,
+            </if>
+            <if test="dealerAccountName != null">
+                dealer_account_name,
+            </if>
+            <if test="dealerAccountNo != null">
+                dealer_account_no,
+            </if>
+            <if test="dealerBank != null">
+                dealer_bank,
+            </if>
+            <if test="dealerPaymentAmount != null">
+                dealer_payment_amount,
+            </if>
+            <if test="dealerPaymentDate != null">
+                dealer_payment_date,
+            </if>
+            <if test="dealerPaymentUserId != null">
+                dealer_payment_user_id,
+            </if>
+            <if test="dealerPaymentUserName != null">
+                dealer_payment_user_name,
+            </if>
+            <if test="dealerPaymentRemark != null">
+                dealer_payment_remark,
+            </if>
+            <if test="bankId != null">
+                bank_id,
+            </if>
+            <if test="bankName != null">
+                bank_name,
+            </if>
+            <if test="bankPaymentDate != null">
+                bank_payment_date,
+            </if>
+            <if test="bankPaymentAmount != null">
+                bank_payment_amount,
+            </if>
+            <if test="bankPaymentRemark != null">
+                bank_payment_remark,
+            </if>
+            <if test="bankPaymentUserId != null">
+                bank_payment_user_id,
+            </if>
+            <if test="bankPaymentUserName != null">
+                bank_payment_user_name,
+            </if>
+            <if test="bankPaymentStatus != null">
+                bank_payment_status,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="modifyTime != null">
+                modify_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="projectId != null">
+                #{projectId,jdbcType=BIGINT},
+            </if>
+            <if test="guaranteeCorporationId != null">
+                #{guaranteeCorporationId,jdbcType=BIGINT},
+            </if>
+            <if test="guaranteeCorporationName != null">
+                #{guaranteeCorporationName,jdbcType=VARCHAR},
+            </if>
+            <if test="guaranteeCorporationAccountName != null">
+                #{guaranteeCorporationAccountName,jdbcType=VARCHAR},
+            </if>
+            <if test="guaranteeCorporationAccountNo != null">
+                #{guaranteeCorporationAccountNo,jdbcType=VARCHAR},
+            </if>
+            <if test="guaranteeCorporationBank != null">
+                #{guaranteeCorporationBank,jdbcType=VARCHAR},
+            </if>
+            <if test="guaranteeCorporationPaymentAmount != null">
+                #{guaranteeCorporationPaymentAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="guaranteeCorporationPaymentDate != null">
+                #{guaranteeCorporationPaymentDate,jdbcType=DATE},
+            </if>
+            <if test="guaranteeCorporationPaymentUserId != null">
+                #{guaranteeCorporationPaymentUserId,jdbcType=BIGINT},
+            </if>
+            <if test="guaranteeCorporationPaymentUserName != null">
+                #{guaranteeCorporationPaymentUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="guaranteeCorporationPaymentRemark != null">
+                #{guaranteeCorporationPaymentRemark,jdbcType=VARCHAR},
+            </if>
+            <if test="dealerId != null">
+                #{dealerId,jdbcType=BIGINT},
+            </if>
+            <if test="dealerName != null">
+                #{dealerName,jdbcType=VARCHAR},
+            </if>
+            <if test="dealerAccountName != null">
+                #{dealerAccountName,jdbcType=VARCHAR},
+            </if>
+            <if test="dealerAccountNo != null">
+                #{dealerAccountNo,jdbcType=VARCHAR},
+            </if>
+            <if test="dealerBank != null">
+                #{dealerBank,jdbcType=VARCHAR},
+            </if>
+            <if test="dealerPaymentAmount != null">
+                #{dealerPaymentAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="dealerPaymentDate != null">
+                #{dealerPaymentDate,jdbcType=DATE},
+            </if>
+            <if test="dealerPaymentUserId != null">
+                #{dealerPaymentUserId,jdbcType=BIGINT},
+            </if>
+            <if test="dealerPaymentUserName != null">
+                #{dealerPaymentUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="dealerPaymentRemark != null">
+                #{dealerPaymentRemark,jdbcType=VARCHAR},
+            </if>
+            <if test="bankId != null">
+                #{bankId,jdbcType=BIGINT},
+            </if>
+            <if test="bankName != null">
+                #{bankName,jdbcType=VARCHAR},
+            </if>
+            <if test="bankPaymentDate != null">
+                #{bankPaymentDate,jdbcType=DATE},
+            </if>
+            <if test="bankPaymentAmount != null">
+                #{bankPaymentAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="bankPaymentRemark != null">
+                #{bankPaymentRemark,jdbcType=VARCHAR},
+            </if>
+            <if test="bankPaymentUserId != null">
+                #{bankPaymentUserId,jdbcType=BIGINT},
+            </if>
+            <if test="bankPaymentUserName != null">
+                #{bankPaymentUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="bankPaymentStatus != null">
+                #{bankPaymentStatus,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="modifyTime != null">
+                #{modifyTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.cgw360.cls.model.approve.LoanApprovePaymentExample"
+            resultType="java.lang.Integer">
+        select count(*) from loan_approve_payment
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update loan_approve_payment
+        <set>
+            <if test="record.projectId != null">
+                project_id = #{record.projectId,jdbcType=BIGINT},
+            </if>
+            <if test="record.guaranteeCorporationId != null">
+                guarantee_corporation_id = #{record.guaranteeCorporationId,jdbcType=BIGINT},
+            </if>
+            <if test="record.guaranteeCorporationName != null">
+                guarantee_corporation_name = #{record.guaranteeCorporationName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.guaranteeCorporationAccountName != null">
+                guarantee_corporation_account_name = #{record.guaranteeCorporationAccountName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.guaranteeCorporationAccountNo != null">
+                guarantee_corporation_account_no = #{record.guaranteeCorporationAccountNo,jdbcType=VARCHAR},
+            </if>
+            <if test="record.guaranteeCorporationBank != null">
+                guarantee_corporation_bank = #{record.guaranteeCorporationBank,jdbcType=VARCHAR},
+            </if>
+            <if test="record.guaranteeCorporationPaymentAmount != null">
+                guarantee_corporation_payment_amount = #{record.guaranteeCorporationPaymentAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="record.guaranteeCorporationPaymentDate != null">
+                guarantee_corporation_payment_date = #{record.guaranteeCorporationPaymentDate,jdbcType=DATE},
+            </if>
+            <if test="record.guaranteeCorporationPaymentUserId != null">
+                guarantee_corporation_payment_user_id = #{record.guaranteeCorporationPaymentUserId,jdbcType=BIGINT},
+            </if>
+            <if test="record.guaranteeCorporationPaymentUserName != null">
+                guarantee_corporation_payment_user_name =
+                #{record.guaranteeCorporationPaymentUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.guaranteeCorporationPaymentRemark != null">
+                guarantee_corporation_payment_remark = #{record.guaranteeCorporationPaymentRemark,jdbcType=VARCHAR},
+            </if>
+            <if test="record.dealerId != null">
+                dealer_id = #{record.dealerId,jdbcType=BIGINT},
+            </if>
+            <if test="record.dealerName != null">
+                dealer_name = #{record.dealerName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.dealerAccountName != null">
+                dealer_account_name = #{record.dealerAccountName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.dealerAccountNo != null">
+                dealer_account_no = #{record.dealerAccountNo,jdbcType=VARCHAR},
+            </if>
+            <if test="record.dealerBank != null">
+                dealer_bank = #{record.dealerBank,jdbcType=VARCHAR},
+            </if>
+            <if test="record.dealerPaymentAmount != null">
+                dealer_payment_amount = #{record.dealerPaymentAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="record.dealerPaymentDate != null">
+                dealer_payment_date = #{record.dealerPaymentDate,jdbcType=DATE},
+            </if>
+            <if test="record.dealerPaymentUserId != null">
+                dealer_payment_user_id = #{record.dealerPaymentUserId,jdbcType=BIGINT},
+            </if>
+            <if test="record.dealerPaymentUserName != null">
+                dealer_payment_user_name = #{record.dealerPaymentUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.dealerPaymentRemark != null">
+                dealer_payment_remark = #{record.dealerPaymentRemark,jdbcType=VARCHAR},
+            </if>
+            <if test="record.bankId != null">
+                bank_id = #{record.bankId,jdbcType=BIGINT},
+            </if>
+            <if test="record.bankName != null">
+                bank_name = #{record.bankName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.bankPaymentDate != null">
+                bank_payment_date = #{record.bankPaymentDate,jdbcType=DATE},
+            </if>
+            <if test="record.bankPaymentDate == null">
+                bank_payment_date = null,
+            </if>
+            <if test="record.bankPaymentAmount != null">
+                bank_payment_amount = #{record.bankPaymentAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="record.bankPaymentAmount == null">
+                bank_payment_amount = null,
+            </if>
+            <if test="record.bankPaymentRemark != null">
+                bank_payment_remark = #{record.bankPaymentRemark,jdbcType=VARCHAR},
+            </if>
+            <if test="record.bankPaymentRemark == null">
+                bank_payment_remark = null,
+            </if>
+            <if test="record.bankPaymentUserId != null">
+                bank_payment_user_id = #{record.bankPaymentUserId,jdbcType=BIGINT},
+            </if>
+            <if test="record.bankPaymentUserId == null">
+                bank_payment_user_id = null,
+            </if>
+            <if test="record.bankPaymentUserName != null">
+                bank_payment_user_name = #{record.bankPaymentUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.bankPaymentUserName == null">
+                bank_payment_user_name = null,
+            </if>
+            <if test="record.bankPaymentStatus != null">
+                bank_payment_status = #{record.bankPaymentStatus,jdbcType=INTEGER},
+            </if>
+            <if test="record.bankPaymentStatus == null">
+                bank_payment_status = null,
+            </if>
+            <if test="record.createTime != null">
+                create_time = #{record.createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.modifyTime != null">
+                modify_time = #{record.modifyTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.exportStatus != null">
+                export_status = #{record.exportStatus,jdbcType=INTEGER},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update loan_approve_payment
+        set
+        project_id = #{record.projectId,jdbcType=BIGINT},
+        guarantee_corporation_id = #{record.guaranteeCorporationId,jdbcType=BIGINT},
+        guarantee_corporation_name = #{record.guaranteeCorporationName,jdbcType=VARCHAR},
+        guarantee_corporation_account_name = #{record.guaranteeCorporationAccountName,jdbcType=VARCHAR},
+        guarantee_corporation_account_no = #{record.guaranteeCorporationAccountNo,jdbcType=VARCHAR},
+        guarantee_corporation_bank = #{record.guaranteeCorporationBank,jdbcType=VARCHAR},
+        guarantee_corporation_payment_amount = #{record.guaranteeCorporationPaymentAmount,jdbcType=DECIMAL},
+        guarantee_corporation_payment_date = #{record.guaranteeCorporationPaymentDate,jdbcType=DATE},
+        guarantee_corporation_payment_user_id = #{record.guaranteeCorporationPaymentUserId,jdbcType=BIGINT},
+        guarantee_corporation_payment_user_name = #{record.guaranteeCorporationPaymentUserName,jdbcType=VARCHAR},
+        guarantee_corporation_payment_remark = #{record.guaranteeCorporationPaymentRemark,jdbcType=VARCHAR},
+        dealer_id = #{record.dealerId,jdbcType=BIGINT},
+        dealer_name = #{record.dealerName,jdbcType=VARCHAR},
+        dealer_account_name = #{record.dealerAccountName,jdbcType=VARCHAR},
+        dealer_account_no = #{record.dealerAccountNo,jdbcType=VARCHAR},
+        dealer_bank = #{record.dealerBank,jdbcType=VARCHAR},
+        dealer_payment_amount = #{record.dealerPaymentAmount,jdbcType=DECIMAL},
+        dealer_payment_date = #{record.dealerPaymentDate,jdbcType=DATE},
+        dealer_payment_user_id = #{record.dealerPaymentUserId,jdbcType=BIGINT},
+        dealer_payment_user_name = #{record.dealerPaymentUserName,jdbcType=VARCHAR},
+        dealer_payment_remark = #{record.dealerPaymentRemark,jdbcType=VARCHAR},
+        bank_id = #{record.bankId,jdbcType=BIGINT},
+        bank_name = #{record.bankName,jdbcType=VARCHAR},
+        bank_payment_date = #{record.bankPaymentDate,jdbcType=DATE},
+        bank_payment_amount = #{record.bankPaymentAmount,jdbcType=DECIMAL},
+        bank_payment_remark = #{record.bankPaymentRemark,jdbcType=VARCHAR},
+        bank_payment_user_id = #{record.bankPaymentUserId,jdbcType=BIGINT},
+        bank_payment_user_name = #{record.bankPaymentUserName,jdbcType=VARCHAR},
+        bank_payment_status = #{record.bankPaymentStatus,jdbcType=INTEGER},
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+        modify_time = #{record.modifyTime,jdbcType=TIMESTAMP}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.cgw360.cls.model.approve.LoanApprovePayment">
+        update loan_approve_payment
+        <set>
+            <if test="projectId != null">
+                project_id = #{projectId,jdbcType=BIGINT},
+            </if>
+            <if test="guaranteeCorporationId != null">
+                guarantee_corporation_id = #{guaranteeCorporationId,jdbcType=BIGINT},
+            </if>
+            <if test="guaranteeCorporationName != null">
+                guarantee_corporation_name = #{guaranteeCorporationName,jdbcType=VARCHAR},
+            </if>
+            <if test="guaranteeCorporationAccountName != null">
+                guarantee_corporation_account_name = #{guaranteeCorporationAccountName,jdbcType=VARCHAR},
+            </if>
+            <if test="guaranteeCorporationAccountNo != null">
+                guarantee_corporation_account_no = #{guaranteeCorporationAccountNo,jdbcType=VARCHAR},
+            </if>
+            <if test="guaranteeCorporationBank != null">
+                guarantee_corporation_bank = #{guaranteeCorporationBank,jdbcType=VARCHAR},
+            </if>
+            <if test="guaranteeCorporationPaymentAmount != null">
+                guarantee_corporation_payment_amount = #{guaranteeCorporationPaymentAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="guaranteeCorporationPaymentDate != null">
+                guarantee_corporation_payment_date = #{guaranteeCorporationPaymentDate,jdbcType=DATE},
+            </if>
+            <if test="guaranteeCorporationPaymentUserId != null">
+                guarantee_corporation_payment_user_id = #{guaranteeCorporationPaymentUserId,jdbcType=BIGINT},
+            </if>
+            <if test="guaranteeCorporationPaymentUserName != null">
+                guarantee_corporation_payment_user_name = #{guaranteeCorporationPaymentUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="guaranteeCorporationPaymentRemark != null">
+                guarantee_corporation_payment_remark = #{guaranteeCorporationPaymentRemark,jdbcType=VARCHAR},
+            </if>
+            <if test="dealerId != null">
+                dealer_id = #{dealerId,jdbcType=BIGINT},
+            </if>
+            <if test="dealerName != null">
+                dealer_name = #{dealerName,jdbcType=VARCHAR},
+            </if>
+            <if test="dealerAccountName != null">
+                dealer_account_name = #{dealerAccountName,jdbcType=VARCHAR},
+            </if>
+            <if test="dealerAccountNo != null">
+                dealer_account_no = #{dealerAccountNo,jdbcType=VARCHAR},
+            </if>
+            <if test="dealerBank != null">
+                dealer_bank = #{dealerBank,jdbcType=VARCHAR},
+            </if>
+            <if test="dealerPaymentAmount != null">
+                dealer_payment_amount = #{dealerPaymentAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="dealerPaymentDate != null">
+                dealer_payment_date = #{dealerPaymentDate,jdbcType=DATE},
+            </if>
+            <if test="dealerPaymentUserId != null">
+                dealer_payment_user_id = #{dealerPaymentUserId,jdbcType=BIGINT},
+            </if>
+            <if test="dealerPaymentUserName != null">
+                dealer_payment_user_name = #{dealerPaymentUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="dealerPaymentRemark != null">
+                dealer_payment_remark = #{dealerPaymentRemark,jdbcType=VARCHAR},
+            </if>
+            <if test="bankId != null">
+                bank_id = #{bankId,jdbcType=BIGINT},
+            </if>
+            <if test="bankName != null">
+                bank_name = #{bankName,jdbcType=VARCHAR},
+            </if>
+            <if test="bankPaymentDate != null">
+                bank_payment_date = #{bankPaymentDate,jdbcType=DATE},
+            </if>
+            <if test="bankPaymentAmount != null">
+                bank_payment_amount = #{bankPaymentAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="bankPaymentRemark != null">
+                bank_payment_remark = #{bankPaymentRemark,jdbcType=VARCHAR},
+            </if>
+            <if test="bankPaymentUserId != null">
+                bank_payment_user_id = #{bankPaymentUserId,jdbcType=BIGINT},
+            </if>
+            <if test="bankPaymentUserName != null">
+                bank_payment_user_name = #{bankPaymentUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="bankPaymentStatus != null">
+                bank_payment_status = #{bankPaymentStatus,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="modifyTime != null">
+                modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.cgw360.cls.model.approve.LoanApprovePayment">
+        update loan_approve_payment
+        set project_id = #{projectId,jdbcType=BIGINT},
+        guarantee_corporation_id = #{guaranteeCorporationId,jdbcType=BIGINT},
+        guarantee_corporation_name = #{guaranteeCorporationName,jdbcType=VARCHAR},
+        guarantee_corporation_account_name = #{guaranteeCorporationAccountName,jdbcType=VARCHAR},
+        guarantee_corporation_account_no = #{guaranteeCorporationAccountNo,jdbcType=VARCHAR},
+        guarantee_corporation_bank = #{guaranteeCorporationBank,jdbcType=VARCHAR},
+        guarantee_corporation_payment_amount = #{guaranteeCorporationPaymentAmount,jdbcType=DECIMAL},
+        guarantee_corporation_payment_date = #{guaranteeCorporationPaymentDate,jdbcType=DATE},
+        guarantee_corporation_payment_user_id = #{guaranteeCorporationPaymentUserId,jdbcType=BIGINT},
+        guarantee_corporation_payment_user_name = #{guaranteeCorporationPaymentUserName,jdbcType=VARCHAR},
+        guarantee_corporation_payment_remark = #{guaranteeCorporationPaymentRemark,jdbcType=VARCHAR},
+        dealer_id = #{dealerId,jdbcType=BIGINT},
+        dealer_name = #{dealerName,jdbcType=VARCHAR},
+        dealer_account_name = #{dealerAccountName,jdbcType=VARCHAR},
+        dealer_account_no = #{dealerAccountNo,jdbcType=VARCHAR},
+        dealer_bank = #{dealerBank,jdbcType=VARCHAR},
+        dealer_payment_amount = #{dealerPaymentAmount,jdbcType=DECIMAL},
+        dealer_payment_date = #{dealerPaymentDate,jdbcType=DATE},
+        dealer_payment_user_id = #{dealerPaymentUserId,jdbcType=BIGINT},
+        dealer_payment_user_name = #{dealerPaymentUserName,jdbcType=VARCHAR},
+        dealer_payment_remark = #{dealerPaymentRemark,jdbcType=VARCHAR},
+        bank_id = #{bankId,jdbcType=BIGINT},
+        bank_name = #{bankName,jdbcType=VARCHAR},
+        bank_payment_date = #{bankPaymentDate,jdbcType=DATE},
+        bank_payment_amount = #{bankPaymentAmount,jdbcType=DECIMAL},
+        bank_payment_remark = #{bankPaymentRemark,jdbcType=VARCHAR},
+        bank_payment_user_id = #{bankPaymentUserId,jdbcType=BIGINT},
+        bank_payment_user_name = #{bankPaymentUserName,jdbcType=VARCHAR},
+        bank_payment_status = #{bankPaymentStatus,jdbcType=INTEGER},
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+        modify_time = #{modifyTime,jdbcType=TIMESTAMP}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    
+    <sql id="loan_approve_payment_column_list">
+    	lap.project_id id,
+    	lap.project_id projectId,
+		lap.project_no projectNo, 
+		lap.org_id orgId,
+		lap.org_name orgName, 
+		lap.required_amount requiredAmount,
+		lap.co_bank_id coBankId,
+		lap.co_bank_name coBankName, 
+		lapm.guarantee_corporation_id guaranteeCorporationId,
+		lapm.guarantee_corporation_name guaranteeCorporationName, 
+		lapm.guarantee_corporation_account_name guaranteeCorporationAccountName,
+		lapm.guarantee_corporation_account_no guaranteeCorporationAccountNo,
+		lapm.guarantee_corporation_bank guaranteeCorporationBank,
+		lapm.export_status exportStatus,
+		lci.customer_name customerName
+    </sql>
+    
+    <sql id="loan_approve_payment_from">
+		FROM
+			loan_approve_project lap
+		LEFT JOIN loan_approve_payment lapm ON lap.project_id = lapm.project_id
+		LEFT JOIN loan_approve_customer lci ON lap.project_id = lci.project_id
+		LEFT JOIN business_object_process_info c_bopi ON lap.relative_apply_id1 = c_bopi.business_object_id
+		AND c_bopi.business_type = 'LOAN_APPLY_FLOW'
+		AND c_bopi.node_key = 'LOAN_FUND_DIRECTOR'
+		LEFT JOIN business_object_process_info c_bopi2 ON lap.relative_apply_id2 = c_bopi2.business_object_id
+		AND c_bopi2.business_type = 'LOAN_MODIFY_FLOW'
+		AND c_bopi2.node_key = 'LOAN_MODIFY_FUND_DIRECTOR'
+    </sql>
+    <sql id="loan_approve_payment_condition">
+    	<if test="queryMap.orgId != null">
+    		and lap.org_id =  #{queryMap.orgId,jdbcType=BIGINT}
+    	</if>
+    	<if test="queryMap.guaranteeCorporationId != null">
+    		and lapm.guarantee_corporation_id =  #{queryMap.guaranteeCorporationId,jdbcType=BIGINT}
+    	</if>
+    	<if test="queryMap.coBankId != null">
+    		and lap.co_bank_id =  #{queryMap.coBankId,jdbcType=BIGINT}
+    	</if>
+    	<if test="queryMap.exportStatus != null">
+    		and lapm.export_status =  #{queryMap.exportStatus,jdbcType=INTEGER}
+    	</if>
+    	<if test="queryMap.projectIds != null">
+    		and lap.project_id in 
+    		<foreach collection="queryMap.projectIds" item="item" open=" ("  close=") " separator=",">
+				${item}
+			</foreach>
+    	</if>
+    	<if test="queryMap.dataGroupScope != null">
+	 		and(
+				<if test="queryMap.dataGroupScope != null">
+					lap.user_group_id in 
+	 				<foreach collection="queryMap.dataGroupScope" item="tag" open=" (" separator=" ," close=") ">
+						  ${tag} 
+					</foreach>
+	 			</if>
+			)
+		</if>
+    </sql>
+    <select id="selectLoanApprovePaymentExport" parameterType="java.util.Map" resultType="com.cgw360.cls.model.approve.LoanApprovePaymentExport">  
+    	select 
+			<include refid="loan_approve_payment_column_list"/>,
+			ifnull(max(c_bopi2.submitted_date_time),max(c_bopi.submitted_date_time)) auditDate
+		<include refid="loan_approve_payment_from"></include>
+		<trim prefix="where" prefixOverrides="and|or">
+		    <include refid="loan_approve_payment_condition" />
+	  	</trim>
+	  	GROUP BY lap.project_id
+		HAVING ifnull(max(c_bopi2.submitted_date_time),max(c_bopi.submitted_date_time)) is not null
+    </select>
+    
+    <select id="countLoanApprovePaymentExport" parameterType="java.util.Map" resultType="java.util.Map">  
+    	select 
+			count(1) totalNum,
+			sum(lap.required_amount) totalAmount
+		from (
+			select 
+				lap.project_id project_id,lap.required_amount required_amount
+			<include refid="loan_approve_payment_from"></include>
+			<trim prefix="where" prefixOverrides="and|or">
+			    <include refid="loan_approve_payment_condition" />
+		  	</trim>
+		  	GROUP BY lap.project_id
+			HAVING ifnull(max(c_bopi2.submitted_date_time),max(c_bopi.submitted_date_time)) is not null
+		) lap
+    </select>
+    
+    <update id="updateLoanApprovePaymentExportStatus" parameterType="java.util.Map">
+    	update loan_approve_payment lap set lap.export_status = 2 
+    	<trim prefix="where" prefixOverrides="and|or">
+		    <include refid="loan_approve_payment_condition" />
+	  	</trim>
+    </update>
+   
+</mapper>

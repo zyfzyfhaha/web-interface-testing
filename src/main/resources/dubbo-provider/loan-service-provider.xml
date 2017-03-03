@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://code.alibabatech.com/schema/dubbo
+        http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+    <dubbo:service ref="loanApproveAssetsService" interface="com.cgw360.cls.api.loan.approve.ILoanApproveAssetsService"
+                   group="${dubbo.cheguo.cls.group}"
+                   version="${dubbo.cheguo.cls.version}" timeout="6000"/>
+
+    <dubbo:service ref="loanApproveContacterService"
+                   interface="com.cgw360.cls.api.loan.approve.ILoanApproveContacterService"
+                   group="${dubbo.cheguo.cls.group}" version="${dubbo.cheguo.cls.version}" timeout="6000"/>
+
+    <dubbo:service ref="loanApproveCustomerService"
+                   interface="com.cgw360.cls.api.loan.approve.ILoanApproveCustomerService"
+                   group="${dubbo.cheguo.cls.group}" version="${dubbo.cheguo.cls.version}" timeout="6000"/>
+
+    <dubbo:service ref="loanApproveDocumentService"
+                   interface="com.cgw360.cls.api.loan.approve.ILoanApproveDocumentService"
+                   group="${dubbo.cheguo.cls.group}" version="${dubbo.cheguo.cls.version}" timeout="6000"/>
+
+    <dubbo:service ref="loanApproveFeeService" interface="com.cgw360.cls.api.loan.approve.ILoanApproveFeeService"
+                   group="${dubbo.cheguo.cls.group}"
+                   version="${dubbo.cheguo.cls.version}" timeout="6000"/>
+
+    <dubbo:service ref="loanApproveGuarantorService"
+                   interface="com.cgw360.cls.api.loan.approve.ILoanApproveGuarantorService"
+                   group="${dubbo.cheguo.cls.group}" version="${dubbo.cheguo.cls.version}" timeout="6000"/>
+
+    <dubbo:service ref="loanApprovePaymentService"
+                   interface="com.cgw360.cls.api.loan.approve.ILoanApprovePaymentService"
+                   group="${dubbo.cheguo.cls.group}"
+                   version="${dubbo.cheguo.cls.version}" timeout="6000"/>
+
+    <dubbo:service ref="loanApproveProjectService"
+                   interface="com.cgw360.cls.api.loan.approve.ILoanApproveProjectService"
+                   group="${dubbo.cheguo.cls.group}"
+                   version="${dubbo.cheguo.cls.version}" timeout="6000"/>
+
+    <dubbo:service ref="loanInfoQueryService" interface="com.cgw360.cls.api.loan.common.ILoanInfoQueryService"
+                   group="${dubbo.cheguo.cls.group}"
+                   version="${dubbo.cheguo.cls.version}" timeout="6000"/>
+
+    <dubbo:service ref="loanApplyService" interface="com.cgw360.cls.api.loan.apply.ILoanApplyService"
+                   group="${dubbo.cheguo.cls.group}"
+                   version="${dubbo.cheguo.cls.version}" timeout="6000"/>
+
+    <dubbo:service ref="loanAssertsInfoService" interface="com.cgw360.cls.api.loan.apply.ILoanAssertsInfoService"
+                   group="${dubbo.cheguo.cls.group}"
+                   version="${dubbo.cheguo.cls.version}" timeout="6000"/>
+
+    <dubbo:service ref="loanCustomerService" interface="com.cgw360.cls.api.loan.apply.ILoanCustomerService"
+                   group="${dubbo.cheguo.cls.group}"
+                   version="${dubbo.cheguo.cls.version}" timeout="6000"/>
+
+    <dubbo:service ref="loanCustomerContractService"
+                   interface="com.cgw360.cls.api.loan.apply.ILoanCustomerContacterService"
+                   group="${dubbo.cheguo.cls.group}" version="${dubbo.cheguo.cls.version}" timeout="6000"/>
+
+    <dubbo:service ref="loanDocumentService" interface="com.cgw360.cls.api.loan.apply.ILoanDocumentService"
+                   group="${dubbo.cheguo.cls.group}"
+                   version="${dubbo.cheguo.cls.version}" timeout="6000"/>
+
+    <dubbo:service ref="loanFeeService" interface="com.cgw360.cls.api.loan.apply.ILoanFeeService"
+                   group="${dubbo.cheguo.cls.group}"
+                   version="${dubbo.cheguo.cls.version}" timeout="6000"/>
+
+    <dubbo:service ref="loanGuarantorService" interface="com.cgw360.cls.api.loan.apply.ILoanGuarantorService"
+                   group="${dubbo.cheguo.cls.group}"
+                   version="${dubbo.cheguo.cls.version}" timeout="6000"/>
+
+    <dubbo:service ref="loanModifyService" interface="com.cgw360.cls.api.loan.apply.ILoanModifyService"
+                   group="${dubbo.cheguo.cls.group}"
+                   version="${dubbo.cheguo.cls.version}" timeout="6000"/>
+
+    <dubbo:service ref="loanPaymentService" interface="com.cgw360.cls.api.loan.apply.ILoanPaymentService"
+                   group="${dubbo.cheguo.cls.group}"
+                   version="${dubbo.cheguo.cls.version}" timeout="6000"/>
+
+    <dubbo:service ref="loanProjectService" interface="com.cgw360.cls.api.loan.apply.ILoanProjectService"
+                   group="${dubbo.cheguo.cls.group}"
+                   version="${dubbo.cheguo.cls.version}" timeout="6000"/>
+
+    <dubbo:service ref="loanAssetPackageService" interface="com.cgw360.cls.api.loan.ILoanAssetPackageService"
+                   group="${dubbo.cheguo.cls.group}"
+                   version="${dubbo.cheguo.cls.version}" timeout="6000"/>
+
+    <dubbo:service ref="loanDocumentQueryHisService"
+                   interface="com.cgw360.cls.api.loan.apply.ILoanDocumentQueryHisService"
+                   group="${dubbo.cheguo.cls.group}"
+                   version="${dubbo.cheguo.cls.version}" timeout="6000"/>
+
+</beans>

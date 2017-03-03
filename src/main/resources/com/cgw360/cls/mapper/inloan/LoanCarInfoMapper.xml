@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cgw360.cls.dao.inloan.ILoanCarInfoDao">
+	<resultMap id="myResultMap" type="com.cgw360.cls.model.inloan.LoanCarInfo" autoMapping="true">
+		<result column="id" property="id" />
+		<result column="project_id" property="projectId" />
+		<result column="car_frame_no" property="carFrameNo" />
+		<result column="car_engine_no" property="carEngineNo" />
+		<result column="bill_no" property="billNo" />
+		<result column="bill_date" property="billDate" />
+		<result column="max_capacity" property="maxCapacity" />
+		<result column="note" property="note" />
+		<result column="gps_no" property="gpsNo" />
+		<result column="create_time" property="createTime" />
+		<result column="modify_time" property="modifyTime" />
+	</resultMap>
+
+	<insert id="insertOne" parameterType="com.cgw360.cls.model.inloan.LoanCarInfo" keyProperty="id" useGeneratedKeys="true">
+		<![CDATA[
+  			insert into loan_car_info
+  			(
+  			  			   			project_id, 			  			   			
+  			  			   			car_frame_no,
+  			  			   			car_engine_no,
+  			  			   			bill_no,
+  			  			   			bill_date,
+  			  			   			max_capacity,
+  			  			   			note,
+  			  			   			gps_no,
+  			  			   			create_time,
+  			  			   			modify_time  			   			
+			)values(						 			
+						 			 #{projectId} ,						 			 
+						 			 #{carFrameNo} ,
+						 			 #{carEngineNo} ,
+						 			 #{billNo} ,
+						 			 #{billDate} ,
+						 			 #{maxCapacity} ,
+						 			 #{note} ,
+						 			 #{gpsNo} ,
+						 			 NOW() ,
+						 			 #{modifyTime} 			 			
+			)
+		]]>
+	</insert>
+
+	<insert id="insertList" parameterType="com.cgw360.cls.model.inloan.LoanCarInfo" keyProperty="id" useGeneratedKeys="true">
+		<![CDATA[
+  			insert into loan_car_info
+  			(
+  			  			   			project_id, 			  			   			
+  			  			   			car_frame_no,
+  			  			   			car_engine_no,
+  			  			   			bill_no,
+  			  			   			bill_date,
+  			  			   			max_capacity,
+  			  			   			note,
+  			  			   			gps_no,
+  			  			   			create_time,
+  			  			   			modify_time  			
+			)values
+			]]>
+		<foreach collection="list" item="item" index="index" separator=",">
+			(
+			#{item.projectId} ,
+			#{item.carFrameNo} ,
+			#{item.carEngineNo} ,
+			#{item.billNo} ,
+			#{item.billDate} ,
+			#{item.maxCapacity} ,
+			#{item.note} ,
+			#{item.gpsNo} ,
+			NOW() ,
+			#{item.modifyTime}
+			)
+		</foreach>
+	</insert>
+
+	<delete id="deleteOne" parameterType="java.lang.Long">
+		<![CDATA[
+			delete from loan_car_info where id = #{id}
+		]]>
+	</delete>
+
+	<delete id="deleteList">
+		<![CDATA[
+			delete from loan_car_info where id in
+		]]>
+		<foreach collection="list" item="itemId" index="index" open="(" close=")" separator=",">
+			#{itemId}
+		</foreach>
+	</delete>
+
+	<update id="update" parameterType="com.cgw360.cls.model.inloan.LoanCarInfo">
+		<![CDATA[
+			update loan_car_info 
+		]]>
+		<set>
+			<if test="projectId != null and projectId != ''"> project_id = #{projectId}, </if>
+			<if test="carFrameNo != null and carFrameNo != ''"> car_frame_no = #{carFrameNo}, </if>
+			<if test="carEngineNo != null and carEngineNo != ''"> car_engine_no = #{carEngineNo}, </if>
+			<if test="billNo != null and billNo != ''"> bill_no = #{billNo}, </if>
+			<if test="billDate != null and billDate != ''"> bill_date = #{billDate}, </if>
+			<if test="maxCapacity != null and maxCapacity != ''"> max_capacity = #{maxCapacity}, </if>
+			<if test="note != null and note != ''"> note = #{note}, </if>
+			<if test="gpsNo != null and gpsNo != ''"> gps_no = #{gpsNo}, </if>
+			<if test="createTime != null and createTime != ''"> create_time = #{createTime}, </if>
+			<if test="modifyTime != null and modifyTime != ''"> modify_time = #{modifyTime}, </if>
+		</set>
+		<![CDATA[
+			where id = #{id}
+		]]>
+	</update>
+
+	<select id="selectOne" parameterType="java.lang.Long" resultMap="myResultMap">
+		<![CDATA[
+			select * from loan_car_info where id = #{id} limit 1
+		]]>
+	</select>
+	<select id="selectList" resultMap="myResultMap">
+		<![CDATA[
+			select * from loan_car_info where id in
+		]]>
+		<foreach collection="list" item="itemId" index="index" open="(" close=")" separator=",">
+			#{itemId}
+		</foreach>
+	</select>
+	<!-- common statement -->
+	<sql id="common_where">
+		<!-- and username like '%${username}%' -->
+		<where>
+			<if test="projectId != null and projectId != ''">
+				AND project_id = #{projectId}
+			</if>
+			<if test="carFrameNo != null and carFrameNo != ''">
+				AND car_frame_no = #{carFrameNo}
+			</if>
+			<if test="carEngineNo != null and carEngineNo != ''">
+				AND car_engine_no = #{carEngineNo}
+			</if>
+			<if test="billNo != null and billNo != ''">
+				AND bill_no = #{billNo}
+			</if>
+			<if test="billDate != null and billDate != ''">
+				AND bill_date = #{billDate}
+			</if>
+			<if test="maxCapacity != null and maxCapacity != ''">
+				AND max_capacity = #{maxCapacity}
+			</if>
+			<if test="note != null and note != ''">
+				AND note = #{note}
+			</if>
+			<if test="gpsNo != null and gpsNo != ''">
+				AND gps_no = #{gpsNo}
+			</if>
+			<if test="createTime != null and createTime != ''">
+				AND create_time = #{createTime}
+			</if>
+			<if test="modifyTime != null and modifyTime != ''">
+				AND modify_time = #{modifyTime}
+			</if>
+		</where>
+	</sql>
+
+	<select id="selectCountByFields" parameterType="java.util.Map" resultType="java.lang.Integer">
+		<![CDATA[
+			select count(1) from loan_car_info 
+		]]>
+		<include refid="common_where" />
+	</select>
+	<select id="selectByFields" parameterType="java.util.Map" resultMap="myResultMap">
+		<![CDATA[
+			select * from loan_car_info 
+		]]>
+		<include refid="common_where" />
+		<choose>
+			<when test="sortField != null and sortField == 'createTimeAsc'">
+				<![CDATA[order by case when create_time is null then '2039-01-01 00:00:00' else create_time end asc]]>
+			</when>
+			<when test="sortField != null and sortField == 'createTimeDesc'">
+				<![CDATA[order by case when create_time is null then '1969-12-31 23:59:59' else create_time end desc]]>
+			</when>
+			<otherwise>
+				<![CDATA[order by case when create_time is null then '1969-12-31 23:59:59' else create_time end desc]]>
+			</otherwise>
+		</choose>
+		<choose>
+			<when test="limitStart != null and limitNum != null">
+				limit #{limitStart}, #{limitNum}
+			</when>
+			<when test="limitNum != null">
+				limit #{limitNum}
+			</when>
+			<otherwise></otherwise>
+		</choose>
+	</select>
+</mapper>

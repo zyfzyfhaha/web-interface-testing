@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+       http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+    <context:property-placeholder location="classpath*:/cls.conf" ignore-unresolvable="true"/>
+
+    <context:component-scan base-package="com.cgw360" annotation-config="true"/>
+    <aop:aspectj-autoproxy proxy-target-class="true"/>
+
+    <util:map id="creditProcessNodeActionMap" key-type="java.lang.String"
+              value-type="com.cgw360.cls.bss.flow.credit.ICreditProcessAction">
+        <entry key="CREDIT_FLOW#CREDIT_START" value-ref="creditProcessLaunchActionImpl"/>
+        <entry key="CREDIT_FLOW#CREDIT_ENTER" value-ref="creditProcessEnterActionImpl"/>
+        <entry key="CREDIT_FLOW#CREDIT_ACCEPT" value-ref="creditProcessAcceptActionImpl"/>
+    </util:map>
+
+    <bean id="creditProcessNodeActionMapper" class="com.cgw360.cls.bss.flow.ProcessNodeActionMapper">
+        <property name="nodeActionMapper" ref="creditProcessNodeActionMap"/>
+    </bean>
+
+</beans>

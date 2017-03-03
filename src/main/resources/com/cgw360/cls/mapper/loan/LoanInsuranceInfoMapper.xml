@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cgw360.cls.dao.loaninsurance.LoanInsuranceInfoDao">
+	<resultMap id="myResultMap" type="com.cgw360.cls.model.loaninsurance.LoanInsuranceInfo" autoMapping="true">
+		<result column="id" property="id" />
+		<result column="project_id" property="projectId" />
+		<result column="insurance_no" property="insuranceNo" />
+		<result column="insurance_company_id" property="insuranceCompanyId" />
+		<result column="insurance_company_name" property="insuranceCompanyName" />
+		<result column="insurance_type_key" property="insuranceTypeKey" />
+		<result column="insurance_type_name" property="insuranceTypeName" />
+		<result column="insurance_start_time" property="insuranceStartTime" />
+		<result column="insurance_end_time" property="insuranceEndTime" />
+		<result column="insurance_fee_total" property="insuranceFeeTotal" />
+		<result column="insurance_status" property="insuranceStatus" />
+		<result column="remark" property="remark" />
+		<result column="creator" property="creator" />
+		<result column="status" property="status" />
+		<result column="create_time" property="createTime" />
+        <result column="modify_time" property="modifyTime" />	
+	</resultMap>
+	
+	<resultMap id="loanInfoViewResultMap" type="com.cgw360.cls.model.loaninsurance.LoanInfoViewDto" autoMapping="true">
+		<result column="relative_apply_id1" property="relativeApplyId1" jdbcType="BIGINT" />
+	    <result column="credit_id" property="creditId" jdbcType="BIGINT" />
+	    <result column="project_id" property="projectId" jdbcType="BIGINT" />
+	    <result column="project_no" property="projectNo" jdbcType="VARCHAR" />
+	    <result column="customer_id" property="customerId" jdbcType="BIGINT" />
+	    <result column="customer_no" property="customerNo" jdbcType="VARCHAR" />
+	    <result column="customer_name" property="customerName" jdbcType="VARCHAR" />
+	    <result column="card_type" property="cardType" jdbcType="INTEGER" />
+	    <result column="card_no" property="cardNo" jdbcType="VARCHAR" />
+	    <result column="mobile_phone" property="mobilePhone" jdbcType="VARCHAR" />
+	    <result column="business_type_id" property="businessTypeId" jdbcType="INTEGER" />
+	    <result column="business_type_name" property="businessTypeName" jdbcType="VARCHAR" />
+	    <result column="product_id" property="productId" jdbcType="INTEGER" />
+	    <result column="product_name" property="productName" jdbcType="VARCHAR" />
+	    <result column="STATUS" property="status" jdbcType="INTEGER" />
+	    <result column="car_type" property="carType" jdbcType="VARCHAR" />
+	    <result column="car_serialno" property="carSerialno" jdbcType="VARCHAR" />
+	    <result column="car_brand" property="carBrand" jdbcType="VARCHAR" />
+	    <result column="car_brand_name" property="carBrandName" jdbcType="VARCHAR" />
+	    <result column="car_make" property="carMake" jdbcType="VARCHAR" />
+	    <result column="car_make_name" property="carMakeName" jdbcType="VARCHAR" />
+	    <result column="car_model" property="carModel" jdbcType="VARCHAR" />
+	    <result column="car_model_name" property="carModelName" jdbcType="VARCHAR" />
+	    <result column="loan_amount" property="loanAmount" jdbcType="DECIMAL" />
+	    <result column="required_amount" property="requiredAmount" jdbcType="DECIMAL" />
+	    <result column="loan_term" property="loanTerm" jdbcType="INTEGER" />
+	    <result column="loan_ratio" property="loanRatio" jdbcType="DECIMAL" />
+	    <result column="handing_fee" property="handingFee" jdbcType="DECIMAL" />
+	    <result column="repayment_amount" property="repaymentAmount" jdbcType="DECIMAL" />
+	    <result column="down_payment_amount" property="downPaymentAmount" jdbcType="DECIMAL" />
+	    <result column="payment_method" property="paymentMethod" jdbcType="INTEGER" />
+	    <result column="delivery_method" property="deliveryMethod" jdbcType="INTEGER" />
+	    <result column="payment_level" property="paymentLevel" jdbcType="INTEGER" />
+	    <result column="settle_method" property="settleMethod" jdbcType="INTEGER" />
+	    <result column="tested_repayment_amount" property="testedRepaymentAmount" jdbcType="DECIMAL" />
+	    <result column="receivable_amount" property="receivableAmount" jdbcType="DECIMAL" />
+	    <result column="collected_amount" property="collectedAmount" jdbcType="DECIMAL" />
+	    <result column="pre_collected_amount" property="preCollectedAmount" jdbcType="DECIMAL" />
+	    <result column="payable_amount" property="payableAmount" jdbcType="DECIMAL" />
+	    <result column="policy_finish_flag" property="policyFinishFlag" jdbcType="INTEGER" />
+	    <result column="launch_date" property="launchDate" jdbcType="DATE" />
+	    <result column="launch_user_id" property="launchUserId" jdbcType="BIGINT" />
+	    <result column="launch_user_name" property="launchUserName" jdbcType="VARCHAR" />
+	    <result column="sign_date" property="signDate" jdbcType="TIMESTAMP" />
+	    <result column="main_signer_id" property="mainSignerId" jdbcType="BIGINT" />
+	    <result column="main_signer_name" property="mainSignerName" jdbcType="VARCHAR" />
+	    <result column="review_date" property="reviewDate" jdbcType="DATE" />
+	    <result column="review_user_id" property="reviewUserId" jdbcType="BIGINT" />
+	    <result column="review_user_name" property="reviewUserName" jdbcType="VARCHAR" />
+	    <result column="approve_date" property="approveDate" jdbcType="DATE" />
+	    <result column="approve_user_id" property="approveUserId" jdbcType="BIGINT" />
+	    <result column="approve_user_name" property="approveUserName" jdbcType="VARCHAR" />
+	    <result column="dealer_id" property="dealerId" jdbcType="BIGINT" />
+	    <result column="dealer_name" property="dealerName" jdbcType="VARCHAR" />
+	    <result column="co_bank_id" property="coBankId" jdbcType="BIGINT" />
+	    <result column="co_bank_name" property="coBankName" jdbcType="VARCHAR" />
+	    <result column="user_id" property="userId" jdbcType="BIGINT" />
+	    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+	    <result column="user_group_id" property="userGroupId" jdbcType="BIGINT" />
+	    <result column="user_group_name" property="userGroupName" jdbcType="VARCHAR" />
+	    <result column="manager_id" property="managerId" jdbcType="BIGINT" />
+	    <result column="manager_name" property="managerName" jdbcType="VARCHAR" />
+	    <result column="org_id" property="orgId" jdbcType="BIGINT" />
+	    <result column="org_name" property="orgName" jdbcType="VARCHAR" />
+	    <result column="guarantee_corporation_payment_date" property="guaranteeCorporationPaymentDate" jdbcType="DATE" />
+	    <result column="guarantee_corporation_payment_amount" property="guaranteeCorporationPaymentAmount" jdbcType="DECIMAL" />
+	    <result column="dealer_payment_date" property="dealerPaymentDate" jdbcType="DATE" />
+	    <result column="dealer_payment_amount" property="dealerPaymentAmount" jdbcType="DECIMAL" />
+	    <result column="bank_payment_date" property="bankPaymentDate" jdbcType="DATE" />
+	    <result column="bank_payment_amount" property="bankPaymentAmount" jdbcType="DECIMAL" />
+	    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+	    <result column="predicted_purchasetax" property="predictedPurchasetax" jdbcType="INTEGER" />
+	    <result column="flow_type" property="flowType" jdbcType="VARCHAR" />
+	    <result column="pb_deposit" property="pbDeposit" jdbcType="DECIMAL" />
+	    <result column="plate_no" property="plateNo" jdbcType="VARCHAR" />
+	</resultMap>
+	
+
+	<select id="search" parameterType="java.util.Map" resultMap="myResultMap">
+		select * from loan_insurance_info where status=1
+        <if test="projectId != null">
+          AND project_id = #{projectId}
+        </if>
+	</select>
+
+	<select id="searchLoanInfoView" parameterType="java.util.Map" resultMap="loanInfoViewResultMap">
+		select lpi.plate_no, lv.*,af.predicted_purchasetax,af.pb_deposit from loan_info_view lv 
+		LEFT JOIN loan_approve_fee af on lv.project_id=af.project_id 
+		LEFT JOIN license_plate_info lpi on af.project_id = lpi.project_id
+		where lv.status in (2,3)
+		AND lv.review_date is not NULL
+        <if test="projectNo != null and projectNo !='' ">
+          AND lv.project_no LIKE CONCAT(CONCAT('%',
+			#{projectNo,jdbcType=VARCHAR}), '%')
+        </if>
+        <if test="customerName != null and customerName !='' ">
+          AND lv.customer_name LIKE CONCAT(CONCAT('%',
+			#{customerName,jdbcType=VARCHAR}), '%')
+        </if>
+        <if test="cardNo != null and cardNo !='' ">
+          AND lv.card_no LIKE CONCAT(CONCAT('%',
+			#{cardNo,jdbcType=VARCHAR}), '%')
+        </if>
+        <if test="mobilePhone != null and mobilePhone !='' ">
+          AND lv.mobile_phone LIKE CONCAT(CONCAT('%',
+			#{mobilePhone,jdbcType=VARCHAR}), '%')
+        </if>
+        <if test="plateNo != null and plateNo !='' ">
+          AND lpi.plate_no LIKE CONCAT(CONCAT('%',
+			#{plateNo,jdbcType=VARCHAR}), '%')
+        </if>
+        <if test="status ==2 ">
+          AND lv.policy_finish_flag = #{status}
+        </if>
+        <if test="status == 1 ">
+          AND lv.policy_finish_flag is null
+        </if>
+        <if test="userId != null and userId !='' ">
+          AND lv.user_id = #{userId}
+        </if>
+        <if test="groupIdList != null and groupIdList.size()>0">
+            and lv.user_group_id in
+            <foreach collection="groupIdList" item="groupId" separator="," open="(" close=")">
+                #{groupId,jdbcType=BIGINT}
+            </foreach>
+        </if>
+        order by lv.launch_date desc
+	</select>
+	
+	<select id="getInsuranceCount" parameterType="java.util.Map" resultMap="myResultMap">
+		select * from loan_insurance_info where status=1
+        <if test="projectId != null">
+          AND project_id = #{projectId}
+        </if>
+	</select>
+	
+	<select id="toUpdate" parameterType="com.cgw360.cls.model.loaninsurance.LoanInsuranceInfo" resultMap="myResultMap">
+	    select * from loan_insurance_info where 1=1
+	    <if test="id != null">
+	       AND id = #{id}
+	    </if>
+	</select>
+	
+	<insert id="insertSelective" parameterType="com.cgw360.cls.model.loaninsurance.LoanInsuranceInfo" keyProperty="id" useGeneratedKeys="true">
+    insert into loan_insurance_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="projectId != null" >
+        project_id,
+      </if>
+      <if test="insuranceNo != null" >
+        insurance_no,
+      </if>
+      <if test="insuranceCompanyId != null" >
+        insurance_company_id,
+      </if>
+      <if test="insuranceCompanyName != null" >
+        insurance_company_name,
+      </if>
+      <if test="insuranceTypeKey != null" >
+        insurance_type_key,
+      </if>
+      <if test="insuranceTypeName != null" >
+        insurance_type_name,
+      </if>
+      <if test="insuranceStartTime != null" >
+        insurance_start_time,
+      </if>
+      <if test="insuranceEndTime != null" >
+        insurance_end_time,
+      </if>
+      <if test="insuranceFeeTotal != null" >
+        insurance_fee_total,
+      </if>
+      <if test="insuranceStatus != null" >
+        insurance_status,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="creator != null" >
+        creator,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="modifyTime != null" >
+        modify_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="projectId != null" >
+        #{projectId,jdbcType=BIGINT},
+      </if>
+      <if test="insuranceNo != null" >
+        #{insuranceNo,jdbcType=VARCHAR},
+      </if>
+      <if test="insuranceCompanyId != null" >
+        #{insuranceCompanyId,jdbcType=BIGINT},
+      </if>
+      <if test="insuranceCompanyName != null" >
+        #{insuranceCompanyName,jdbcType=VARCHAR},
+      </if>
+      <if test="insuranceTypeKey != null" >
+        #{insuranceTypeKey,jdbcType=VARCHAR},
+      </if>
+      <if test="insuranceTypeName != null" >
+        #{insuranceTypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="insuranceStartTime != null" >
+        #{insuranceStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="insuranceEndTime != null" >
+        #{insuranceEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="insuranceFeeTotal != null" >
+        #{insuranceFeeTotal,jdbcType=DECIMAL},
+      </if>
+      <if test="insuranceStatus != null" >
+        #{insuranceStatus,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="creator != null" >
+        #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyTime != null" >
+        #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+	
+    <update id="update" parameterType="com.cgw360.cls.model.loaninsurance.LoanInsuranceInfo">
+		<![CDATA[
+			update loan_insurance_info 
+		]]>
+		<set>
+			<if test="insuranceCompanyId != null and insuranceCompanyId != ''"> insurance_company_id = #{insuranceCompanyId}, </if>
+			<if test="insuranceCompanyName != null and insuranceCompanyName != ''"> insurance_company_name = #{insuranceCompanyName}, </if>
+			<if test="insuranceTypeKey != null and insuranceTypeKey != ''"> insurance_type_key = #{insuranceTypeKey}, </if>
+			<if test="insuranceTypeName != null and insuranceTypeName != ''"> insurance_type_name = #{insuranceTypeName}, </if>
+			<if test="insuranceNo != null and insuranceNo != ''"> insurance_no = #{insuranceNo}, </if>
+			<if test="insuranceStartTime != null and insuranceStartTime != ''"> insurance_start_time = #{insuranceStartTime}, </if>
+			<if test="insuranceEndTime != null and insuranceEndTime != ''"> insurance_end_time = #{insuranceEndTime}, </if>
+			<if test="insuranceFeeTotal != null and insuranceFeeTotal != ''"> insurance_fee_total = #{insuranceFeeTotal}, </if>
+			
+			<if test="remark != null and remark != ''"> remark = #{remark}, </if>
+			<if test="insuranceStatus != null and insuranceStatus != ''"> insurance_status = #{insuranceStatus}, </if>
+			<if test="creator != null and creator != ''"> creator = #{creator}, </if>
+			<if test="status != null and status != ''"> status = #{status}, </if>
+			<if test="modifyTime != null and modifyTime != ''"> modify_time = #{modifyTime}, </if>
+		</set>
+		<![CDATA[
+			where id = #{id}
+		]]>
+	</update>
+   <update id="delLoanInsurance" parameterType="java.lang.Long">
+			update loan_insurance_info set status=0 WHERE id =#{id,jdbcType=BIGINT} 
+   </update>
+	
+	<update id="updateApproveProjectPolicyFinishFlag" parameterType="java.lang.Long">
+			update loan_approve_project set policy_finish_flag=2 WHERE project_id =#{projectId,jdbcType=BIGINT} 
+   </update>
+   
+   <update id="updatePolicyFinishFlagWait" parameterType="java.lang.Long">
+			update loan_approve_project set policy_finish_flag=null WHERE project_id =#{projectId,jdbcType=BIGINT} 
+   </update>
+   
+   <update id="updatePolicyFinishFlag" parameterType="java.lang.Long">
+			update loan_approve_project 
+			set policy_finish_flag=#{status,jdbcType=BIGINT} 
+			WHERE project_id =#{projectId,jdbcType=BIGINT} 
+   </update>
+</mapper>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://code.alibabatech.com/schema/dubbo
+        http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+	<!-- <dubbo:application name="za_user_serivce"/> -->
+
+    <dubbo:registry id="staff_center" register="false" protocol="dubbo" address="${dubbo.cheguo.staff.address}" />
+	<dubbo:registry id="cheguo_cls_center" register="false" protocol="dubbo" address="${dubbo.cheguo.cls.address}" />
+	<dubbo:registry id="cheguo_api_center" register="false" protocol="dubbo" address="${dubbo.cheguo.api.address}" />
+	<dubbo:registry id="cls_center" register="false" protocol="dubbo" address="${dubbo.cheguo.staff.address}" />
+
+    <!--<dubbo:registry id="cheguo_staff_center" register="false" protocol="dubbo" address="${dubbo.cheguo.staff.address}"/>
+    <dubbo:registry id="cls_admin_service_center" register="false" protocol="dubbo"
+                    address="${dubbo.cheguo.cls.admin.address}"/>
+	<dubbo:registry id="cheguo_api_center" register="false" protocol="dubbo" address="${dubbo.cheguo.api.address}" />-->
+
+    <import resource="classpath*:dubbo-consumer/*.xml"/>
+
+</beans>

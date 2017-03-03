@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cgw360.cls.dao.inloan.IPledgeInfoDao">
+	<resultMap id="myResultMap" type="com.cgw360.cls.model.inloan.PledgeInfo" autoMapping="true">
+		<result column="id" property="id" />
+		<result column="project_id" property="projectId" />
+		<result column="pledge_status" property="pledgeStatus" />
+		<result column="pledge_date" property="pledgeDate" />
+		<result column="wararnt_no" property="wararntNo" />
+		<result column="operator_uid" property="operatorUid" />
+		<result column="operator_realname" property="operatorRealname" />
+		<result column="fail_reason" property="failReason" />
+		<result column="note" property="note" />
+		<result column="create_time" property="createTime" />
+		<result column="modify_time" property="modifyTime" />
+	</resultMap>
+
+	<insert id="insertOne" parameterType="com.cgw360.cls.model.inloan.PledgeInfo" keyProperty="id" useGeneratedKeys="true">
+		<![CDATA[
+  			insert into pledge_info
+  			(
+  			  			   			project_id,
+  			  			   			pledge_status,
+  			  			   			pledge_date,
+  			  			   			wararnt_no,
+  			  			   			operator_uid,
+  			  			   			operator_realname,
+  			  			   			fail_reason,
+  			  			   			note,
+  			  			   			create_time,
+  			  			   			modify_time  			   			
+			)values(
+						 			 #{projectId} ,
+						 			 #{pledgeStatus} ,
+						 			 #{pledgeDate} ,
+						 			 #{wararntNo} ,
+						 			 #{operatorUid} ,
+						 			 #{operatorRealname} ,
+						 			 #{failReason} ,
+						 			 #{note} ,
+						 			 NOW() ,
+						 			 #{modifyTime} 			 			
+			)
+		]]>
+	</insert>
+
+	<insert id="insertList" parameterType="com.cgw360.cls.model.inloan.PledgeInfo" keyProperty="id" useGeneratedKeys="true">
+		<![CDATA[
+  			insert into pledge_info
+  			(
+  			  			   			project_id,
+  			  			   			pledge_status,
+  			  			   			pledge_date,
+  			  			   			wararnt_no,
+  			  			   			operator_uid,
+  			  			   			operator_realname,
+  			  			   			fail_reason,
+  			  			   			note,
+  			  			   			create_time,
+  			  			   			modify_time  			   			
+			)values
+			]]>
+		<foreach collection="list" item="item" index="index" separator=",">
+			(
+			#{item.projectId} ,
+			#{item.pledgeStatus} ,
+			#{item.pledgeDate} ,
+			#{item.wararntNo} ,
+			#{item.operatorUid} ,
+			#{item.operatorRealname} ,
+			#{item.failReason} ,
+			#{item.note} ,
+			NOW() ,
+			#{item.modifyTime}
+			)
+		</foreach>
+	</insert>
+
+	<delete id="deleteOne" parameterType="java.lang.Long">
+		<![CDATA[
+			delete from pledge_info where id = #{id}
+		]]>
+	</delete>
+
+	<delete id="deleteList">
+		<![CDATA[
+			delete from pledge_info where id in
+		]]>
+		<foreach collection="list" item="itemId" index="index" open="(" close=")" separator=",">
+			#{itemId}
+		</foreach>
+	</delete>
+
+	<update id="update" parameterType="com.cgw360.cls.model.inloan.PledgeInfo">
+		<![CDATA[
+			update pledge_info 
+		]]>
+		<set>
+			<if test="projectId != null and projectId != ''"> project_id = #{projectId}, </if>
+			<if test="pledgeStatus != null and pledgeStatus != ''"> pledge_status = #{pledgeStatus}, </if>
+			<if test="pledgeDate != null and pledgeDate != ''"> pledge_date = #{pledgeDate}, </if>
+			<if test="wararntNo != null and wararntNo != ''"> wararnt_no = #{wararntNo}, </if>
+			<if test="operatorUid != null and operatorUid != ''"> operator_uid = #{operatorUid}, </if>
+			<if test="operatorRealname != null and operatorRealname != ''"> operator_realname = #{operatorRealname}, </if>
+			<if test="failReason != null and failReason != ''"> fail_reason = #{failReason}, </if>
+			<if test="note != null and note != ''"> note = #{note}, </if>
+			<if test="createTime != null and createTime != ''"> create_time = #{createTime}, </if>
+			<if test="modifyTime != null and modifyTime != ''"> modify_time = #{modifyTime}, </if>
+		</set>
+		<![CDATA[
+			where id = #{id}
+		]]>
+	</update>
+
+	<select id="selectOne" parameterType="java.lang.Long" resultMap="myResultMap">
+		<![CDATA[
+			select * from pledge_info where id = #{id} limit 1
+		]]>
+	</select>
+	<select id="selectList" resultMap="myResultMap">
+		<![CDATA[
+			select * from pledge_info where id in
+		]]>
+		<foreach collection="list" item="itemId" index="index" open="(" close=")" separator=",">
+			#{itemId}
+		</foreach>
+	</select>
+	<!-- common statement -->
+	<sql id="common_where">
+		<!-- and username like '%${username}%' -->
+		<where>
+			<if test="projectId != null and projectId != ''">
+				AND project_id = #{projectId}
+			</if>
+			<if test="pledgeStatus != null and pledgeStatus != ''">
+				AND pledge_status = #{pledgeStatus}
+			</if>
+			<if test="pledgeDate != null and pledgeDate != ''">
+				AND pledge_date = #{pledgeDate}
+			</if>
+			<if test="wararntNo != null and wararntNo != ''">
+				AND wararnt_no = #{wararntNo}
+			</if>
+			<if test="operatorUid != null and operatorUid != ''">
+				AND operator_uid = #{operatorUid}
+			</if>
+			<if test="operatorRealname != null and operatorRealname != ''">
+				AND operator_realname = #{operatorRealname}
+			</if>
+			<if test="failReason != null and failReason != ''">
+				AND fail_reason = #{failReason}
+			</if>
+			<if test="note != null and note != ''">
+				AND note = #{note}
+			</if>
+			<if test="createTime != null and createTime != ''">
+				AND create_time = #{createTime}
+			</if>
+			<if test="modifyTime != null and modifyTime != ''">
+				AND modify_time = #{modifyTime}
+			</if>
+		</where>
+	</sql>
+
+	<select id="selectCountByFields" parameterType="java.util.Map" resultType="java.lang.Integer">
+		<![CDATA[
+			select count(1) from pledge_info 
+		]]>
+		<include refid="common_where" />
+	</select>
+	<select id="selectByFields" parameterType="java.util.Map" resultMap="myResultMap">
+		<![CDATA[
+			select * from pledge_info 
+		]]>
+		<include refid="common_where" />
+		<choose>
+			<when test="sortField != null and sortField == 'createTimeAsc'">
+				<![CDATA[order by case when create_time is null then '2039-01-01 00:00:00' else create_time end asc]]>
+			</when>
+			<when test="sortField != null and sortField == 'createTimeDesc'">
+				<![CDATA[order by case when create_time is null then '1969-12-31 23:59:59' else create_time end desc]]>
+			</when>
+			<otherwise>
+				<![CDATA[order by case when create_time is null then '1969-12-31 23:59:59' else create_time end desc]]>
+			</otherwise>
+		</choose>
+		<choose>
+			<when test="limitStart != null and limitNum != null">
+				limit #{limitStart}, #{limitNum}
+			</when>
+			<when test="limitNum != null">
+				limit #{limitNum}
+			</when>
+			<otherwise></otherwise>
+		</choose>
+	</select>
+	
+	<sql id="criteria_condition">
+		<if test="loanStatuses != null">
+			<choose>
+				<when test="loanStatuses.size() > 0">
+					lap1.status in
+					<foreach collection="loanStatuses" item="tag" open=" (" separator=", " close=" )">
+						${tag}
+					</foreach>
+				</when>
+				<otherwise>
+					and 1 = -1
+				</otherwise>
+			</choose>
+		</if>	
+		<choose>
+    		<when test="pledgeStatus==1">
+    			and (pi.pledge_status = 1)	 			
+    		</when>
+    		<otherwise>
+    			and (pi.pledge_status is null or pi.pledge_status = 2)	
+    		</otherwise>
+    	</choose>	
+    	<if test="isRegistered !=null and isRegistered != ''">
+	 		 and lpi.is_registered = #{isRegistered}		  
+	 	</if>
+  		<if test="projectNo !=null and projectNo != ''">
+	 		 and lap1.project_no like concat("%",#{projectNo},"%") 		  
+	 	</if>
+	 	<if test="customerName !=null and customerName != ''">
+	 		 and lap1.customer_name like concat("%",#{customerName},"%") 		  
+	 	</if>
+	 	<if test="cardNo !=null and cardNo != ''">
+	 		and lap1.card_no like concat("%",#{cardNo},"%") 		  
+	 	</if>
+	 	<if test="mobilePhone !=null and mobilePhone != ''">
+	 		and lap1.mobile_phone like concat("%",#{mobilePhone},"%") 		  
+	 	</if>
+	 	<if test="plateNo !=null and plateNo != ''">
+	 		and lpi.plate_no like concat("%",#{plateNo},"%") 		  
+	 	</if>
+	 	<if test="dealerPaymentDate !=null and dealerPaymentDate != ''">
+	 		and lap1.dealer_payment_date = #{dealerPaymentDate}		  
+	 	</if>
+	 	<if test="beginPayDate !=null and beginPayDate != ''">
+	 		and lap1.dealer_payment_date &gt; #{beginPayDate}		  
+	 	</if>
+	 	<if test="endPayDate !=null and endPayDate != ''">
+	 		and lap1.dealer_payment_date &lt; #{endPayDate}		  
+	 	</if>
+	 	<if test="dataOrgScope != null or dataGroupScope != null">
+	 		and(
+	 			<if test="dataOrgScope != null">
+	 				lap1.org_id in 
+	 				<foreach collection="dataOrgScope" item="tag" open=" )" separator=" ," close=") ">
+						  ${tag}
+					</foreach>
+	 			</if>
+	 			<if test="dataOrgScope != null and dataGroupScope != null"> 
+	 				or 
+	 			</if>
+				<if test="dataGroupScope != null">
+					lap1.user_group_id in 
+	 				<foreach collection="dataGroupScope" item="tag" open=" (" separator=" ," close=") ">
+						  ${tag} 
+					</foreach>
+	 			</if>
+			)
+		</if>
+  	</sql>
+	 <select id="countByCriteria" resultType="java.lang.Integer" parameterType="java.util.Map" >
+	    select 
+	    	count(1)
+		from loan_info_view lap1
+		left join loan_car_info lci on lci.project_id = lap1.project_id
+		left join license_plate_info lpi on lpi.loan_car_id = lci.id
+		left join pledge_info pi on pi.project_id  = lap1.project_id
+		left join loan_contract_info lci2 on lci2.project_id = lap1.project_id
+		<trim prefix="where" prefixOverrides="and|or">
+		    <include refid="criteria_condition" />
+	  	</trim>
+	</select>
+	<select id="selectByCriteria" parameterType="java.util.Map" resultType="java.util.Map">
+		select 
+			lap1.relative_apply_id1 applyId, 
+			lap1.project_id projectId, 
+			lap1.project_no projectNo,
+			lap1.car_type carType,
+			lap1.customer_name customerName, 
+			lap1.card_no cardNo, 
+			lap1.mobile_phone mobilePhone, 
+			lap1.dealer_payment_date dealerPaymentDate,
+			datediff(curdate(),lap1.dealer_payment_date) paymentDays,
+			lap1.loan_amount loanAmount,
+			lap1.loan_term loanTerm,
+
+			lci2.contract_no contractNo, 
+			lpi.plate_no plateNo,		
+			pi.fail_reason failReason,
+			pi.wararnt_no wararntNo,
+			pi.pledge_date pledgeDate,
+			pi.operator_realname operatorRealname		
+		from loan_info_view lap1
+		left join loan_car_info lci on lci.project_id = lap1.project_id
+		left join license_plate_info lpi on lpi.loan_car_id = lci.id
+		left join pledge_info pi on pi.project_id  = lap1.project_id
+		left join loan_contract_info lci2 on lci2.project_id = lap1.project_id
+
+		<trim prefix="where" prefixOverrides="and|or">
+		    <include refid="criteria_condition" />
+	  	</trim>
+  		order by lap1.dealer_payment_date 
+  		<if test="limitStart!=null">
+  			limit #{limitStart}, #{limitNum}
+  		</if>	
+  	</select>
+  	
+  	<select id="selectByProjectId" parameterType="java.lang.Long" resultType="java.util.Map">
+		select 
+			lap1.relative_apply_id1 applyId, 
+			lap1.project_id projectId, 
+			lap1.project_no projectNo,
+			lap1.product_name productName,
+			lap1.loan_amount loanAmount,
+			lap1.loan_term loanTerm,
+			lap1.car_type carType,
+			lap1.customer_id customerId,
+			lap1.customer_no customerNo,
+			lap1.customer_name customerName,
+			lap1.card_no cardNo,
+			lap1.mobile_phone mobilePhone, 
+			lap1.dealer_payment_date dealerPaymentDate,
+
+			lpi.plate_no plateNo,
+			lpi.plate_area plateArea,
+			lpi.register_date registerDate,
+			lpi.register_target registerTarget,
+			lpi.company_name companyName,
+			lpi.company_code companyCode,	
+			pi.id id,
+			pi.pledge_status pledgeStatus,
+			pi.pledge_date pledgeDate,
+			pi.wararnt_no wararntNo,
+			pi.operator_uid operatorUid,
+			pi.operator_realname operatorRealname,
+			pi.fail_reason failReason,
+			pi.note note
+		from loan_info_view lap1
+		left join loan_car_info lci on lci.project_id = lap1.project_id
+		left join license_plate_info lpi on lpi.loan_car_id = lci.id
+		left join pledge_info pi on pi.project_id  = lap1.project_id
+		left join loan_contract_info lci2 on lci2.project_id = lap1.project_id
+		where lap1.project_id = #{projectId}
+
+  	</select>
+</mapper>

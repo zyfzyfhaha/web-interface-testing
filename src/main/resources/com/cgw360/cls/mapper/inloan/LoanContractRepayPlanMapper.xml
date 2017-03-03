@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cgw360.cls.dao.inloan.LoanContractRepayPlanMapper">
+	<resultMap id="BaseResultMap" type="com.cgw360.cls.model.inloan.LoanContractRepayPlan">
+		<id column="id" property="id" jdbcType="BIGINT" />
+		<result column="contract_id" property="contractId" jdbcType="BIGINT" />
+		<result column="project_id" property="projectId" jdbcType="BIGINT" />
+		<result column="plan_no" property="planNo" jdbcType="BIGINT" />
+		<result column="begin_time" property="beginTime" jdbcType="TIMESTAMP" />
+		<result column="end_time" property="endTime" jdbcType="TIMESTAMP" />
+		<result column="being_amount" property="beingAmount" jdbcType="DECIMAL" />
+		<result column="repay_amount" property="repayAmount" jdbcType="DECIMAL" />
+		<result column="end_amount" property="endAmount" jdbcType="DECIMAL" />
+		
+	    <result column="month_repayment_amount" property="monthRepaymentAmount" jdbcType="DECIMAL" />
+	    <result column="current_term_principle" property="currentTermPrinciple" jdbcType="DECIMAL" />
+	    <result column="current_term_interest" property="currentTermInterest" jdbcType="DECIMAL" />
+	    <result column="continuous_overdue_times" property="continuousOverdueTimes" jdbcType="INTEGER" />
+	    <result column="accumulated_overdue_times" property="accumulatedOverdueTimes" jdbcType="INTEGER" />
+	    <result column="overdue_total_amount" property="overdueTotalAmount" jdbcType="DECIMAL" />
+	    <result column="yesterday_repayment_amount" property="yesterdayRepaymentAmount" jdbcType="DECIMAL" />
+	    <result column="last_repayment_date" property="lastRepaymentDate" jdbcType="DATE" />		
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		id, contract_id, project_id, plan_no, begin_time, end_time, being_amount, repay_amount, end_amount
+		, month_repayment_amount, current_term_principle, current_term_interest, continuous_overdue_times
+		, accumulated_overdue_times, overdue_total_amount, yesterday_repayment_amount, last_repayment_date
+	</sql>
+
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from loan_contract_repay_plan
+		where id = #{id,jdbcType=BIGINT}
+	</select>
+
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from
+		loan_contract_repay_plan
+		where id = #{id,jdbcType=BIGINT}
+	</delete>
+
+	<insert id="insert" parameterType="com.cgw360.cls.model.inloan.LoanContractRepayPlan">
+		insert into
+		loan_contract_repay_plan (
+		contract_id, project_id, plan_no,begin_time, end_time,being_amount,repay_amount,end_amount
+		, month_repayment_amount, current_term_principle, current_term_interest, continuous_overdue_times
+		, accumulated_overdue_times, overdue_total_amount, yesterday_repayment_amount, last_repayment_date
+		)
+		values (
+		#{contractId,jdbcType=BIGINT},
+		#{projectId,jdbcType=BIGINT},
+		#{planNo,jdbcType=BIGINT},
+		#{beginTime,jdbcType=TIMESTAMP},
+		#{endTime,jdbcType=TIMESTAMP},
+		#{beingAmount,jdbcType=DECIMAL},
+		#{repayAmount,jdbcType=DECIMAL},
+		#{endAmount,jdbcType=DECIMAL},
+		#{monthRepaymentAmount,jdbcType=DECIMAL}, 
+		#{currentTermPrinciple,jdbcType=DECIMAL}, 
+      	#{currentTermInterest,jdbcType=DECIMAL}, 
+      	#{continuousOverdueTimes,jdbcType=INTEGER}, 
+     	#{accumulatedOverdueTimes,jdbcType=INTEGER}, 
+     	#{overdueTotalAmount,jdbcType=DECIMAL}, 
+      	#{yesterdayRepaymentAmount,jdbcType=DECIMAL}, 
+      	#{lastRepaymentDate,jdbcType=DATE}
+		)
+	</insert>
+
+	<update id="updateByPrimaryKeySelective" parameterType="com.cgw360.cls.model.inloan.LoanContractRepayPlan">
+		update loan_contract_repay_plan
+		<set>
+			<if test="contractId != null">
+				contract_id = #{contractId,jdbcType=BIGINT},
+			</if>
+			<if test="projectId != null">
+				project_id = #{projectId,jdbcType=BIGINT},
+			</if>
+			<if test="planNo != null">
+				plan_no = #{planNo,jdbcType=BIGINT},
+			</if>
+			<if test="beginTime != null">
+				begin_time = #{beginTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="endTime != null">
+				end_time = #{endTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="beingAmount != null">
+				being_amount = #{beingAmount,jdbcType=DECIMAL},
+			</if>
+			<if test="repayAmount != null">
+				repay_amount = #{repayAmount,jdbcType=DECIMAL},
+			</if>
+			<if test="endAmount != null">
+				end_amount = #{endAmount,jdbcType=DECIMAL},
+			</if>
+			<if test="monthRepaymentAmount != null" >
+			  month_repayment_amount = #{monthRepaymentAmount,jdbcType=DECIMAL},
+			</if>
+			<if test="currentTermPrinciple != null" >
+			  current_term_principle = #{currentTermPrinciple,jdbcType=DECIMAL},
+			</if>
+			<if test="currentTermInterest != null" >
+			  current_term_interest = #{currentTermInterest,jdbcType=DECIMAL},
+			</if>
+			<if test="continuousOverdueTimes != null" >
+			  continuous_overdue_times = #{continuousOverdueTimes,jdbcType=INTEGER},
+			</if>
+			<if test="accumulatedOverdueTimes != null" >
+			  accumulated_overdue_times = #{accumulatedOverdueTimes,jdbcType=INTEGER},
+			</if>
+			<if test="overdueTotalAmount != null" >
+			  overdue_total_amount = #{overdueTotalAmount,jdbcType=DECIMAL},
+			</if>
+			<if test="yesterdayRepaymentAmount != null" >
+			  yesterday_repayment_amount = #{yesterdayRepaymentAmount,jdbcType=DECIMAL},
+			</if>
+			<if test="lastRepaymentDate != null" >
+			  last_repayment_date = #{lastRepaymentDate,jdbcType=DATE},
+			</if>
+		</set>
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+
+	<update id="updateByPrimaryKey" parameterType="com.cgw360.cls.model.inloan.LoanContractRepayPlan">
+		update
+		loan_contract_repay_plan
+		set contract_id = #{contractId,jdbcType=BIGINT},
+		project_id = #{projectId,jdbcType=BIGINT},
+		plan_no = #{planNo,jdbcType=BIGINT},
+		begin_time = #{beginTime,jdbcType=TIMESTAMP},
+		end_time = #{endTime,jdbcType=TIMESTAMP},
+		being_amount = #{beingAmount,jdbcType=DECIMAL},
+		repay_amount = #{repayAmount,jdbcType=DECIMAL},
+		end_amount = #{endAmount,jdbcType=DECIMAL},
+		month_repayment_amount = #{record.monthRepaymentAmount,jdbcType=DECIMAL},
+		current_term_principle = #{record.currentTermPrinciple,jdbcType=DECIMAL},
+		current_term_interest = #{record.currentTermInterest,jdbcType=DECIMAL},
+		continuous_overdue_times = #{record.continuousOverdueTimes,jdbcType=INTEGER},
+		accumulated_overdue_times = #{record.accumulatedOverdueTimes,jdbcType=INTEGER},
+		overdue_total_amount = #{record.overdueTotalAmount,jdbcType=DECIMAL},
+		yesterday_repayment_amount = #{record.yesterdayRepaymentAmount,jdbcType=DECIMAL},
+		last_repayment_date = #{record.lastRepaymentDate,jdbcType=DATE}
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+
+	<delete id="deleteByContractId" parameterType="java.lang.Long">
+		delete from
+		loan_contract_repay_plan
+		where contract_id =
+		#{contractId,jdbcType=BIGINT}
+	</delete>
+
+	<insert id="insertList" parameterType="com.cgw360.cls.model.inloan.LoanContractRepayPlan">
+		insert into loan_contract_repay_plan
+		(
+		contract_id, project_id, plan_no,begin_time, end_time,being_amount,repay_amount,end_amount
+		, month_repayment_amount, current_term_principle, current_term_interest, continuous_overdue_times
+		, accumulated_overdue_times, overdue_total_amount, yesterday_repayment_amount, last_repayment_date
+		) values
+		<foreach collection="list" item="item" index="index" separator=",">
+			(
+			#{item.contractId,jdbcType=BIGINT},
+			#{item.projectId,jdbcType=BIGINT},
+			#{item.planNo,jdbcType=BIGINT},
+			#{item.beginTime,jdbcType=TIMESTAMP},
+			#{item.endTime,jdbcType=TIMESTAMP},
+			#{item.beingAmount,jdbcType=DECIMAL},
+			#{item.repayAmount,jdbcType=DECIMAL},
+			#{item.endAmount,jdbcType=DECIMAL},
+			#{item.monthRepaymentAmount,jdbcType=DECIMAL}, 
+			#{item.currentTermPrinciple,jdbcType=DECIMAL}, 
+	      	#{item.currentTermInterest,jdbcType=DECIMAL}, 
+	      	#{item.continuousOverdueTimes,jdbcType=INTEGER}, 
+	     	#{item.accumulatedOverdueTimes,jdbcType=INTEGER}, 
+	     	#{item.overdueTotalAmount,jdbcType=DECIMAL}, 
+	      	#{item.yesterdayRepaymentAmount,jdbcType=DECIMAL}, 
+	      	#{item.lastRepaymentDate,jdbcType=DATE}			
+			
+			)
+		</foreach>
+	</insert>
+
+	<sql id="common_where">
+		<if test="contractId != null">
+			and contract_id = #{contractId,jdbcType=BIGINT}
+		</if>
+	</sql>
+
+	<select id="selectCountByFields" parameterType="java.util.Map" resultType="java.lang.Integer">
+		select count(1) from loan_contract_repay_plan
+		<trim prefix="where" prefixOverrides="and|or">
+			<include refid="common_where" />
+		</trim>
+
+	</select>
+
+	<select id="selectByFields" parameterType="java.util.Map" resultMap="BaseResultMap">
+		select * from loan_contract_repay_plan
+		<trim prefix="where" prefixOverrides="and|or">
+			<include refid="common_where" />
+		</trim>
+		order by plan_no
+		<choose>
+			<when test="limitStart != null and limitNum != null">
+				limit #{limitStart}, #{limitNum}
+			</when>
+			<when test="limitNum != null">
+				limit #{limitNum}
+			</when>
+			<otherwise></otherwise>
+		</choose>
+	</select>
+</mapper>

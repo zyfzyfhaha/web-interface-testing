@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cgw360.cls.dao.loaninsurance.LoanInsuranceInfoDetailDao">
+	<resultMap id="myResultMap" type="com.cgw360.cls.model.loaninsurance.LoanInsuranceInfoDetail" autoMapping="true">
+		<result column="id" property="id" />
+		<result column="loan_insurance_id" property="loanInsuranceId" />
+		<result column="insurance_type_id" property="insuranceTypeId" />
+		<result column="insurance_type_name" property="insuranceTypeName" />
+		<result column="insurance_fee" property="insuranceFee" />
+		<result column="insurance_status" property="insuranceStatus" />
+		<result column="creator" property="creator" />
+		<result column="create_time" property="createTime" />
+		<result column="modify_time" property="modifyTime" />
+	</resultMap>
+
+	<select id="search" parameterType="java.util.Map" resultMap="myResultMap">
+		select * from loan_insurance_info_detail
+	</select>
+	
+	<select id="getLoanInsuranceId" parameterType="java.util.Map" resultMap="myResultMap">
+		select * from loan_insurance_info_detail where loan_insurance_id =#{loanInsuranceId}
+	</select>
+	
+	<insert id="insertSelective" parameterType="com.cgw360.cls.model.loaninsurance.LoanInsuranceInfoDetail" useGeneratedKeys="true" keyProperty="id">
+		insert into loan_insurance_info_detail
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="loanInsuranceId != null">
+				loan_insurance_id,
+			</if>
+			<if test="insuranceTypeId != null">
+				insurance_type_id,
+			</if>
+			<if test="insuranceTypeName != null">
+				insurance_type_name,
+			</if>
+			<if test="insuranceFee != null">
+				insurance_fee,
+			</if>
+			<if test="insuranceStatus != null">
+				insurance_status,
+			</if>
+			<if test="creator != null">
+				creator,
+			</if>
+			<if test="createTime != null">
+				create_time,
+			</if>
+			<if test="modifyTime != null">
+				modify_time,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=BIGINT},
+			</if>
+			<if test="loanInsuranceId != null">
+				#{loanInsuranceId,jdbcType=BIGINT},
+			</if>
+			<if test="insuranceTypeId != null">
+				#{insuranceTypeId,jdbcType=BIGINT},
+			</if>
+			<if test="insuranceTypeName != null">
+				#{insuranceTypeName,jdbcType=VARCHAR},
+			</if>
+			<if test="insuranceFee != null">
+				#{insuranceFee,jdbcType=DECIMAL},
+			</if>
+			<if test="insuranceStatus != null">
+				#{insuranceStatus,jdbcType=INTEGER},
+			</if>
+			<if test="creator != null">
+				#{creator,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null">
+				#{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="modifyTime != null">
+				#{modifyTime,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+
+	<delete id="delLoanInsuranceInfoDetail" parameterType="java.lang.Long">
+		delete from loan_insurance_info_detail where loan_insurance_id=#{loanInsuranceId}
+	</delete>
+	
+
+<!--     <update id="updStatus" parameterType="java.lang.Long"> -->
+<!-- 		update cls_message_board set status=1 WHERE mid =#{mid,jdbcType=BIGINT} or parent_id =#{mid,jdbcType=BIGINT} -->
+<!-- 	</update> -->
+</mapper>

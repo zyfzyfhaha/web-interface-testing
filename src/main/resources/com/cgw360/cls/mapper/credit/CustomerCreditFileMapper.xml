@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cgw360.cls.dao.credit.CustomerCreditFileMapper" >
+  <resultMap id="BaseResultMap" type="com.cgw360.cls.model.credit.CustomerCreditFile" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="credit_relavant_id" property="creditRelavantId" jdbcType="BIGINT" />
+    <result column="credit_file" property="creditFile" jdbcType="VARCHAR" />
+    <result column="credit_file_size" property="creditFileSize" jdbcType="FLOAT" />
+    <result column="credit_type" property="creditType" jdbcType="INTEGER" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, credit_relavant_id, credit_file, credit_file_size, credit_type, remark, create_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.cgw360.cls.model.credit.CustomerCreditFileExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from customer_credit_file
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from customer_credit_file
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from customer_credit_file
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.cgw360.cls.model.credit.CustomerCreditFileExample" >
+    delete from customer_credit_file
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.cgw360.cls.model.credit.CustomerCreditFile" >
+    insert into customer_credit_file (id, credit_relavant_id, credit_file, 
+      credit_file_size, credit_type, remark, 
+      create_time)
+    values (#{id,jdbcType=BIGINT}, #{creditRelavantId,jdbcType=BIGINT}, #{creditFile,jdbcType=VARCHAR}, 
+      #{creditFileSize,jdbcType=FLOAT}, #{creditType,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cgw360.cls.model.credit.CustomerCreditFile" >
+    insert into customer_credit_file
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="creditRelavantId != null" >
+        credit_relavant_id,
+      </if>
+      <if test="creditFile != null" >
+        credit_file,
+      </if>
+      <if test="creditFileSize != null" >
+        credit_file_size,
+      </if>
+      <if test="creditType != null" >
+        credit_type,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="creditRelavantId != null" >
+        #{creditRelavantId,jdbcType=BIGINT},
+      </if>
+      <if test="creditFile != null" >
+        #{creditFile,jdbcType=VARCHAR},
+      </if>
+      <if test="creditFileSize != null" >
+        #{creditFileSize,jdbcType=FLOAT},
+      </if>
+      <if test="creditType != null" >
+        #{creditType,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.cgw360.cls.model.credit.CustomerCreditFileExample" resultType="java.lang.Integer" >
+    select count(*) from customer_credit_file
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update customer_credit_file
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.creditRelavantId != null" >
+        credit_relavant_id = #{record.creditRelavantId,jdbcType=BIGINT},
+      </if>
+      <if test="record.creditFile != null" >
+        credit_file = #{record.creditFile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.creditFileSize != null" >
+        credit_file_size = #{record.creditFileSize,jdbcType=FLOAT},
+      </if>
+      <if test="record.creditType != null" >
+        credit_type = #{record.creditType,jdbcType=INTEGER},
+      </if>
+      <if test="record.remark != null" >
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update customer_credit_file
+    set id = #{record.id,jdbcType=BIGINT},
+      credit_relavant_id = #{record.creditRelavantId,jdbcType=BIGINT},
+      credit_file = #{record.creditFile,jdbcType=VARCHAR},
+      credit_file_size = #{record.creditFileSize,jdbcType=FLOAT},
+      credit_type = #{record.creditType,jdbcType=INTEGER},
+      remark = #{record.remark,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cgw360.cls.model.credit.CustomerCreditFile" >
+    update customer_credit_file
+    <set >
+      <if test="creditRelavantId != null" >
+        credit_relavant_id = #{creditRelavantId,jdbcType=BIGINT},
+      </if>
+      <if test="creditFile != null" >
+        credit_file = #{creditFile,jdbcType=VARCHAR},
+      </if>
+      <if test="creditFileSize != null" >
+        credit_file_size = #{creditFileSize,jdbcType=FLOAT},
+      </if>
+      <if test="creditType != null" >
+        credit_type = #{creditType,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cgw360.cls.model.credit.CustomerCreditFile" >
+    update customer_credit_file
+    set credit_relavant_id = #{creditRelavantId,jdbcType=BIGINT},
+      credit_file = #{creditFile,jdbcType=VARCHAR},
+      credit_file_size = #{creditFileSize,jdbcType=FLOAT},
+      credit_type = #{creditType,jdbcType=INTEGER},
+      remark = #{remark,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -1,0 +1,581 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cgw360.cls.dao.purchase.PurchaseApplyMapper">
+    <resultMap id="BaseResultMap" type="com.cgw360.cls.model.purchase.PurchaseApply">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="apply_num" property="applyNum" jdbcType="VARCHAR"/>
+        <result column="apply_time" property="applyTime" jdbcType="TIMESTAMP"/>
+        <result column="apply_org_id" property="applyOrgId" jdbcType="BIGINT"/>
+        <result column="apply_org_name" property="applyOrgName" jdbcType="VARCHAR"/>
+        <result column="apply_user_id" property="applyUserId" jdbcType="BIGINT"/>
+        <result column="apply_user_name" property="applyUserName" jdbcType="VARCHAR"/>
+        <result column="item_name" property="itemName" jdbcType="VARCHAR"/>
+        <result column="model_type" property="modelType" jdbcType="VARCHAR"/>
+        <result column="other_request" property="otherRequest" jdbcType="VARCHAR"/>
+        <result column="request_time" property="requestTime" jdbcType="TIMESTAMP"/>
+        <result column="apply_number" property="applyNumber" jdbcType="BIGINT"/>
+        <result column="apply_status" property="applyStatus" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+        <result column="update_user_id" property="updateUserId" jdbcType="BIGINT"/>
+        <result column="update_org_id" property="updateOrgId" jdbcType="BIGINT"/>
+        <result column="contract_amt" property="contractAmt" jdbcType="DECIMAL"/>
+        <result column="purchase_contract_id" property="purchaseContractId" jdbcType="BIGINT"/>
+        <result column="user_stock" property="userStock" jdbcType="BIGINT"/>
+        <result column="stock" property="stock" jdbcType="BIGINT"/>
+        <result column="not_stock" property="notStock" jdbcType="BIGINT"/>
+        <result column="contract_time" property="contractTime" jdbcType="TIMESTAMP"/>
+        <result column="purchase_user_name" property="purchaseUserName" jdbcType="VARCHAR"/>
+        <result column="contract_number" property="contractNumber" jdbcType="BIGINT"/>
+   		<result column="purchase_stock_num" property="purchaseStockNum" jdbcType="VARCHAR"/>
+   		<result column="stock_time" property="stockTime" jdbcType="TIMESTAMP"/>
+   		<result column="remarks" property="remarks" jdbcType="VARCHAR"/>
+   		<result column="supplier" property="supplier" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+        id,apply_num,apply_time,apply_org_id,apply_org_name,apply_user_id,apply_user_name,
+        item_name,model_type,other_request,request_time,apply_number,apply_status,case when contract_amt is null  then 0 else contract_amt end contract_amt,
+        stock,user_stock,not_stock,purchase_contract_id
+    </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    	select
+    	<include refid="Base_Column_List" />
+		from purchase_apply
+		where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    update purchase_apply set del_flag = '2'
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+   <insert id="insertSelective" parameterType="com.cgw360.cls.model.purchase.PurchaseApply" >
+    insert into purchase_apply
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="applyNum != null" >
+        apply_num,
+      </if>
+      <if test="applyTime != null" >
+        apply_time,
+      </if>
+      <if test="applyOrgId != null" >
+        apply_org_id,
+      </if>
+      <if test="applyOrgName != null" >
+        apply_org_name,
+      </if>
+      <if test="applyUserId != null" >
+        apply_user_id,
+      </if>
+      <if test="applyUserName != null" >
+        apply_user_name,
+      </if>
+      <if test="itemName != null" >
+        item_name,
+      </if>
+      <if test="modelType != null" >
+        model_type,
+      </if>
+      <if test="otherRequest != null" >
+        other_request,
+      </if>
+      <if test="requestTime != null" >
+        request_time,
+      </if>
+      <if test="applyNumber != null" >
+        apply_number,
+      </if>
+      <if test="applyStatus != null" >
+        apply_status,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="updateUserId != null" >
+        update_user_id,
+      </if>
+      <if test="updateOrgId != null" >
+        update_org_id,
+      </if>
+      <if test="delFlag != null" >
+        del_Flag,
+      </if>
+      <if test="stock != null" >
+        stock,
+      </if>
+      <if test="notStock != null" >
+        not_stock,
+      </if>
+      <if test="userStock != null" >
+        user_stock,
+      </if>
+      <if test="contractAmt != null" >
+        contract_amt,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="applyNum != null" >
+        #{applyNum,jdbcType=VARCHAR},
+      </if>
+      <if test="applyTime != null" >
+        #{applyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="applyOrgId != null" >
+        #{applyOrgId,jdbcType=BIGINT},
+      </if>
+      <if test="applyOrgName != null" >
+        #{applyOrgName,jdbcType=VARCHAR},
+      </if>
+      <if test="applyUserId != null" >
+        #{applyUserId,jdbcType=BIGINT},
+      </if>
+      <if test="applyUserName != null" >
+        #{applyUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="itemName != null" >
+        #{itemName,jdbcType=VARCHAR},
+      </if>
+      <if test="modelType != null" >
+        #{modelType,jdbcType=VARCHAR},
+      </if>
+      <if test="otherRequest != null" >
+        #{otherRequest,jdbcType=VARCHAR},
+      </if>
+      <if test="requestTime != null" >
+        #{requestTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="applyNumber != null" >
+        #{applyNumber,jdbcType=BIGINT},
+      </if>
+      <if test="applyStatus != null" >
+        #{applyStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUserId != null" >
+        #{updateUserId,jdbcType=BIGINT},
+      </if>
+      <if test="updateOrgId != null" >
+        #{updateOrgId,jdbcType=BIGINT},
+      </if>
+      <if test="delFlag != null" >
+        #{delFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="stock != null" >
+        #{stock,jdbcType=BIGINT},
+      </if>
+      <if test="notStock != null" >
+        #{notStock,jdbcType=BIGINT},
+      </if>
+      <if test="userStock != null" >
+        #{userStock,jdbcType=BIGINT},
+      </if>
+      <if test="contractAmt != null" >
+        #{contractAmt,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.cgw360.cls.model.purchase.PurchaseApply" >
+    update purchase_apply
+    <set >
+      <if test="applyNum != null" >
+        apply_num = #{applyNum,jdbcType=VARCHAR},
+      </if>
+      <if test="applyTime != null" >
+        apply_time = #{applyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="applyOrgId != null" >
+        apply_org_id = #{applyOrgId,jdbcType=BIGINT},
+      </if>
+      <if test="applyOrgName != null" >
+        apply_org_name = #{applyOrgName,jdbcType=VARCHAR},
+      </if>
+      <if test="applyUserId != null" >
+        apply_user_id = #{applyUserId,jdbcType=BIGINT},
+      </if>
+      <if test="applyUserName != null" >
+        apply_user_name = #{applyUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="itemName != null" >
+        item_name = #{itemName,jdbcType=VARCHAR},
+      </if>
+      <if test="modelType != null" >
+        model_type = #{modelType,jdbcType=VARCHAR},
+      </if>
+      <if test="otherRequest != null" >
+        other_request = #{otherRequest,jdbcType=VARCHAR},
+      </if>
+      <if test="requestTime != null" >
+        request_time = #{requestTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="applyNumber != null" >
+        apply_number = #{applyNumber,jdbcType=BIGINT},
+      </if>
+      <if test="applyStatus != null" >
+        apply_status = #{applyStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUserId != null" >
+        update_user_id = #{updateUserId,jdbcType=BIGINT},
+      </if>
+      <if test="updateOrgId != null" >
+        update_org_id = #{updateOrgId,jdbcType=BIGINT},
+      </if>
+      <if test="delFlag != null" >
+        del_flag = #{delFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="purchaseContractId != null" >
+        purchase_contract_id = #{purchaseContractId,jdbcType=BIGINT},
+      </if>
+      <if test="stock != null" >
+        stock = #{stock,jdbcType=BIGINT},
+      </if>
+      <if test="userStock != null" >
+        user_stock = #{userStock,jdbcType=BIGINT},
+      </if>
+      <if test="notStock != null" >
+        not_stock = #{notStock,jdbcType=BIGINT},
+      </if>
+      <if test="contractAmt != null" >
+        contract_amt = #{contractAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="remarks != null" >
+        remarks = #{remarks,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyContract" parameterType="com.cgw360.cls.model.purchase.PurchaseApply" >
+    update purchase_apply
+    set purchase_contract_id = #{purchaseContractId,jdbcType=BIGINT},
+      contract_amt = #{contractAmt,jdbcType=DECIMAL},
+      apply_status = #{applyStatus,jdbcType=VARCHAR},
+      update_user_id = #{updateUserId,jdbcType=BIGINT},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      update_org_id = #{updateOrgId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.cgw360.cls.model.purchase.PurchaseApplyExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from purchase_apply
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  
+  <select id="selectPurchaseStockByExample" resultMap="BaseResultMap" parameterType="com.cgw360.cls.model.purchase.PurchaseApplyExample">
+  	select
+  		pa.id,pc.contract_time,pa.apply_org_name,pc.purchase_user_name,
+  		pc.contract_number,pa.not_stock,pa.stock,pa.item_name,pa.model_type,
+  		pa.other_request,pa.apply_status,pa.remarks
+  	from purchase_apply pa  
+  	left join purchase_contract pc on pa.purchase_contract_id = pc.id 
+  	<if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  
+  <select id="selectStockByExample" resultMap="BaseResultMap" parameterType="com.cgw360.cls.model.purchase.PurchaseApplyExample">
+  	select
+  		id,purchase_apply_id,purchase_contract_id,purchase_stock_num,
+  		stock_time,supplier,item_name,model_type,other_request,apply_num,
+  		contract_num,remarks,stock,apply_org_id,apply_org_name
+  	from purchase_stock 
+  	<if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  
+   <insert id="insertStockSelective" parameterType="com.cgw360.cls.model.purchase.PurchaseApply" useGeneratedKeys="true" keyProperty="id" >
+    insert into purchase_stock
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="purchaseApplyId != null" >
+        purchase_apply_id,
+      </if>
+      <if test="purchaseContractId != null" >
+        purchase_contract_id,
+      </if>
+      <if test="purchaseStockNum != null" >
+        purchase_stock_num,
+      </if>
+      <if test="stockTime != null" >
+        stock_time,
+      </if>
+      <if test="supplier != null" >
+        supplier,
+      </if>
+      <if test="itemName != null" >
+        item_name,
+      </if>
+      <if test="modelType != null" >
+        model_type,
+      </if>
+      <if test="otherRequest != null" >
+        other_request,
+      </if>
+      <if test="applyNum != null" >
+        apply_num,
+      </if>
+      <if test="contractNum != null" >
+        contract_num,
+      </if>
+      <if test="remarks != null" >
+        remarks,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="updateUserId != null" >
+        update_user_id,
+      </if>
+      <if test="createUserId != null" >
+        create_user_id,
+      </if>
+      <if test="delFlag != null" >
+        del_Flag,
+      </if>
+      <if test="stock != null" >
+        stock,
+      </if>
+      <if test="applyOrgId != null" >
+        apply_org_id,
+      </if>
+      <if test="applyOrgName != null" >
+        apply_org_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="purchaseApplyId != null" >
+        #{purchaseApplyId,jdbcType=BIGINT},
+      </if>
+      <if test="purchaseContractId != null" >
+        #{purchaseContractId,jdbcType=BIGINT},
+      </if>
+      <if test="purchaseStockNum != null" >
+        #{purchaseStockNum,jdbcType=VARCHAR},
+      </if>
+      <if test="stockTime != null" >
+        #{stockTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="supplier != null" >
+        #{supplier,jdbcType=VARCHAR},
+      </if>
+      <if test="itemName != null" >
+        #{itemName,jdbcType=VARCHAR},
+      </if>
+      <if test="modelType != null" >
+        #{modelType,jdbcType=VARCHAR},
+      </if>
+      <if test="otherRequest != null" >
+        #{otherRequest,jdbcType=VARCHAR},
+      </if>
+      <if test="applyNum != null" >
+        #{applyNum,jdbcType=VARCHAR},
+      </if>
+      <if test="contractNum != null" >
+        #{contractNum,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null" >
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUserId != null" >
+        #{updateUserId,jdbcType=BIGINT},
+      </if>
+      <if test="createUserId != null" >
+        #{createUserId,jdbcType=BIGINT},
+      </if>
+      <if test="delFlag != null" >
+        #{delFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="stock != null" >
+        #{stock,jdbcType=BIGINT},
+      </if>
+      <if test="applyOrgId != null" >
+        #{applyOrgId,jdbcType=BIGINT},
+      </if>
+      <if test="applyOrgName != null" >
+        #{applyOrgName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  
+  <update id="updateStockByPrimaryKeySelective" parameterType="com.cgw360.cls.model.purchase.PurchaseApply" >
+    update purchase_stock
+    <set >
+      <if test="purchaseApplyId != null" >
+        purchase_apply_id = #{purchaseApplyId,jdbcType=BIGINT},
+      </if>
+      <if test="purchaseContractId != null" >
+        purchase_contract_id = #{purchaseContractId,jdbcType=BIGINT},
+      </if>
+      <if test="purchaseStockNum != null" >
+        purchase_stock_num = #{purchaseStockNum,jdbcType=VARCHAR},
+      </if>
+      <if test="stockTime != null" >
+        stock_time = #{stockTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="supplier != null" >
+        supplier = #{supplier,jdbcType=VARCHAR},
+      </if>
+      <if test="itemName != null" >
+        item_name = #{itemName,jdbcType=VARCHAR},
+      </if>
+      <if test="modelType != null" >
+        model_type = #{modelType,jdbcType=VARCHAR},
+      </if>
+      <if test="otherRequest != null" >
+        other_request = #{otherRequest,jdbcType=VARCHAR},
+      </if>
+      <if test="applyNum != null" >
+        apply_num = #{applyNum,jdbcType=VARCHAR},
+      </if>
+      <if test="contractNum != null" >
+        contract_num = #{contractNum,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null" >
+        remarks = #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUserId != null" >
+        update_user_id = #{updateUserId,jdbcType=BIGINT},
+      </if>
+      <if test="createUserId != null" >
+        create_user_id = #{createUserId,jdbcType=BIGINT},
+      </if>
+      <if test="delFlag != null" >
+        del_flag = #{delFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="stock != null" >
+        stock = #{stock,jdbcType=BIGINT},
+      </if>
+      <if test="applyOrgId != null" >
+        apply_org_id = #{applyOrgId,jdbcType=BIGINT},
+      </if>
+      <if test="applyOrgName != null" >
+        apply_org_name = #{applyOrgName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <delete id="deleteStockByPrimaryKey" parameterType="java.lang.Long" >
+    update purchase_stock set del_flag = '2'
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  
+  <select id="selectPurchaseApplyByStockId" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    	distinct 
+    pa.id,pa.user_stock
+    from purchase_stock_detail ps
+    left join purchase_stock psd on ps.purchase_stock_id = psd.id
+    and psd.del_flag = '1'
+    left join purchase_apply pa on psd.purchase_apply_id = pa.id
+    and pa.del_flag = '1'
+    where ps.id = #{id,jdbcType=BIGINT}
+  </select>
+  
+</mapper>

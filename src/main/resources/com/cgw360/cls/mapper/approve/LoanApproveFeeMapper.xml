@@ -1,0 +1,1082 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cgw360.cls.dao.approve.LoanApproveFeeMapper">
+    <resultMap id="BaseResultMap" type="com.cgw360.cls.model.approve.LoanApproveFee">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="project_id" property="projectId" jdbcType="BIGINT"/>
+        <result column="premium_type" property="premiumType" jdbcType="INTEGER"/>
+        <result column="insurance_amount" property="insuranceAmount" jdbcType="DECIMAL"/>
+        <result column="insurance_company_id" property="insuranceCompanyId" jdbcType="BIGINT"/>
+        <result column="insurance_company" property="insuranceCompany" jdbcType="VARCHAR"/>
+        <result column="account_deposit" property="accountDeposit" jdbcType="DECIMAL"/>
+        <result column="is_renewal" property="isRenewal" jdbcType="INTEGER"/>
+        <result column="renewal_deposit" property="renewalDeposit" jdbcType="DECIMAL"/>
+        <result column="is_pb" property="isPb" jdbcType="INTEGER"/>
+        <result column="pb_deposit" property="pbDeposit" jdbcType="DECIMAL"/>
+        <result column="cost_type" property="costType" jdbcType="INTEGER"/>
+        <result column="cost_amount" property="costAmount" jdbcType="DECIMAL"/>
+        <result column="predicted_purchasetax" property="predictedPurchasetax" jdbcType="INTEGER"/>
+        <result column="purchase_tax" property="purchaseTax" jdbcType="DECIMAL"/>
+        <result column="guaranty_risk_amount" property="guarantyRiskAmount" jdbcType="DECIMAL"/>
+        <result column="service_fee" property="serviceFee" jdbcType="DECIMAL"/>
+        <result column="bank_irs_fee" property="bankIrsFee" jdbcType="DECIMAL"/>
+        <result column="license_fee" property="licenseFee" jdbcType="DECIMAL"/>
+        <result column="door_survey_fee" property="doorSurveyFee" jdbcType="DECIMAL"/>
+        <result column="agency_fee" property="agencyFee" jdbcType="DECIMAL"/>
+        <result column="outsource_survey_fee" property="outsourceSurveyFee" jdbcType="DECIMAL"/>
+        <result column="gps_number" property="gpsNumber" jdbcType="INTEGER"/>
+        <result column="gps_type" property="gpsType" jdbcType="INTEGER"/>
+        <result column="gps_producer" property="gpsProducer" jdbcType="VARCHAR"/>
+        <result column="gps_installation_fee" property="gpsInstallationFee" jdbcType="DECIMAL"/>
+        <result column="liability_amount" property="liabilityAmount" jdbcType="DECIMAL"/>
+        <result column="total_fee" property="totalFee" jdbcType="DECIMAL"/>
+        <result column="guarantee_service_fee" property="guaranteeServiceFee" jdbcType="DECIMAL"/>
+        <result column="bank_downpayment_amount" property="bankDownpaymentAmount" jdbcType="DECIMAL"/>
+        <result column="bank_installment_amount" property="bankInstallmentAmount" jdbcType="DECIMAL"/>
+        <result column="bank_installment_fee" property="bankInstallmentFee" jdbcType="DECIMAL"/>
+        <result column="notice_downpayment_capital" property="noticeDownpaymentCapital" jdbcType="DECIMAL"/>
+        <result column="notice_downpayment_interest" property="noticeDownpaymentInterest" jdbcType="DECIMAL"/>
+        <result column="notice_downpayment_amount" property="noticeDownpaymentAmount" jdbcType="DECIMAL"/>
+        <result column="notice_periodpayment_capital" property="noticePeriodpaymentCapital" jdbcType="DECIMAL"/>
+        <result column="notice_periodpayment_interest" property="noticePeriodpaymentInterest" jdbcType="DECIMAL"/>
+        <result column="notice_periodpayment_amount" property="noticePeriodpaymentAmount" jdbcType="DECIMAL"/>
+        <result column="notice_finalpayment_capital" property="noticeFinalpaymentCapital" jdbcType="DECIMAL"/>
+        <result column="notice_finalpayment_interest" property="noticeFinalpaymentInterest" jdbcType="DECIMAL"/>
+        <result column="notice_finalpayment_amount" property="noticeFinalpaymentAmount" jdbcType="DECIMAL"/>
+        <result column="contract_downpayment_capital" property="contractDownpaymentCapital" jdbcType="DECIMAL"/>
+        <result column="contract_downpayment_interest" property="contractDownpaymentInterest" jdbcType="DECIMAL"/>
+        <result column="contract_downpayment_amount" property="contractDownpaymentAmount" jdbcType="DECIMAL"/>
+        <result column="contract_periodpayment_capital" property="contractPeriodpaymentCapital" jdbcType="DECIMAL"/>
+        <result column="contract_periodpayment_interest" property="contractPeriodpaymentInterest" jdbcType="DECIMAL"/>
+        <result column="contract_periodpayment_amount" property="contractPeriodpaymentAmount" jdbcType="DECIMAL"/>
+        <result column="contract_finalpayment_capital" property="contractFinalpaymentCapital" jdbcType="DECIMAL"/>
+        <result column="contract_finalpayment_interest" property="contractFinalpaymentInterest" jdbcType="DECIMAL"/>
+        <result column="contract_finalpayment_amount" property="contractFinalpaymentAmount" jdbcType="DECIMAL"/>
+        <result column="bill_date" property="billDate" jdbcType="VARCHAR"/>
+        <result column="remark" property="remark" jdbcType="VARCHAR"/>
+        <result column="is_inuse" property="isInuse" jdbcType="INTEGER"/>
+        <result column="user_id" property="userId" jdbcType="BIGINT"/>
+        <result column="user_name" property="userName" jdbcType="VARCHAR"/>
+        <result column="org_id" property="orgId" jdbcType="BIGINT"/>
+        <result column="org_name" property="orgName" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+    id, project_id, premium_type, insurance_amount, insurance_company_id, insurance_company, 
+    account_deposit, is_renewal, renewal_deposit, is_pb, pb_deposit, cost_type, cost_amount, 
+    predicted_purchasetax, purchase_tax, guaranty_risk_amount, service_fee, bank_irs_fee, 
+    license_fee, door_survey_fee, agency_fee, outsource_survey_fee, gps_number, gps_type, 
+    gps_producer, gps_installation_fee, liability_amount, total_fee, guarantee_service_fee, 
+    bank_downpayment_amount, bank_installment_amount, bank_installment_fee, notice_downpayment_capital, 
+    notice_downpayment_interest, notice_downpayment_amount, notice_periodpayment_capital, 
+    notice_periodpayment_interest, notice_periodpayment_amount, notice_finalpayment_capital, 
+    notice_finalpayment_interest, notice_finalpayment_amount, contract_downpayment_capital, 
+    contract_downpayment_interest, contract_downpayment_amount, contract_periodpayment_capital, 
+    contract_periodpayment_interest, contract_periodpayment_amount, contract_finalpayment_capital, 
+    contract_finalpayment_interest, contract_finalpayment_amount, bill_date, remark, 
+    is_inuse, user_id, user_name, org_id, org_name, create_time, modify_time
+  </sql>
+    <select id="selectByExample" resultMap="BaseResultMap"
+            parameterType="com.cgw360.cls.model.approve.LoanApproveFeeExample">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from loan_approve_fee
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from loan_approve_fee
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from loan_approve_fee
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+    <delete id="deleteByExample" parameterType="com.cgw360.cls.model.approve.LoanApproveFeeExample">
+        delete from loan_approve_fee
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.cgw360.cls.model.approve.LoanApproveFee">
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into loan_approve_fee (project_id, premium_type, insurance_amount,
+        insurance_company_id, insurance_company, account_deposit,
+        is_renewal, renewal_deposit, is_pb,
+        pb_deposit, cost_type, cost_amount,
+        predicted_purchasetax, purchase_tax, guaranty_risk_amount,
+        service_fee, bank_irs_fee, license_fee,
+        door_survey_fee, agency_fee, outsource_survey_fee,
+        gps_number, gps_type, gps_producer,
+        gps_installation_fee, liability_amount, total_fee,
+        guarantee_service_fee, bank_downpayment_amount,
+        bank_installment_amount, bank_installment_fee,
+        notice_downpayment_capital, notice_downpayment_interest,
+        notice_downpayment_amount, notice_periodpayment_capital,
+        notice_periodpayment_interest, notice_periodpayment_amount,
+        notice_finalpayment_capital, notice_finalpayment_interest,
+        notice_finalpayment_amount, contract_downpayment_capital,
+        contract_downpayment_interest, contract_downpayment_amount,
+        contract_periodpayment_capital, contract_periodpayment_interest,
+        contract_periodpayment_amount, contract_finalpayment_capital,
+        contract_finalpayment_interest, contract_finalpayment_amount,
+        bill_date, remark, is_inuse,
+        user_id, user_name, org_id,
+        org_name, create_time, modify_time
+        )
+        values (#{projectId,jdbcType=BIGINT}, #{premiumType,jdbcType=INTEGER}, #{insuranceAmount,jdbcType=DECIMAL},
+        #{insuranceCompanyId,jdbcType=BIGINT}, #{insuranceCompany,jdbcType=VARCHAR}, #{accountDeposit,jdbcType=DECIMAL},
+        #{isRenewal,jdbcType=INTEGER}, #{renewalDeposit,jdbcType=DECIMAL}, #{isPb,jdbcType=INTEGER},
+        #{pbDeposit,jdbcType=DECIMAL}, #{costType,jdbcType=INTEGER}, #{costAmount,jdbcType=DECIMAL},
+        #{predictedPurchasetax,jdbcType=INTEGER}, #{purchaseTax,jdbcType=DECIMAL},
+        #{guarantyRiskAmount,jdbcType=DECIMAL},
+        #{serviceFee,jdbcType=DECIMAL}, #{bankIrsFee,jdbcType=DECIMAL}, #{licenseFee,jdbcType=DECIMAL},
+        #{doorSurveyFee,jdbcType=DECIMAL}, #{agencyFee,jdbcType=DECIMAL}, #{outsourceSurveyFee,jdbcType=DECIMAL},
+        #{gpsNumber,jdbcType=INTEGER}, #{gpsType,jdbcType=INTEGER}, #{gpsProducer,jdbcType=VARCHAR},
+        #{gpsInstallationFee,jdbcType=DECIMAL}, #{liabilityAmount,jdbcType=DECIMAL}, #{totalFee,jdbcType=DECIMAL},
+        #{guaranteeServiceFee,jdbcType=DECIMAL}, #{bankDownpaymentAmount,jdbcType=DECIMAL},
+        #{bankInstallmentAmount,jdbcType=DECIMAL}, #{bankInstallmentFee,jdbcType=DECIMAL},
+        #{noticeDownpaymentCapital,jdbcType=DECIMAL}, #{noticeDownpaymentInterest,jdbcType=DECIMAL},
+        #{noticeDownpaymentAmount,jdbcType=DECIMAL}, #{noticePeriodpaymentCapital,jdbcType=DECIMAL},
+        #{noticePeriodpaymentInterest,jdbcType=DECIMAL}, #{noticePeriodpaymentAmount,jdbcType=DECIMAL},
+        #{noticeFinalpaymentCapital,jdbcType=DECIMAL}, #{noticeFinalpaymentInterest,jdbcType=DECIMAL},
+        #{noticeFinalpaymentAmount,jdbcType=DECIMAL}, #{contractDownpaymentCapital,jdbcType=DECIMAL},
+        #{contractDownpaymentInterest,jdbcType=DECIMAL}, #{contractDownpaymentAmount,jdbcType=DECIMAL},
+        #{contractPeriodpaymentCapital,jdbcType=DECIMAL}, #{contractPeriodpaymentInterest,jdbcType=DECIMAL},
+        #{contractPeriodpaymentAmount,jdbcType=DECIMAL}, #{contractFinalpaymentCapital,jdbcType=DECIMAL},
+        #{contractFinalpaymentInterest,jdbcType=DECIMAL}, #{contractFinalpaymentAmount,jdbcType=DECIMAL},
+        #{billDate,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{isInuse,jdbcType=INTEGER},
+        #{userId,jdbcType=BIGINT}, #{userName,jdbcType=VARCHAR}, #{orgId,jdbcType=BIGINT},
+        #{orgName,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{modifyTime,jdbcType=TIMESTAMP}
+        )
+    </insert>
+    <insert id="insertSelective" parameterType="com.cgw360.cls.model.approve.LoanApproveFee">
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into loan_approve_fee
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="projectId != null">
+                project_id,
+            </if>
+            <if test="premiumType != null">
+                premium_type,
+            </if>
+            <if test="insuranceAmount != null">
+                insurance_amount,
+            </if>
+            <if test="insuranceCompanyId != null">
+                insurance_company_id,
+            </if>
+            <if test="insuranceCompany != null">
+                insurance_company,
+            </if>
+            <if test="accountDeposit != null">
+                account_deposit,
+            </if>
+            <if test="isRenewal != null">
+                is_renewal,
+            </if>
+            <if test="renewalDeposit != null">
+                renewal_deposit,
+            </if>
+            <if test="isPb != null">
+                is_pb,
+            </if>
+            <if test="pbDeposit != null">
+                pb_deposit,
+            </if>
+            <if test="costType != null">
+                cost_type,
+            </if>
+            <if test="costAmount != null">
+                cost_amount,
+            </if>
+            <if test="predictedPurchasetax != null">
+                predicted_purchasetax,
+            </if>
+            <if test="purchaseTax != null">
+                purchase_tax,
+            </if>
+            <if test="guarantyRiskAmount != null">
+                guaranty_risk_amount,
+            </if>
+            <if test="serviceFee != null">
+                service_fee,
+            </if>
+            <if test="bankIrsFee != null">
+                bank_irs_fee,
+            </if>
+            <if test="licenseFee != null">
+                license_fee,
+            </if>
+            <if test="doorSurveyFee != null">
+                door_survey_fee,
+            </if>
+            <if test="agencyFee != null">
+                agency_fee,
+            </if>
+            <if test="outsourceSurveyFee != null">
+                outsource_survey_fee,
+            </if>
+            <if test="gpsNumber != null">
+                gps_number,
+            </if>
+            <if test="gpsType != null">
+                gps_type,
+            </if>
+            <if test="gpsProducer != null">
+                gps_producer,
+            </if>
+            <if test="gpsInstallationFee != null">
+                gps_installation_fee,
+            </if>
+            <if test="liabilityAmount != null">
+                liability_amount,
+            </if>
+            <if test="totalFee != null">
+                total_fee,
+            </if>
+            <if test="guaranteeServiceFee != null">
+                guarantee_service_fee,
+            </if>
+            <if test="bankDownpaymentAmount != null">
+                bank_downpayment_amount,
+            </if>
+            <if test="bankInstallmentAmount != null">
+                bank_installment_amount,
+            </if>
+            <if test="bankInstallmentFee != null">
+                bank_installment_fee,
+            </if>
+            <if test="noticeDownpaymentCapital != null">
+                notice_downpayment_capital,
+            </if>
+            <if test="noticeDownpaymentInterest != null">
+                notice_downpayment_interest,
+            </if>
+            <if test="noticeDownpaymentAmount != null">
+                notice_downpayment_amount,
+            </if>
+            <if test="noticePeriodpaymentCapital != null">
+                notice_periodpayment_capital,
+            </if>
+            <if test="noticePeriodpaymentInterest != null">
+                notice_periodpayment_interest,
+            </if>
+            <if test="noticePeriodpaymentAmount != null">
+                notice_periodpayment_amount,
+            </if>
+            <if test="noticeFinalpaymentCapital != null">
+                notice_finalpayment_capital,
+            </if>
+            <if test="noticeFinalpaymentInterest != null">
+                notice_finalpayment_interest,
+            </if>
+            <if test="noticeFinalpaymentAmount != null">
+                notice_finalpayment_amount,
+            </if>
+            <if test="contractDownpaymentCapital != null">
+                contract_downpayment_capital,
+            </if>
+            <if test="contractDownpaymentInterest != null">
+                contract_downpayment_interest,
+            </if>
+            <if test="contractDownpaymentAmount != null">
+                contract_downpayment_amount,
+            </if>
+            <if test="contractPeriodpaymentCapital != null">
+                contract_periodpayment_capital,
+            </if>
+            <if test="contractPeriodpaymentInterest != null">
+                contract_periodpayment_interest,
+            </if>
+            <if test="contractPeriodpaymentAmount != null">
+                contract_periodpayment_amount,
+            </if>
+            <if test="contractFinalpaymentCapital != null">
+                contract_finalpayment_capital,
+            </if>
+            <if test="contractFinalpaymentInterest != null">
+                contract_finalpayment_interest,
+            </if>
+            <if test="contractFinalpaymentAmount != null">
+                contract_finalpayment_amount,
+            </if>
+            <if test="billDate != null">
+                bill_date,
+            </if>
+            <if test="remark != null">
+                remark,
+            </if>
+            <if test="isInuse != null">
+                is_inuse,
+            </if>
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="userName != null">
+                user_name,
+            </if>
+            <if test="orgId != null">
+                org_id,
+            </if>
+            <if test="orgName != null">
+                org_name,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="modifyTime != null">
+                modify_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="projectId != null">
+                #{projectId,jdbcType=BIGINT},
+            </if>
+            <if test="premiumType != null">
+                #{premiumType,jdbcType=INTEGER},
+            </if>
+            <if test="insuranceAmount != null">
+                #{insuranceAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="insuranceCompanyId != null">
+                #{insuranceCompanyId,jdbcType=BIGINT},
+            </if>
+            <if test="insuranceCompany != null">
+                #{insuranceCompany,jdbcType=VARCHAR},
+            </if>
+            <if test="accountDeposit != null">
+                #{accountDeposit,jdbcType=DECIMAL},
+            </if>
+            <if test="isRenewal != null">
+                #{isRenewal,jdbcType=INTEGER},
+            </if>
+            <if test="renewalDeposit != null">
+                #{renewalDeposit,jdbcType=DECIMAL},
+            </if>
+            <if test="isPb != null">
+                #{isPb,jdbcType=INTEGER},
+            </if>
+            <if test="pbDeposit != null">
+                #{pbDeposit,jdbcType=DECIMAL},
+            </if>
+            <if test="costType != null">
+                #{costType,jdbcType=INTEGER},
+            </if>
+            <if test="costAmount != null">
+                #{costAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="predictedPurchasetax != null">
+                #{predictedPurchasetax,jdbcType=INTEGER},
+            </if>
+            <if test="purchaseTax != null">
+                #{purchaseTax,jdbcType=DECIMAL},
+            </if>
+            <if test="guarantyRiskAmount != null">
+                #{guarantyRiskAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="serviceFee != null">
+                #{serviceFee,jdbcType=DECIMAL},
+            </if>
+            <if test="bankIrsFee != null">
+                #{bankIrsFee,jdbcType=DECIMAL},
+            </if>
+            <if test="licenseFee != null">
+                #{licenseFee,jdbcType=DECIMAL},
+            </if>
+            <if test="doorSurveyFee != null">
+                #{doorSurveyFee,jdbcType=DECIMAL},
+            </if>
+            <if test="agencyFee != null">
+                #{agencyFee,jdbcType=DECIMAL},
+            </if>
+            <if test="outsourceSurveyFee != null">
+                #{outsourceSurveyFee,jdbcType=DECIMAL},
+            </if>
+            <if test="gpsNumber != null">
+                #{gpsNumber,jdbcType=INTEGER},
+            </if>
+            <if test="gpsType != null">
+                #{gpsType,jdbcType=INTEGER},
+            </if>
+            <if test="gpsProducer != null">
+                #{gpsProducer,jdbcType=VARCHAR},
+            </if>
+            <if test="gpsInstallationFee != null">
+                #{gpsInstallationFee,jdbcType=DECIMAL},
+            </if>
+            <if test="liabilityAmount != null">
+                #{liabilityAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="totalFee != null">
+                #{totalFee,jdbcType=DECIMAL},
+            </if>
+            <if test="guaranteeServiceFee != null">
+                #{guaranteeServiceFee,jdbcType=DECIMAL},
+            </if>
+            <if test="bankDownpaymentAmount != null">
+                #{bankDownpaymentAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="bankInstallmentAmount != null">
+                #{bankInstallmentAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="bankInstallmentFee != null">
+                #{bankInstallmentFee,jdbcType=DECIMAL},
+            </if>
+            <if test="noticeDownpaymentCapital != null">
+                #{noticeDownpaymentCapital,jdbcType=DECIMAL},
+            </if>
+            <if test="noticeDownpaymentInterest != null">
+                #{noticeDownpaymentInterest,jdbcType=DECIMAL},
+            </if>
+            <if test="noticeDownpaymentAmount != null">
+                #{noticeDownpaymentAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="noticePeriodpaymentCapital != null">
+                #{noticePeriodpaymentCapital,jdbcType=DECIMAL},
+            </if>
+            <if test="noticePeriodpaymentInterest != null">
+                #{noticePeriodpaymentInterest,jdbcType=DECIMAL},
+            </if>
+            <if test="noticePeriodpaymentAmount != null">
+                #{noticePeriodpaymentAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="noticeFinalpaymentCapital != null">
+                #{noticeFinalpaymentCapital,jdbcType=DECIMAL},
+            </if>
+            <if test="noticeFinalpaymentInterest != null">
+                #{noticeFinalpaymentInterest,jdbcType=DECIMAL},
+            </if>
+            <if test="noticeFinalpaymentAmount != null">
+                #{noticeFinalpaymentAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="contractDownpaymentCapital != null">
+                #{contractDownpaymentCapital,jdbcType=DECIMAL},
+            </if>
+            <if test="contractDownpaymentInterest != null">
+                #{contractDownpaymentInterest,jdbcType=DECIMAL},
+            </if>
+            <if test="contractDownpaymentAmount != null">
+                #{contractDownpaymentAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="contractPeriodpaymentCapital != null">
+                #{contractPeriodpaymentCapital,jdbcType=DECIMAL},
+            </if>
+            <if test="contractPeriodpaymentInterest != null">
+                #{contractPeriodpaymentInterest,jdbcType=DECIMAL},
+            </if>
+            <if test="contractPeriodpaymentAmount != null">
+                #{contractPeriodpaymentAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="contractFinalpaymentCapital != null">
+                #{contractFinalpaymentCapital,jdbcType=DECIMAL},
+            </if>
+            <if test="contractFinalpaymentInterest != null">
+                #{contractFinalpaymentInterest,jdbcType=DECIMAL},
+            </if>
+            <if test="contractFinalpaymentAmount != null">
+                #{contractFinalpaymentAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="billDate != null">
+                #{billDate,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="isInuse != null">
+                #{isInuse,jdbcType=INTEGER},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=BIGINT},
+            </if>
+            <if test="userName != null">
+                #{userName,jdbcType=VARCHAR},
+            </if>
+            <if test="orgId != null">
+                #{orgId,jdbcType=BIGINT},
+            </if>
+            <if test="orgName != null">
+                #{orgName,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="modifyTime != null">
+                #{modifyTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.cgw360.cls.model.approve.LoanApproveFeeExample"
+            resultType="java.lang.Integer">
+        select count(*) from loan_approve_fee
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update loan_approve_fee
+        <set>
+            <if test="record.id != null">
+                id = #{record.id,jdbcType=BIGINT},
+            </if>
+            <if test="record.projectId != null">
+                project_id = #{record.projectId,jdbcType=BIGINT},
+            </if>
+            <if test="record.premiumType != null">
+                premium_type = #{record.premiumType,jdbcType=INTEGER},
+            </if>
+            <if test="record.insuranceAmount != null">
+                insurance_amount = #{record.insuranceAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="record.insuranceCompanyId != null">
+                insurance_company_id = #{record.insuranceCompanyId,jdbcType=BIGINT},
+            </if>
+            <if test="record.insuranceCompany != null">
+                insurance_company = #{record.insuranceCompany,jdbcType=VARCHAR},
+            </if>
+            <if test="record.accountDeposit != null">
+                account_deposit = #{record.accountDeposit,jdbcType=DECIMAL},
+            </if>
+            <if test="record.isRenewal != null">
+                is_renewal = #{record.isRenewal,jdbcType=INTEGER},
+            </if>
+            <if test="record.renewalDeposit != null">
+                renewal_deposit = #{record.renewalDeposit,jdbcType=DECIMAL},
+            </if>
+            <if test="record.isPb != null">
+                is_pb = #{record.isPb,jdbcType=INTEGER},
+            </if>
+            <if test="record.pbDeposit != null">
+                pb_deposit = #{record.pbDeposit,jdbcType=DECIMAL},
+            </if>
+            <if test="record.costType != null">
+                cost_type = #{record.costType,jdbcType=INTEGER},
+            </if>
+            <if test="record.costAmount != null">
+                cost_amount = #{record.costAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="record.predictedPurchasetax != null">
+                predicted_purchasetax = #{record.predictedPurchasetax,jdbcType=INTEGER},
+            </if>
+            <if test="record.purchaseTax != null">
+                purchase_tax = #{record.purchaseTax,jdbcType=DECIMAL},
+            </if>
+            <if test="record.guarantyRiskAmount != null">
+                guaranty_risk_amount = #{record.guarantyRiskAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="record.serviceFee != null">
+                service_fee = #{record.serviceFee,jdbcType=DECIMAL},
+            </if>
+            <if test="record.bankIrsFee != null">
+                bank_irs_fee = #{record.bankIrsFee,jdbcType=DECIMAL},
+            </if>
+            <if test="record.licenseFee != null">
+                license_fee = #{record.licenseFee,jdbcType=DECIMAL},
+            </if>
+            <if test="record.doorSurveyFee != null">
+                door_survey_fee = #{record.doorSurveyFee,jdbcType=DECIMAL},
+            </if>
+            <if test="record.agencyFee != null">
+                agency_fee = #{record.agencyFee,jdbcType=DECIMAL},
+            </if>
+            <if test="record.outsourceSurveyFee != null">
+                outsource_survey_fee = #{record.outsourceSurveyFee,jdbcType=DECIMAL},
+            </if>
+            <if test="record.gpsNumber != null">
+                gps_number = #{record.gpsNumber,jdbcType=INTEGER},
+            </if>
+            <if test="record.gpsType != null">
+                gps_type = #{record.gpsType,jdbcType=INTEGER},
+            </if>
+            <if test="record.gpsProducer != null">
+                gps_producer = #{record.gpsProducer,jdbcType=VARCHAR},
+            </if>
+            <if test="record.gpsInstallationFee != null">
+                gps_installation_fee = #{record.gpsInstallationFee,jdbcType=DECIMAL},
+            </if>
+            <if test="record.liabilityAmount != null">
+                liability_amount = #{record.liabilityAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="record.totalFee != null">
+                total_fee = #{record.totalFee,jdbcType=DECIMAL},
+            </if>
+            <if test="record.guaranteeServiceFee != null">
+                guarantee_service_fee = #{record.guaranteeServiceFee,jdbcType=DECIMAL},
+            </if>
+            <if test="record.bankDownpaymentAmount != null">
+                bank_downpayment_amount = #{record.bankDownpaymentAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="record.bankInstallmentAmount != null">
+                bank_installment_amount = #{record.bankInstallmentAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="record.bankInstallmentFee != null">
+                bank_installment_fee = #{record.bankInstallmentFee,jdbcType=DECIMAL},
+            </if>
+            <if test="record.noticeDownpaymentCapital != null">
+                notice_downpayment_capital = #{record.noticeDownpaymentCapital,jdbcType=DECIMAL},
+            </if>
+            <if test="record.noticeDownpaymentInterest != null">
+                notice_downpayment_interest = #{record.noticeDownpaymentInterest,jdbcType=DECIMAL},
+            </if>
+            <if test="record.noticeDownpaymentAmount != null">
+                notice_downpayment_amount = #{record.noticeDownpaymentAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="record.noticePeriodpaymentCapital != null">
+                notice_periodpayment_capital = #{record.noticePeriodpaymentCapital,jdbcType=DECIMAL},
+            </if>
+            <if test="record.noticePeriodpaymentInterest != null">
+                notice_periodpayment_interest = #{record.noticePeriodpaymentInterest,jdbcType=DECIMAL},
+            </if>
+            <if test="record.noticePeriodpaymentAmount != null">
+                notice_periodpayment_amount = #{record.noticePeriodpaymentAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="record.noticeFinalpaymentCapital != null">
+                notice_finalpayment_capital = #{record.noticeFinalpaymentCapital,jdbcType=DECIMAL},
+            </if>
+            <if test="record.noticeFinalpaymentInterest != null">
+                notice_finalpayment_interest = #{record.noticeFinalpaymentInterest,jdbcType=DECIMAL},
+            </if>
+            <if test="record.noticeFinalpaymentAmount != null">
+                notice_finalpayment_amount = #{record.noticeFinalpaymentAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="record.contractDownpaymentCapital != null">
+                contract_downpayment_capital = #{record.contractDownpaymentCapital,jdbcType=DECIMAL},
+            </if>
+            <if test="record.contractDownpaymentInterest != null">
+                contract_downpayment_interest = #{record.contractDownpaymentInterest,jdbcType=DECIMAL},
+            </if>
+            <if test="record.contractDownpaymentAmount != null">
+                contract_downpayment_amount = #{record.contractDownpaymentAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="record.contractPeriodpaymentCapital != null">
+                contract_periodpayment_capital = #{record.contractPeriodpaymentCapital,jdbcType=DECIMAL},
+            </if>
+            <if test="record.contractPeriodpaymentInterest != null">
+                contract_periodpayment_interest = #{record.contractPeriodpaymentInterest,jdbcType=DECIMAL},
+            </if>
+            <if test="record.contractPeriodpaymentAmount != null">
+                contract_periodpayment_amount = #{record.contractPeriodpaymentAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="record.contractFinalpaymentCapital != null">
+                contract_finalpayment_capital = #{record.contractFinalpaymentCapital,jdbcType=DECIMAL},
+            </if>
+            <if test="record.contractFinalpaymentInterest != null">
+                contract_finalpayment_interest = #{record.contractFinalpaymentInterest,jdbcType=DECIMAL},
+            </if>
+            <if test="record.contractFinalpaymentAmount != null">
+                contract_finalpayment_amount = #{record.contractFinalpaymentAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="record.billDate != null">
+                bill_date = #{record.billDate,jdbcType=VARCHAR},
+            </if>
+            <if test="record.remark != null">
+                remark = #{record.remark,jdbcType=VARCHAR},
+            </if>
+            <if test="record.isInuse != null">
+                is_inuse = #{record.isInuse,jdbcType=INTEGER},
+            </if>
+            <if test="record.userId != null">
+                user_id = #{record.userId,jdbcType=BIGINT},
+            </if>
+            <if test="record.userName != null">
+                user_name = #{record.userName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.orgId != null">
+                org_id = #{record.orgId,jdbcType=BIGINT},
+            </if>
+            <if test="record.orgName != null">
+                org_name = #{record.orgName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.createTime != null">
+                create_time = #{record.createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.modifyTime != null">
+                modify_time = #{record.modifyTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update loan_approve_fee
+        set id = #{record.id,jdbcType=BIGINT},
+        project_id = #{record.projectId,jdbcType=BIGINT},
+        premium_type = #{record.premiumType,jdbcType=INTEGER},
+        insurance_amount = #{record.insuranceAmount,jdbcType=DECIMAL},
+        insurance_company_id = #{record.insuranceCompanyId,jdbcType=BIGINT},
+        insurance_company = #{record.insuranceCompany,jdbcType=VARCHAR},
+        account_deposit = #{record.accountDeposit,jdbcType=DECIMAL},
+        is_renewal = #{record.isRenewal,jdbcType=INTEGER},
+        renewal_deposit = #{record.renewalDeposit,jdbcType=DECIMAL},
+        is_pb = #{record.isPb,jdbcType=INTEGER},
+        pb_deposit = #{record.pbDeposit,jdbcType=DECIMAL},
+        cost_type = #{record.costType,jdbcType=INTEGER},
+        cost_amount = #{record.costAmount,jdbcType=DECIMAL},
+        predicted_purchasetax = #{record.predictedPurchasetax,jdbcType=INTEGER},
+        purchase_tax = #{record.purchaseTax,jdbcType=DECIMAL},
+        guaranty_risk_amount = #{record.guarantyRiskAmount,jdbcType=DECIMAL},
+        service_fee = #{record.serviceFee,jdbcType=DECIMAL},
+        bank_irs_fee = #{record.bankIrsFee,jdbcType=DECIMAL},
+        license_fee = #{record.licenseFee,jdbcType=DECIMAL},
+        door_survey_fee = #{record.doorSurveyFee,jdbcType=DECIMAL},
+        agency_fee = #{record.agencyFee,jdbcType=DECIMAL},
+        outsource_survey_fee = #{record.outsourceSurveyFee,jdbcType=DECIMAL},
+        gps_number = #{record.gpsNumber,jdbcType=INTEGER},
+        gps_type = #{record.gpsType,jdbcType=INTEGER},
+        gps_producer = #{record.gpsProducer,jdbcType=VARCHAR},
+        gps_installation_fee = #{record.gpsInstallationFee,jdbcType=DECIMAL},
+        liability_amount = #{record.liabilityAmount,jdbcType=DECIMAL},
+        total_fee = #{record.totalFee,jdbcType=DECIMAL},
+        guarantee_service_fee = #{record.guaranteeServiceFee,jdbcType=DECIMAL},
+        bank_downpayment_amount = #{record.bankDownpaymentAmount,jdbcType=DECIMAL},
+        bank_installment_amount = #{record.bankInstallmentAmount,jdbcType=DECIMAL},
+        bank_installment_fee = #{record.bankInstallmentFee,jdbcType=DECIMAL},
+        notice_downpayment_capital = #{record.noticeDownpaymentCapital,jdbcType=DECIMAL},
+        notice_downpayment_interest = #{record.noticeDownpaymentInterest,jdbcType=DECIMAL},
+        notice_downpayment_amount = #{record.noticeDownpaymentAmount,jdbcType=DECIMAL},
+        notice_periodpayment_capital = #{record.noticePeriodpaymentCapital,jdbcType=DECIMAL},
+        notice_periodpayment_interest = #{record.noticePeriodpaymentInterest,jdbcType=DECIMAL},
+        notice_periodpayment_amount = #{record.noticePeriodpaymentAmount,jdbcType=DECIMAL},
+        notice_finalpayment_capital = #{record.noticeFinalpaymentCapital,jdbcType=DECIMAL},
+        notice_finalpayment_interest = #{record.noticeFinalpaymentInterest,jdbcType=DECIMAL},
+        notice_finalpayment_amount = #{record.noticeFinalpaymentAmount,jdbcType=DECIMAL},
+        contract_downpayment_capital = #{record.contractDownpaymentCapital,jdbcType=DECIMAL},
+        contract_downpayment_interest = #{record.contractDownpaymentInterest,jdbcType=DECIMAL},
+        contract_downpayment_amount = #{record.contractDownpaymentAmount,jdbcType=DECIMAL},
+        contract_periodpayment_capital = #{record.contractPeriodpaymentCapital,jdbcType=DECIMAL},
+        contract_periodpayment_interest = #{record.contractPeriodpaymentInterest,jdbcType=DECIMAL},
+        contract_periodpayment_amount = #{record.contractPeriodpaymentAmount,jdbcType=DECIMAL},
+        contract_finalpayment_capital = #{record.contractFinalpaymentCapital,jdbcType=DECIMAL},
+        contract_finalpayment_interest = #{record.contractFinalpaymentInterest,jdbcType=DECIMAL},
+        contract_finalpayment_amount = #{record.contractFinalpaymentAmount,jdbcType=DECIMAL},
+        bill_date = #{record.billDate,jdbcType=VARCHAR},
+        remark = #{record.remark,jdbcType=VARCHAR},
+        is_inuse = #{record.isInuse,jdbcType=INTEGER},
+        user_id = #{record.userId,jdbcType=BIGINT},
+        user_name = #{record.userName,jdbcType=VARCHAR},
+        org_id = #{record.orgId,jdbcType=BIGINT},
+        org_name = #{record.orgName,jdbcType=VARCHAR},
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+        modify_time = #{record.modifyTime,jdbcType=TIMESTAMP}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.cgw360.cls.model.approve.LoanApproveFee">
+        update loan_approve_fee
+        <set>
+            <if test="projectId != null">
+                project_id = #{projectId,jdbcType=BIGINT},
+            </if>
+            <if test="premiumType != null">
+                premium_type = #{premiumType,jdbcType=INTEGER},
+            </if>
+            <if test="insuranceAmount != null">
+                insurance_amount = #{insuranceAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="insuranceCompanyId != null">
+                insurance_company_id = #{insuranceCompanyId,jdbcType=BIGINT},
+            </if>
+            <if test="insuranceCompany != null">
+                insurance_company = #{insuranceCompany,jdbcType=VARCHAR},
+            </if>
+            <if test="accountDeposit != null">
+                account_deposit = #{accountDeposit,jdbcType=DECIMAL},
+            </if>
+            <if test="isRenewal != null">
+                is_renewal = #{isRenewal,jdbcType=INTEGER},
+            </if>
+            <if test="renewalDeposit != null">
+                renewal_deposit = #{renewalDeposit,jdbcType=DECIMAL},
+            </if>
+            <if test="isPb != null">
+                is_pb = #{isPb,jdbcType=INTEGER},
+            </if>
+            <if test="pbDeposit != null">
+                pb_deposit = #{pbDeposit,jdbcType=DECIMAL},
+            </if>
+            <if test="costType != null">
+                cost_type = #{costType,jdbcType=INTEGER},
+            </if>
+            <if test="costAmount != null">
+                cost_amount = #{costAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="predictedPurchasetax != null">
+                predicted_purchasetax = #{predictedPurchasetax,jdbcType=INTEGER},
+            </if>
+            <if test="purchaseTax != null">
+                purchase_tax = #{purchaseTax,jdbcType=DECIMAL},
+            </if>
+            <if test="guarantyRiskAmount != null">
+                guaranty_risk_amount = #{guarantyRiskAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="serviceFee != null">
+                service_fee = #{serviceFee,jdbcType=DECIMAL},
+            </if>
+            <if test="bankIrsFee != null">
+                bank_irs_fee = #{bankIrsFee,jdbcType=DECIMAL},
+            </if>
+            <if test="licenseFee != null">
+                license_fee = #{licenseFee,jdbcType=DECIMAL},
+            </if>
+            <if test="doorSurveyFee != null">
+                door_survey_fee = #{doorSurveyFee,jdbcType=DECIMAL},
+            </if>
+            <if test="agencyFee != null">
+                agency_fee = #{agencyFee,jdbcType=DECIMAL},
+            </if>
+            <if test="outsourceSurveyFee != null">
+                outsource_survey_fee = #{outsourceSurveyFee,jdbcType=DECIMAL},
+            </if>
+            <if test="gpsNumber != null">
+                gps_number = #{gpsNumber,jdbcType=INTEGER},
+            </if>
+            <if test="gpsType != null">
+                gps_type = #{gpsType,jdbcType=INTEGER},
+            </if>
+            <if test="gpsProducer != null">
+                gps_producer = #{gpsProducer,jdbcType=VARCHAR},
+            </if>
+            <if test="gpsInstallationFee != null">
+                gps_installation_fee = #{gpsInstallationFee,jdbcType=DECIMAL},
+            </if>
+            <if test="liabilityAmount != null">
+                liability_amount = #{liabilityAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="totalFee != null">
+                total_fee = #{totalFee,jdbcType=DECIMAL},
+            </if>
+            <if test="guaranteeServiceFee != null">
+                guarantee_service_fee = #{guaranteeServiceFee,jdbcType=DECIMAL},
+            </if>
+            <if test="bankDownpaymentAmount != null">
+                bank_downpayment_amount = #{bankDownpaymentAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="bankInstallmentAmount != null">
+                bank_installment_amount = #{bankInstallmentAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="bankInstallmentFee != null">
+                bank_installment_fee = #{bankInstallmentFee,jdbcType=DECIMAL},
+            </if>
+            <if test="noticeDownpaymentCapital != null">
+                notice_downpayment_capital = #{noticeDownpaymentCapital,jdbcType=DECIMAL},
+            </if>
+            <if test="noticeDownpaymentInterest != null">
+                notice_downpayment_interest = #{noticeDownpaymentInterest,jdbcType=DECIMAL},
+            </if>
+            <if test="noticeDownpaymentAmount != null">
+                notice_downpayment_amount = #{noticeDownpaymentAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="noticePeriodpaymentCapital != null">
+                notice_periodpayment_capital = #{noticePeriodpaymentCapital,jdbcType=DECIMAL},
+            </if>
+            <if test="noticePeriodpaymentInterest != null">
+                notice_periodpayment_interest = #{noticePeriodpaymentInterest,jdbcType=DECIMAL},
+            </if>
+            <if test="noticePeriodpaymentAmount != null">
+                notice_periodpayment_amount = #{noticePeriodpaymentAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="noticeFinalpaymentCapital != null">
+                notice_finalpayment_capital = #{noticeFinalpaymentCapital,jdbcType=DECIMAL},
+            </if>
+            <if test="noticeFinalpaymentInterest != null">
+                notice_finalpayment_interest = #{noticeFinalpaymentInterest,jdbcType=DECIMAL},
+            </if>
+            <if test="noticeFinalpaymentAmount != null">
+                notice_finalpayment_amount = #{noticeFinalpaymentAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="contractDownpaymentCapital != null">
+                contract_downpayment_capital = #{contractDownpaymentCapital,jdbcType=DECIMAL},
+            </if>
+            <if test="contractDownpaymentInterest != null">
+                contract_downpayment_interest = #{contractDownpaymentInterest,jdbcType=DECIMAL},
+            </if>
+            <if test="contractDownpaymentAmount != null">
+                contract_downpayment_amount = #{contractDownpaymentAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="contractPeriodpaymentCapital != null">
+                contract_periodpayment_capital = #{contractPeriodpaymentCapital,jdbcType=DECIMAL},
+            </if>
+            <if test="contractPeriodpaymentInterest != null">
+                contract_periodpayment_interest = #{contractPeriodpaymentInterest,jdbcType=DECIMAL},
+            </if>
+            <if test="contractPeriodpaymentAmount != null">
+                contract_periodpayment_amount = #{contractPeriodpaymentAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="contractFinalpaymentCapital != null">
+                contract_finalpayment_capital = #{contractFinalpaymentCapital,jdbcType=DECIMAL},
+            </if>
+            <if test="contractFinalpaymentInterest != null">
+                contract_finalpayment_interest = #{contractFinalpaymentInterest,jdbcType=DECIMAL},
+            </if>
+            <if test="contractFinalpaymentAmount != null">
+                contract_finalpayment_amount = #{contractFinalpaymentAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="billDate != null">
+                bill_date = #{billDate,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null">
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="isInuse != null">
+                is_inuse = #{isInuse,jdbcType=INTEGER},
+            </if>
+            <if test="userId != null">
+                user_id = #{userId,jdbcType=BIGINT},
+            </if>
+            <if test="userName != null">
+                user_name = #{userName,jdbcType=VARCHAR},
+            </if>
+            <if test="orgId != null">
+                org_id = #{orgId,jdbcType=BIGINT},
+            </if>
+            <if test="orgName != null">
+                org_name = #{orgName,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="modifyTime != null">
+                modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.cgw360.cls.model.approve.LoanApproveFee">
+    update loan_approve_fee
+    set project_id = #{projectId,jdbcType=BIGINT},
+      premium_type = #{premiumType,jdbcType=INTEGER},
+      insurance_amount = #{insuranceAmount,jdbcType=DECIMAL},
+      insurance_company_id = #{insuranceCompanyId,jdbcType=BIGINT},
+      insurance_company = #{insuranceCompany,jdbcType=VARCHAR},
+      account_deposit = #{accountDeposit,jdbcType=DECIMAL},
+      is_renewal = #{isRenewal,jdbcType=INTEGER},
+      renewal_deposit = #{renewalDeposit,jdbcType=DECIMAL},
+      is_pb = #{isPb,jdbcType=INTEGER},
+      pb_deposit = #{pbDeposit,jdbcType=DECIMAL},
+      cost_type = #{costType,jdbcType=INTEGER},
+      cost_amount = #{costAmount,jdbcType=DECIMAL},
+      predicted_purchasetax = #{predictedPurchasetax,jdbcType=INTEGER},
+      purchase_tax = #{purchaseTax,jdbcType=DECIMAL},
+      guaranty_risk_amount = #{guarantyRiskAmount,jdbcType=DECIMAL},
+      service_fee = #{serviceFee,jdbcType=DECIMAL},
+      bank_irs_fee = #{bankIrsFee,jdbcType=DECIMAL},
+      license_fee = #{licenseFee,jdbcType=DECIMAL},
+      door_survey_fee = #{doorSurveyFee,jdbcType=DECIMAL},
+      agency_fee = #{agencyFee,jdbcType=DECIMAL},
+      outsource_survey_fee = #{outsourceSurveyFee,jdbcType=DECIMAL},
+      gps_number = #{gpsNumber,jdbcType=INTEGER},
+      gps_type = #{gpsType,jdbcType=INTEGER},
+      gps_producer = #{gpsProducer,jdbcType=VARCHAR},
+      gps_installation_fee = #{gpsInstallationFee,jdbcType=DECIMAL},
+      liability_amount = #{liabilityAmount,jdbcType=DECIMAL},
+      total_fee = #{totalFee,jdbcType=DECIMAL},
+      guarantee_service_fee = #{guaranteeServiceFee,jdbcType=DECIMAL},
+      bank_downpayment_amount = #{bankDownpaymentAmount,jdbcType=DECIMAL},
+      bank_installment_amount = #{bankInstallmentAmount,jdbcType=DECIMAL},
+      bank_installment_fee = #{bankInstallmentFee,jdbcType=DECIMAL},
+      notice_downpayment_capital = #{noticeDownpaymentCapital,jdbcType=DECIMAL},
+      notice_downpayment_interest = #{noticeDownpaymentInterest,jdbcType=DECIMAL},
+      notice_downpayment_amount = #{noticeDownpaymentAmount,jdbcType=DECIMAL},
+      notice_periodpayment_capital = #{noticePeriodpaymentCapital,jdbcType=DECIMAL},
+      notice_periodpayment_interest = #{noticePeriodpaymentInterest,jdbcType=DECIMAL},
+      notice_periodpayment_amount = #{noticePeriodpaymentAmount,jdbcType=DECIMAL},
+      notice_finalpayment_capital = #{noticeFinalpaymentCapital,jdbcType=DECIMAL},
+      notice_finalpayment_interest = #{noticeFinalpaymentInterest,jdbcType=DECIMAL},
+      notice_finalpayment_amount = #{noticeFinalpaymentAmount,jdbcType=DECIMAL},
+      contract_downpayment_capital = #{contractDownpaymentCapital,jdbcType=DECIMAL},
+      contract_downpayment_interest = #{contractDownpaymentInterest,jdbcType=DECIMAL},
+      contract_downpayment_amount = #{contractDownpaymentAmount,jdbcType=DECIMAL},
+      contract_periodpayment_capital = #{contractPeriodpaymentCapital,jdbcType=DECIMAL},
+      contract_periodpayment_interest = #{contractPeriodpaymentInterest,jdbcType=DECIMAL},
+      contract_periodpayment_amount = #{contractPeriodpaymentAmount,jdbcType=DECIMAL},
+      contract_finalpayment_capital = #{contractFinalpaymentCapital,jdbcType=DECIMAL},
+      contract_finalpayment_interest = #{contractFinalpaymentInterest,jdbcType=DECIMAL},
+      contract_finalpayment_amount = #{contractFinalpaymentAmount,jdbcType=DECIMAL},
+      bill_date = #{billDate,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      is_inuse = #{isInuse,jdbcType=INTEGER},
+      user_id = #{userId,jdbcType=BIGINT},
+      user_name = #{userName,jdbcType=VARCHAR},
+      org_id = #{orgId,jdbcType=BIGINT},
+      org_name = #{orgName,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      modify_time = #{modifyTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

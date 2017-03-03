@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cgw360.cls.dao.loan.LoanAssetPackageMapper">
+
+	<resultMap id="BaseResultMap" type="com.cgw360.cls.model.loan.LoanAssetPackage">
+		<id column="id" property="id" jdbcType="BIGINT"/>
+		<result column="project_id" property="projectId" jdbcType="BIGINT"/>
+		<result column="id" property="id" jdbcType="BIGINT"/>
+		<result column="asset_package_no" property="assetPackageNo" jdbcType="VARCHAR"/>
+		<result column="co_company_id" property="coCompanyId" jdbcType="INTEGER"/>
+		<result column="co_company_name" property="coCompanyName" jdbcType="VARCHAR"/>
+		<result column="asset_package_amount" property="assetPackageAmount" jdbcType="DECIMAL"/>
+		<result column="start_time" property="startTime" jdbcType="TIMESTAMP"/>
+		<result column="end_time" property="endTime" jdbcType="TIMESTAMP"/>
+		<result column="status" property="status" jdbcType="INTEGER"/>
+		<result column="isvalid" property="isvalid" jdbcType="INTEGER"/>
+		<result column="remark" property="remark" jdbcType="VARCHAR"/>
+		<result column="user_id" property="userId" jdbcType="BIGINT"/>
+		<result column="user_name" property="userName" jdbcType="VARCHAR"/>
+		<result column="user_group_id" property="userGroupId" jdbcType="BIGINT"/>
+		<result column="user_group_name" property="userGroupName" jdbcType="VARCHAR"/>
+		<result column="org_id" property="orgId" jdbcType="BIGINT"/>
+		<result column="org_name" property="orgName" jdbcType="VARCHAR"/>
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+		<result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP"/>
+	</resultMap>
+
+	<!-- 获取列表 -->
+	<select id="getList" resultMap="BaseResultMap" parameterType="java.util.Map">
+		select 	lap.*,
+		ifnull(a.assetBalanceAmount,0) as assetBalanceAmount,
+		ifnull(a.assetAccumulatedAmount,0) as assetAccumulatedAmount
+		from	loan_asset_package lap
+		left join(
+		select 	laa.assets_package_id,
+		sum(
+		case when laa.assets_package_status = 1 then lapro.loan_amount else 0 end
+		) assetBalanceAmount,
+		sum(lapro.loan_amount) as assetAccumulatedAmount
+		from loan_approve_assets laa
+		inner join loan_approve_project lapro
+		on laa.project_id = lapro.project_id
+		group by laa.assets_package_id) a
+		on lap.id = a.assets_package_id
+		<where>
+			<if test="assetPackageNo !=null and assetPackageNo!=''">
+				and asset_package_no like concat('%',#{assetPackageNo},'%')
+			</if>
+			<if test="coCompanyId !=null">
+				and co_company_id=#{coCompanyId}
+			</if>
+			<if test="coCompanyName !=null and coCompanyName!=''">
+				and co_company_name=#{coCompanyName}
+			</if>
+			<if test="status !=null and status == 1">
+				<![CDATA[
+			  		and date_format(start_time,'%y-%m-%d') > date_format(NOW(),'%y-%m-%d')
+			  	]]>
+			</if>
+			<if test="status !=null and status == 2">
+				<![CDATA[
+			  		and date_format(start_time,'%y-%m-%d') <= date_format(NOW(),'%y-%m-%d')
+			  		and date_format(end_time,'%y-%m-%d') >= date_format(NOW(),'%y-%m-%d')
+			  	]]>
+			</if>
+			<if test="status !=null and status == 3">
+				<![CDATA[
+			  		and date_format(end_time,'%y-%m-%d') < date_format(NOW(),'%y-%m-%d')
+			  	]]>
+			</if>
+		</where>
+		order by create_time desc
+	</select>
+ 	
+ 	<!-- 添加-->
+ 	<insert id="insert" parameterType="com.cgw360.cls.model.loan.LoanAssetPackage" keyProperty="id" useGeneratedKeys="true">
+		INSERT INTO loan_asset_package(
+			<trim suffixOverrides=",">
+            	<if test="id !=null">
+			  		id,
+				</if>
+        		<if test="assetPackageNo !=null and assetPackageNo!=''">
+			  		asset_package_no,
+				</if>
+            	<if test="coCompanyId !=null">
+			  		co_company_id,
+				</if>
+        		<if test="coCompanyName !=null and coCompanyName!=''">
+			  		co_company_name,
+				</if>
+            	<if test="assetPackageAmount !=null">
+			  		asset_package_amount,
+				</if>
+            	<if test="startTime !=null">
+			  		start_time,
+				</if>
+            	<if test="endTime !=null">
+			  		end_time,
+				</if>
+            	<if test="status !=null">
+			  		status,
+				</if>
+            	<if test="isvalid !=null">
+			  		isvalid,
+				</if>
+        		<if test="remark !=null and remark!=''">
+			  		remark,
+				</if>
+            	<if test="userId !=null">
+			  		user_id,
+				</if>
+        		<if test="userName !=null and userName!=''">
+			  		user_name,
+				</if>
+            	<if test="userGroupId !=null">
+			  		user_group_id,
+				</if>
+        		<if test="userGroupName !=null and userGroupName!=''">
+			  		user_group_name,
+				</if>
+            	<if test="orgId !=null">
+			  		org_id,
+				</if>
+        		<if test="orgName !=null and orgName!=''">
+			  		org_name,
+				</if>
+			  		create_time,
+			  		modify_time,
+			</trim>
+		)values(
+			<trim suffixOverrides=",">
+            	<if test="id !=null">
+			  		#{id},
+				</if>
+        		<if test="assetPackageNo !=null and assetPackageNo!=''">
+			  		#{assetPackageNo},
+				</if>
+            	<if test="coCompanyId !=null">
+			  		#{coCompanyId},
+				</if>
+        		<if test="coCompanyName !=null and coCompanyName!=''">
+			  		#{coCompanyName},
+				</if>
+            	<if test="assetPackageAmount !=null">
+			  		#{assetPackageAmount},
+				</if>
+            	<if test="startTime !=null">
+			  		#{startTime},
+				</if>
+            	<if test="endTime !=null">
+			  		#{endTime},
+				</if>
+            	<if test="status !=null">
+			  		#{status},
+				</if>
+            	<if test="isvalid !=null">
+			  		#{isvalid},
+				</if>
+        		<if test="remark !=null and remark!=''">
+			  		#{remark},
+				</if>
+            	<if test="userId !=null">
+			  		#{userId},
+				</if>
+        		<if test="userName !=null and userName!=''">
+			  		#{userName},
+				</if>
+            	<if test="userGroupId !=null">
+			  		#{userGroupId},
+				</if>
+        		<if test="userGroupName !=null and userGroupName!=''">
+			  		#{userGroupName},
+				</if>
+            	<if test="orgId !=null">
+			  		#{orgId},
+				</if>
+        		<if test="orgName !=null and orgName!=''">
+			  		#{orgName},
+				</if>
+			  		NOW(),
+					NOW(),
+			</trim>
+		)
+	</insert>
+ 	
+ 	<!-- 更新 -->
+ 	<update id="updateByPrimaryKeySelective">
+		UPDATE loan_asset_package 
+		<set>
+			<trim suffixOverrides=",">
+            	<if test="id !=null">
+			  		id=#{id},
+				</if>
+        		<if test="assetPackageNo !=null and assetPackageNo!=''">
+			  		asset_package_no=#{assetPackageNo},
+				</if>
+            	<if test="coCompanyId !=null">
+			  		co_company_id=#{coCompanyId},
+				</if>
+        		<if test="coCompanyName !=null and coCompanyName!=''">
+			  		co_company_name=#{coCompanyName},
+				</if>
+            	<if test="assetPackageAmount !=null">
+			  		asset_package_amount=#{assetPackageAmount},
+				</if>
+            	<if test="startTime !=null">
+			  		start_time=#{startTime},
+				</if>
+            	<if test="endTime !=null">
+			  		end_time=#{endTime},
+				</if>
+            	<if test="status !=null">
+			  		status=#{status},
+				</if>
+            	<if test="isvalid !=null">
+			  		isvalid=#{isvalid},
+				</if>
+        		<if test="remark !=null and remark!=''">
+			  		remark=#{remark},
+				</if>
+            	<if test="userId !=null">
+			  		user_id=#{userId},
+				</if>
+        		<if test="userName !=null and userName!=''">
+			  		user_name=#{userName},
+				</if>
+            	<if test="userGroupId !=null">
+			  		user_group_id=#{userGroupId},
+				</if>
+        		<if test="userGroupName !=null and userGroupName!=''">
+			  		user_group_name=#{userGroupName},
+				</if>
+            	<if test="orgId !=null">
+			  		org_id=#{orgId},
+				</if>
+        		<if test="orgName !=null and orgName!=''">
+			  		org_name=#{orgName},
+				</if>
+            	<if test="createTime !=null">
+			  		create_time=#{createTime},
+				</if>
+            	<if test="modifyTime !=null">
+			  		modify_time=#{modifyTime},
+				</if>
+			</trim>
+		</set>
+		<where>
+			id=#{id}
+		</where>
+	</update>
+	
+	<!-- 删除 -->
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		DELETE FROM loan_asset_package
+		<where>
+			id=#{id}
+		</where>
+	</delete>
+
+	<!-- 获取LoanAssetPackage -->
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.util.Map">
+		select lap.*,
+		ifnull(a.assetBalanceAmount,0) as assetBalanceAmount,
+		ifnull(a.assetAccumulatedAmount,0) as assetAccumulatedAmount
+		from loan_asset_package lap
+		left join(
+		select 	laa.assets_package_id,
+		sum(
+		case when laa.assets_package_status = 1 then lapro.loan_amount else 0 end
+		) assetBalanceAmount,
+		sum(lapro.loan_amount) as assetAccumulatedAmount
+		from loan_approve_assets laa
+		inner join loan_approve_project lapro
+		on laa.project_id = lapro.project_id
+		where laa.assets_package_id = #{id}) a
+		on lap.id = a.assets_package_id
+		where id=#{id}
+	</select>
+
+	<!--根据条件统计-->
+	<select id="isExistsAssetsInPackage" parameterType="java.lang.Long"
+			resultType="java.lang.Integer">
+		select count(*) from loan_approve_assets
+		where 1=1
+		<if test="assetsPackageId != null">
+			and assets_package_id = #{assetsPackageId,jdbcType=BIGINT}
+		</if>
+	</select>
+</mapper>

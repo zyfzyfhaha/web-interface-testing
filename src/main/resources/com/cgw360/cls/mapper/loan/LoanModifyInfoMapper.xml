@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cgw360.cls.dao.loan.LoanModifyInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.cgw360.cls.model.loan.LoanModifyInfo" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="apply_id" property="applyId" jdbcType="BIGINT" />
+    <result column="project_id" property="projectId" jdbcType="BIGINT" />
+    <result column="object_type" property="objectType" jdbcType="VARCHAR" />
+    <result column="object_name" property="objectName" jdbcType="VARCHAR" />
+    <result column="action_type" property="actionType" jdbcType="VARCHAR" />
+    <result column="column_code" property="columnCode" jdbcType="VARCHAR" />
+    <result column="column_name" property="columnName" jdbcType="VARCHAR" />
+    <result column="before_value" property="beforeValue" jdbcType="VARCHAR" />
+    <result column="after_value" property="afterValue" jdbcType="VARCHAR" />
+    <result column="user_id" property="userId" jdbcType="BIGINT" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, apply_id, project_id, object_type, object_name, action_type, column_code, `column_name`,
+    before_value, after_value, user_id, user_name, modify_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.cgw360.cls.model.loan.LoanModifyInfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from loan_modify_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from loan_modify_info
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from loan_modify_info
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.cgw360.cls.model.loan.LoanModifyInfoExample" >
+    delete from loan_modify_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.cgw360.cls.model.loan.LoanModifyInfo" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into loan_modify_info (apply_id, project_id, object_type, 
+      object_name, action_type, column_code, 
+      `column_name`, before_value, after_value,
+      user_id, user_name, modify_time
+      )
+    values (#{applyId,jdbcType=BIGINT}, #{projectId,jdbcType=BIGINT}, #{objectType,jdbcType=VARCHAR}, 
+      #{objectName,jdbcType=VARCHAR}, #{actionType,jdbcType=VARCHAR}, #{columnCode,jdbcType=VARCHAR}, 
+      #{columnName,jdbcType=VARCHAR}, #{beforeValue,jdbcType=VARCHAR}, #{afterValue,jdbcType=VARCHAR}, 
+      #{userId,jdbcType=BIGINT}, #{userName,jdbcType=VARCHAR}, #{modifyTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.cgw360.cls.model.loan.LoanModifyInfo" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into loan_modify_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="applyId != null" >
+        apply_id,
+      </if>
+      <if test="projectId != null" >
+        project_id,
+      </if>
+      <if test="objectType != null" >
+        object_type,
+      </if>
+      <if test="objectName != null" >
+        object_name,
+      </if>
+      <if test="actionType != null" >
+        action_type,
+      </if>
+      <if test="columnCode != null" >
+        column_code,
+      </if>
+      <if test="columnName != null" >
+        column_name,
+      </if>
+      <if test="beforeValue != null" >
+        before_value,
+      </if>
+      <if test="afterValue != null" >
+        after_value,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="userName != null" >
+        user_name,
+      </if>
+      <if test="modifyTime != null" >
+        modify_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="applyId != null" >
+        #{applyId,jdbcType=BIGINT},
+      </if>
+      <if test="projectId != null" >
+        #{projectId,jdbcType=BIGINT},
+      </if>
+      <if test="objectType != null" >
+        #{objectType,jdbcType=VARCHAR},
+      </if>
+      <if test="objectName != null" >
+        #{objectName,jdbcType=VARCHAR},
+      </if>
+      <if test="actionType != null" >
+        #{actionType,jdbcType=VARCHAR},
+      </if>
+      <if test="columnCode != null" >
+        #{columnCode,jdbcType=VARCHAR},
+      </if>
+      <if test="columnName != null" >
+        #{columnName,jdbcType=VARCHAR},
+      </if>
+      <if test="beforeValue != null" >
+        #{beforeValue,jdbcType=VARCHAR},
+      </if>
+      <if test="afterValue != null" >
+        #{afterValue,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="userName != null" >
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyTime != null" >
+        #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.cgw360.cls.model.loan.LoanModifyInfoExample" resultType="java.lang.Integer" >
+    select count(*) from loan_modify_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update loan_modify_info
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.applyId != null" >
+        apply_id = #{record.applyId,jdbcType=BIGINT},
+      </if>
+      <if test="record.projectId != null" >
+        project_id = #{record.projectId,jdbcType=BIGINT},
+      </if>
+      <if test="record.objectType != null" >
+        object_type = #{record.objectType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.objectName != null" >
+        object_name = #{record.objectName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.actionType != null" >
+        action_type = #{record.actionType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.columnCode != null" >
+        column_code = #{record.columnCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.columnName != null" >
+        column_name = #{record.columnName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.beforeValue != null" >
+        before_value = #{record.beforeValue,jdbcType=VARCHAR},
+      </if>
+      <if test="record.afterValue != null" >
+        after_value = #{record.afterValue,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userId != null" >
+        user_id = #{record.userId,jdbcType=BIGINT},
+      </if>
+      <if test="record.userName != null" >
+        user_name = #{record.userName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.modifyTime != null" >
+        modify_time = #{record.modifyTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update loan_modify_info
+    set id = #{record.id,jdbcType=BIGINT},
+      apply_id = #{record.applyId,jdbcType=BIGINT},
+      project_id = #{record.projectId,jdbcType=BIGINT},
+      object_type = #{record.objectType,jdbcType=VARCHAR},
+      object_name = #{record.objectName,jdbcType=VARCHAR},
+      action_type = #{record.actionType,jdbcType=VARCHAR},
+      column_code = #{record.columnCode,jdbcType=VARCHAR},
+      column_name = #{record.columnName,jdbcType=VARCHAR},
+      before_value = #{record.beforeValue,jdbcType=VARCHAR},
+      after_value = #{record.afterValue,jdbcType=VARCHAR},
+      user_id = #{record.userId,jdbcType=BIGINT},
+      user_name = #{record.userName,jdbcType=VARCHAR},
+      modify_time = #{record.modifyTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cgw360.cls.model.loan.LoanModifyInfo" >
+    update loan_modify_info
+    <set >
+      <if test="applyId != null" >
+        apply_id = #{applyId,jdbcType=BIGINT},
+      </if>
+      <if test="projectId != null" >
+        project_id = #{projectId,jdbcType=BIGINT},
+      </if>
+      <if test="objectType != null" >
+        object_type = #{objectType,jdbcType=VARCHAR},
+      </if>
+      <if test="objectName != null" >
+        object_name = #{objectName,jdbcType=VARCHAR},
+      </if>
+      <if test="actionType != null" >
+        action_type = #{actionType,jdbcType=VARCHAR},
+      </if>
+      <if test="columnCode != null" >
+        column_code = #{columnCode,jdbcType=VARCHAR},
+      </if>
+      <if test="columnName != null" >
+        column_name = #{columnName,jdbcType=VARCHAR},
+      </if>
+      <if test="beforeValue != null" >
+        before_value = #{beforeValue,jdbcType=VARCHAR},
+      </if>
+      <if test="afterValue != null" >
+        after_value = #{afterValue,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="userName != null" >
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyTime != null" >
+        modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cgw360.cls.model.loan.LoanModifyInfo" >
+    update loan_modify_info
+    set apply_id = #{applyId,jdbcType=BIGINT},
+      project_id = #{projectId,jdbcType=BIGINT},
+      object_type = #{objectType,jdbcType=VARCHAR},
+      object_name = #{objectName,jdbcType=VARCHAR},
+      action_type = #{actionType,jdbcType=VARCHAR},
+      column_code = #{columnCode,jdbcType=VARCHAR},
+      column_name = #{columnName,jdbcType=VARCHAR},
+      before_value = #{beforeValue,jdbcType=VARCHAR},
+      after_value = #{afterValue,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=BIGINT},
+      user_name = #{userName,jdbcType=VARCHAR},
+      modify_time = #{modifyTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+    <insert id="insertBatch" parameterType="java.util.List" useGeneratedKeys="true">
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into loan_modify_info (apply_id, project_id, object_type,object_name, action_type,column_code,column_name,
+        before_value,after_value,user_id, user_name, modify_time)
+        values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.applyId,jdbcType=BIGINT},
+             #{item.projectId,jdbcType=BIGINT},
+             #{item.objectType,jdbcType=VARCHAR},
+             #{item.objectName,jdbcType=VARCHAR},
+             #{item.actionType,jdbcType=VARCHAR},
+             #{item.columnCode,jdbcType=VARCHAR},
+             #{item.columnName,jdbcType=VARCHAR},
+             #{item.beforeValue,jdbcType=VARCHAR},
+             #{item.afterValue,jdbcType=VARCHAR},
+             #{item.userId,jdbcType=BIGINT},
+             #{item.userName,jdbcType=VARCHAR},
+             #{item.modifyTime,jdbcType=TIMESTAMP}
+            )
+        </foreach>
+    </insert>
+</mapper>
